@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Entity
 @Table(name = "tieuchi")
@@ -47,7 +47,7 @@ public class Tieuchi implements Serializable {
     @Column(name = "phanTram")
     private Integer phanTram;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tieuchi")
-    private Collection<Diem> diemCollection;
+    private Set<Diem> diemSet;
 
     public Tieuchi() {
     }
@@ -81,12 +81,12 @@ public class Tieuchi implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Diem> getDiemCollection() {
-        return diemCollection;
+    public Set<Diem> getDiemSet() {
+        return diemSet;
     }
 
-    public void setDiemCollection(Collection<Diem> diemCollection) {
-        this.diemCollection = diemCollection;
+    public void setDiemSet(Set<Diem> diemSet) {
+        this.diemSet = diemSet;
     }
 
     @Override

@@ -19,7 +19,8 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[] {
-            WebKhoaLuanConfig.class
+            WebKhoaLuanConfig.class,
+            TilesConfig.class
         };
     }
 

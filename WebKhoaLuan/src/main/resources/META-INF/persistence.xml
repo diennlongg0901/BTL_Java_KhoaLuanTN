@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="3.0" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.password" value="09022001"/>
-        </properties>
-    </persistence-unit>
+<persistence version="3.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="my_persistence_unit">
+    <class>com.demo.pojo.Quantri</class>
+    <class>com.demo.pojo.Nganh</class>
+    <class>com.demo.pojo.Sinhvien</class>
+    <class>com.demo.pojo.Giangvien</class>
+    <class>com.demo.pojo.Khoa</class>
+    <class>com.demo.pojo.Diem</class>
+    <class>com.demo.pojo.Giaovu</class>
+    <class>com.demo.pojo.Khoaluan</class>
+    <class>com.demo.pojo.Tieuchi</class>
+    <class>com.demo.pojo.Hoidong</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="09022001"/>
+    </properties>
+  </persistence-unit>
 </persistence>
-
 <!--https://jakarta.ee/xml/ns/persistence-->

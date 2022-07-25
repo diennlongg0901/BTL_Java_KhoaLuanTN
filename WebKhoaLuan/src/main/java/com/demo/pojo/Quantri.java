@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Entity
 @Table(name = "quantri")
@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Quantri.findByEmailQT", query = "SELECT q FROM Quantri q WHERE q.emailQT = :emailQT"),
     @NamedQuery(name = "Quantri.findByUsernamQT", query = "SELECT q FROM Quantri q WHERE q.usernamQT = :usernamQT"),
     @NamedQuery(name = "Quantri.findByPasswordQT", query = "SELECT q FROM Quantri q WHERE q.passwordQT = :passwordQT"),
-    @NamedQuery(name = "Quantri.findByAnhQT", query = "SELECT q FROM Quantri q WHERE q.anhQT = :anhQT")})
+    @NamedQuery(name = "Quantri.findByAnhQT", query = "SELECT q FROM Quantri q WHERE q.anhQT = :anhQT"),
+    @NamedQuery(name = "Quantri.findByVaiTro", query = "SELECT q FROM Quantri q WHERE q.vaiTro = :vaiTro")})
 public class Quantri implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,6 +83,11 @@ public class Quantri implements Serializable {
     @Size(max = 100)
     @Column(name = "anhQT")
     private String anhQT;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "vaiTro")
+    private String vaiTro;
 
     public Quantri() {
     }
@@ -90,10 +96,11 @@ public class Quantri implements Serializable {
         this.maQT = maQT;
     }
 
-    public Quantri(String maQT, String usernamQT, String passwordQT) {
+    public Quantri(String maQT, String usernamQT, String passwordQT, String vaiTro) {
         this.maQT = maQT;
         this.usernamQT = usernamQT;
         this.passwordQT = passwordQT;
+        this.vaiTro = vaiTro;
     }
 
     public String getMaQT() {
@@ -182,6 +189,14 @@ public class Quantri implements Serializable {
 
     public void setAnhQT(String anhQT) {
         this.anhQT = anhQT;
+    }
+
+    public String getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
     }
 
     @Override

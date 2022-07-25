@@ -5,8 +5,8 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Entity
 @Table(name = "giangvien")
@@ -44,7 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Giangvien.findByPasswordGV", query = "SELECT g FROM Giangvien g WHERE g.passwordGV = :passwordGV"),
     @NamedQuery(name = "Giangvien.findByAnhGV", query = "SELECT g FROM Giangvien g WHERE g.anhGV = :anhGV"),
     @NamedQuery(name = "Giangvien.findByHocVi", query = "SELECT g FROM Giangvien g WHERE g.hocVi = :hocVi"),
-    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam")})
+    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam"),
+    @NamedQuery(name = "Giangvien.findByVaiTro", query = "SELECT g FROM Giangvien g WHERE g.vaiTro = :vaiTro")})
 public class Giangvien implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -98,8 +99,13 @@ public class Giangvien implements Serializable {
     @Size(max = 50)
     @Column(name = "hocHam")
     private String hocHam;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "vaiTro")
+    private String vaiTro;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvienmaGV")
-    private Collection<Khoaluan> khoaluanCollection;
+    private Set<Khoaluan> khoaluanSet;
 
     public Giangvien() {
     }
@@ -108,12 +114,13 @@ public class Giangvien implements Serializable {
         this.maGV = maGV;
     }
 
-    public Giangvien(String maGV, String tenGV, String usernameGV, String passwordGV, String hocVi) {
+    public Giangvien(String maGV, String tenGV, String usernameGV, String passwordGV, String hocVi, String vaiTro) {
         this.maGV = maGV;
         this.tenGV = tenGV;
         this.usernameGV = usernameGV;
         this.passwordGV = passwordGV;
         this.hocVi = hocVi;
+        this.vaiTro = vaiTro;
     }
 
     public String getMaGV() {
@@ -220,13 +227,21 @@ public class Giangvien implements Serializable {
         this.hocHam = hocHam;
     }
 
-    @XmlTransient
-    public Collection<Khoaluan> getKhoaluanCollection() {
-        return khoaluanCollection;
+    public String getVaiTro() {
+        return vaiTro;
     }
 
-    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
-        this.khoaluanCollection = khoaluanCollection;
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
+    }
+
+    @XmlTransient
+    public Set<Khoaluan> getKhoaluanSet() {
+        return khoaluanSet;
+    }
+
+    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
+        this.khoaluanSet = khoaluanSet;
     }
 
     @Override

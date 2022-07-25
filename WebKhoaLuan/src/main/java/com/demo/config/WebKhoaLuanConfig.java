@@ -26,11 +26,11 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer{
     }
     
     
-    @Bean
-    public InternalResourceViewResolver viewResolver () {
-        InternalResourceViewResolver r = new InternalResourceViewResolver ();
-        r.setPrefix("WEB-INF/jsp/");
-        r.setSuffix(".jsp");
-        return r;
-    }
+//    @Bean
+//    public InternalResourceViewResolver viewResolver () {
+//        InternalResourceViewResolver r = new InternalResourceViewResolver ();
+//        r.setPrefix("WEB-INF/jsp/");
+//        r.setSuffix(".jsp");
+//        return r;
+//    }
 }

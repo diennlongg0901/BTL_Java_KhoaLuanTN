@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Entity
 @Table(name = "giaovu")
@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Giaovu.findByUsernameGVu", query = "SELECT g FROM Giaovu g WHERE g.usernameGVu = :usernameGVu"),
     @NamedQuery(name = "Giaovu.findByPasswordGVu", query = "SELECT g FROM Giaovu g WHERE g.passwordGVu = :passwordGVu"),
     @NamedQuery(name = "Giaovu.findByAnhGVu", query = "SELECT g FROM Giaovu g WHERE g.anhGVu = :anhGVu"),
+    @NamedQuery(name = "Giaovu.findByVaiTro", query = "SELECT g FROM Giaovu g WHERE g.vaiTro = :vaiTro"),
     @NamedQuery(name = "Giaovu.findByPhongBan", query = "SELECT g FROM Giaovu g WHERE g.phongBan = :phongBan")})
 public class Giaovu implements Serializable {
 
@@ -87,6 +88,11 @@ public class Giaovu implements Serializable {
     private String anhGVu;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 20)
+    @Column(name = "vaiTro")
+    private String vaiTro;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "phongBan")
     private String phongBan;
@@ -98,11 +104,12 @@ public class Giaovu implements Serializable {
         this.maGVu = maGVu;
     }
 
-    public Giaovu(String maGVu, String tenGVu, String usernameGVu, String passwordGVu, String phongBan) {
+    public Giaovu(String maGVu, String tenGVu, String usernameGVu, String passwordGVu, String vaiTro, String phongBan) {
         this.maGVu = maGVu;
         this.tenGVu = tenGVu;
         this.usernameGVu = usernameGVu;
         this.passwordGVu = passwordGVu;
+        this.vaiTro = vaiTro;
         this.phongBan = phongBan;
     }
 
@@ -192,6 +199,14 @@ public class Giaovu implements Serializable {
 
     public void setAnhGVu(String anhGVu) {
         this.anhGVu = anhGVu;
+    }
+
+    public String getVaiTro() {
+        return vaiTro;
+    }
+
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
     }
 
     public String getPhongBan() {
