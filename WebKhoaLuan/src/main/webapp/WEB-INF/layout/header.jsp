@@ -4,6 +4,7 @@
     Author     : ADMIN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <nav class="navbar navbar-expand-sm fixed-top py-3 bg-light navbar-light">
@@ -14,7 +15,9 @@
                 <a class="nav-link" href="#">Thông báo mới</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Đăng nhập</a>
+                <a class="nav-link text-success" href="<c:url value = "/DangNhap" />">
+                    <i class = "fa fa-user" aria-hidden="true"></i> Đăng nhập
+                </a>
             </li>
         </ul>
     </div>

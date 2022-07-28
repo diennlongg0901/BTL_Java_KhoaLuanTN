@@ -14,8 +14,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     <definition name="TrangChu" extends="baseLayout">
         <put-attribute name="title" value="Trường đai học AA" />
-        <put-attribute name="trangchu"
+        <put-attribute name="content"
                        value="/WEB-INF/jsp/TrangChu.jsp" />
+    </definition>
+    
+    <definition name="DangNhap" extends="baseLayout">
+        <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/DangNhap.jsp" />
     </definition>
     
 </tiles-definitions>

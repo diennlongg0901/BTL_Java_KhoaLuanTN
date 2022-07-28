@@ -21,6 +21,8 @@ public class DispatcherServletInit extends AbstractAnnotationConfigDispatcherSer
         return new Class[] {
             WebKhoaLuanConfig.class,
             TilesConfig.class
+//            SpringSecurityConfig.class
+                
         };
     }
 

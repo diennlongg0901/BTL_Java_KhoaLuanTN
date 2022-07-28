@@ -20,7 +20,7 @@
     <body>
         <tiles:insertAttribute name="header"/>
         <div>
-            <tiles:insertAttribute name="trangchu"/>
+            <tiles:insertAttribute name="content"/>
         </div>
         <tiles:insertAttribute name="footer"/>
     </body>
