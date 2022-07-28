@@ -6,29 +6,27 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="spring"
-           uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c"
-           uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="login-box">
+    <h2>Login</h2>
+    <form>
+        <div class="user-box">
+            <input type="text" name="" required="">
+            <label>Username</label>
+        </div>
+        <div class="user-box">
+            <input type="password" name="" required="">
+            <label>Password</label>
+        </div>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+        </a>
+    </form>
+</div>
 
-<spring:url value="/DangNhap" var="action" />
-<form action="${action}" method="post" >
-    <div class="form-group">
-        <label for="usernameId">
-            <spring:message code="user.username" />
-        </label>
-        <input name="username" id="usernameId"
-               class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="passwordId">
-            <spring:message code="user.password" />
-        </label>
-        <input id="passwordId" name="password"
-               class="form-control" type="password" />
-    </div>
-    <div class="form-group">
-        <input type="submit"
-               value="<spring:message code="user.login" />"/>
-    </div>
-</form>
+
+
+</div>
