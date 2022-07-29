@@ -9,15 +9,13 @@
 
 <nav class="navbar navbar-expand-sm fixed-top py-3 bg-light navbar-light">
     <div class="container-fluid">
-        <a class="nav-link active" href="#">Trường Đại học AA</a>
+        <a class="nav-link active" href="<c:url value="/" />"><strong>Trường Đại học AA</strong></a>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="#">Thông báo mới</a>
+                <a class="nav-link" href="#"><strong>Thông báo mới</strong></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-success" href="<c:url value = "/DangNhap" />">
-                    <i class = "fa fa-user" aria-hidden="true"></i> Đăng nhập
-                </a>
+                <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
             </li>
         </ul>
     </div>

@@ -20,6 +20,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     
     <definition name="DangNhap" extends="baseLayout">
         <put-attribute name="title" value="Đăng nhập" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/DangNhap.jsp" />
     </definition>

@@ -48,6 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Giangvien.findByVaiTro", query = "SELECT g FROM Giangvien g WHERE g.vaiTro = :vaiTro")})
 public class Giangvien implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    private Set<Chitiethoidong> chitiethoidongSet;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -267,6 +270,15 @@ public class Giangvien implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Giangvien[ maGV=" + maGV + " ]";
+    }
+
+    @XmlTransient
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
+    }
+
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
     
 }

@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Hoidong.findByTenHD", query = "SELECT h FROM Hoidong h WHERE h.tenHD = :tenHD")})
 public class Hoidong implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
+    private Set<Chitiethoidong> chitiethoidongSet;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +104,15 @@ public class Hoidong implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Hoidong[ maHD=" + maHD + " ]";
+    }
+
+    @XmlTransient
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
+    }
+
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
     
 }
