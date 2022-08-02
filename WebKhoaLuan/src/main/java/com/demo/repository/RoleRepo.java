@@ -4,18 +4,14 @@
  */
 package com.demo.repository;
 
+import com.demo.pojo.Chucvu;
 import java.util.List;
-import org.springframework.security.core.userdetails.User;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
-public interface UserRepo {
 
-    void addUser(User user);
-
-    List<User> getUsers(String username);
-    
-    User getUserbyID(int id);
+public interface RoleRepo {
+    List<Chucvu> getChucvu();
 }

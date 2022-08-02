@@ -12,6 +12,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,6 +49,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam"),
     @NamedQuery(name = "Giangvien.findByVaiTro", query = "SELECT g FROM Giangvien g WHERE g.vaiTro = :vaiTro")})
 public class Giangvien implements Serializable {
+
+    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
+    @ManyToOne(optional = false)
+    private Chucvu chucvumaChucVu;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
     private Set<Chitiethoidong> chitiethoidongSet;
@@ -279,6 +285,14 @@ public class Giangvien implements Serializable {
 
     public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
         this.chitiethoidongSet = chitiethoidongSet;
+    }
+
+    public Chucvu getChucvumaChucVu() {
+        return chucvumaChucVu;
+    }
+
+    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
+        this.chucvumaChucVu = chucvumaChucVu;
     }
     
 }

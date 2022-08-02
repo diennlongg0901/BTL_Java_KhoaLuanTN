@@ -13,6 +13,7 @@
     <class>com.demo.pojo.Tieuchi</class>
     <class>com.demo.pojo.Hoidong</class>
     <class>com.demo.pojo.Chitiethoidong</class>
+    <class>com.demo.pojo.Chucvu</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

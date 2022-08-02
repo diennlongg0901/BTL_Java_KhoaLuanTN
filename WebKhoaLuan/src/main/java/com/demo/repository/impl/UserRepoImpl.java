@@ -10,30 +10,36 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author PC
  */
-//@Repository
-//public class UserRepoImpl implements UserRepo {
-//
-//    
-//
-//        @Autowired
-//        private SessionFactory sessionFactory;
-//
-//        @Override
-//        public void addUser(User user) {
-//            sessionFactory.getCurrentSession().save(user);
-//        }
-//
-//        @Override
-//        public List<User> getUsers(String username) {
-//            return null;
-//            
-//}
-//        @Override
-//        public User getUserByID(int id) {
-//            return null;
-//}
+@Repository
+@Transactional
+public class UserRepoImpl implements UserRepo {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
+    @Override
+    public void addUser(User user) {
+        sessionFactory.getCurrentSession().save(user);
+    }
+
+    @Override
+    public List<User> getUsers(String username) {
+        return null;
+
+    }
+
+    public User getUserByID(int id) {
+        return null;
+    }
+
+    @Override
+    public User getUserbyID(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+}

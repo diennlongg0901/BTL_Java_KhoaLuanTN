@@ -50,6 +50,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sinhvien.findByTinhTrang", query = "SELECT s FROM Sinhvien s WHERE s.tinhTrang = :tinhTrang")})
 public class Sinhvien implements Serializable {
 
+    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
+    @ManyToOne(optional = false)
+    private Chucvu chucvumaChucVu;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -282,6 +286,14 @@ public class Sinhvien implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Sinhvien[ maSoSV=" + maSoSV + " ]";
+    }
+
+    public Chucvu getChucvumaChucVu() {
+        return chucvumaChucVu;
+    }
+
+    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
+        this.chucvumaChucVu = chucvumaChucVu;
     }
     
 }

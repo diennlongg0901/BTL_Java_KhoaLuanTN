@@ -8,17 +8,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <c:url value="/DangNhap" var="action" />
-<div class="container-fluid">
-    <h2 class="text-center">Đăng nhập</h2>
-    <div class="form-group container-fluid">
+<div class="container">
+    <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>
+    <div class="form-group container">
         <form>
             <div class="form-outline mb-4">
                 <label class="form-label" for="vaiTro">Vai trò người dùng</label>
                 <select id="vaiTro" name="vaiTro">
-                    <option value="volvo">Sinh viên</option>
-                    <option value="saab">Giảng viên</option>
-                    <option value="fiat">Giáo vụ</option>
-                    <option value="audi">Quản trị</option>
+                    <c:forEach items="${chucvu}" var="c">
+                        <option value="${c.maChucVu}">${c.tenChucVu}</option>
+                    </c:forEach>
                 </select>
             </div>
 

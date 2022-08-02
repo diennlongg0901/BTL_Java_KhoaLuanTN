@@ -10,6 +10,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -42,6 +44,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Giaovu.findByVaiTro", query = "SELECT g FROM Giaovu g WHERE g.vaiTro = :vaiTro"),
     @NamedQuery(name = "Giaovu.findByPhongBan", query = "SELECT g FROM Giaovu g WHERE g.phongBan = :phongBan")})
 public class Giaovu implements Serializable {
+
+    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
+    @ManyToOne(optional = false)
+    private Chucvu chucvumaChucVu;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -240,6 +246,14 @@ public class Giaovu implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Giaovu[ maGVu=" + maGVu + " ]";
+    }
+
+    public Chucvu getChucvumaChucVu() {
+        return chucvumaChucVu;
+    }
+
+    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
+        this.chucvumaChucVu = chucvumaChucVu;
     }
     
 }

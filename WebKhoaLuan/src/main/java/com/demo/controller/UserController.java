@@ -4,7 +4,10 @@
  */
 package com.demo.controller;
 
+import com.demo.service.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -13,8 +16,12 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class UserController {
+    @Autowired
+    private RoleService roleService;
+    
     @GetMapping("/DangNhap")
-    public String DangNhap(){
+    public String DangNhap(Model model){
+        model.addAttribute("chucvu", this.roleService.getChucvu());
         return "DangNhap";
     }
 }
