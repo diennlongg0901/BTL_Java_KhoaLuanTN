@@ -4,19 +4,14 @@
  */
 package com.demo.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.demo.pojo.Quantri;
+import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
  * @author PC
  */
-public interface UserService extends UserDetailsService 
-
- {
-
-    void addUser(User user);
-
-    User getUserByUsername(String username);
-
+public interface UserService extends UserDetailsService {
+    List<Quantri> getUsersQT(String username);
 }

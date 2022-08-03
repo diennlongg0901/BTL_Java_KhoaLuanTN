@@ -4,18 +4,13 @@
  */
 package com.demo.repository;
 
+import com.demo.pojo.Quantri;
 import java.util.List;
-import org.springframework.security.core.userdetails.User;
 
 /**
  *
  * @author PC
  */
 public interface UserRepo {
-
-    void addUser(User user);
-
-    List<User> getUsers(String username);
-    
-    User getUserbyID(int id);
+    List<Quantri> getUsersQT(String username);
 }

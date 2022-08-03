@@ -14,9 +14,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"><strong>Thông báo mới</strong></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
-            </li>
+            <c:if test="${pageContext.request.userPrincipal.name == null}">
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
+                </li>
+            </c:if>
+            <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng xuất</strong></a>
+                </li>
+            </c:if>
         </ul>
     </div>
 </nav>

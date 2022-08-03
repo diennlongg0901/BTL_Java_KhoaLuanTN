@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Quantri.findByAnhQT", query = "SELECT q FROM Quantri q WHERE q.anhQT = :anhQT"),
     @NamedQuery(name = "Quantri.findByVaiTro", query = "SELECT q FROM Quantri q WHERE q.vaiTro = :vaiTro")})
 public class Quantri implements Serializable {
-
+    
     @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
     @ManyToOne(optional = false)
     private Chucvu chucvumaChucVu;

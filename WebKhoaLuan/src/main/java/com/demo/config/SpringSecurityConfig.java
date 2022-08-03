@@ -32,15 +32,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userDetailsService;
     
-    @Bean
-    public BCryptPasswordEncoder encoder(){
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public BCryptPasswordEncoder encoder(){
+//        return new BCryptPasswordEncoder();
+//    }
     
     @Override
     protected void configure(AuthenticationManagerBuilder a) throws Exception{
-        a.userDetailsService(userDetailsService).passwordEncoder(encoder());
+        a.userDetailsService(userDetailsService);
     }
+    
+//    .passwordEncoder(encoder())
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -54,7 +56,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
         http.exceptionHandling().accessDeniedPage("/DangNhap?accessDenied");
         
         http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
+                .antMatchers("/admin/**").access("hasRole('QT')");
         
         http.csrf().disable();
     }

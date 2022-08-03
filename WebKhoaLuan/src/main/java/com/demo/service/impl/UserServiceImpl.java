@@ -5,6 +5,7 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Giaovu;
+import com.demo.pojo.Quantri;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
 import java.util.HashSet;
@@ -16,49 +17,33 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author PC
  */
-//@Service("userDetailsService")
-//public class UserServiceImpl implements UserService {
-//
-//    @Autowired
-//    private UserRepo userRepo;
-//
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+@Service("userDetailsService")
+public class UserServiceImpl implements UserService {
 
-//    @Override
-//    @Transactional
-//    public void addUser(User user) {
-//        user.(
-//                bCryptPasswordEncoder.encode(user.getPassword()));
-//        userRepository.addUser(user);
-//    }
-//
-//    @Override
-//    @Transactional(readOnly = true)
-//    public User getUserByUsername(String username) {
-//        return userRepository.getUsers(username).get(0);
-//    }
-//
-//    @Override
-//    @Transactional(readOnly = true)
-//    public UserDetails loadUserByUsername(String username)
-//            throws UsernameNotFoundException {
-//        List<User> users = userRepository.getUsers(username);
-//        if (users.isEmpty()) {
-//            throw new UsernameNotFoundException("Không tồn tại!");
-//        }
-//        User u = users.get(0);
-//        Set<GrantedAuthority> authorities = new HashSet<>();
-//        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
-//        return new org.springframework.security.core.userdetails.User(
-//                u.getUsername(), u.getPassword(), authorities);
-//
-//    }
+    @Autowired
+    private UserRepo userRepo;
+    
+    @Override
+    public List<Quantri> getUsersQT(String username) {
+        return this.userRepo.getUsersQT(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<Quantri> quantri = this.getUsersQT(username);
+        if (quantri.isEmpty())
+        {
+            throw new UsernameNotFoundException("Tài khoản người dùng quản trị không có!");
+        }
+        Quantri qt = quantri.get(0);
+        Set<GrantedAuthority> auth = new HashSet<>();
+        auth.add(new SimpleGrantedAuthority(qt.getChucvumaChucVu().getTenChucVu()));
+        return new org.springframework.security.core.userdetails.User(qt.getUsernamQT(), qt.getPasswordQT(), auth);
+    }
+}
