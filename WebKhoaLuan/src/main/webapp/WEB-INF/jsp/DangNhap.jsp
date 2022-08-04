@@ -13,6 +13,12 @@
     </div>
 </c:if>
 
+<c:if test="${param.accessDenied != null}">
+    <div class="alert alert-danger">
+        Bạn không có quyền truy cập vào trang này !!!
+    </div>
+</c:if>
+
 <c:url value="/DangNhap" var="action" />
 <div class="container">
     <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>

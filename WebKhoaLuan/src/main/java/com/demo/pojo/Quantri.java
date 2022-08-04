@@ -18,10 +18,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Entity
 @Table(name = "quantri")
@@ -82,7 +83,7 @@ public class Quantri implements Serializable {
     private String passwordQT;
     @Size(max = 100)
     @Column(name = "anhQT")
-    private String anhQT;
+    private String anhQT;  
     @Size(max = 45)
     @Column(name = "chucVu")
     private String chucVu;

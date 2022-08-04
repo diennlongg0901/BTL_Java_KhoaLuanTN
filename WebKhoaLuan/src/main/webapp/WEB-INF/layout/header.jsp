@@ -14,6 +14,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="#"><strong>Thông báo mới</strong></a>
             </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" href="<c:url value = "/admin/QLSinhVien" />"><strong>Quản ly sinh viên</strong></a>
+            </li>
+            
             <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li class="nav-item">
                     <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
