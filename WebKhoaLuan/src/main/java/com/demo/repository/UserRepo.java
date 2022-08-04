@@ -12,5 +12,6 @@ import java.util.List;
  * @author PC
  */
 public interface UserRepo {
+    boolean addUser (Quantri userQuantri);
     List<Quantri> getUsersQT(String username);
 }

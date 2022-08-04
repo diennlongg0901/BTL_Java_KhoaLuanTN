@@ -5,6 +5,7 @@
 package com.demo.controller;
 
 import com.demo.service.RoleService;
+import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ public class UserController {
     
     @GetMapping("/DangNhap")
     public String DangNhap(Model model){
-        model.addAttribute("chucvu", this.roleService.getChucvu());
+//        model.addAttribute("chucvu", this.roleService.getChucvu());
         return "DangNhap";
     }
 }

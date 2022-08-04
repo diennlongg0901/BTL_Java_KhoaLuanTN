@@ -4,7 +4,6 @@
  */
 package com.demo.service.impl;
 
-import com.demo.pojo.Giaovu;
 import com.demo.pojo.Quantri;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
@@ -14,7 +13,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -43,7 +41,12 @@ public class UserServiceImpl implements UserService {
         }
         Quantri qt = quantri.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(qt.getChucvumaChucVu().getTenChucVu()));
+        auth.add(new SimpleGrantedAuthority(qt.getChucVu()));
         return new org.springframework.security.core.userdetails.User(qt.getUsernamQT(), qt.getPasswordQT(), auth);
+    }
+
+    @Override
+    public boolean addUser(Quantri userQuantri) {
+        return this.userRepo.addUser(userQuantri);
     }
 }

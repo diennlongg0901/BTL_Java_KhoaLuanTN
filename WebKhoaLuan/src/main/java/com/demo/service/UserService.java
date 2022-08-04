@@ -13,5 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author PC
  */
 public interface UserService extends UserDetailsService {
+    boolean addUser (Quantri userQuantri);
     List<Quantri> getUsersQT(String username);
 }

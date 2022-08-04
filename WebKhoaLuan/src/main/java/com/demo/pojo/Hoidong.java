@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,9 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Hoidong.findByTenHD", query = "SELECT h FROM Hoidong h WHERE h.tenHD = :tenHD")})
 public class Hoidong implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Set<Chitiethoidong> chitiethoidongSet;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +43,10 @@ public class Hoidong implements Serializable {
     @Size(max = 50)
     @Column(name = "tenHD")
     private String tenHD;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
+    private Collection<Chitiethoidong> chitiethoidongCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidongmaHD")
-    private Set<Khoaluan> khoaluanSet;
+    private Collection<Khoaluan> khoaluanCollection;
 
     public Hoidong() {
     }
@@ -73,12 +72,21 @@ public class Hoidong implements Serializable {
     }
 
     @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
+    public Collection<Chitiethoidong> getChitiethoidongCollection() {
+        return chitiethoidongCollection;
     }
 
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
+    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
+        this.chitiethoidongCollection = chitiethoidongCollection;
+    }
+
+    @XmlTransient
+    public Collection<Khoaluan> getKhoaluanCollection() {
+        return khoaluanCollection;
+    }
+
+    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
+        this.khoaluanCollection = khoaluanCollection;
     }
 
     @Override
@@ -104,15 +112,6 @@ public class Hoidong implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Hoidong[ maHD=" + maHD + " ]";
-    }
-
-    @XmlTransient
-    public Set<Chitiethoidong> getChitiethoidongSet() {
-        return chitiethoidongSet;
-    }
-
-    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
-        this.chitiethoidongSet = chitiethoidongSet;
     }
     
 }

@@ -5,8 +5,8 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,16 +46,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Giangvien.findByPasswordGV", query = "SELECT g FROM Giangvien g WHERE g.passwordGV = :passwordGV"),
     @NamedQuery(name = "Giangvien.findByAnhGV", query = "SELECT g FROM Giangvien g WHERE g.anhGV = :anhGV"),
     @NamedQuery(name = "Giangvien.findByHocVi", query = "SELECT g FROM Giangvien g WHERE g.hocVi = :hocVi"),
-    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam"),
-    @NamedQuery(name = "Giangvien.findByVaiTro", query = "SELECT g FROM Giangvien g WHERE g.vaiTro = :vaiTro")})
+    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam")})
 public class Giangvien implements Serializable {
-
-    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
-    @ManyToOne(optional = false)
-    private Chucvu chucvumaChucVu;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
-    private Set<Chitiethoidong> chitiethoidongSet;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -108,13 +100,13 @@ public class Giangvien implements Serializable {
     @Size(max = 50)
     @Column(name = "hocHam")
     private String hocHam;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "vaiTro")
-    private String vaiTro;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    private Collection<Chitiethoidong> chitiethoidongCollection;
+    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
+    @ManyToOne(optional = false)
+    private Chucvu chucvumaChucVu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvienmaGV")
-    private Set<Khoaluan> khoaluanSet;
+    private Collection<Khoaluan> khoaluanCollection;
 
     public Giangvien() {
     }
@@ -123,13 +115,12 @@ public class Giangvien implements Serializable {
         this.maGV = maGV;
     }
 
-    public Giangvien(String maGV, String tenGV, String usernameGV, String passwordGV, String hocVi, String vaiTro) {
+    public Giangvien(String maGV, String tenGV, String usernameGV, String passwordGV, String hocVi) {
         this.maGV = maGV;
         this.tenGV = tenGV;
         this.usernameGV = usernameGV;
         this.passwordGV = passwordGV;
         this.hocVi = hocVi;
-        this.vaiTro = vaiTro;
     }
 
     public String getMaGV() {
@@ -236,21 +227,30 @@ public class Giangvien implements Serializable {
         this.hocHam = hocHam;
     }
 
-    public String getVaiTro() {
-        return vaiTro;
+    @XmlTransient
+    public Collection<Chitiethoidong> getChitiethoidongCollection() {
+        return chitiethoidongCollection;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
+        this.chitiethoidongCollection = chitiethoidongCollection;
+    }
+
+    public Chucvu getChucvumaChucVu() {
+        return chucvumaChucVu;
+    }
+
+    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
+        this.chucvumaChucVu = chucvumaChucVu;
     }
 
     @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
+    public Collection<Khoaluan> getKhoaluanCollection() {
+        return khoaluanCollection;
     }
 
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
+    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
+        this.khoaluanCollection = khoaluanCollection;
     }
 
     @Override
@@ -276,23 +276,6 @@ public class Giangvien implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Giangvien[ maGV=" + maGV + " ]";
-    }
-
-    @XmlTransient
-    public Set<Chitiethoidong> getChitiethoidongSet() {
-        return chitiethoidongSet;
-    }
-
-    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
-        this.chitiethoidongSet = chitiethoidongSet;
-    }
-
-    public Chucvu getChucvumaChucVu() {
-        return chucvumaChucVu;
-    }
-
-    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
-        this.chucvumaChucVu = chucvumaChucVu;
     }
     
 }

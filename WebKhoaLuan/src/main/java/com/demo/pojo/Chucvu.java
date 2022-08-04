@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,13 +46,11 @@ public class Chucvu implements Serializable {
     @Column(name = "tenChucVu")
     private String tenChucVu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Set<Giaovu> giaovuSet;
+    private Collection<Giaovu> giaovuCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Set<Sinhvien> sinhvienSet;
+    private Collection<Sinhvien> sinhvienCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Set<Quantri> quantriSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Set<Giangvien> giangvienSet;
+    private Collection<Giangvien> giangvienCollection;
 
     public Chucvu() {
     }
@@ -83,39 +81,30 @@ public class Chucvu implements Serializable {
     }
 
     @XmlTransient
-    public Set<Giaovu> getGiaovuSet() {
-        return giaovuSet;
+    public Collection<Giaovu> getGiaovuCollection() {
+        return giaovuCollection;
     }
 
-    public void setGiaovuSet(Set<Giaovu> giaovuSet) {
-        this.giaovuSet = giaovuSet;
-    }
-
-    @XmlTransient
-    public Set<Sinhvien> getSinhvienSet() {
-        return sinhvienSet;
-    }
-
-    public void setSinhvienSet(Set<Sinhvien> sinhvienSet) {
-        this.sinhvienSet = sinhvienSet;
+    public void setGiaovuCollection(Collection<Giaovu> giaovuCollection) {
+        this.giaovuCollection = giaovuCollection;
     }
 
     @XmlTransient
-    public Set<Quantri> getQuantriSet() {
-        return quantriSet;
+    public Collection<Sinhvien> getSinhvienCollection() {
+        return sinhvienCollection;
     }
 
-    public void setQuantriSet(Set<Quantri> quantriSet) {
-        this.quantriSet = quantriSet;
+    public void setSinhvienCollection(Collection<Sinhvien> sinhvienCollection) {
+        this.sinhvienCollection = sinhvienCollection;
     }
 
     @XmlTransient
-    public Set<Giangvien> getGiangvienSet() {
-        return giangvienSet;
+    public Collection<Giangvien> getGiangvienCollection() {
+        return giangvienCollection;
     }
 
-    public void setGiangvienSet(Set<Giangvien> giangvienSet) {
-        this.giangvienSet = giangvienSet;
+    public void setGiangvienCollection(Collection<Giangvien> giangvienCollection) {
+        this.giangvienCollection = giangvienCollection;
     }
 
     @Override

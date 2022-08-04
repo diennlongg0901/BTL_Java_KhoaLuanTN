@@ -10,8 +10,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,12 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Quantri.findByUsernamQT", query = "SELECT q FROM Quantri q WHERE q.usernamQT = :usernamQT"),
     @NamedQuery(name = "Quantri.findByPasswordQT", query = "SELECT q FROM Quantri q WHERE q.passwordQT = :passwordQT"),
     @NamedQuery(name = "Quantri.findByAnhQT", query = "SELECT q FROM Quantri q WHERE q.anhQT = :anhQT"),
-    @NamedQuery(name = "Quantri.findByVaiTro", query = "SELECT q FROM Quantri q WHERE q.vaiTro = :vaiTro")})
+    @NamedQuery(name = "Quantri.findByChucVu", query = "SELECT q FROM Quantri q WHERE q.chucVu = :chucVu")})
 public class Quantri implements Serializable {
-    
-    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
-    @ManyToOne(optional = false)
-    private Chucvu chucvumaChucVu;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -83,17 +77,15 @@ public class Quantri implements Serializable {
     private String usernamQT;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 250)
     @Column(name = "passwordQT")
     private String passwordQT;
     @Size(max = 100)
     @Column(name = "anhQT")
     private String anhQT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20)
-    @Column(name = "vaiTro")
-    private String vaiTro;
+    @Size(max = 45)
+    @Column(name = "chucVu")
+    private String chucVu;
 
     public Quantri() {
     }
@@ -102,11 +94,10 @@ public class Quantri implements Serializable {
         this.maQT = maQT;
     }
 
-    public Quantri(String maQT, String usernamQT, String passwordQT, String vaiTro) {
+    public Quantri(String maQT, String usernamQT, String passwordQT) {
         this.maQT = maQT;
         this.usernamQT = usernamQT;
         this.passwordQT = passwordQT;
-        this.vaiTro = vaiTro;
     }
 
     public String getMaQT() {
@@ -197,12 +188,12 @@ public class Quantri implements Serializable {
         this.anhQT = anhQT;
     }
 
-    public String getVaiTro() {
-        return vaiTro;
+    public String getChucVu() {
+        return chucVu;
     }
 
-    public void setVaiTro(String vaiTro) {
-        this.vaiTro = vaiTro;
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
     }
 
     @Override
@@ -228,14 +219,6 @@ public class Quantri implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Quantri[ maQT=" + maQT + " ]";
-    }
-
-    public Chucvu getChucvumaChucVu() {
-        return chucvumaChucVu;
-    }
-
-    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
-        this.chucvumaChucVu = chucvumaChucVu;
     }
     
 }

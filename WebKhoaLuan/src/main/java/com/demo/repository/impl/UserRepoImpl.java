@@ -14,10 +14,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,11 +39,16 @@ public class UserRepoImpl implements UserRepo {
         query = query.select(r);
         if (!username.isEmpty())
         {
-            Predicate p = (Predicate) builder.equal(r.get("usernamQT").as(String.class), username.trim());
+            Predicate p = builder.equal(r.get("usernamQT").as(String.class), username.trim());
             query = query.where(p);
         }
         
         Query q = s.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addUser(Quantri qntr) {
+        return false;
     }
 }

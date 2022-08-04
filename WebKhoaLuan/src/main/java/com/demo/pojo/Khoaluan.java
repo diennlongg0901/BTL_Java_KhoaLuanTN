@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,7 +53,7 @@ public class Khoaluan implements Serializable {
     @Column(name = "ghiChu")
     private String ghiChu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoaluan")
-    private Set<Diem> diemSet;
+    private Collection<Diem> diemCollection;
     @JoinColumn(name = "giangvien_maGV", referencedColumnName = "maGV")
     @ManyToOne(optional = false)
     private Giangvien giangvienmaGV;
@@ -104,12 +104,12 @@ public class Khoaluan implements Serializable {
     }
 
     @XmlTransient
-    public Set<Diem> getDiemSet() {
-        return diemSet;
+    public Collection<Diem> getDiemCollection() {
+        return diemCollection;
     }
 
-    public void setDiemSet(Set<Diem> diemSet) {
-        this.diemSet = diemSet;
+    public void setDiemCollection(Collection<Diem> diemCollection) {
+        this.diemCollection = diemCollection;
     }
 
     public Giangvien getGiangvienmaGV() {
