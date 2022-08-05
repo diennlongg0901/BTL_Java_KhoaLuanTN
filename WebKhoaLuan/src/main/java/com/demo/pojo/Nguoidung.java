@@ -7,12 +7,10 @@ package com.demo.pojo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -21,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nguoidung.findAll", query = "SELECT n FROM Nguoidung n"),
-    @NamedQuery(name = "Nguoidung.findByMaND", query = "SELECT n FROM Nguoidung n WHERE n.maND = :maND"),
+    @NamedQuery(name = "Nguoidung.findByMaND", query = "SELECT n FROM Nguoidung n WHERE n.nguoidungPK.maND = :maND"),
     @NamedQuery(name = "Nguoidung.findByHo", query = "SELECT n FROM Nguoidung n WHERE n.ho = :ho"),
     @NamedQuery(name = "Nguoidung.findByTen", query = "SELECT n FROM Nguoidung n WHERE n.ten = :ten"),
     @NamedQuery(name = "Nguoidung.findByGioiTinh", query = "SELECT n FROM Nguoidung n WHERE n.gioiTinh = :gioiTinh"),
@@ -46,17 +43,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Nguoidung.findByDiaChi", query = "SELECT n FROM Nguoidung n WHERE n.diaChi = :diaChi"),
     @NamedQuery(name = "Nguoidung.findByEmail", query = "SELECT n FROM Nguoidung n WHERE n.email = :email"),
     @NamedQuery(name = "Nguoidung.findBySdt", query = "SELECT n FROM Nguoidung n WHERE n.sdt = :sdt"),
-    @NamedQuery(name = "Nguoidung.findByHoatDong", query = "SELECT n FROM Nguoidung n WHERE n.hoatDong = :hoatDong")})
+    @NamedQuery(name = "Nguoidung.findByHoatDong", query = "SELECT n FROM Nguoidung n WHERE n.hoatDong = :hoatDong"),
+    @NamedQuery(name = "Nguoidung.findByChucvumaChucVu", query = "SELECT n FROM Nguoidung n WHERE n.nguoidungPK.chucvumaChucVu = :chucvumaChucVu")})
 public class Nguoidung implements Serializable {
-    private static final String QuanTri = "Quản Trị";
-    
+
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "maND")
-    private String maND;
+    @EmbeddedId
+    protected NguoidungPK nguoidungPK;
     @Size(max = 50)
     @Column(name = "ho")
     private String ho;
@@ -100,25 +93,29 @@ public class Nguoidung implements Serializable {
     private Set<Giaovu> giaovuSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
     private Set<Sinhvien> sinhvienSet;
-    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu")
-    @ManyToOne 
-    private Chucvu chucvumaChucVu;
+    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Chucvu chucvu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
     private Set<Khoaluan> khoaluanSet;
 
     public Nguoidung() {
     }
 
-    public Nguoidung(String maND) {
-        this.maND = maND;
+    public Nguoidung(NguoidungPK nguoidungPK) {
+        this.nguoidungPK = nguoidungPK;
     }
 
-    public String getMaND() {
-        return maND;
+    public Nguoidung(String maND, String chucvumaChucVu) {
+        this.nguoidungPK = new NguoidungPK(maND, chucvumaChucVu);
     }
 
-    public void setMaND(String maND) {
-        this.maND = maND;
+    public NguoidungPK getNguoidungPK() {
+        return nguoidungPK;
+    }
+
+    public void setNguoidungPK(NguoidungPK nguoidungPK) {
+        this.nguoidungPK = nguoidungPK;
     }
 
     public String getHo() {
@@ -254,12 +251,12 @@ public class Nguoidung implements Serializable {
         this.sinhvienSet = sinhvienSet;
     }
 
-    public Chucvu getChucvumaChucVu() {
-        return chucvumaChucVu;
+    public Chucvu getChucvu() {
+        return chucvu;
     }
 
-    public void setChucvumaChucVu(Chucvu chucvumaChucVu) {
-        this.chucvumaChucVu = chucvumaChucVu;
+    public void setChucvu(Chucvu chucvu) {
+        this.chucvu = chucvu;
     }
 
     @XmlTransient
@@ -274,7 +271,7 @@ public class Nguoidung implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maND != null ? maND.hashCode() : 0);
+        hash += (nguoidungPK != null ? nguoidungPK.hashCode() : 0);
         return hash;
     }
 
@@ -285,7 +282,7 @@ public class Nguoidung implements Serializable {
             return false;
         }
         Nguoidung other = (Nguoidung) object;
-        if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
+        if ((this.nguoidungPK == null && other.nguoidungPK != null) || (this.nguoidungPK != null && !this.nguoidungPK.equals(other.nguoidungPK))) {
             return false;
         }
         return true;
@@ -293,7 +290,7 @@ public class Nguoidung implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Nguoidung[ maND=" + maND + " ]";
+        return "com.demo.pojo.Nguoidung[ nguoidungPK=" + nguoidungPK + " ]";
     }
     
 }

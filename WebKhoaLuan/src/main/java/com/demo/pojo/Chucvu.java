@@ -37,15 +37,13 @@ public class Chucvu implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 5)
+    @Size(min = 1, max = 10)
     @Column(name = "maChucVu")
     private String maChucVu;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "tenChucVu")
     private String tenChucVu;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvu")
     private Set<Nguoidung> nguoidungSet;
 
     public Chucvu() {
@@ -53,11 +51,6 @@ public class Chucvu implements Serializable {
 
     public Chucvu(String maChucVu) {
         this.maChucVu = maChucVu;
-    }
-
-    public Chucvu(String maChucVu, String tenChucVu) {
-        this.maChucVu = maChucVu;
-        this.tenChucVu = tenChucVu;
     }
 
     public String getMaChucVu() {
@@ -108,10 +101,6 @@ public class Chucvu implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Chucvu[ maChucVu=" + maChucVu + " ]";
-    }
-
-    public String as(Class<String> aClass) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

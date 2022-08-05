@@ -11,12 +11,17 @@
 
 
     <c:forEach var="sv" items="${Sinhvien}">
-        <div class="card" >
-            <div class="card-header"> <h2> ${sv.tenSV} </h2> </div>
+        <h2> ${sv.maSV} </h2>
+        <h3>${sv.nienKhoa}</h3>
+        <h3>${sv.tinhTrang}</h3>
+        
+<!--        <div class="card" >
+            <div class="card-header">  </div>
             <div class="card-body">
+                
                 <img src="<c:url value="picture/Anh1" />" alt="${sv.tenSV}" />
             </div>
-                <div class="card-footer"><h3>${sv.maSV}</h3></div>
-        </div>
+                <div class="card-footer"></div>
+        </div>-->
     </c:forEach>
     

@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         }
         Nguoidung u = user.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(u.getChucvumaChucVu().getMaChucVu()));
+        auth.add(new SimpleGrantedAuthority(u.getChucvu().getMaChucVu()));
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
 
