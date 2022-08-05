@@ -50,8 +50,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.exceptionHandling().accessDeniedPage("/DangNhap?accessDenied");
         
-//        http.authorizeRequests().antMatchers("/").permitAll()
-//                .antMatchers("/admin/**").access("hasRole('QT')");
+        http.logout().logoutSuccessUrl("/DangNhap");
+        
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('QT')");
         
         http.csrf().disable();
     }

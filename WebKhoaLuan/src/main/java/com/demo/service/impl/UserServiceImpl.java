@@ -4,7 +4,8 @@
  */
 package com.demo.service.impl;
 
-import com.demo.pojo.Quantri;
+import com.demo.pojo.Nguoidung;
+import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
 import java.util.HashSet;
@@ -28,25 +29,30 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     
     @Override
-    public List<Quantri> getUsersQT(String username) {
-        return this.userRepo.getUsersQT(username);
+    public List<Nguoidung> getUsers(String username) {
+        return this.userRepo.getUsers(username);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        List<Quantri> quantri = this.getUsersQT(username);
-        if (quantri.isEmpty())
+        List<Nguoidung> user = this.getUsers(username);
+        if (user.isEmpty())
         {
             throw new UsernameNotFoundException("Tài khoản người dùng quản trị không có!");
         }
-        Quantri qt = quantri.get(0);
+        Nguoidung u = user.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(qt.getChucVu()));
-        return new org.springframework.security.core.userdetails.User(qt.getUsernamQT(), qt.getPasswordQT(), auth);
+        auth.add(new SimpleGrantedAuthority(u.getChucvumaChucVu().getMaChucVu()));
+        return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
 
     @Override
-    public boolean addUser(Quantri userQuantri) {
-        return this.userRepo.addUser(userQuantri);
+    public boolean addUser(Nguoidung user) {
+        return this.userRepo.addUser(user);
+    }
+
+    @Override
+    public List<Sinhvien> getSinhvien() {
+        return this.userRepo.getSinhvien();
     }
 }

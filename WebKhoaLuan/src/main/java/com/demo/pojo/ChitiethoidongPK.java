@@ -20,28 +20,20 @@ public class ChitiethoidongPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "giangvien_maGV")
-    private String giangvienmaGV;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "hoidong_maHD")
     private int hoidongmaHD;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "nguoidung_maND")
+    private String nguoidungmaND;
 
     public ChitiethoidongPK() {
     }
 
-    public ChitiethoidongPK(String giangvienmaGV, int hoidongmaHD) {
-        this.giangvienmaGV = giangvienmaGV;
+    public ChitiethoidongPK(int hoidongmaHD, String nguoidungmaND) {
         this.hoidongmaHD = hoidongmaHD;
-    }
-
-    public String getGiangvienmaGV() {
-        return giangvienmaGV;
-    }
-
-    public void setGiangvienmaGV(String giangvienmaGV) {
-        this.giangvienmaGV = giangvienmaGV;
+        this.nguoidungmaND = nguoidungmaND;
     }
 
     public int getHoidongmaHD() {
@@ -52,11 +44,19 @@ public class ChitiethoidongPK implements Serializable {
         this.hoidongmaHD = hoidongmaHD;
     }
 
+    public String getNguoidungmaND() {
+        return nguoidungmaND;
+    }
+
+    public void setNguoidungmaND(String nguoidungmaND) {
+        this.nguoidungmaND = nguoidungmaND;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (giangvienmaGV != null ? giangvienmaGV.hashCode() : 0);
         hash += (int) hoidongmaHD;
+        hash += (nguoidungmaND != null ? nguoidungmaND.hashCode() : 0);
         return hash;
     }
 
@@ -67,10 +67,10 @@ public class ChitiethoidongPK implements Serializable {
             return false;
         }
         ChitiethoidongPK other = (ChitiethoidongPK) object;
-        if ((this.giangvienmaGV == null && other.giangvienmaGV != null) || (this.giangvienmaGV != null && !this.giangvienmaGV.equals(other.giangvienmaGV))) {
+        if (this.hoidongmaHD != other.hoidongmaHD) {
             return false;
         }
-        if (this.hoidongmaHD != other.hoidongmaHD) {
+        if ((this.nguoidungmaND == null && other.nguoidungmaND != null) || (this.nguoidungmaND != null && !this.nguoidungmaND.equals(other.nguoidungmaND))) {
             return false;
         }
         return true;
@@ -78,7 +78,7 @@ public class ChitiethoidongPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.ChitiethoidongPK[ giangvienmaGV=" + giangvienmaGV + ", hoidongmaHD=" + hoidongmaHD + " ]";
+        return "com.demo.pojo.ChitiethoidongPK[ hoidongmaHD=" + hoidongmaHD + ", nguoidungmaND=" + nguoidungmaND + " ]";
     }
     
 }

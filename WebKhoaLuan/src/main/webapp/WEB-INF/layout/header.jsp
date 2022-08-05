@@ -21,7 +21,7 @@
             </c:if>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <li class="nav-item">
-                    <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng xuất</strong></a>
+                    <a class="nav-link text-success" href="<c:url value = "/logout" />"><strong>Đăng xuất</strong></a>
                 </li>
             </c:if>
         </ul>

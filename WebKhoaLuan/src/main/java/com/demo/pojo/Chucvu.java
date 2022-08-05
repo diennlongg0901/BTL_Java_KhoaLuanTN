@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -46,11 +46,7 @@ public class Chucvu implements Serializable {
     @Column(name = "tenChucVu")
     private String tenChucVu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Collection<Giaovu> giaovuCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Collection<Sinhvien> sinhvienCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvumaChucVu")
-    private Collection<Giangvien> giangvienCollection;
+    private Set<Nguoidung> nguoidungSet;
 
     public Chucvu() {
     }
@@ -81,30 +77,12 @@ public class Chucvu implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Giaovu> getGiaovuCollection() {
-        return giaovuCollection;
+    public Set<Nguoidung> getNguoidungSet() {
+        return nguoidungSet;
     }
 
-    public void setGiaovuCollection(Collection<Giaovu> giaovuCollection) {
-        this.giaovuCollection = giaovuCollection;
-    }
-
-    @XmlTransient
-    public Collection<Sinhvien> getSinhvienCollection() {
-        return sinhvienCollection;
-    }
-
-    public void setSinhvienCollection(Collection<Sinhvien> sinhvienCollection) {
-        this.sinhvienCollection = sinhvienCollection;
-    }
-
-    @XmlTransient
-    public Collection<Giangvien> getGiangvienCollection() {
-        return giangvienCollection;
-    }
-
-    public void setGiangvienCollection(Collection<Giangvien> giangvienCollection) {
-        this.giangvienCollection = giangvienCollection;
+    public void setNguoidungSet(Set<Nguoidung> nguoidungSet) {
+        this.nguoidungSet = nguoidungSet;
     }
 
     @Override
@@ -130,6 +108,10 @@ public class Chucvu implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Chucvu[ maChucVu=" + maChucVu + " ]";
+    }
+
+    public String as(Class<String> aClass) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

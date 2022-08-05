@@ -4,7 +4,8 @@
  */
 package com.demo.service;
 
-import com.demo.pojo.Quantri;
+import com.demo.pojo.Nguoidung;
+import com.demo.pojo.Sinhvien;
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author PC
  */
 public interface UserService extends UserDetailsService {
-    boolean addUser (Quantri userQuantri);
-    List<Quantri> getUsersQT(String username);
+    boolean addUser (Nguoidung user);
+    List<Nguoidung> getUsers(String username);
+    List<Sinhvien> getSinhvien();
 }

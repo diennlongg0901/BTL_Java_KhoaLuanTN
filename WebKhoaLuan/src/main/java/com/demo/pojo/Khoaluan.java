@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,16 +53,13 @@ public class Khoaluan implements Serializable {
     @Column(name = "ghiChu")
     private String ghiChu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoaluan")
-    private Collection<Diem> diemCollection;
-    @JoinColumn(name = "giangvien_maGV", referencedColumnName = "maGV")
-    @ManyToOne(optional = false)
-    private Giangvien giangvienmaGV;
+    private Set<Diem> diemSet;
     @JoinColumn(name = "hoidong_maHD", referencedColumnName = "maHD")
     @ManyToOne(optional = false)
     private Hoidong hoidongmaHD;
-    @JoinColumn(name = "sinhvien_maSoSV", referencedColumnName = "maSoSV")
+    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND")
     @ManyToOne(optional = false)
-    private Sinhvien sinhvienmaSoSV;
+    private Nguoidung nguoidungmaND;
 
     public Khoaluan() {
     }
@@ -104,20 +101,12 @@ public class Khoaluan implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Diem> getDiemCollection() {
-        return diemCollection;
+    public Set<Diem> getDiemSet() {
+        return diemSet;
     }
 
-    public void setDiemCollection(Collection<Diem> diemCollection) {
-        this.diemCollection = diemCollection;
-    }
-
-    public Giangvien getGiangvienmaGV() {
-        return giangvienmaGV;
-    }
-
-    public void setGiangvienmaGV(Giangvien giangvienmaGV) {
-        this.giangvienmaGV = giangvienmaGV;
+    public void setDiemSet(Set<Diem> diemSet) {
+        this.diemSet = diemSet;
     }
 
     public Hoidong getHoidongmaHD() {
@@ -128,12 +117,12 @@ public class Khoaluan implements Serializable {
         this.hoidongmaHD = hoidongmaHD;
     }
 
-    public Sinhvien getSinhvienmaSoSV() {
-        return sinhvienmaSoSV;
+    public Nguoidung getNguoidungmaND() {
+        return nguoidungmaND;
     }
 
-    public void setSinhvienmaSoSV(Sinhvien sinhvienmaSoSV) {
-        this.sinhvienmaSoSV = sinhvienmaSoSV;
+    public void setNguoidungmaND(Nguoidung nguoidungmaND) {
+        this.nguoidungmaND = nguoidungmaND;
     }
 
     @Override

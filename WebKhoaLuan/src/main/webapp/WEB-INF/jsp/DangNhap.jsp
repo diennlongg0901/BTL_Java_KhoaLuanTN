@@ -13,20 +13,25 @@
     </div>
 </c:if>
 
+<c:if test="${param.accessDenied != null}">
+    <div class="alert alert-danger">
+        Tài khoản không được quyền truy cập!
+    </div>
+</c:if>
+
 <c:url value="/DangNhap" var="action" />
 <div class="container">
     <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>
     <div class="form-group container">
         <form method="post" action="${action}">
-<!--            <div class="form-outline mb-4">
+            <div class="form-outline mb-4">
                 <label class="form-label" for="vaiTro">Vai trò người dùng</label>
                 <select id="vaiTro" name="vaiTro">
                     <c:forEach items="${chucvu}" var="c">
                         <option value="${c.maChucVu}">${c.tenChucVu}</option>
                     </c:forEach>
                 </select>
-            </div>-->
-
+            </div>
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="username">Username</label>

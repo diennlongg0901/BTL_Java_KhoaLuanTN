@@ -25,23 +25,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Chitiethoidong.findAll", query = "SELECT c FROM Chitiethoidong c"),
-    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaGV", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaGV = :giangvienmaGV"),
     @NamedQuery(name = "Chitiethoidong.findByHoidongmaHD", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.hoidongmaHD = :hoidongmaHD"),
-    @NamedQuery(name = "Chitiethoidong.findByChucVu", query = "SELECT c FROM Chitiethoidong c WHERE c.chucVu = :chucVu")})
+    @NamedQuery(name = "Chitiethoidong.findByNguoidungmaND", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.nguoidungmaND = :nguoidungmaND"),
+    @NamedQuery(name = "Chitiethoidong.findByVaiTro", query = "SELECT c FROM Chitiethoidong c WHERE c.vaiTro = :vaiTro")})
 public class Chitiethoidong implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ChitiethoidongPK chitiethoidongPK;
-    @Size(max = 50)
-    @Column(name = "chucVu")
-    private String chucVu;
-    @JoinColumn(name = "giangvien_maGV", referencedColumnName = "maGV", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Giangvien giangvien;
+    @Size(max = 45)
+    @Column(name = "vaiTro")
+    private String vaiTro;
     @JoinColumn(name = "hoidong_maHD", referencedColumnName = "maHD", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Hoidong hoidong;
+    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Nguoidung nguoidung;
 
     public Chitiethoidong() {
     }
@@ -50,8 +50,8 @@ public class Chitiethoidong implements Serializable {
         this.chitiethoidongPK = chitiethoidongPK;
     }
 
-    public Chitiethoidong(String giangvienmaGV, int hoidongmaHD) {
-        this.chitiethoidongPK = new ChitiethoidongPK(giangvienmaGV, hoidongmaHD);
+    public Chitiethoidong(int hoidongmaHD, String nguoidungmaND) {
+        this.chitiethoidongPK = new ChitiethoidongPK(hoidongmaHD, nguoidungmaND);
     }
 
     public ChitiethoidongPK getChitiethoidongPK() {
@@ -62,20 +62,12 @@ public class Chitiethoidong implements Serializable {
         this.chitiethoidongPK = chitiethoidongPK;
     }
 
-    public String getChucVu() {
-        return chucVu;
+    public String getVaiTro() {
+        return vaiTro;
     }
 
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
-    }
-
-    public Giangvien getGiangvien() {
-        return giangvien;
-    }
-
-    public void setGiangvien(Giangvien giangvien) {
-        this.giangvien = giangvien;
+    public void setVaiTro(String vaiTro) {
+        this.vaiTro = vaiTro;
     }
 
     public Hoidong getHoidong() {
@@ -84,6 +76,14 @@ public class Chitiethoidong implements Serializable {
 
     public void setHoidong(Hoidong hoidong) {
         this.hoidong = hoidong;
+    }
+
+    public Nguoidung getNguoidung() {
+        return nguoidung;
+    }
+
+    public void setNguoidung(Nguoidung nguoidung) {
+        this.nguoidung = nguoidung;
     }
 
     @Override

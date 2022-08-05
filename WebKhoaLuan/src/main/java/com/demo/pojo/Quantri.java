@@ -5,16 +5,15 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,16 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Quantri.findAll", query = "SELECT q FROM Quantri q"),
     @NamedQuery(name = "Quantri.findByMaQT", query = "SELECT q FROM Quantri q WHERE q.maQT = :maQT"),
-    @NamedQuery(name = "Quantri.findByHoQT", query = "SELECT q FROM Quantri q WHERE q.hoQT = :hoQT"),
-    @NamedQuery(name = "Quantri.findByTenQT", query = "SELECT q FROM Quantri q WHERE q.tenQT = :tenQT"),
-    @NamedQuery(name = "Quantri.findByGioiTinhQT", query = "SELECT q FROM Quantri q WHERE q.gioiTinhQT = :gioiTinhQT"),
-    @NamedQuery(name = "Quantri.findByNgaySinhQT", query = "SELECT q FROM Quantri q WHERE q.ngaySinhQT = :ngaySinhQT"),
-    @NamedQuery(name = "Quantri.findByDiaChiQT", query = "SELECT q FROM Quantri q WHERE q.diaChiQT = :diaChiQT"),
-    @NamedQuery(name = "Quantri.findBySoDTQT", query = "SELECT q FROM Quantri q WHERE q.soDTQT = :soDTQT"),
-    @NamedQuery(name = "Quantri.findByEmailQT", query = "SELECT q FROM Quantri q WHERE q.emailQT = :emailQT"),
-    @NamedQuery(name = "Quantri.findByUsernamQT", query = "SELECT q FROM Quantri q WHERE q.usernamQT = :usernamQT"),
-    @NamedQuery(name = "Quantri.findByPasswordQT", query = "SELECT q FROM Quantri q WHERE q.passwordQT = :passwordQT"),
-    @NamedQuery(name = "Quantri.findByAnhQT", query = "SELECT q FROM Quantri q WHERE q.anhQT = :anhQT"),
     @NamedQuery(name = "Quantri.findByChucVu", query = "SELECT q FROM Quantri q WHERE q.chucVu = :chucVu")})
 public class Quantri implements Serializable {
 
@@ -46,58 +35,21 @@ public class Quantri implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 45)
     @Column(name = "maQT")
     private String maQT;
-    @Size(max = 50)
-    @Column(name = "hoQT")
-    private String hoQT;
-    @Size(max = 20)
-    @Column(name = "tenQT")
-    private String tenQT;
-    @Size(max = 5)
-    @Column(name = "gioiTinhQT")
-    private String gioiTinhQT;
-    @Column(name = "ngaySinhQT")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngaySinhQT;
-    @Size(max = 100)
-    @Column(name = "diaChiQT")
-    private String diaChiQT;
-    @Size(max = 15)
-    @Column(name = "soDTQT")
-    private String soDTQT;
-    @Size(max = 50)
-    @Column(name = "emailQT")
-    private String emailQT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "usernamQT")
-    private String usernamQT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "passwordQT")
-    private String passwordQT;
-    @Size(max = 100)
-    @Column(name = "anhQT")
-    private String anhQT;
     @Size(max = 45)
     @Column(name = "chucVu")
     private String chucVu;
+    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND")
+    @ManyToOne(optional = false)
+    private Nguoidung nguoidungmaND;
 
     public Quantri() {
     }
 
     public Quantri(String maQT) {
         this.maQT = maQT;
-    }
-
-    public Quantri(String maQT, String usernamQT, String passwordQT) {
-        this.maQT = maQT;
-        this.usernamQT = usernamQT;
-        this.passwordQT = passwordQT;
     }
 
     public String getMaQT() {
@@ -108,92 +60,20 @@ public class Quantri implements Serializable {
         this.maQT = maQT;
     }
 
-    public String getHoQT() {
-        return hoQT;
-    }
-
-    public void setHoQT(String hoQT) {
-        this.hoQT = hoQT;
-    }
-
-    public String getTenQT() {
-        return tenQT;
-    }
-
-    public void setTenQT(String tenQT) {
-        this.tenQT = tenQT;
-    }
-
-    public String getGioiTinhQT() {
-        return gioiTinhQT;
-    }
-
-    public void setGioiTinhQT(String gioiTinhQT) {
-        this.gioiTinhQT = gioiTinhQT;
-    }
-
-    public Date getNgaySinhQT() {
-        return ngaySinhQT;
-    }
-
-    public void setNgaySinhQT(Date ngaySinhQT) {
-        this.ngaySinhQT = ngaySinhQT;
-    }
-
-    public String getDiaChiQT() {
-        return diaChiQT;
-    }
-
-    public void setDiaChiQT(String diaChiQT) {
-        this.diaChiQT = diaChiQT;
-    }
-
-    public String getSoDTQT() {
-        return soDTQT;
-    }
-
-    public void setSoDTQT(String soDTQT) {
-        this.soDTQT = soDTQT;
-    }
-
-    public String getEmailQT() {
-        return emailQT;
-    }
-
-    public void setEmailQT(String emailQT) {
-        this.emailQT = emailQT;
-    }
-
-    public String getUsernamQT() {
-        return usernamQT;
-    }
-
-    public void setUsernamQT(String usernamQT) {
-        this.usernamQT = usernamQT;
-    }
-
-    public String getPasswordQT() {
-        return passwordQT;
-    }
-
-    public void setPasswordQT(String passwordQT) {
-        this.passwordQT = passwordQT;
-    }
-
-    public String getAnhQT() {
-        return anhQT;
-    }
-
-    public void setAnhQT(String anhQT) {
-        this.anhQT = anhQT;
-    }
-
     public String getChucVu() {
         return chucVu;
     }
 
     public void setChucVu(String chucVu) {
         this.chucVu = chucVu;
+    }
+
+    public Nguoidung getNguoidungmaND() {
+        return nguoidungmaND;
+    }
+
+    public void setNguoidungmaND(Nguoidung nguoidungmaND) {
+        this.nguoidungmaND = nguoidungmaND;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,9 +44,9 @@ public class Hoidong implements Serializable {
     @Column(name = "tenHD")
     private String tenHD;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Collection<Chitiethoidong> chitiethoidongCollection;
+    private Set<Chitiethoidong> chitiethoidongSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidongmaHD")
-    private Collection<Khoaluan> khoaluanCollection;
+    private Set<Khoaluan> khoaluanSet;
 
     public Hoidong() {
     }
@@ -72,21 +72,21 @@ public class Hoidong implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Chitiethoidong> getChitiethoidongCollection() {
-        return chitiethoidongCollection;
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
     }
 
-    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
-        this.chitiethoidongCollection = chitiethoidongCollection;
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
 
     @XmlTransient
-    public Collection<Khoaluan> getKhoaluanCollection() {
-        return khoaluanCollection;
+    public Set<Khoaluan> getKhoaluanSet() {
+        return khoaluanSet;
     }
 
-    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
-        this.khoaluanCollection = khoaluanCollection;
+    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
+        this.khoaluanSet = khoaluanSet;
     }
 
     @Override

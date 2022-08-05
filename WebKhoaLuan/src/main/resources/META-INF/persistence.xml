@@ -14,6 +14,20 @@
     <class>com.demo.pojo.Hoidong</class>
     <class>com.demo.pojo.Chitiethoidong</class>
     <class>com.demo.pojo.Chucvu</class>
+    <class>com.demo.config.Chitiethoidong</class>
+    <class>com.demo.config.Nguoidung</class>
+    <class>com.demo.config.Nganh</class>
+    <class>com.demo.config.Quantri</class>
+    <class>com.demo.config.Diem</class>
+    <class>com.demo.config.Giaovu</class>
+    <class>com.demo.config.Khoa</class>
+    <class>com.demo.config.Tieuchi</class>
+    <class>com.demo.config.Sinhvien</class>
+    <class>com.demo.config.Giangvien</class>
+    <class>com.demo.config.Chucvu</class>
+    <class>com.demo.config.Khoaluan</class>
+    <class>com.demo.config.Hoidong</class>
+    <class>com.demo.pojo.Nguoidung</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

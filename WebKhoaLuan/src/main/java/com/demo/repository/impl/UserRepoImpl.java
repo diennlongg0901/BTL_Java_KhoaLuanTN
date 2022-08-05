@@ -4,7 +4,9 @@
  */
 package com.demo.repository.impl;
 
+import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Quantri;
+import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import java.util.List;
 
@@ -31,15 +33,15 @@ public class UserRepoImpl implements UserRepo {
     private LocalSessionFactoryBean sessionFactory;
 
     @Override
-    public List<Quantri> getUsersQT(String username) {
+    public List<Nguoidung> getUsers(String username) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = s.getCriteriaBuilder();
-        CriteriaQuery<Quantri> query = builder.createQuery(Quantri.class);
-        Root r = query.from(Quantri.class);
+        CriteriaQuery<Nguoidung> query = builder.createQuery(Nguoidung.class);
+        Root r = query.from(Nguoidung.class);
         query = query.select(r);
         if (!username.isEmpty())
         {
-            Predicate p = builder.equal(r.get("usernamQT").as(String.class), username.trim());
+            Predicate p = builder.equal(r.get("username").as(String.class), username.trim());
             query = query.where(p);
         }
         
@@ -48,7 +50,14 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean addUser(Quantri qntr) {
+    public boolean addUser(Nguoidung user) {
         return false;
+    }
+
+    @Override
+    public List<Sinhvien> getSinhvien() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Sinhvien");
+        return q.getResultList();
     }
 }
