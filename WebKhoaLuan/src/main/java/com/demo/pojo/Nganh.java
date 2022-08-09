@@ -9,8 +9,8 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -31,17 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nganh.findAll", query = "SELECT n FROM Nganh n"),
-    @NamedQuery(name = "Nganh.findByMaNganh", query = "SELECT n FROM Nganh n WHERE n.maNganh = :maNganh"),
+    @NamedQuery(name = "Nganh.findByMaNganh", query = "SELECT n FROM Nganh n WHERE n.nganhPK.maNganh = :maNganh"),
     @NamedQuery(name = "Nganh.findByTenNganh", query = "SELECT n FROM Nganh n WHERE n.tenNganh = :tenNganh"),
-    @NamedQuery(name = "Nganh.findByThongTin", query = "SELECT n FROM Nganh n WHERE n.thongTin = :thongTin")})
+    @NamedQuery(name = "Nganh.findByThongTin", query = "SELECT n FROM Nganh n WHERE n.thongTin = :thongTin"),
+    @NamedQuery(name = "Nganh.findByKhoamaKhoa", query = "SELECT n FROM Nganh n WHERE n.nganhPK.khoamaKhoa = :khoamaKhoa")})
 public class Nganh implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "maNganh")
-    private Integer maNganh;
+    @EmbeddedId
+    protected NganhPK nganhPK;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
@@ -50,30 +48,34 @@ public class Nganh implements Serializable {
     @Size(max = 200)
     @Column(name = "thongTin")
     private String thongTin;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nganhmaNganh")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nganh")
     private Set<Sinhvien> sinhvienSet;
-    @JoinColumn(name = "khoa_maKhoa", referencedColumnName = "maKhoa")
+    @JoinColumn(name = "khoa_maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Khoa khoamaKhoa;
+    private Khoa khoa;
 
     public Nganh() {
     }
 
-    public Nganh(Integer maNganh) {
-        this.maNganh = maNganh;
+    public Nganh(NganhPK nganhPK) {
+        this.nganhPK = nganhPK;
     }
 
-    public Nganh(Integer maNganh, String tenNganh) {
-        this.maNganh = maNganh;
+    public Nganh(NganhPK nganhPK, String tenNganh) {
+        this.nganhPK = nganhPK;
         this.tenNganh = tenNganh;
     }
 
-    public Integer getMaNganh() {
-        return maNganh;
+    public Nganh(int maNganh, int khoamaKhoa) {
+        this.nganhPK = new NganhPK(maNganh, khoamaKhoa);
     }
 
-    public void setMaNganh(Integer maNganh) {
-        this.maNganh = maNganh;
+    public NganhPK getNganhPK() {
+        return nganhPK;
+    }
+
+    public void setNganhPK(NganhPK nganhPK) {
+        this.nganhPK = nganhPK;
     }
 
     public String getTenNganh() {
@@ -101,18 +103,18 @@ public class Nganh implements Serializable {
         this.sinhvienSet = sinhvienSet;
     }
 
-    public Khoa getKhoamaKhoa() {
-        return khoamaKhoa;
+    public Khoa getKhoa() {
+        return khoa;
     }
 
-    public void setKhoamaKhoa(Khoa khoamaKhoa) {
-        this.khoamaKhoa = khoamaKhoa;
+    public void setKhoa(Khoa khoa) {
+        this.khoa = khoa;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maNganh != null ? maNganh.hashCode() : 0);
+        hash += (nganhPK != null ? nganhPK.hashCode() : 0);
         return hash;
     }
 
@@ -123,7 +125,7 @@ public class Nganh implements Serializable {
             return false;
         }
         Nganh other = (Nganh) object;
-        if ((this.maNganh == null && other.maNganh != null) || (this.maNganh != null && !this.maNganh.equals(other.maNganh))) {
+        if ((this.nganhPK == null && other.nganhPK != null) || (this.nganhPK != null && !this.nganhPK.equals(other.nganhPK))) {
             return false;
         }
         return true;
@@ -131,7 +133,7 @@ public class Nganh implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Nganh[ maNganh=" + maNganh + " ]";
+        return "com.demo.pojo.Nganh[ nganhPK=" + nganhPK + " ]";
     }
     
 }

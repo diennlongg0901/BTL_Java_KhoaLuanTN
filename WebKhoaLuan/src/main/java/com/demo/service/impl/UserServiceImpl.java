@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Sinhvien> getSinhvien() {
-        return this.userRepo.getSinhvien();
-    }
+    public List<Nguoidung> getAllUsers() {
+        return this.userRepo.getAllUsers();
+    }  
 }

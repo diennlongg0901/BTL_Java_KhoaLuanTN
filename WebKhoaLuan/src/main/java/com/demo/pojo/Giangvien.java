@@ -5,18 +5,21 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,41 +30,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Giangvien.findAll", query = "SELECT g FROM Giangvien g"),
-    @NamedQuery(name = "Giangvien.findByMaGV", query = "SELECT g FROM Giangvien g WHERE g.maGV = :maGV"),
+    @NamedQuery(name = "Giangvien.findByMaGV", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maGV = :maGV"),
     @NamedQuery(name = "Giangvien.findByHocVi", query = "SELECT g FROM Giangvien g WHERE g.hocVi = :hocVi"),
-    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam")})
+    @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam"),
+    @NamedQuery(name = "Giangvien.findByMaND", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maND = :maND"),
+    @NamedQuery(name = "Giangvien.findByMaChucVu", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maChucVu = :maChucVu")})
 public class Giangvien implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "maGV")
-    private String maGV;
+    @EmbeddedId
+    protected GiangvienPK giangvienPK;
     @Size(max = 50)
     @Column(name = "hocVi")
     private String hocVi;
     @Size(max = 50)
     @Column(name = "hocHam")
     private String hocHam;
-    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND")
+    @JoinColumns({
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private Nguoidung nguoidungmaND;
+    private Nguoidung nguoidung;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    private Set<Chitiethoidong> chitiethoidongSet;
 
     public Giangvien() {
     }
 
-    public Giangvien(String maGV) {
-        this.maGV = maGV;
+    public Giangvien(GiangvienPK giangvienPK) {
+        this.giangvienPK = giangvienPK;
     }
 
-    public String getMaGV() {
-        return maGV;
+    public Giangvien(String maGV, String maND, String maChucVu) {
+        this.giangvienPK = new GiangvienPK(maGV, maND, maChucVu);
     }
 
-    public void setMaGV(String maGV) {
-        this.maGV = maGV;
+    public GiangvienPK getGiangvienPK() {
+        return giangvienPK;
+    }
+
+    public void setGiangvienPK(GiangvienPK giangvienPK) {
+        this.giangvienPK = giangvienPK;
     }
 
     public String getHocVi() {
@@ -80,18 +89,27 @@ public class Giangvien implements Serializable {
         this.hocHam = hocHam;
     }
 
-    public Nguoidung getNguoidungmaND() {
-        return nguoidungmaND;
+    public Nguoidung getNguoidung() {
+        return nguoidung;
     }
 
-    public void setNguoidungmaND(Nguoidung nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
+    public void setNguoidung(Nguoidung nguoidung) {
+        this.nguoidung = nguoidung;
+    }
+
+    @XmlTransient
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
+    }
+
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maGV != null ? maGV.hashCode() : 0);
+        hash += (giangvienPK != null ? giangvienPK.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +120,7 @@ public class Giangvien implements Serializable {
             return false;
         }
         Giangvien other = (Giangvien) object;
-        if ((this.maGV == null && other.maGV != null) || (this.maGV != null && !this.maGV.equals(other.maGV))) {
+        if ((this.giangvienPK == null && other.giangvienPK != null) || (this.giangvienPK != null && !this.giangvienPK.equals(other.giangvienPK))) {
             return false;
         }
         return true;
@@ -110,7 +128,7 @@ public class Giangvien implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Giangvien[ maGV=" + maGV + " ]";
+        return "com.demo.pojo.Giangvien[ giangvienPK=" + giangvienPK + " ]";
     }
     
 }

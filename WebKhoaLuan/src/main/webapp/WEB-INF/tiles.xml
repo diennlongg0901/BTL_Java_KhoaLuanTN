@@ -25,11 +25,32 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/jsp/DangNhap.jsp" />
     </definition>
     
-    <definition name="QLSinhVien" extends="baseLayout">
-        <put-attribute name="title" value="QUẢN LÝ SINH VIÊN" />
+    <definition name="QLTaiKhoan" extends="baseLayout">
+        <put-attribute name="title" value="QUẢN TRỊ VIÊN" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
         <put-attribute name="content"
-                       value="/WEB-INF/jsp/QLSinhVien.jsp" />
+                       value="/WEB-INF/jsp/QLTaiKhoan.jsp" />
     </definition>
     
+    <definition name="SinhVien" extends="baseLayout">
+        <put-attribute name="title" value="SINH VIÊN" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/SinhVien.jsp" />
+    </definition>
+    
+    <definition name="GiaoVu" extends="baseLayout">
+        <put-attribute name="title" value="GIÁO VỤ" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
+        <put-attribute name="content" 
+                       value="/WEB-INF/jsp/GiaoVu.jsp" />
+    </definition>
+    
+    <definition name="GiangVien" extends="baseLayout">
+        <put-attribute name="title" value="GIẢNG VIÊN" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/GiangVien.jsp" />
+    </definition>
 </tiles-definitions>
 

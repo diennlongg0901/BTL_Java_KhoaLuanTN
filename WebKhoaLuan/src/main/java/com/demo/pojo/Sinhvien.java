@@ -5,18 +5,23 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,18 +32,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Sinhvien.findAll", query = "SELECT s FROM Sinhvien s"),
-    @NamedQuery(name = "Sinhvien.findByMaSV", query = "SELECT s FROM Sinhvien s WHERE s.maSV = :maSV"),
+    @NamedQuery(name = "Sinhvien.findByMaSV", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maSV = :maSV"),
     @NamedQuery(name = "Sinhvien.findByNienKhoa", query = "SELECT s FROM Sinhvien s WHERE s.nienKhoa = :nienKhoa"),
-    @NamedQuery(name = "Sinhvien.findByTinhTrang", query = "SELECT s FROM Sinhvien s WHERE s.tinhTrang = :tinhTrang")})
+    @NamedQuery(name = "Sinhvien.findByTinhTrang", query = "SELECT s FROM Sinhvien s WHERE s.tinhTrang = :tinhTrang"),
+    @NamedQuery(name = "Sinhvien.findByMaND", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maND = :maND"),
+    @NamedQuery(name = "Sinhvien.findByMaChucVu", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maChucVu = :maChucVu"),
+    @NamedQuery(name = "Sinhvien.findByMaNganh", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maNganh = :maNganh"),
+    @NamedQuery(name = "Sinhvien.findByMaKhoa", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maKhoa = :maKhoa")})
 public class Sinhvien implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "maSV")
-    private String maSV;
+    @EmbeddedId
+    protected SinhvienPK sinhvienPK;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 15)
@@ -48,32 +53,42 @@ public class Sinhvien implements Serializable {
     @NotNull
     @Column(name = "tinhTrang")
     private short tinhTrang;
-    @JoinColumn(name = "nganh_maNganh", referencedColumnName = "maNganh")
+    @JoinColumns({
+        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
+        @JoinColumn(name = "maKhoa", referencedColumnName = "khoa_maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private Nganh nganhmaNganh;
-    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND")
+    private Nganh nganh;
+    @JoinColumns({
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private Nguoidung nguoidungmaND;
+    private Nguoidung nguoidung;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
+    private Set<Khoaluan> khoaluanSet;
 
     public Sinhvien() {
     }
 
-    public Sinhvien(String maSV) {
-        this.maSV = maSV;
+    public Sinhvien(SinhvienPK sinhvienPK) {
+        this.sinhvienPK = sinhvienPK;
     }
 
-    public Sinhvien(String maSV, String nienKhoa, short tinhTrang) {
-        this.maSV = maSV;
+    public Sinhvien(SinhvienPK sinhvienPK, String nienKhoa, short tinhTrang) {
+        this.sinhvienPK = sinhvienPK;
         this.nienKhoa = nienKhoa;
         this.tinhTrang = tinhTrang;
     }
 
-    public String getMaSV() {
-        return maSV;
+    public Sinhvien(String maSV, String maND, String maChucVu, int maNganh, int maKhoa) {
+        this.sinhvienPK = new SinhvienPK(maSV, maND, maChucVu, maNganh, maKhoa);
     }
 
-    public void setMaSV(String maSV) {
-        this.maSV = maSV;
+    public SinhvienPK getSinhvienPK() {
+        return sinhvienPK;
+    }
+
+    public void setSinhvienPK(SinhvienPK sinhvienPK) {
+        this.sinhvienPK = sinhvienPK;
     }
 
     public String getNienKhoa() {
@@ -92,26 +107,35 @@ public class Sinhvien implements Serializable {
         this.tinhTrang = tinhTrang;
     }
 
-    public Nganh getNganhmaNganh() {
-        return nganhmaNganh;
+    public Nganh getNganh() {
+        return nganh;
     }
 
-    public void setNganhmaNganh(Nganh nganhmaNganh) {
-        this.nganhmaNganh = nganhmaNganh;
+    public void setNganh(Nganh nganh) {
+        this.nganh = nganh;
     }
 
-    public Nguoidung getNguoidungmaND() {
-        return nguoidungmaND;
+    public Nguoidung getNguoidung() {
+        return nguoidung;
     }
 
-    public void setNguoidungmaND(Nguoidung nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
+    public void setNguoidung(Nguoidung nguoidung) {
+        this.nguoidung = nguoidung;
+    }
+
+    @XmlTransient
+    public Set<Khoaluan> getKhoaluanSet() {
+        return khoaluanSet;
+    }
+
+    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
+        this.khoaluanSet = khoaluanSet;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maSV != null ? maSV.hashCode() : 0);
+        hash += (sinhvienPK != null ? sinhvienPK.hashCode() : 0);
         return hash;
     }
 
@@ -122,7 +146,7 @@ public class Sinhvien implements Serializable {
             return false;
         }
         Sinhvien other = (Sinhvien) object;
-        if ((this.maSV == null && other.maSV != null) || (this.maSV != null && !this.maSV.equals(other.maSV))) {
+        if ((this.sinhvienPK == null && other.sinhvienPK != null) || (this.sinhvienPK != null && !this.sinhvienPK.equals(other.sinhvienPK))) {
             return false;
         }
         return true;
@@ -130,7 +154,7 @@ public class Sinhvien implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Sinhvien[ maSV=" + maSV + " ]";
+        return "com.demo.pojo.Sinhvien[ sinhvienPK=" + sinhvienPK + " ]";
     }
     
 }

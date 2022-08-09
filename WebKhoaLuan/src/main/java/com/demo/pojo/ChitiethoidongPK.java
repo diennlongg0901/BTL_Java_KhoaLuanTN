@@ -20,20 +20,56 @@ public class ChitiethoidongPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "hoidong_maHD")
-    private int hoidongmaHD;
+    @Size(min = 1, max = 45)
+    @Column(name = "giangvien_maGV")
+    private String giangvienmaGV;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "nguoidung_maND")
-    private String nguoidungmaND;
+    @Column(name = "giangvien_maND")
+    private String giangvienmaND;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "giangvien_maChucVu")
+    private String giangvienmaChucVu;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "hoidong_maHD")
+    private int hoidongmaHD;
 
     public ChitiethoidongPK() {
     }
 
-    public ChitiethoidongPK(int hoidongmaHD, String nguoidungmaND) {
+    public ChitiethoidongPK(String giangvienmaGV, String giangvienmaND, String giangvienmaChucVu, int hoidongmaHD) {
+        this.giangvienmaGV = giangvienmaGV;
+        this.giangvienmaND = giangvienmaND;
+        this.giangvienmaChucVu = giangvienmaChucVu;
         this.hoidongmaHD = hoidongmaHD;
-        this.nguoidungmaND = nguoidungmaND;
+    }
+
+    public String getGiangvienmaGV() {
+        return giangvienmaGV;
+    }
+
+    public void setGiangvienmaGV(String giangvienmaGV) {
+        this.giangvienmaGV = giangvienmaGV;
+    }
+
+    public String getGiangvienmaND() {
+        return giangvienmaND;
+    }
+
+    public void setGiangvienmaND(String giangvienmaND) {
+        this.giangvienmaND = giangvienmaND;
+    }
+
+    public String getGiangvienmaChucVu() {
+        return giangvienmaChucVu;
+    }
+
+    public void setGiangvienmaChucVu(String giangvienmaChucVu) {
+        this.giangvienmaChucVu = giangvienmaChucVu;
     }
 
     public int getHoidongmaHD() {
@@ -44,19 +80,13 @@ public class ChitiethoidongPK implements Serializable {
         this.hoidongmaHD = hoidongmaHD;
     }
 
-    public String getNguoidungmaND() {
-        return nguoidungmaND;
-    }
-
-    public void setNguoidungmaND(String nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (giangvienmaGV != null ? giangvienmaGV.hashCode() : 0);
+        hash += (giangvienmaND != null ? giangvienmaND.hashCode() : 0);
+        hash += (giangvienmaChucVu != null ? giangvienmaChucVu.hashCode() : 0);
         hash += (int) hoidongmaHD;
-        hash += (nguoidungmaND != null ? nguoidungmaND.hashCode() : 0);
         return hash;
     }
 
@@ -67,10 +97,16 @@ public class ChitiethoidongPK implements Serializable {
             return false;
         }
         ChitiethoidongPK other = (ChitiethoidongPK) object;
-        if (this.hoidongmaHD != other.hoidongmaHD) {
+        if ((this.giangvienmaGV == null && other.giangvienmaGV != null) || (this.giangvienmaGV != null && !this.giangvienmaGV.equals(other.giangvienmaGV))) {
             return false;
         }
-        if ((this.nguoidungmaND == null && other.nguoidungmaND != null) || (this.nguoidungmaND != null && !this.nguoidungmaND.equals(other.nguoidungmaND))) {
+        if ((this.giangvienmaND == null && other.giangvienmaND != null) || (this.giangvienmaND != null && !this.giangvienmaND.equals(other.giangvienmaND))) {
+            return false;
+        }
+        if ((this.giangvienmaChucVu == null && other.giangvienmaChucVu != null) || (this.giangvienmaChucVu != null && !this.giangvienmaChucVu.equals(other.giangvienmaChucVu))) {
+            return false;
+        }
+        if (this.hoidongmaHD != other.hoidongmaHD) {
             return false;
         }
         return true;
@@ -78,7 +114,7 @@ public class ChitiethoidongPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.ChitiethoidongPK[ hoidongmaHD=" + hoidongmaHD + ", nguoidungmaND=" + nguoidungmaND + " ]";
+        return "com.demo.pojo.ChitiethoidongPK[ giangvienmaGV=" + giangvienmaGV + ", giangvienmaND=" + giangvienmaND + ", giangvienmaChucVu=" + giangvienmaChucVu + ", hoidongmaHD=" + hoidongmaHD + " ]";
     }
     
 }

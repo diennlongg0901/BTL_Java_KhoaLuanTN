@@ -7,15 +7,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h1 class="text-center">QUẢN LÝ SINH VIÊN</h1>
+<h1 class="text-center">QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h1>
 
 
-    <c:forEach var="sv" items="${Sinhvien}">
-        <h2> ${sv.maSV} </h2>
-        <h3>${sv.nienKhoa}</h3>
-        <h3>${sv.tinhTrang}</h3>
+    <%--<c:forEach var="nd" items="${nguoidung}">--%>
+<!--        <h2> ${nd.ten} </h2>
+        <h3>${nd.hoatDong}</h3>
+        <h3>${nd.ngaySinh}</h3>
         
-<!--        <div class="card" >
+        <div class="card" >
             <div class="card-header">  </div>
             <div class="card-body">
                 
@@ -23,5 +23,5 @@
             </div>
                 <div class="card-footer"></div>
         </div>-->
-    </c:forEach>
+    <%--</c:forEach>--%>
     

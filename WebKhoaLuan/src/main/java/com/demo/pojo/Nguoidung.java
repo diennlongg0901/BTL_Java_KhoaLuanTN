@@ -83,21 +83,17 @@ public class Nguoidung implements Serializable {
     private String sdt;
     @Column(name = "hoatDong")
     private Short hoatDong;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
     private Set<Quantri> quantriSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
     private Set<Giangvien> giangvienSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Set<Chitiethoidong> chitiethoidongSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
     private Set<Giaovu> giaovuSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
     private Set<Sinhvien> sinhvienSet;
     @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Chucvu chucvu;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidungmaND")
-    private Set<Khoaluan> khoaluanSet;
 
     public Nguoidung() {
     }
@@ -225,15 +221,6 @@ public class Nguoidung implements Serializable {
     }
 
     @XmlTransient
-    public Set<Chitiethoidong> getChitiethoidongSet() {
-        return chitiethoidongSet;
-    }
-
-    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
-        this.chitiethoidongSet = chitiethoidongSet;
-    }
-
-    @XmlTransient
     public Set<Giaovu> getGiaovuSet() {
         return giaovuSet;
     }
@@ -257,15 +244,6 @@ public class Nguoidung implements Serializable {
 
     public void setChucvu(Chucvu chucvu) {
         this.chucvu = chucvu;
-    }
-
-    @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
-    }
-
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
     }
 
     @Override

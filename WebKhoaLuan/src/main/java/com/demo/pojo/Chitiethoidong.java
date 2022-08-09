@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,8 +26,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Chitiethoidong.findAll", query = "SELECT c FROM Chitiethoidong c"),
+    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaGV", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaGV = :giangvienmaGV"),
+    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaND", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaND = :giangvienmaND"),
+    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaChucVu", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaChucVu = :giangvienmaChucVu"),
     @NamedQuery(name = "Chitiethoidong.findByHoidongmaHD", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.hoidongmaHD = :hoidongmaHD"),
-    @NamedQuery(name = "Chitiethoidong.findByNguoidungmaND", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.nguoidungmaND = :nguoidungmaND"),
     @NamedQuery(name = "Chitiethoidong.findByVaiTro", query = "SELECT c FROM Chitiethoidong c WHERE c.vaiTro = :vaiTro")})
 public class Chitiethoidong implements Serializable {
 
@@ -36,12 +39,15 @@ public class Chitiethoidong implements Serializable {
     @Size(max = 45)
     @Column(name = "vaiTro")
     private String vaiTro;
+    @JoinColumns({
+        @JoinColumn(name = "giangvien_maGV", referencedColumnName = "maGV", insertable = false, updatable = false),
+        @JoinColumn(name = "giangvien_maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "giangvien_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private Giangvien giangvien;
     @JoinColumn(name = "hoidong_maHD", referencedColumnName = "maHD", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Hoidong hoidong;
-    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Nguoidung nguoidung;
 
     public Chitiethoidong() {
     }
@@ -50,8 +56,8 @@ public class Chitiethoidong implements Serializable {
         this.chitiethoidongPK = chitiethoidongPK;
     }
 
-    public Chitiethoidong(int hoidongmaHD, String nguoidungmaND) {
-        this.chitiethoidongPK = new ChitiethoidongPK(hoidongmaHD, nguoidungmaND);
+    public Chitiethoidong(String giangvienmaGV, String giangvienmaND, String giangvienmaChucVu, int hoidongmaHD) {
+        this.chitiethoidongPK = new ChitiethoidongPK(giangvienmaGV, giangvienmaND, giangvienmaChucVu, hoidongmaHD);
     }
 
     public ChitiethoidongPK getChitiethoidongPK() {
@@ -70,20 +76,20 @@ public class Chitiethoidong implements Serializable {
         this.vaiTro = vaiTro;
     }
 
+    public Giangvien getGiangvien() {
+        return giangvien;
+    }
+
+    public void setGiangvien(Giangvien giangvien) {
+        this.giangvien = giangvien;
+    }
+
     public Hoidong getHoidong() {
         return hoidong;
     }
 
     public void setHoidong(Hoidong hoidong) {
         this.hoidong = hoidong;
-    }
-
-    public Nguoidung getNguoidung() {
-        return nguoidung;
-    }
-
-    public void setNguoidung(Nguoidung nguoidung) {
-        this.nguoidung = nguoidung;
     }
 
     @Override

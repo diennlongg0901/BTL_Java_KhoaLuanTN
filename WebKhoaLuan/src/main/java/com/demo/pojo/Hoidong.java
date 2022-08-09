@@ -45,7 +45,7 @@ public class Hoidong implements Serializable {
     private String tenHD;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
     private Set<Chitiethoidong> chitiethoidongSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidongmaHD")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
     private Set<Khoaluan> khoaluanSet;
 
     public Hoidong() {

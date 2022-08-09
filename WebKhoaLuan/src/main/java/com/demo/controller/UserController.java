@@ -30,9 +30,24 @@ public class UserController {
         return "DangNhap";
     }
     
-    @GetMapping("/admin/QLSinhVien")
-    public String QLSinhVien(Model model){
-        model.addAttribute("Sinhvien", this.userService.getSinhvien());
-        return "QLSinhVien";
+    @GetMapping("/quantri/QLTaiKhoan")
+    public String QLTaiKhoan(Model model){
+//        model.addAttribute("nguoidung", this.userService.getAllUsers());
+        return "QLTaiKhoan";
+    }
+    
+    @GetMapping("/sinhvien/")
+    public String SinhVien() {
+        return "SinhVien";
+    }
+    
+    @GetMapping("/giaovu/")
+    public String GiaoVu() {
+        return "GiaoVu";
+    }
+    
+    @GetMapping("/giangvien/")
+    public String GiangVien() {
+        return "GiangVien";
     }
 }

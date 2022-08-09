@@ -60,7 +60,7 @@ public class Khoa implements Serializable {
     @Size(max = 50)
     @Column(name = "emailKhoa")
     private String emailKhoa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoamaKhoa")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoa")
     private Set<Nganh> nganhSet;
 
     public Khoa() {

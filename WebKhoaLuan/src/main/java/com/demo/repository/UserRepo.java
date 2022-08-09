@@ -15,5 +15,5 @@ import java.util.List;
 public interface UserRepo {
     boolean addUser (Nguoidung user);
     List<Nguoidung> getUsers(String username);
-    List<Sinhvien> getSinhvien();
+    List<Nguoidung> getAllUsers();
 }

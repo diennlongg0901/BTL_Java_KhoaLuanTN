@@ -55,9 +55,17 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public List<Sinhvien> getSinhvien() {
+    public List<Nguoidung> getAllUsers() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Sinhvien");
+        Query q = session.createQuery("FROM Nguoidung");
         return q.getResultList();
+        
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//        CriteriaQuery<Nguoidung> query = builder.createQuery(Nguoidung.class);
+//        Root r = query.from(Nguoidung.class);
+//        query = query.select(r);
+//        Query q = session.createQuery(query);
+//
+//        return q.getResultList();
     }
 }

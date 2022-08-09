@@ -7,9 +7,10 @@ package com.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,44 +28,48 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Giaovu.findAll", query = "SELECT g FROM Giaovu g"),
-    @NamedQuery(name = "Giaovu.findByMaGV", query = "SELECT g FROM Giaovu g WHERE g.maGV = :maGV"),
-    @NamedQuery(name = "Giaovu.findByPhongBan", query = "SELECT g FROM Giaovu g WHERE g.phongBan = :phongBan")})
+    @NamedQuery(name = "Giaovu.findByMaGV", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.maGV = :maGV"),
+    @NamedQuery(name = "Giaovu.findByPhongBan", query = "SELECT g FROM Giaovu g WHERE g.phongBan = :phongBan"),
+    @NamedQuery(name = "Giaovu.findByNguoidungmaND", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.nguoidungmaND = :nguoidungmaND"),
+    @NamedQuery(name = "Giaovu.findByNguoidungchucvumaChucVu", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.nguoidungchucvumaChucVu = :nguoidungchucvumaChucVu")})
 public class Giaovu implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "maGV")
-    private String maGV;
+    @EmbeddedId
+    protected GiaovuPK giaovuPK;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "phongBan")
     private String phongBan;
-    @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND")
+    @JoinColumns({
+        @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "nguoidung_chucvu_maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private Nguoidung nguoidungmaND;
+    private Nguoidung nguoidung;
 
     public Giaovu() {
     }
 
-    public Giaovu(String maGV) {
-        this.maGV = maGV;
+    public Giaovu(GiaovuPK giaovuPK) {
+        this.giaovuPK = giaovuPK;
     }
 
-    public Giaovu(String maGV, String phongBan) {
-        this.maGV = maGV;
+    public Giaovu(GiaovuPK giaovuPK, String phongBan) {
+        this.giaovuPK = giaovuPK;
         this.phongBan = phongBan;
     }
 
-    public String getMaGV() {
-        return maGV;
+    public Giaovu(String maGV, String nguoidungmaND, String nguoidungchucvumaChucVu) {
+        this.giaovuPK = new GiaovuPK(maGV, nguoidungmaND, nguoidungchucvumaChucVu);
     }
 
-    public void setMaGV(String maGV) {
-        this.maGV = maGV;
+    public GiaovuPK getGiaovuPK() {
+        return giaovuPK;
+    }
+
+    public void setGiaovuPK(GiaovuPK giaovuPK) {
+        this.giaovuPK = giaovuPK;
     }
 
     public String getPhongBan() {
@@ -75,18 +80,18 @@ public class Giaovu implements Serializable {
         this.phongBan = phongBan;
     }
 
-    public Nguoidung getNguoidungmaND() {
-        return nguoidungmaND;
+    public Nguoidung getNguoidung() {
+        return nguoidung;
     }
 
-    public void setNguoidungmaND(Nguoidung nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
+    public void setNguoidung(Nguoidung nguoidung) {
+        this.nguoidung = nguoidung;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maGV != null ? maGV.hashCode() : 0);
+        hash += (giaovuPK != null ? giaovuPK.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +102,7 @@ public class Giaovu implements Serializable {
             return false;
         }
         Giaovu other = (Giaovu) object;
-        if ((this.maGV == null && other.maGV != null) || (this.maGV != null && !this.maGV.equals(other.maGV))) {
+        if ((this.giaovuPK == null && other.giaovuPK != null) || (this.giaovuPK != null && !this.giaovuPK.equals(other.giaovuPK))) {
             return false;
         }
         return true;
@@ -105,7 +110,7 @@ public class Giaovu implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Giaovu[ maGV=" + maGV + " ]";
+        return "com.demo.pojo.Giaovu[ giaovuPK=" + giaovuPK + " ]";
     }
     
 }

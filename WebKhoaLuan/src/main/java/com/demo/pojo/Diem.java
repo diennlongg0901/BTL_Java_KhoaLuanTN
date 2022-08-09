@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,6 +27,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Diem.findAll", query = "SELECT d FROM Diem d"),
     @NamedQuery(name = "Diem.findByKhoaluanmaKL", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaKL = :khoaluanmaKL"),
+    @NamedQuery(name = "Diem.findByKhoaluanhoidongmaHD", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanhoidongmaHD = :khoaluanhoidongmaHD"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaSV", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaSV = :khoaluanmaSV"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaND", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaND = :khoaluanmaND"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaChucVu", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaChucVu = :khoaluanmaChucVu"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaNganh", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaNganh = :khoaluanmaNganh"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaKhoa", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaKhoa = :khoaluanmaKhoa"),
     @NamedQuery(name = "Diem.findByTieuchimaTC", query = "SELECT d FROM Diem d WHERE d.diemPK.tieuchimaTC = :tieuchimaTC"),
     @NamedQuery(name = "Diem.findByDiem", query = "SELECT d FROM Diem d WHERE d.diem = :diem")})
 public class Diem implements Serializable {
@@ -36,7 +43,14 @@ public class Diem implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "diem")
     private BigDecimal diem;
-    @JoinColumn(name = "khoaluan_maKL", referencedColumnName = "maKL", insertable = false, updatable = false)
+    @JoinColumns({
+        @JoinColumn(name = "khoaluan_maKL", referencedColumnName = "maKL", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_hoidong_maHD", referencedColumnName = "hoidong_maHD", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maSV", referencedColumnName = "maSV", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Khoaluan khoaluan;
     @JoinColumn(name = "tieuchi_maTC", referencedColumnName = "maTC", insertable = false, updatable = false)
@@ -50,8 +64,8 @@ public class Diem implements Serializable {
         this.diemPK = diemPK;
     }
 
-    public Diem(int khoaluanmaKL, int tieuchimaTC) {
-        this.diemPK = new DiemPK(khoaluanmaKL, tieuchimaTC);
+    public Diem(int khoaluanmaKL, int khoaluanhoidongmaHD, String khoaluanmaSV, String khoaluanmaND, String khoaluanmaChucVu, int khoaluanmaNganh, int khoaluanmaKhoa, int tieuchimaTC) {
+        this.diemPK = new DiemPK(khoaluanmaKL, khoaluanhoidongmaHD, khoaluanmaSV, khoaluanmaND, khoaluanmaChucVu, khoaluanmaNganh, khoaluanmaKhoa, tieuchimaTC);
     }
 
     public DiemPK getDiemPK() {
