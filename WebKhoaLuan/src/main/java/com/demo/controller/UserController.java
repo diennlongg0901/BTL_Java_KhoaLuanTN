@@ -11,7 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
+=======
+import org.springframework.web.bind.annotation.PostMapping;
+>>>>>>> 5fad11147aa73dea35fe6685248b0468cab1935e
 
 /**
  *
@@ -30,6 +34,7 @@ public class UserController {
         return "DangNhap";
     }
     
+<<<<<<< HEAD
     @GetMapping("/quantri/QLTaiKhoan")
     public String QLTaiKhoan(Model model){
 //        model.addAttribute("nguoidung", this.userService.getAllUsers());
@@ -50,4 +55,15 @@ public class UserController {
     public String GiangVien() {
         return "GiangVien";
     }
+=======
+//    @GetMapping("/DangKy")
+//    public String DangKyView(){
+//        return "DangKy";
+//    }
+//    
+//    @PostMapping("/DangKy")
+//    public String DangKy(){
+//        return "";
+//    }
+>>>>>>> 5fad11147aa73dea35fe6685248b0468cab1935e
 }
