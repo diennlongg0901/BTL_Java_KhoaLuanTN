@@ -16,7 +16,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -34,51 +33,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class Quantri implements Serializable {
 
     private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
     @EmbeddedId
     protected QuantriPK quantriPK;
-=======
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "maQT")
-    private String maQT;
-    @Size(max = 50)
-    @Column(name = "hoQT")
-    private String hoQT;
-    @Size(max = 20)
-    @Column(name = "tenQT")
-    private String tenQT;
-    @Size(max = 5)
-    @Column(name = "gioiTinhQT")
-    private String gioiTinhQT;
-    @Column(name = "ngaySinhQT")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date ngaySinhQT;
-    @Size(max = 100)
-    @Column(name = "diaChiQT")
-    private String diaChiQT;
-    @Size(max = 15)
-    @Column(name = "soDTQT")
-    private String soDTQT;
-    @Size(max = 50)
-    @Column(name = "emailQT")
-    private String emailQT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "usernamQT")
-    private String usernamQT;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "passwordQT")
-    private String passwordQT;
-    @Size(max = 100)
-    @Column(name = "anhQT")
-    private String anhQT;  
->>>>>>> 5fad11147aa73dea35fe6685248b0468cab1935e
     @Size(max = 45)
     @Column(name = "chucVu")
     private String chucVu;

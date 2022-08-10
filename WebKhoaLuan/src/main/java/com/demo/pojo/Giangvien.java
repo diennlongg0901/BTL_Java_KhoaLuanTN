@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -52,7 +52,7 @@ public class Giangvien implements Serializable {
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
-    private Set<Chitiethoidong> chitiethoidongSet;
+    private Collection<Chitiethoidong> chitiethoidongCollection;
 
     public Giangvien() {
     }
@@ -98,12 +98,12 @@ public class Giangvien implements Serializable {
     }
 
     @XmlTransient
-    public Set<Chitiethoidong> getChitiethoidongSet() {
-        return chitiethoidongSet;
+    public Collection<Chitiethoidong> getChitiethoidongCollection() {
+        return chitiethoidongCollection;
     }
 
-    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
-        this.chitiethoidongSet = chitiethoidongSet;
+    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
+        this.chitiethoidongCollection = chitiethoidongCollection;
     }
 
     @Override

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Embeddable
 public class NganhPK implements Serializable {

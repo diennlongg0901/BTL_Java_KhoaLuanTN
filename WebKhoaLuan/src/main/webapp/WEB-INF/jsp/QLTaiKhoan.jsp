@@ -4,24 +4,22 @@
     Author     : PC
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <h1 class="text-center">QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h1>
 
-
-    <%--<c:forEach var="nd" items="${nguoidung}">--%>
-<!--        <h2> ${nd.ten} </h2>
-        <h3>${nd.hoatDong}</h3>
-        <h3>${nd.ngaySinh}</h3>
+<form:form method="post" action="" modelAttribute="nguoidung" enctype="multipart/form-data" > 
+    <div class="form-group">
+        <label for="file">Ảnh đại diện</label>
+        <form:input type="file" path="file" id="image" cssClass="form-control" />
+    </div>
         
-        <div class="card" >
-            <div class="card-header">  </div>
-            <div class="card-body">
-                
-                <img src="<c:url value="picture/Anh1" />" alt="${sv.tenSV}" />
-            </div>
-                <div class="card-footer"></div>
-        </div>-->
-    <%--</c:forEach>--%>
+    <div class="form-group">
+        <input type="submit" value="Thêm tài khoản người dùng" class="btn btn-danger" />
+    </div>
+</form:form>
+
+
     

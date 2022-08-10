@@ -16,7 +16,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link" href="<c:url value = "/admin/QLSinhVien" />"><strong>Quản ly sinh viên</strong></a>
+                <a class="nav-link" href="<c:url value = "/quantri/QLTaiKhoan" />"><strong>Quản lý tài khoản</strong></a>
             </li>
             
             <c:if test="${pageContext.request.userPrincipal.name == null}">

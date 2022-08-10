@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,7 +44,7 @@ public class Chucvu implements Serializable {
     @Column(name = "tenChucVu")
     private String tenChucVu;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvu")
-    private Set<Nguoidung> nguoidungSet;
+    private Collection<Nguoidung> nguoidungCollection;
 
     public Chucvu() {
     }
@@ -70,12 +70,12 @@ public class Chucvu implements Serializable {
     }
 
     @XmlTransient
-    public Set<Nguoidung> getNguoidungSet() {
-        return nguoidungSet;
+    public Collection<Nguoidung> getNguoidungCollection() {
+        return nguoidungCollection;
     }
 
-    public void setNguoidungSet(Set<Nguoidung> nguoidungSet) {
-        this.nguoidungSet = nguoidungSet;
+    public void setNguoidungCollection(Collection<Nguoidung> nguoidungCollection) {
+        this.nguoidungCollection = nguoidungCollection;
     }
 
     @Override

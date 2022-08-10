@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Embeddable
 public class QuantriPK implements Serializable {

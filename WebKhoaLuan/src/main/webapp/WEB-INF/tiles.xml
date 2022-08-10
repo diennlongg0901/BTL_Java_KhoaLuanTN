@@ -30,11 +30,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/DangKy.jsp" />
     </definition>-->
-    <definition name="QLSinhVien" extends="baseLayout">
+<!--    <definition name="QLSinhVien" extends="baseLayout">
         <put-attribute name="title" value="QUẢN LÝ SINH VIÊN" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/QLSinhVien.jsp" />
-    </definition>
+    </definition>-->
     
     <definition name="QLTaiKhoan" extends="baseLayout">
         <put-attribute name="title" value="QUẢN TRỊ VIÊN" />
