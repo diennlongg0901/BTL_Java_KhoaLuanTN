@@ -51,7 +51,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         
         http.exceptionHandling().accessDeniedPage("/DangNhap?accessDenied");
         
-<<<<<<< HEAD
+
         http.logout().logoutSuccessUrl("/DangNhap");
         
         http.authorizeRequests().antMatchers("/").permitAll()
@@ -59,10 +59,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/giangvien/**").access("hasRole('ROLE_GV')")
                 .antMatchers("/giaovu/**").access("hasRole('ROLE_GVU')")
                 .antMatchers("/sinhvien/**").access("hasRole('ROLE_SV')");
-=======
         http.authorizeRequests().antMatchers("/").permitAll()
                 .antMatchers("/admin/**").access("hasRole('QT')");
->>>>>>> 5fad11147aa73dea35fe6685248b0468cab1935e
         
         http.csrf().disable();
     }

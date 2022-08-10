@@ -5,7 +5,6 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
 import java.util.HashSet;

@@ -5,7 +5,6 @@
 package com.demo.service;
 
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.Sinhvien;
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

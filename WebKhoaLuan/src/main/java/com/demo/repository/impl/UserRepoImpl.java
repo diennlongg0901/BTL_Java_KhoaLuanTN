@@ -6,7 +6,6 @@ package com.demo.repository.impl;
 
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Quantri;
-import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import java.util.List;
 

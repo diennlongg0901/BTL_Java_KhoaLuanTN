@@ -12,8 +12,13 @@
         <a class="nav-link active" href="<c:url value = "/" />"><strong>Trường Đại học AA</strong></a>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <c:if test="${pageContext.request.isUserInRole('ROLE_QT')}">
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><strong>Quản lý tài khoản</strong></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Quản lý tài khoản</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Tạo tài khoản</a></li>
+                        <li><a class="dropdown-item" href="#">Chỉnh sửa tài khoản</a></li>
+                        <li><a class="dropdown-item" href="#">Xem tài khoản</a></li>
+                    </ul>
                 </li>
             </c:if>
             <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">

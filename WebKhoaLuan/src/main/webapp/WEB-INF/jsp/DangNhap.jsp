@@ -15,11 +15,7 @@
 
 <c:if test="${param.accessDenied != null}">
     <div class="alert alert-danger">
-<<<<<<< HEAD
         Tài khoản không được quyền truy cập!
-=======
-        Bạn không có quyền truy cập vào trang này !!!
->>>>>>> 5fad11147aa73dea35fe6685248b0468cab1935e
     </div>
 </c:if>
 
@@ -28,14 +24,6 @@
     <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>
     <div class="form-group container">
         <form method="post" action="${action}">
-            <div class="form-outline mb-4">
-                <label class="form-label" for="vaiTro">Vai trò người dùng</label>
-                <select id="vaiTro" name="vaiTro">
-                    <c:forEach items="${chucvu}" var="c">
-                        <option value="${c.maChucVu}">${c.tenChucVu}</option>
-                    </c:forEach>
-                </select>
-            </div>
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="username">Username</label>
