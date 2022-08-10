@@ -5,8 +5,8 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Entity
 @Table(name = "nguoidung")
@@ -84,13 +84,13 @@ public class Nguoidung implements Serializable {
     @Column(name = "hoatDong")
     private Short hoatDong;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Set<Quantri> quantriSet;
+    private Collection<Quantri> quantriCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Set<Giangvien> giangvienSet;
+    private Collection<Giangvien> giangvienCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Set<Giaovu> giaovuSet;
+    private Collection<Giaovu> giaovuCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Set<Sinhvien> sinhvienSet;
+    private Collection<Sinhvien> sinhvienCollection;
     @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Chucvu chucvu;
@@ -203,39 +203,39 @@ public class Nguoidung implements Serializable {
     }
 
     @XmlTransient
-    public Set<Quantri> getQuantriSet() {
-        return quantriSet;
+    public Collection<Quantri> getQuantriCollection() {
+        return quantriCollection;
     }
 
-    public void setQuantriSet(Set<Quantri> quantriSet) {
-        this.quantriSet = quantriSet;
-    }
-
-    @XmlTransient
-    public Set<Giangvien> getGiangvienSet() {
-        return giangvienSet;
-    }
-
-    public void setGiangvienSet(Set<Giangvien> giangvienSet) {
-        this.giangvienSet = giangvienSet;
+    public void setQuantriCollection(Collection<Quantri> quantriCollection) {
+        this.quantriCollection = quantriCollection;
     }
 
     @XmlTransient
-    public Set<Giaovu> getGiaovuSet() {
-        return giaovuSet;
+    public Collection<Giangvien> getGiangvienCollection() {
+        return giangvienCollection;
     }
 
-    public void setGiaovuSet(Set<Giaovu> giaovuSet) {
-        this.giaovuSet = giaovuSet;
+    public void setGiangvienCollection(Collection<Giangvien> giangvienCollection) {
+        this.giangvienCollection = giangvienCollection;
     }
 
     @XmlTransient
-    public Set<Sinhvien> getSinhvienSet() {
-        return sinhvienSet;
+    public Collection<Giaovu> getGiaovuCollection() {
+        return giaovuCollection;
     }
 
-    public void setSinhvienSet(Set<Sinhvien> sinhvienSet) {
-        this.sinhvienSet = sinhvienSet;
+    public void setGiaovuCollection(Collection<Giaovu> giaovuCollection) {
+        this.giaovuCollection = giaovuCollection;
+    }
+
+    @XmlTransient
+    public Collection<Sinhvien> getSinhvienCollection() {
+        return sinhvienCollection;
+    }
+
+    public void setSinhvienCollection(Collection<Sinhvien> sinhvienCollection) {
+        this.sinhvienCollection = sinhvienCollection;
     }
 
     public Chucvu getChucvu() {

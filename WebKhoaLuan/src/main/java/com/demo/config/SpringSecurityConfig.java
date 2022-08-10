@@ -59,9 +59,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/giangvien/**").access("hasRole('ROLE_GV')")
                 .antMatchers("/giaovu/**").access("hasRole('ROLE_GVU')")
                 .antMatchers("/sinhvien/**").access("hasRole('ROLE_SV')");
-        http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/admin/**").access("hasRole('QT')");
-        
+      
         http.csrf().disable();
     }
 }

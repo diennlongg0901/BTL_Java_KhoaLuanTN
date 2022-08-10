@@ -68,7 +68,6 @@ public class UserRepoImpl implements UserRepo {
 //        Root r = query.from(Nguoidung.class);
 //        query = query.select(r);
 //        Query q = session.createQuery(query);
-//
 //        return q.getResultList();
     }
 }

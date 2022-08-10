@@ -16,6 +16,11 @@
 <c:if test="${param.accessDenied != null}">
     <div class="alert alert-danger">
         Tài khoản không được quyền truy cập!
+<<<<<<< HEAD
+=======
+        Bạn không có quyền truy cập vào trang này !!!
+
+>>>>>>> dc6e5d6a4a4749da8ab64e0d119646ebc61e2dbc
     </div>
 </c:if>
 

@@ -57,7 +57,7 @@
                     </ul>
                 </li>
             </c:if>
-
+            
             <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li class="nav-item">
                     <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
