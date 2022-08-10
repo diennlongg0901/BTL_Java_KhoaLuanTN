@@ -13,7 +13,7 @@
     <div class="form-group container">
         <form method="post" action="${action}">
 
-            <div class="form-outline">
+            <div class="form-outline mt-4">
                 <label class="form-label" for="vaiTro">Vai trò người dùng</label>
                 <select id="vaiTro" name="vaiTro">
                     <c:forEach items="${chucvu}" var="c">
@@ -22,12 +22,12 @@
                 </select>
             </div>
 
-            <div class="form-outline">
+            <div class="form-outline mt-4">
                 <label class="form-label" for="ho">Họ</label>
                 <input type="text" id="ho" name="ho" class="form-control" />
             </div>
 
-            <div class="form-outline">
+            <div class="form-outline mt-4">
                 <label class="form-label" for="ten">Tên</label>
                 <input type="text" id="ten" name="ten" class="form-control" />
             </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <label for="date" class="col-1 col-form-label">Ngày sinh</label>
+            <label for="date" class="col-1 col-form-label mt-4">Ngày sinh</label>
             <div class="col-5">
                 <div class="input-group date" id="datepicker">
                     <input type="text" class="form-control" id="ngaySinh" name="ngaySinh"/>
@@ -56,12 +56,12 @@
                 </div>
             </div>
 
-            <div class="form-outline">
+            <div class="form-outline mt-4">
                 <label class="form-label" for="diaChi">Địa chỉ</label>
                 <input type="text" id="diaChi" name="diaChi" class="form-control" />
             </div>
 
-            <div class="form-outline">
+            <div class="form-outline mt-4">
                 <label class="form-label" for="email">Email</label>
                 <input type="email" id="email" name="email" class="form-control" />
             </div>

@@ -19,31 +19,51 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Quản lý tài khoản</strong></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Tạo tài khoản</a></li>
-                        <li><a class="dropdown-item" href="#">Chỉnh sửa tài khoản</a></li>
-                        <li><a class="dropdown-item" href="#">Xem tài khoản</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/quantri/QLTaiKhoan"/>">Chỉnh sửa tài khoản</a></li>
                     </ul>
                 </li>
             </c:if>
+
             <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><strong>Chức năng giáo vụ</strong></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng giáo vụ</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tạo đề tài khóa luận</a></li>
+                        <li><a class="dropdown-item" href="#">Phân công giảng viên hướng dẫn</a></li>
+                        <li><a class="dropdown-item" href="#">Tạo hội đồng</a></li>
+                        <li><a class="dropdown-item" href="#">Xem thống kê điểm</a></li>
+                    </ul>
                 </li>
             </c:if>
+
             <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><strong>Chức năng giảng viên</strong></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng giảng viên</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Xem danh sách khóa luận</a></li>
+                        <li><a class="dropdown-item" href="#">Chấm điểm khóa luận</a></li>
+                        <li><a class="dropdown-item" href="#">Xem thông tin hội đồng</a></li>
+                    </ul>
                 </li>
             </c:if>
+                
             <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
-                <li class="nav-item">
-                    <a class="nav-link text-success" href="#"><strong>Chức năng sinh viên</strong></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng sinh viên</strong></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Đăng ký đề tài khóa luận</a></li>
+                        <li><a class="dropdown-item" href="#">Nộp khóa luận</a></li>
+                        <li><a class="dropdown-item" href="#">Xem điểm khóa luận</a></li>
+                    </ul>
                 </li>
             </c:if>
+
             <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li class="nav-item">
                     <a class="nav-link text-success" href="<c:url value = "/DangNhap" />"><strong>Đăng nhập</strong></a>
                 </li>
             </c:if>
+
             <c:if test="${pageContext.request.userPrincipal.name != null}">
                 <li class="nav-item">
                     <a class="nav-link text-success" href="<c:url value = "/logout" />"><strong>Đăng xuất</strong></a>

@@ -27,13 +27,12 @@ public class UserController {
     
     @GetMapping("/DangNhap")
     public String DangNhap(Model model){
-        
         return "DangNhap";
     }
     
     @GetMapping("/quantri/QLTaiKhoan")
     public String QLTaiKhoan(Model model){
-//        model.addAttribute("nguoidung", this.userService.getAllUsers());
+        model.addAttribute("nguoidung", this.userService.getAllUsers());
         return "QLTaiKhoan";
     }
     

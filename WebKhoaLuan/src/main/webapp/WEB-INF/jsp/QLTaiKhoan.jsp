@@ -18,18 +18,14 @@
     </select>
 </div>
 
-<%--<c:forEach var="nd" items="${nguoidung}">--%>
-<!--        <h2> ${nd.ten} </h2>
-    <h3>${nd.hoatDong}</h3>
-    <h3>${nd.ngaySinh}</h3>
-    
+<input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
+<input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/>
+
+<c:forEach var="nd" items="${nguoidung}">
     <div class="card" >
-        <div class="card-header">  </div>
-        <div class="card-body">
-            
-            <img src="<c:url value="picture/Anh1" />" alt="${sv.tenSV}" />
-        </div>
-            <div class="card-footer"></div>
-    </div>-->
-<%--</c:forEach>--%>
+        <div class="card-header"> <h2> ${nd.ten} </h2> </div>
+        <div class="card-body"><h3>${nd.hoatDong}</h3></div>
+        <div class="card-footer"><h3>${nd.ngaySinh}</h3></div>
+    </div>
+</c:forEach>
 
