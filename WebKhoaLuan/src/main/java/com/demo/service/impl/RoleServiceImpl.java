@@ -5,6 +5,8 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Chucvu;
+import com.demo.pojo.Khoa;
+import com.demo.pojo.Nganh;
 import com.demo.repository.RoleRepo;
 import com.demo.service.RoleService;
 import java.util.List;
@@ -23,5 +25,15 @@ public class RoleServiceImpl implements RoleService{
     @Override
     public List<Chucvu> getChucvu() {
         return this.roleRepo.getChucvu();
+    }
+
+    @Override
+    public List<Nganh> getNganh() {
+        return this.roleRepo.getNganh();
+    }
+
+    @Override
+    public List<Khoa> getKhoa() {
+        return this.roleRepo.getKhoa();
     }
 }

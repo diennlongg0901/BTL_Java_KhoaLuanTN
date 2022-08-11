@@ -34,7 +34,6 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer{
     public CommonsMultipartResolver multipartResolver(){
         CommonsMultipartResolver cmr = new CommonsMultipartResolver();
         cmr.setDefaultEncoding("UTF-8");
-        
         return cmr;
     }
     
@@ -46,7 +45,6 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer{
                 "api_secret","-k-rg0NZdbrmpo59Q0h10Y-yW2U",
                 "secure", true
         ));
-        
         return c;
     }
 //    @Bean

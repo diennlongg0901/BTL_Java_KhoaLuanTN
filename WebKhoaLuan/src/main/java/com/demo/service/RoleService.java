@@ -5,6 +5,8 @@
 package com.demo.service;
 
 import com.demo.pojo.Chucvu;
+import com.demo.pojo.Khoa;
+import com.demo.pojo.Nganh;
 import java.util.List;
 
 /**
@@ -13,4 +15,6 @@ import java.util.List;
  */
 public interface RoleService {
     List<Chucvu> getChucvu();
+    List<Nganh> getNganh();
+    List<Khoa> getKhoa();
 }

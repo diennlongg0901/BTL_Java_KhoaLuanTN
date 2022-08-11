@@ -5,6 +5,7 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
 import java.util.HashSet;
@@ -15,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     
     @Override
     public List<Nguoidung> getUsers(String username) {
@@ -47,6 +51,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(Nguoidung user) {
+        String password = user.getUsername();
+        NguoidungPK nguoidungPK = new NguoidungPK();
+        user.setPassword(this.passwordEncoder.encode(password));
+        user.setHoatDong(Short.parseShort("1"));
+        nguoidungPK.setMaND(user.getUsername());
+        nguoidungPK.setChucvumaChucVu(user.getChucvu().getMaChucVu());
+        user.setNguoidungPK(nguoidungPK);
         return this.userRepo.addUser(user);
     }
 

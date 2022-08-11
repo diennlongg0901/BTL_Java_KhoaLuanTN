@@ -4,6 +4,7 @@
  */
 package com.demo.controller;
 
+import com.demo.pojo.Nguoidung;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -24,6 +26,8 @@ public class UserController {
     private RoleService roleService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserService userDetailsService;
     
     @GetMapping("/DangNhap")
     public String DangNhap(Model model){
@@ -33,12 +37,32 @@ public class UserController {
     @GetMapping("/quantri/QLTaiKhoan")
     public String QLTaiKhoan(Model model){
         model.addAttribute("nguoidung", this.userService.getAllUsers());
+        model.addAttribute("chucvu", this.roleService.getChucvu());
         return "QLTaiKhoan";
     }
     
     @GetMapping("/quantri/DangKy")
-    public String DangKy(Model model) {
+    public String DangKyView(Model model) {
+        model.addAttribute("nguoidung", new Nguoidung());
         model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nganh", this.roleService.getNganh());
+        model.addAttribute("khoa", this.roleService.getKhoa());
+        return "DangKy";
+    }
+    
+    @PostMapping("/quantri/DangKy")
+    public String DangKy(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        String errMsg = "";
+        model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nganh", this.roleService.getNganh());
+        model.addAttribute("khoa", this.roleService.getKhoa());
+        if (this.userDetailsService.addUser(nd) == true) {
+            return "redirect:/DangNhap";
+        }
+        else
+            errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
+        
+        model.addAttribute("errMsg", errMsg);
         return "DangKy";
     }
     

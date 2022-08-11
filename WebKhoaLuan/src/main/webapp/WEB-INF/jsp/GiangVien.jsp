@@ -5,4 +5,4 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h2 class="text-center">TRANG CHỦ GIẢNG VIÊN</h2>
+<h2 class="text-center mt-5">TRANG CHỦ GIẢNG VIÊN</h2>

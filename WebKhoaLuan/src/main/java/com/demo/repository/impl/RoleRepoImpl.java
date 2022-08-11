@@ -5,6 +5,8 @@
 package com.demo.repository.impl;
 
 import com.demo.pojo.Chucvu;
+import com.demo.pojo.Khoa;
+import com.demo.pojo.Nganh;
 import com.demo.repository.RoleRepo;
 import java.util.List;
 import javax.persistence.Query;
@@ -28,6 +30,20 @@ public class RoleRepoImpl implements RoleRepo{
     public List<Chucvu> getChucvu() {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
         Query q = s.createQuery("FROM Chucvu");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Nganh> getNganh() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM Nganh");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Khoa> getKhoa() {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        Query q = s.createQuery("FROM Khoa");
         return q.getResultList();
     }
 }
