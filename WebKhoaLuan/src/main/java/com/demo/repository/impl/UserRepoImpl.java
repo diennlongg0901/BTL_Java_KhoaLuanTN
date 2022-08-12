@@ -5,6 +5,7 @@
 package com.demo.repository.impl;
 
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.repository.UserRepo;
 import java.util.List;
@@ -70,5 +71,19 @@ public class UserRepoImpl implements UserRepo {
         query = query.select(r);
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean deleteUsers(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            NguoidungPK userPK = session.get(NguoidungPK.class, userID);
+            Nguoidung user = session.get(Nguoidung.class, userPK);
+            session.delete(user);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 }

@@ -8,8 +8,10 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 class="text-center mt-5">QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
+<!--<script type="text/javascript" src="main.js" ></script>-->
 
+<h2 class="text-center mt-5">QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
+<c:url value="/quantri/QLTaiKhoan" var="action" />
 <div class="container">
     <div class="form-outline mb-4">
         <label class="form-label" for="vaiTro">Vai trò người dùng</label>
@@ -19,6 +21,7 @@
             </c:forEach>
         </select>
     </div>
+
 
     <table class="table">
         <thead>
@@ -36,6 +39,7 @@
                 <th scope="col">C.Vụ</th>
             </tr>
         </thead>
+
         <tbody>
             <c:forEach items="${nguoidung}" var="nd">
                 <tr>
@@ -50,21 +54,38 @@
                     <td>${nd.username}</td>
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
-                    <td>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/></td>
-                    </tr>
-            </c:forEach>
+            <form action="${action}" >
+                <td >
+<!--                        <form action="${action}{}"  method="delele"><input type="submit" value="Delete"/></form>-->
+                    <input onclick="xoaTaikhoan(${nd.nguoidungPK.maND})" type="submit" class="btn btn-primary btn-block mb-4"                               
+                           value="Xóa tài khoản"/>
+                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/>
+                </td>
+            </form>
+            </tr>
+        </c:forEach>
         </tbody>
+
     </table>
 
-<!--    <hr>
-
-    <div class="mt-4">
-        
-    </div>-->
+    <!--    <hr>
+    
+        <div class="mt-4">
+            
+        </div>-->
 </div>
+<script src="<c:url value="/static/main.js" />"></script>
+<script>
 
+                        var modal = document.getElementById(${nd.nguoidungPK.maND});
+
+
+                        window.onclick = function (event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        }
+</script>
 <%--<form:form method="post" action="" modelAttribute="nguoidung" enctype="multipart/form-data" > 
     <div class="form-group">
         <label for="file">Ảnh đại diện</label>

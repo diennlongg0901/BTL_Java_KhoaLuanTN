@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
     public List<Nguoidung> getAllUsers() {
         return this.userRepo.getAllUsers();
     }  
+
+    @Override
+    public boolean deleteUsers(String userID) {
+        return this.userRepo.deleteUsers(userID);
+    }
 }

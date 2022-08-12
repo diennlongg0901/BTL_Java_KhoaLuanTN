@@ -15,4 +15,5 @@ public interface UserRepo {
     boolean addUser (Nguoidung user);
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
+    boolean deleteUsers(String userID);
 }
