@@ -7,6 +7,7 @@ package com.demo.repository.impl;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
@@ -76,6 +77,7 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
+<<<<<<< HEAD
     public boolean addUserQT(Quantri userQT) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
@@ -116,6 +118,14 @@ public class UserRepoImpl implements UserRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(userGVU);
+=======
+    public boolean deleteUsers(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            NguoidungPK userPK = session.get(NguoidungPK.class, userID);
+            Nguoidung user = session.get(Nguoidung.class, userPK);
+            session.delete(user);
+>>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());

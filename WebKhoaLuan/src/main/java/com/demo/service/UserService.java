@@ -24,5 +24,6 @@ public interface UserService extends UserDetailsService {
     boolean addUserGVU (Giaovu userGVU);
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
+    boolean deleteUsers(String userID);
 
 }

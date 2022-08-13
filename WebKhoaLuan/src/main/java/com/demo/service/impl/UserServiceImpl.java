@@ -120,6 +120,7 @@ public class UserServiceImpl implements UserService {
     }  
 
     @Override
+<<<<<<< HEAD
     public boolean addUserQT(Quantri userQT) {
         userQT.setChucVu("Quản trị người dùng");     
         return this.userRepo.addUserQT(userQT);
@@ -141,5 +142,9 @@ public class UserServiceImpl implements UserService {
     public boolean addUserGVU(Giaovu userGVU) {
         userGVU.setPhongBan("1");
         return this.userRepo.addUserGVU(userGVU);
+=======
+    public boolean deleteUsers(String userID) {
+        return this.userRepo.deleteUsers(userID);
+>>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
     }
 }
