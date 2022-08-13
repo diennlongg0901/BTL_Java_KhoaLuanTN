@@ -4,7 +4,11 @@
  */
 package com.demo.controller;
 
+import com.demo.pojo.Giangvien;
+import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.Quantri;
+import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,60 +26,127 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class UserController {
+
     @Autowired
     private RoleService roleService;
     @Autowired
     private UserService userService;
     @Autowired
     private UserService userDetailsService;
-    
+
     @GetMapping("/DangNhap")
-    public String DangNhap(Model model){
+    public String DangNhap(Model model) {
         return "DangNhap";
     }
-    
+
     @GetMapping("/quantri/QLTaiKhoan")
-    public String QLTaiKhoan(Model model){
+    public String QLTaiKhoan(Model model) {
         model.addAttribute("nguoidung", this.userService.getAllUsers());
         model.addAttribute("chucvu", this.roleService.getChucvu());
         return "QLTaiKhoan";
     }
-    
+
     @GetMapping("/quantri/DangKy")
     public String DangKyView(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
+        model.addAttribute("quantri", new Quantri());
+        model.addAttribute("sinhvien", new Sinhvien());
+        model.addAttribute("giaovu", new Giaovu());
+        model.addAttribute("giangvien", new Giangvien());
         model.addAttribute("chucvu", this.roleService.getChucvu());
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
         return "DangKy";
     }
-    
+
     @PostMapping("/quantri/DangKy")
-    public String DangKy(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+    public String DangKy(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd,
+            @ModelAttribute(value = "quantri") Quantri qt,
+            @ModelAttribute(value = "sinhvien") Sinhvien sv,
+            @ModelAttribute(value = "giaovu") Giaovu gvu,
+            @ModelAttribute(value = "giangvien") Giangvien gv) {
         String errMsg = "";
         model.addAttribute("chucvu", this.roleService.getChucvu());
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
         if (this.userDetailsService.addUser(nd) == true) {
-            return "redirect:/DangNhap";
-        }
-        else
+            switch (nd.getChucvu().getMaChucVu()) {
+                case "ROLE_QT":
+                    this.userDetailsService.addUserQT(qt);
+                    return "redirect:/quantri/QLTaiKhoan";
+                case "ROLE_GVU":
+                    this.userDetailsService.addUserGVU(gvu);
+                    return "redirect:/quantri/QLTaiKhoan";
+                case "ROLE_GV":
+                    this.userDetailsService.addUserGV(gv);
+                    return "redirect:/quantri/QLTaiKhoan";
+                case "ROLE_SV":
+                    this.userDetailsService.addUserSV(sv);
+                    return "redirect:/quantri/QLTaiKhoan";
+            }
+            
+        } else {
             errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
-        
+        }
         model.addAttribute("errMsg", errMsg);
         return "DangKy";
     }
+    
+//    @GetMapping("/quantri/DKBoSung")
+//    public String DKBSView(Model model) {
+//        model.addAttribute("nguoidung", new Nguoidung());
+//        model.addAttribute("quantri", new Quantri());
+//        model.addAttribute("sinhvien", new Sinhvien());
+//        model.addAttribute("giaovu", new Giaovu());
+//        model.addAttribute("giangvien", new Giangvien());
+//        model.addAttribute("chucvu", this.roleService.getChucvu());
+//        model.addAttribute("nganh", this.roleService.getNganh());
+//        model.addAttribute("khoa", this.roleService.getKhoa());
+//        return "DangKy";
+//    }
+    
+//    @PostMapping("/quantri/DKBoSung")
+//    public String DKBoSung(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd,
+//            @ModelAttribute(value = "sinhvien") Sinhvien sv,
+//            @ModelAttribute(value = "giaovu") Giaovu gvu,
+//            @ModelAttribute(value = "giangvien") Giangvien gv) {
+//        String errMsg = "";
+//        model.addAttribute("chucvu", this.roleService.getChucvu());
+//        model.addAttribute("nganh", this.roleService.getNganh());
+//        model.addAttribute("khoa", this.roleService.getKhoa());
+//            switch (nd.getChucvu().getMaChucVu()) {
+////                case "ROLE_QT":
+////                    this.userDetailsService.addUserQT(qt);
+////                    return "redirect:/quantri/QLTaiKhoan";
+//                case "ROLE_GVU":
+//                    this.userDetailsService.addUserGVU(gvu);
+//                    return "redirect:/quantri/DKBoSung";
+//                case "ROLE_GV":
+//                    this.userDetailsService.addUserGV(gv);
+//                    return "redirect:/quantri/DKBoSung";
+//                case "ROLE_SV":
+//                    this.userDetailsService.addUserSV(sv);
+//                    return "redirect:/quantri/DKBoSung";
+//            }
+//            
+////        } else {
+////            errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
+////        }
+//
+////        model.addAttribute("errMsg", errMsg);
+//        return "DangKyBoSung";
+//    }
     
     @GetMapping("/sinhvien/")
     public String SinhVien() {
         return "SinhVien";
     }
-    
+
     @GetMapping("/giaovu/")
     public String GiaoVu() {
         return "GiaoVu";
     }
-    
+
     @GetMapping("/giangvien/")
     public String GiangVien() {
         return "GiangVien";

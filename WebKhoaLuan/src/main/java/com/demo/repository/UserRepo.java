@@ -4,7 +4,11 @@
  */
 package com.demo.repository;
 
+import com.demo.pojo.Giangvien;
+import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.Quantri;
+import com.demo.pojo.Sinhvien;
 import java.util.List;
 
 /**
@@ -13,6 +17,10 @@ import java.util.List;
  */
 public interface UserRepo {
     boolean addUser (Nguoidung user);
+    boolean addUserQT (Quantri userQT);
+    boolean addUserSV (Sinhvien userSV);
+    boolean addUserGV (Giangvien userGV);
+    boolean addUserGVU (Giaovu userGVU);
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
 }

@@ -4,7 +4,11 @@
  */
 package com.demo.service;
 
+import com.demo.pojo.Giangvien;
+import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.Quantri;
+import com.demo.pojo.Sinhvien;
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -14,6 +18,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  */
 public interface UserService extends UserDetailsService {
     boolean addUser (Nguoidung user);
+    boolean addUserQT (Quantri userQT);
+    boolean addUserSV (Sinhvien userSV);
+    boolean addUserGV (Giangvien userGV);
+    boolean addUserGVU (Giaovu userGVU);
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
 

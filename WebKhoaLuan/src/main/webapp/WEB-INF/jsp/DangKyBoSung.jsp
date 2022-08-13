@@ -1,84 +1,28 @@
-<%--
-    Document   : DangKy
-    Created on : Aug 10, 2022, 10:33:14 AM
+<%-- 
+    Document   : DangKyBoSung
+    Created on : Aug 12, 2022, 4:05:20 PM
     Author     : ADMIN
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<c:if test="${errMsg != null}">
-    <div class="alert alert-danger">
-        ${errMsg}
+<h4 class="mt-4" id="title"></h4>
+<div class="form-outline mt-4">
+    <label class="form-label" for="vaiTro">Vai trò người dùng</label>
+    <select id="vaiTro" onchange="chonCV()">
+        <c:forEach items="${chucvu}" var="c">
+            <option value="${c.maChucVu}" >${c.tenChucVu}</option>
+        </c:forEach>
+    </select>
+</div>
+<form:form method="post" action="${action}" modelAttribute="sinhvien" >
+
+    <div class="form-outline mt-4">
+        <label class="form-label" for="username">Username</label>
     </div>
-</c:if>
 
-<c:url value="/quantri/DangKy" var="action" />
-<c:url value="/quantri/DKBoSung" var="action1" />
-<div class="container">
-    <h2 class="text-center mt-5">ĐĂNG KÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
-    <div class="form-group container">
-        <h4 class="mt-4">Thông tin chung  tài khoản người dùng:</h4>
-        <form:form method="post" action="${action}" modelAttribute="nguoidung" >
-
-            <div class="form-outline mt-4">
-                <label class="form-label" for="vaiTro">Vai trò người dùng</label>
-                <form:select id="vaiTro" path="chucvu" onchange="chonCV()">
-                    <c:forEach items="${chucvu}" var="c">
-                        <form:option value="${c.maChucVu}" path="chucvu" >${c.tenChucVu}</form:option>
-                    </c:forEach>
-                </form:select>
-            </div>
-
-            <div class="form-outline mt-4">
-                <label class="form-label" for="ho">Họ</label>
-                <form:input type="text" id="ho" path="ho" class="form-control" />
-            </div>
-
-            <div class="form-outline mt-4">
-                <label class="form-label" for="ten">Tên</label>
-                <form:input type="text" id="ten" path="ten" class="form-control" />
-            </div>
-
-            <label class="form-label mt-4" for="gioiTinh">Giới tính</label>
-            <div class="d-flex">
-                <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" path="gioiTinh" value="nam" checked="checked" />
-                    <label class="form-check-label" for="nam">Nam</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <form:radiobutton class="form-check-input" path="gioiTinh" value="nữ" />
-                    <label class="form-check-label" for="nu">Nữ</label>
-                </div>
-            </div>
-
-            <label for="date" class="col-1 col-form-label mt-4">Ngày sinh</label>
-            <div class="col-5">
-                <div class="input-group date" id="datepicker">
-                    <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh"/>
-                    <span class="input-group-append">
-                        <span class="input-group-text bg-light d-block">
-                            <i class="fa fa-calendar"></i>
-                        </span>
-                    </span>
-                </div>
-            </div>
-
-            <div class="form-outline mt-4">
-                <label class="form-label" for="username">Username</label>
-                <form:input type="text" id="username" path="username" class="form-control" />
-            </div>
-
-            <div class="form-outline mt-4">
-                <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo tài khoản người dùng"/>
-                <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
-            </div>
-        </form:form>
-
- <h4 class="mt-4" id="title"></h4>
-<form:form method="post" action="${action1}" modelAttribute="sinhvien" >
     <div class="form-outline mt-4">
         <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
         <select class="sinhVien" id="khoa" hidden="hidden">
@@ -102,15 +46,35 @@
         <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Hủy"/>
     </div>
 </form:form>
-        
-    </div>
-</div>
 
-<script type="text/javascript">
-    $(function () {
-        $('#datepicker').datepicker();
-    });
-</script>
+<%--<form:form method="post" action="${action}" modelAttribute="giangvien">--%>
+<!--                <div class="form-outline mt-4">
+                    <label class="form-label giangVien" for="hocVi" hidden="hidden" >Học vị</label>
+                    <input type="text" id="hocVi" class="form-control giangVien" hidden="hidden"/>
+                </div>
+
+                <div class="form-outline mt-4">
+                    <label class="form-label giangVien" for="hocHam" hidden="hidden" >Học hàm</label>
+                    <input type="text" id="hocHam" class="form-control giangVien" hidden="hidden"/>
+                </div>-->
+
+<!--                <div class="form-outline mt-4">
+                    <input type="submit" class="btn btn-primary btn-block mb-4 giangVien" hidden="hidden" value="Xác nhận"/>
+                    <input type="reset" class="btn btn-primary btn-block mb-4 giangVien" hidden="hidden" value="Hủy"/>
+                </div>-->
+<%--</form:form>--%>
+
+<%--<form:form method="post" action="${action}" modelAttribute="giaovu">--%>
+<!--                <div class="form-outline mt-4">
+                    <label class="form-label giaoVu" for="phongBan" hidden="hidden" >Phòng ban</label>
+                    <input type="text" id="phongBan" class="form-control giaoVu" hidden="hidden"/>
+                </div>-->
+
+<!--                <div class="form-outline mt-4">
+                    <input type="submit" class="btn btn-primary btn-block mb-4 giaoVu" hidden="hidden" value="Xác nhận"/>
+                    <input type="reset" class="btn btn-primary btn-block mb-4 giaoVu" hidden="hidden" value="Hủy"/>
+                </div>-->
+<%--</form:form>--%>
 
 <script type="text/javascript">
     function chonCV() {

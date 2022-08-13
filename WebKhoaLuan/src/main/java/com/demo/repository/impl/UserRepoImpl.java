@@ -4,8 +4,11 @@
  */
 package com.demo.repository.impl;
 
+import com.demo.pojo.Giangvien;
+import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Quantri;
+import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import java.util.List;
 
@@ -70,5 +73,53 @@ public class UserRepoImpl implements UserRepo {
         query = query.select(r);
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addUserQT(Quantri userQT) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(userQT);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addUserSV(Sinhvien userSV) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(userSV);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addUserGV(Giangvien userGV) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(userGV);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addUserGVU(Giaovu userGVU) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(userGVU);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 }

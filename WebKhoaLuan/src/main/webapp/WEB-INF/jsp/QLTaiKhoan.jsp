@@ -51,9 +51,10 @@
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
                     <td>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/></td>
-                    </tr>
+                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa"/>
+                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>
+                    </td>
+                </tr>
             </c:forEach>
         </tbody>
     </table>
