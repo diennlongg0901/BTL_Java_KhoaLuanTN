@@ -23,5 +23,6 @@ public interface UserRepo {
     boolean addUserGVU (Giaovu userGVU);
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
+    List<Giangvien> getAllGV();
     boolean deleteUsers(String userID);
 }

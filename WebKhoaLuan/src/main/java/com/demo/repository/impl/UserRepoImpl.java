@@ -12,6 +12,7 @@ import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import java.util.List;
+import javax.persistence.Entity;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -77,7 +78,6 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-<<<<<<< HEAD
     public boolean addUserQT(Quantri userQT) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
@@ -118,18 +118,70 @@ public class UserRepoImpl implements UserRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(userGVU);
-=======
-    public boolean deleteUsers(String userID) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        try {
-            NguoidungPK userPK = session.get(NguoidungPK.class, userID);
-            Nguoidung user = session.get(Nguoidung.class, userPK);
-            session.delete(user);
->>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
         }
         return false;
+    }
+    
+    
+    @Override
+    public boolean deleteUsers(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        try {
+            //CÁCH 1 - return true, không xóa dưới db
+//            NguoidungPK userPK  = new NguoidungPK();
+//            userPK.setMaND(userID);
+//            Nguoidung user = new Nguoidung();
+//            user.setNguoidungPK(userPK);
+//            session.remove(user);
+
+            //CÁCH 2 - return true, không xóa dưới db
+//            session.beginTransaction();
+//            NguoidungPK userPK  = new NguoidungPK();
+//            userPK.setMaND(userID);
+//            Nguoidung user = new Nguoidung();
+//            user.setNguoidungPK(userPK);
+//            session.delete(user);
+
+            //CÁCH 3 - lỗi Unknow entity
+//            session.delete(userID, Nguoidung.class);
+
+            //CÁCH 4 - return true, không xóa dưới db
+//            Nguoidung user = new Nguoidung();
+//            user.setUsername(userID);
+//            session.delete(user);
+
+            //CÁCH 5 - return false
+//            Nguoidung user = session.load(Nguoidung.class, userID);
+//            session.delete(user);
+
+            //CÁCH 6 - return false
+            NguoidungPK userPK = session.get(NguoidungPK.class, userID);
+            Nguoidung user = session.get(Nguoidung.class, userPK);
+            session.delete(user);
+
+            //CÁCH 7 - lỗi Unknow entity            
+//            session.delete("delete from Nguoidung user where user.username =: 'GVU004'");
+            
+            //CÁCH 8
+//            Query q = session.createQuery("delete from Nguoidung user where user.username = 'GVU004'");
+//            q.executeUpdate();
+
+            //CÁCH 9
+//            session.createQuery("delete from Nguoidung user where user.username  =: userID").setString("userID", userID).executeUpdate();
+//            return true;
+//        } catch (HibernateException e) {
+//            System.err.println(e.getMessage());
+//        }
+        return true;
+    }
+
+    @Override
+    public List<Giangvien> getAllGV() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Giangvien");
+        return q.getResultList();
     }
 }

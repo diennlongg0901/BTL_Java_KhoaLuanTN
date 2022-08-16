@@ -22,7 +22,6 @@
         </select>
     </div>
 
-
     <table class="table">
         <thead>
             <tr>
@@ -54,25 +53,21 @@
                     <td>${nd.username}</td>
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
-<<<<<<< HEAD
                     <td>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa"/>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>
+                        <a href="<c:url value = "/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}"/>">Xóa</a>
+<!--                        <form action="${action}/${nd.nguoidungPK.maND}"><input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa"/></form>
+                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>-->
                     </td>
                 </tr>
             </c:forEach>
-=======
-            <form action="${action}" >
+<!--            <form action="${action}" >
                 <td >
-<!--                        <form action="${action}{}"  method="delele"><input type="submit" value="Delete"/></form>-->
+                        <form action="${action}{}"  method="delele"><input type="submit" value="Delete"/></form>
                     <input onclick="xoaTaikhoan(${nd.nguoidungPK.maND})" type="submit" class="btn btn-primary btn-block mb-4"                               
                            value="Xóa tài khoản"/>
                     <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/>
                 </td>
-            </form>
-            </tr>
-        </c:forEach>
->>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
+            </form>-->
         </tbody>
 
     </table>
@@ -83,7 +78,7 @@
             
         </div>-->
 </div>
-<script src="<c:url value="/static/main.js" />"></script>
+<!--<script src="<c:url value="/static/main.js" />"></script>
 <script>
 
                         var modal = document.getElementById(${nd.nguoidungPK.maND});
@@ -94,7 +89,7 @@
                                 modal.style.display = "none";
                             }
                         }
-</script>
+</script>-->
 <%--<form:form method="post" action="" modelAttribute="nguoidung" enctype="multipart/form-data" > 
     <div class="form-group">
         <label for="file">Ảnh đại diện</label>

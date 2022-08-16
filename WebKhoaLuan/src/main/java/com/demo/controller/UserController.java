@@ -4,18 +4,15 @@
  */
 package com.demo.controller;
 
-<<<<<<< HEAD
+
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
-=======
 import antlr.Utils;
->>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
-import java.lang.reflect.Method;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -54,14 +53,25 @@ public class UserController {
         model.addAttribute("chucvu", this.roleService.getChucvu());
         return "QLTaiKhoan";
     }
-<<<<<<< HEAD
-
-=======
     
-    @DeleteMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
+//    @GetMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
+//    public String xoaTaiKhoanView(Model model) {
+//        model.addAttribute("nguoidung", this.userService.getAllUsers());
+//        model.addAttribute("chucvu", this.roleService.getChucvu());
+//        return "QLTaiKhoan";
+//    }
+    
+    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
     public String xoaTaikhoan(@PathVariable(value = "nguoidungPK.maND") String userID){
-       this.userDetailsService.deleteUsers(userID);
-       return "redirect:/quantri/QLTaiKhoan";
+       if (this.userDetailsService.deleteUsers(userID) == true)
+       {
+           return "redirect:/quantri/QLTaiKhoan";
+       }
+       else
+       {
+           return "redirect:/";
+       }
+        
     }
     
 //    @DeleteMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
@@ -73,7 +83,6 @@ public class UserController {
 //        }
 //    }
     
->>>>>>> 00bba1043335b367d6ea02af7dcf914719b297fb
     @GetMapping("/quantri/DangKy")
     public String DangKyView(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
@@ -167,16 +176,16 @@ public class UserController {
     
     @GetMapping("/sinhvien/")
     public String SinhVien() {
-        return "SinhVien";
+        return "ThongTinNguoiDung";
     }
 
     @GetMapping("/giaovu/")
     public String GiaoVu() {
-        return "GiaoVu";
+        return "ThongTinNguoiDung";
     }
 
     @GetMapping("/giangvien/")
     public String GiangVien() {
-        return "GiangVien";
+        return "ThongTinNguoiDung";
     }
 }

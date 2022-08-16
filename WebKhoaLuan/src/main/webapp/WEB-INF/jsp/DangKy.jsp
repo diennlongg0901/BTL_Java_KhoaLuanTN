@@ -77,32 +77,32 @@
             </div>
         </form:form>
 
- <h4 class="mt-4" id="title"></h4>
-<form:form method="post" action="${action1}" modelAttribute="sinhvien" >
-    <div class="form-outline mt-4">
-        <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
-        <select class="sinhVien" id="khoa" hidden="hidden">
-            <c:forEach items="${khoa}" var="k">
-                <option value="${k.maKhoa}" >${k.tenKhoa}</option>
-            </c:forEach>
-        </select>
-    </div>
+        <h4 class="mt-4" id="title"></h4>
+        <form:form method="post" action="${action1}" modelAttribute="sinhvien" >
+            <div class="form-outline mt-4">
+                <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
+                <select class="sinhVien" id="khoa" hidden="hidden">
+                    <c:forEach items="${khoa}" var="k">
+                        <option value="${k.maKhoa}" >${k.tenKhoa}</option>
+                    </c:forEach>
+                </select>
+            </div>
 
-    <div class="form-outline mt-4">
-        <label class="form-label sinhVien" for="nganh" hidden="hidden" >Ngành</label>
-        <form:select class="sinhVien" id="nganh" path="nganh" hidden="hidden">
-            <c:forEach items="${nganh}" var="n">
-                <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
-            </c:forEach>
-        </form:select>
-    </div>
+            <div class="form-outline mt-4">
+                <label class="form-label sinhVien" for="nganh" hidden="hidden" >Ngành</label>
+                <form:select class="sinhVien" id="nganh" path="nganh" hidden="hidden">
+                    <c:forEach items="${nganh}" var="n">
+                        <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
 
-    <div class="form-outline mt-4">
-        <input type="submit" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Xác nhận"/>
-        <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Hủy"/>
-    </div>
-</form:form>
-        
+            <div class="form-outline mt-4">
+                <input type="submit" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Xác nhận"/>
+                <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Hủy"/>
+            </div>
+        </form:form>
+
     </div>
 </div>
 
