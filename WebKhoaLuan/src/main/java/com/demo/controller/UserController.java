@@ -9,13 +9,19 @@ import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import antlr.Utils;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
+import com.demo.pojo.Nguoidung_;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
+import java.lang.reflect.Method;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +31,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -54,6 +62,31 @@ public class UserController {
         return "QLTaiKhoan";
     }
     
+    
+    
+    @RequestMapping(value = "/update/{id}")
+    public String updateTK(@PathVariable("id") String id, Model model){
+        model.addAttribute("nguoidungPK", this.userService.getNguoidungbyID(id));
+        
+        return "QLTaiKhoan";
+    }
+    
+//    @DeleteMapping(value = "/quantri/QLTaiKhoan/{NguoidungPK.maND}")
+//    public String xoaTaikhoan(@RequestParam String id){
+//        
+//        this.userService.deleteUsers(id);
+//        
+//        return "redirect:/quantri/QLTaiKhoan";
+//    }
+    
+    @GetMapping(value = "/quantri/QLTaiKhoan/{id}")
+    public ResponseEntity<String> xoaTaikhoan(@RequestParam String id){
+        
+        if(this.userService.deleteUsers(id) == true){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
 //    @GetMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
 //    public String xoaTaiKhoanView(Model model) {
 //        model.addAttribute("nguoidung", this.userService.getAllUsers());
@@ -61,18 +94,18 @@ public class UserController {
 //        return "QLTaiKhoan";
 //    }
     
-    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-    public String xoaTaikhoan(@PathVariable(value = "nguoidungPK.maND") String userID){
-       if (this.userDetailsService.deleteUsers(userID) == true)
-       {
-           return "redirect:/quantri/QLTaiKhoan";
-       }
-       else
-       {
-           return "redirect:/";
-       }
-        
-    }
+//    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
+//    public String xoaTaikhoan(@PathVariable(value = "nguoidungPK.maND") String userID){
+//       if (this.userDetailsService.deleteUsers(userID) == true)
+//       {
+//           return "redirect:/quantri/QLTaiKhoan";
+//       }
+//       else
+//       {
+//           return "redirect:/";
+//       }
+//        
+//    }
     
 //    @DeleteMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
 //    public void xoaTaikhoan(@PathVariable(value = "{nguoidungPK.maND}") int maND, HttpSession session){

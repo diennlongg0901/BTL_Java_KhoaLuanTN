@@ -21,6 +21,11 @@
             </c:forEach>
         </select>
     </div>
+    <c:if test="${message != null}">
+        <div class ="alert alert-danger">
+            ${message}
+        </div>
+    </c:if>
 
     <table class="table">
         <thead>
@@ -53,18 +58,17 @@
                     <td>${nd.username}</td>
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
-                    <td>
-                        <a href="<c:url value = "/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}"/>">Xóa</a>
-<!--                        <form action="${action}/${nd.nguoidungPK.maND}"><input type="submit" class="btn btn-primary btn-block mb-4" value="Xóa"/></form>
+                    <td><a href=" <c:url value="/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}" />"> Xóa </a></td>
+                    <td><a href="<c:url value='/update/${nd.username}' />" >Sửa</a></td>
+<!--                        <input href="/quantri/QLKhoaLuan/delete + ${nd.nguoidungPK.maND}" type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
                         <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>-->
-                    </td>
+                    
                 </tr>
             </c:forEach>
 <!--            <form action="${action}" >
                 <td >
                         <form action="${action}{}"  method="delele"><input type="submit" value="Delete"/></form>
-                    <input onclick="xoaTaikhoan(${nd.nguoidungPK.maND})" type="submit" class="btn btn-primary btn-block mb-4"                               
-                           value="Xóa tài khoản"/>
+                    
                     <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/>
                 </td>
             </form>-->
