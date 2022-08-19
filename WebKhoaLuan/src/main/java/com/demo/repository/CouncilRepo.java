@@ -14,5 +14,6 @@ import com.demo.pojo.Hoidong;
  */
 public interface CouncilRepo {
     boolean addCouncil(Hoidong council);
+    Object getNewCouncil();
     boolean addDetailCouncil (Chitiethoidong detailCouncil);
 }

@@ -7,6 +7,7 @@ package com.demo.repository.impl;
 import com.demo.pojo.Chitiethoidong;
 import com.demo.pojo.Hoidong;
 import com.demo.repository.CouncilRepo;
+import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -37,6 +38,19 @@ public class CouncilRepoImpl implements CouncilRepo {
 
     @Override
     public boolean addDetailCouncil(Chitiethoidong detailCouncil) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(detailCouncil);
+            return true;
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    @Override
+    public Object getNewCouncil() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Hoidong ORDER BY maHD DESC");
+        return q.setMaxResults(1).getSingleResult();
     }
 }

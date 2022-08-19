@@ -20,49 +20,59 @@
                 </div>
                 
                 <div class="form-outline mt-4">
-                    <label class="form-label">Mã chủ tịch</label>
-                    <select id="vaiTro">
+                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới" />
+                </div>
+            </form:form>
+                
+            <form:form method="post" action="${action}" modelAttribute="chitiethoidong" >
+                <div class="form-outline mt-4">
+                    <label class="form-label">Thành viên hội đồng</label>
+                    <form:select id="vaiTro" path="chitiethoidongPK.giangvienmaGV">
                         <c:forEach items="${giangvien}" var="gv">
-                            <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
+                            <form:option value="${gv.giangvienPK.maGV}" path="giangvienmaGV" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
                         </c:forEach>
-                    </select>
+                    </form:select>
                 </div>
                 
                 <div class="form-outline mt-4">
                     <label class="form-label">Mã thư ký</label>
-                    <select id="vaiTro">
-                        <c:forEach items="${giangvien}" var="gv">
-                            <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        </c:forEach>
-                    </select>
+                    <form:select id="vaiTro" path="vaiTro" >
+                        <%--<c:forEach items="${giangvien}" var="gv">--%>
+                            <form:option value="Chủ tịch" >Chủ tịch</form:option>
+                            <form:option value="Thư ký" >Thư ký</form:option>
+                            <form:option value="Phản biện" >Phản biện</form:option>
+                            <form:option value="Thành viên 1" >Thành viên 1</form:option>
+                            <form:option value="Thành viên 2" >Thành viên 2</form:option>
+                        <%--</c:forEach>--%>
+                    </form:select>
                 </div>
                 
-                <div class="form-outline mt-4">
+<!--                <div class="form-outline mt-4">
                     <label class="form-label">Mã phản biện</label>
                     <select id="vaiTro">
-                        <c:forEach items="${giangvien}" var="gv">
+                        <%--<c:forEach items="${giangvien}" var="gv">--%>
                             <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        </c:forEach>
+                        <%--</c:forEach>--%>
                     </select>
                 </div>
                 
                 <div class="form-outline mt-4">
                     <label>Mã thành viên 1</label>
                     <select id="vaiTro">
-                        <c:forEach items="${giangvien}" var="gv">
+                        <%--<c:forEach items="${giangvien}" var="gv">--%>
                             <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        </c:forEach>
+                        <%--</c:forEach>--%>
                     </select>
                 </div>
                 
                 <div class="form-outline mt-4">
                     <label>Mã thành viên 2</label>
                     <select id="vaiTro">
-                        <c:forEach items="${giangvien}" var="gv">
+                        <%--<c:forEach items="${giangvien}" var="gv">--%>
                             <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        </c:forEach>
+                        <%--</c:forEach>--%>
                     </select>
-                </div>
+                </div>-->
                 <div class="form-outline mt-4">
                     <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới" />
                 </div>

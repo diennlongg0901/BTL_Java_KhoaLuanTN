@@ -5,6 +5,7 @@
 package com.demo.service;
 
 import com.demo.pojo.Chitiethoidong;
+import com.demo.pojo.ChitiethoidongPK;
 import com.demo.pojo.Hoidong;
 
 /**
@@ -13,5 +14,6 @@ import com.demo.pojo.Hoidong;
  */
 public interface CouncilService {
     boolean addCouncil(Hoidong council);
+    Object getNewCouncil();
     boolean addDetailCouncil (Chitiethoidong detailCouncil);
 }
