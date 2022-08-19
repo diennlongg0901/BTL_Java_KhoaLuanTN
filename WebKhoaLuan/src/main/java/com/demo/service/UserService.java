@@ -7,7 +7,6 @@ package com.demo.service;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import java.util.List;
@@ -18,15 +17,27 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @author PC
  */
 public interface UserService extends UserDetailsService {
+    
+    //THÊM NGƯỜI DÙNG
     boolean addUser (Nguoidung user);
     boolean addUserQT (Quantri userQT);
-    boolean addUserSV (Sinhvien userSV);
-    boolean addUserGV (Giangvien userGV);
     boolean addUserGVU (Giaovu userGVU);
+    boolean addUserGV (Giangvien userGV);
+    boolean addUserSV (Sinhvien userSV);
+    
+    //LẤY NGƯỜI DÙNG   
     List<Nguoidung> getUsers(String username);
+    Nguoidung getUserbyID(String username);
     List<Nguoidung> getAllUsers();
     List<Giangvien> getAllGV();
-    Nguoidung getNguoidungbyID(String username);
-    boolean deleteUsers(String userID);
+    
+    //XÓA NGƯỜI DÙNG   
+    void deleteUsers(String userID);
+    void deleteUsersQT(String userID);
+    void deleteUsersGVU(String userID);
+    void deleteUsersGV(String userID);
+    void deleteUsersSV(String userID);
+       
+    //CẬP NHẬT NGƯỜI DÙNG
     void updateUsers(Nguoidung user);
 }

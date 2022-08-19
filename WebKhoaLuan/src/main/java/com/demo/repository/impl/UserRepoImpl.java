@@ -7,13 +7,10 @@ package com.demo.repository.impl;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
 import java.util.List;
-import javax.persistence.Entity;
-
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -37,6 +34,7 @@ public class UserRepoImpl implements UserRepo {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
+    //LẤY DANH SÁCH NGƯỜI DÙNG
     @Override
     public List<Nguoidung> getUsers(String username) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
@@ -52,7 +50,33 @@ public class UserRepoImpl implements UserRepo {
         Query q = s.createQuery(query);
         return q.getResultList();
     }
+    
+    @Override
+    public Nguoidung getUserbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Nguoidung.class, id);
+        
+    }
+    
+    @Override
+    public List<Nguoidung> getAllUsers() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Nguoidung> query = builder.createQuery(Nguoidung.class);
+        Root r = query.from(Nguoidung.class);
+        query = query.select(r);
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Giangvien> getAllGV() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Giangvien");
+        return q.getResultList();
+    }
 
+    //THÊM NGƯỜI DÙNG
     @Override
     public boolean addUser(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -64,18 +88,7 @@ public class UserRepoImpl implements UserRepo {
         }
         return false;
     }
-
-    @Override
-    public List<Nguoidung> getAllUsers() {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Nguoidung> query = builder.createQuery(Nguoidung.class);
-        Root r = query.from(Nguoidung.class);
-        query = query.select(r);
-        Query q = session.createQuery(query);
-        return q.getResultList();
-    }
-
+  
     @Override
     public boolean addUserQT(Quantri userQT) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -87,12 +100,12 @@ public class UserRepoImpl implements UserRepo {
         }
         return false;
     }
-
+    
     @Override
-    public boolean addUserSV(Sinhvien userSV) {
+    public boolean addUserGVU(Giaovu userGVU) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(userSV);
+            session.save(userGVU);
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
@@ -113,10 +126,10 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public boolean addUserGVU(Giaovu userGVU) {
+    public boolean addUserSV(Sinhvien userSV) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
-            session.save(userGVU);
+            session.save(userSV);
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
@@ -124,39 +137,51 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
 
+    //XÓA NGUỜI DÙNG
     @Override
-    public boolean deleteUsers(String userID) {
+    public void deleteUsers(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
-        NguoidungPK pk = new NguoidungPK();
-        pk.setMaND(userID);
-        Nguoidung p = (Nguoidung) session.load(Nguoidung.class, pk.getMaND());
-        if (null != p) {
-            session.delete(p);
-            return true;
-        }
-        return false;
+        Query q = session.createQuery("DELETE FROM Nguoidung WHERE username = (:userID)");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
+    }
+    
+    @Override
+    public void deleteUsersQT(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Quantri WHERE maGV = (:userID) AND maChucVu = 'ROLE_QT'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
+    }
+    
+    @Override
+    public void deleteUsersGVU(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Giaovu WHERE maGV = (:userID) AND maChucVu = 'ROLE_GVU'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
+    }
+    
+    @Override
+    public void deleteUsersGV(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Giangvien WHERE maGV = (:userID) AND maChucVu = 'ROLE_GV'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
     }
 
     @Override
-    public List<Giangvien> getAllGV() {
+    public void deleteUsersSV(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Giangvien");
-        return q.getResultList();
+        Query q = session.createQuery("DELETE FROM Sinhvien WHERE maSV = (:userID) AND maChucVu = 'ROLE_SV'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
     }
 
+    //CẬP NHẬT NGƯỜI DÙNG
     @Override
     public void updateUsers(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         session.update(user);
     }
-
-    @Override
-    public Nguoidung getNguoidungbyID(String id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Nguoidung.class, id);
-        
-    }
-
-    
 }

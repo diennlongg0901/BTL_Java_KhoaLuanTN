@@ -18,6 +18,7 @@ import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.reflect.Method;
 import java.util.Map;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,17 +31,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author PC
  */
 @Controller
+@Resource(name = "userDetailsService")
 public class UserController {
 
     @Autowired
@@ -55,77 +55,19 @@ public class UserController {
         return "DangNhap";
     }
 
+    @RequestMapping(value = "/update/{id}")
+    public String updateTK(@PathVariable("id") String id, Model model){
+        model.addAttribute("nguoidungPK", this.userService.getUserbyID(id));
+        return "QLTaiKhoan";
+    }
+
+    //QUẢN TRỊ
     @GetMapping("/quantri/QLTaiKhoan")
     public String QLTaiKhoan(Model model) {
         model.addAttribute("nguoidung", this.userService.getAllUsers());
         model.addAttribute("chucvu", this.roleService.getChucvu());
         return "QLTaiKhoan";
     }
-    
-    
-    
-    @RequestMapping(value = "/update/{id}")
-    public String updateTK(@PathVariable("id") String id, Model model){
-        model.addAttribute("nguoidungPK", this.userService.getNguoidungbyID(id));
-        
-        return "QLTaiKhoan";
-    }
-    
-//    @DeleteMapping(value = "/quantri/QLTaiKhoan/{NguoidungPK.maND}")
-//    public String xoaTaikhoan(@RequestParam String id){
-//        
-//        this.userService.deleteUsers(id);
-//        
-//        return "redirect:/quantri/QLTaiKhoan";
-//    }
-    
-    @GetMapping(value = "/quantri/QLTaiKhoan/{id}")
-    public ResponseEntity<String> xoaTaikhoan(@RequestParam String id){
-        
-        if(this.userService.deleteUsers(id) == true){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(id, HttpStatus.OK);
-    }
-//    @GetMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-//    public String xoaTaiKhoanView(Model model) {
-//        model.addAttribute("nguoidung", this.userService.getAllUsers());
-//        model.addAttribute("chucvu", this.roleService.getChucvu());
-//        return "QLTaiKhoan";
-//    }
-    
-    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-    public String xoaTK(@PathVariable(value = "nguoidungPK.maND") String userID){
-       if (this.userDetailsService.deleteUsers(userID) == true)
-       {
-           return "redirect:/quantri/QLTaiKhoan";
-       }
-       else
-       {
-           return "redirect:/";
-       }       
-    }
-//    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-//    public String xoaTaikhoan(@PathVariable(value = "nguoidungPK.maND") String userID){
-//       if (this.userDetailsService.deleteUsers(userID) == true)
-//       {
-//           return "redirect:/quantri/QLTaiKhoan";
-//       }
-//       else
-//       {
-//           return "redirect:/";
-//       }
-//        
-//    }
-    
-//    @DeleteMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-//    public void xoaTaikhoan(@PathVariable(value = "{nguoidungPK.maND}") int maND, HttpSession session){
-//        Map<Integer, Nguoidung> nguoiDung = (Map<Integer, Nguoidung>) session.getAttribute("nguoiDung");
-//        if(nguoiDung != null && nguoiDung.containsKey(maND)){
-//            nguoiDung.remove(maND);
-//            session.setAttribute("nguoiDung", maND);
-//        }
-//    }
     
     @GetMapping("/quantri/DangKy")
     public String DangKyView(Model model) {
@@ -172,63 +114,48 @@ public class UserController {
         return "DangKy";
     }
     
-//    @GetMapping("/quantri/DKBoSung")
-//    public String DKBSView(Model model) {
-//        model.addAttribute("nguoidung", new Nguoidung());
-//        model.addAttribute("quantri", new Quantri());
-//        model.addAttribute("sinhvien", new Sinhvien());
-//        model.addAttribute("giaovu", new Giaovu());
-//        model.addAttribute("giangvien", new Giangvien());
-//        model.addAttribute("chucvu", this.roleService.getChucvu());
-//        model.addAttribute("nganh", this.roleService.getNganh());
-//        model.addAttribute("khoa", this.roleService.getKhoa());
-//        return "DangKy";
-//    }
-    
-//    @PostMapping("/quantri/DKBoSung")
-//    public String DKBoSung(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd,
-//            @ModelAttribute(value = "sinhvien") Sinhvien sv,
-//            @ModelAttribute(value = "giaovu") Giaovu gvu,
-//            @ModelAttribute(value = "giangvien") Giangvien gv) {
-//        String errMsg = "";
-//        model.addAttribute("chucvu", this.roleService.getChucvu());
-//        model.addAttribute("nganh", this.roleService.getNganh());
-//        model.addAttribute("khoa", this.roleService.getKhoa());
-//            switch (nd.getChucvu().getMaChucVu()) {
-////                case "ROLE_QT":
-////                    this.userDetailsService.addUserQT(qt);
-////                    return "redirect:/quantri/QLTaiKhoan";
-//                case "ROLE_GVU":
-//                    this.userDetailsService.addUserGVU(gvu);
-//                    return "redirect:/quantri/DKBoSung";
-//                case "ROLE_GV":
-//                    this.userDetailsService.addUserGV(gv);
-//                    return "redirect:/quantri/DKBoSung";
-//                case "ROLE_SV":
-//                    this.userDetailsService.addUserSV(sv);
-//                    return "redirect:/quantri/DKBoSung";
-//            }
-//            
-////        } else {
-////            errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
-////        }
-//
-////        model.addAttribute("errMsg", errMsg);
-//        return "DangKyBoSung";
-//    }
-    
-    @GetMapping("/sinhvien/")
-    public String SinhVien() {
-        return "ThongTinNguoiDung";
+    @RequestMapping(value = "/quantri/QLTaiKhoan/{nguoidungPK.maND}")
+    public String xoaTK(Model model, @PathVariable(value = "nguoidungPK.maND") String userID){
+        String errMsg = " ";
+        String role = userID.substring(0, 3);
+        try {
+            switch (role) {
+                case "GV0":
+                    this.userService.deleteUsersGV(userID);
+                    break;
+                case "GVU":
+                    this.userService.deleteUsersGVU(userID);
+                    break;
+                case "SV0":
+                    this.userService.deleteUsersSV(userID);
+                    break;
+                case "QT0":
+                    this.userService.deleteUsersQT(userID);
+                    break;
+        }
+            return "redirect:/quantri/QLTaiKhoan";
+        } catch (Exception e) {
+            errMsg = "Đã có lỗi!" + " " + userID + " " + e;
+        }
+        model.addAttribute("errMSG", errMsg);
+        return "redirect:/";      
     }
-
+    
+    //GIÁO VỤ
     @GetMapping("/giaovu/")
     public String GiaoVu() {
         return "ThongTinNguoiDung";
     }
 
+    //GIẢNG VIÊN
     @GetMapping("/giangvien/")
     public String GiangVien() {
+        return "ThongTinNguoiDung";
+    }
+    
+    //SINH VIÊN
+    @GetMapping("/sinhvien/")
+    public String SinhVien() {
         return "ThongTinNguoiDung";
     }
 }

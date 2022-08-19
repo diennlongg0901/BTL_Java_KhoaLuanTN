@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<div class="mt-4 p-5 bg-white text-black rounded">
+<div class="mt-4 p-5 bg-white text-black rounded" id="footer">
     <h3>TRƯỜNG ĐẠI HỌC AA</h3>
     <p>TĐ.Long - NL.Tuyen &copy; 2022</p>
     <hr>

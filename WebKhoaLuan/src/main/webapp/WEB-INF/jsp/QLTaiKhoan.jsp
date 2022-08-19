@@ -58,7 +58,7 @@
                     <td>${nd.username}</td>
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
-                    <td><a href=" <c:url value="/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}" />"> Xóa </a></td>
+                    <td><a href=" <c:url value="/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}" />">Xóa</a></td>
                     <td><a href="<c:url value='/update/${nd.username}' />" >Sửa</a></td>
 <!--                        <input href="/quantri/QLKhoaLuan/delete + ${nd.nguoidungPK.maND}" type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
                         <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>-->

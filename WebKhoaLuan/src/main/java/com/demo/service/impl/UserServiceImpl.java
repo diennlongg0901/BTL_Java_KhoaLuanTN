@@ -27,7 +27,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -41,11 +40,27 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     
+    //LẤY NGƯỜI DÙNG 
     @Override
     public List<Nguoidung> getUsers(String username) {
         return this.userRepo.getUsers(username);
     }
 
+    @Override
+    public List<Nguoidung> getAllUsers() {
+        return this.userRepo.getAllUsers();
+    }
+    
+    @Override
+    public Nguoidung getUserbyID(String username) {
+        return this.userRepo.getUserbyID(username);
+    }
+    
+    @Override
+    public List<Giangvien> getAllGV() {
+        return this.userRepo.getAllGV();
+    }
+    
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<Nguoidung> user = this.getUsers(username);
@@ -59,6 +74,7 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
 
+    //THÊM NGƯỜI DÙNG
     @Override
     public boolean addUser(Nguoidung user) {
         String password = user.getUsername();
@@ -117,14 +133,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Nguoidung> getAllUsers() {
-        return this.userRepo.getAllUsers();
-    }  
-
-    @Override
     public boolean addUserQT(Quantri userQT) {
         userQT.setChucVu("Quản trị người dùng");     
         return this.userRepo.addUserQT(userQT);
+    }
+    
+    @Override
+    public boolean addUserGVU(Giaovu userGVU) {
+        userGVU.setPhongBan("1");
+        return this.userRepo.addUserGVU(userGVU);
     }
 
     @Override
@@ -139,30 +156,37 @@ public class UserServiceImpl implements UserService {
         return this.userRepo.addUserGV(userGV);
     }
 
-    @Override
-    public boolean addUserGVU(Giaovu userGVU) {
-        userGVU.setPhongBan("1");
-        return this.userRepo.addUserGVU(userGVU);
-    }
-    
-    @Override
-    @Transactional
-    public boolean deleteUsers(String userID) {
-        return this.userRepo.deleteUsers(userID);
-    }
-
-    @Override
-    public List<Giangvien> getAllGV() {
-        return this.userRepo.getAllGV();
-    }
-
+    //CẬP NHẬT NGƯỜI DÙNG
     @Override
     public void updateUsers(Nguoidung user) {
       this.userRepo.updateUsers(user);
     }
 
+    //XÓA NGƯỜI DÙNG
     @Override
-    public Nguoidung getNguoidungbyID(String username) {
-        return this.userRepo.getNguoidungbyID(username);
+    public void deleteUsers(String userID) {
+        this.userRepo.deleteUsers(userID);       
+    }
+
+    @Override
+    public void deleteUsersQT(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+     @Override
+    public void deleteUsersGVU(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public void deleteUsersGV(String userID) {
+        this.userRepo.deleteUsersGV(userID);
+        this.userRepo.deleteUsers(userID);
+    }
+
+    @Override
+    public void deleteUsersSV(String userID) {
+        this.userRepo.deleteUsersSV(userID);
+        this.userRepo.deleteUsers(userID);
     }
 }

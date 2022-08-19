@@ -7,7 +7,6 @@ package com.demo.repository;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import java.util.List;
@@ -18,26 +17,27 @@ import java.util.List;
  */
 public interface UserRepo {
 
+    //THÊM NGƯỜI DÙNG
     boolean addUser(Nguoidung user);
-
     boolean addUserQT(Quantri userQT);
-
+    boolean addUserGVU(Giaovu userGVU);
+    boolean addUserGV(Giangvien userGV);
     boolean addUserSV(Sinhvien userSV);
 
-    boolean addUserGV(Giangvien userGV);
-
-    boolean addUserGVU(Giaovu userGVU);
-
+    //LẤY NGƯỜI DÙNG
     List<Nguoidung> getUsers(String username);
-
+    Nguoidung getUserbyID(String id);
     List<Nguoidung> getAllUsers();
-
     List<Giangvien> getAllGV();
 
-    Nguoidung getNguoidungbyID(String id);
-
-    boolean deleteUsers(String userID);
-
+    //XÓA NGƯỜI DÙNG 
+    void deleteUsers(String userID);
+    void deleteUsersQT(String userID);
+    void deleteUsersGVU(String userID);
+    void deleteUsersGV(String userID);
+    void deleteUsersSV(String userID);
+    
+    //CẬP NHẬT NGƯỜI DÙNG
     void updateUsers(Nguoidung user);
 
 }
