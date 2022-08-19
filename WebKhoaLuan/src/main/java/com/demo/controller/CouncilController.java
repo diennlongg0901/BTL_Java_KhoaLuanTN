@@ -5,7 +5,6 @@
 package com.demo.controller;
 
 import com.demo.pojo.Chitiethoidong;
-import com.demo.pojo.ChitiethoidongPK;
 import com.demo.pojo.Hoidong;
 import com.demo.service.CouncilService;
 import com.demo.service.UserService;
@@ -44,8 +43,6 @@ public class CouncilController {
             @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
         model.addAttribute("giangvien", this.userService.getAllGV());
         String errMsg = " ";
-//        boolean check = false;
-//        check = ;
         if (council.getTenHD() != null) {
             if (this.councilService.addCouncil(council) == true) {
                 errMsg = " ";
@@ -60,12 +57,4 @@ public class CouncilController {
         model.addAttribute("errMsg", errMsg);
         return "HoiDong";
     }
-
-//    @PostMapping("/HoiDong")
-//    public String HoiDong(Model model,
-//            @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
-//        model.addAttribute("giangvien", this.userService.getAllGV());
-//        this.councilService.addDetailCouncil(detailCouncil);
-//        return "HoiDong";
-//    }
 }

@@ -44,12 +44,11 @@ public class UserRepoImpl implements UserRepo {
         CriteriaQuery<Nguoidung> query = builder.createQuery(Nguoidung.class);
         Root r = query.from(Nguoidung.class);
         query = query.select(r);
-        if (!username.isEmpty())
-        {
+        if (!username.isEmpty()) {
             Predicate p = builder.equal(r.get("username").as(String.class), username.trim());
             query = query.where(p);
         }
-        
+
         Query q = s.createQuery(query);
         return q.getResultList();
     }
@@ -124,58 +123,19 @@ public class UserRepoImpl implements UserRepo {
         }
         return false;
     }
-    
-    
+
     @Override
     public boolean deleteUsers(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-//        try {
-            //CÁCH 1 - return true, không xóa dưới db
-//            NguoidungPK userPK  = new NguoidungPK();
-//            userPK.setMaND(userID);
-//            Nguoidung user = new Nguoidung();
-//            user.setNguoidungPK(userPK);
-//            session.remove(user);
-
-            //CÁCH 2 - return true, không xóa dưới db
-//            session.beginTransaction();
-//            NguoidungPK userPK  = new NguoidungPK();
-//            userPK.setMaND(userID);
-//            Nguoidung user = new Nguoidung();
-//            user.setNguoidungPK(userPK);
-//            session.delete(user);
-
-            //CÁCH 3 - lỗi Unknow entity
-//            session.delete(userID, Nguoidung.class);
-
-            //CÁCH 4 - return true, không xóa dưới db
-//            Nguoidung user = new Nguoidung();
-//            user.setUsername(userID);
-//            session.delete(user);
-
-            //CÁCH 5 - return false
-//            Nguoidung user = session.load(Nguoidung.class, userID);
-//            session.delete(user);
-
-            //CÁCH 6 - return false
-            NguoidungPK userPK = session.get(NguoidungPK.class, userID);
-            Nguoidung user = session.get(Nguoidung.class, userPK);
-            session.delete(user);
-
-            //CÁCH 7 - lỗi Unknow entity            
-//            session.delete("delete from Nguoidung user where user.username =: 'GVU004'");
-            
-            //CÁCH 8
-//            Query q = session.createQuery("delete from Nguoidung user where user.username = 'GVU004'");
-//            q.executeUpdate();
-
-            //CÁCH 9
-//            session.createQuery("delete from Nguoidung user where user.username  =: userID").setString("userID", userID).executeUpdate();
-//            return true;
-//        } catch (HibernateException e) {
-//            System.err.println(e.getMessage());
-//        }
-        return true;
+        
+        NguoidungPK pk = new NguoidungPK();
+        pk.setMaND(userID);
+        Nguoidung p = (Nguoidung) session.load(Nguoidung.class, pk.getMaND());
+        if (null != p) {
+            session.delete(p);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -184,4 +144,19 @@ public class UserRepoImpl implements UserRepo {
         Query q = session.createQuery("FROM Giangvien");
         return q.getResultList();
     }
+
+    @Override
+    public void updateUsers(Nguoidung user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        session.update(user);
+    }
+
+    @Override
+    public Nguoidung getNguoidungbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        return session.get(Nguoidung.class, id);
+        
+    }
+
+    
 }

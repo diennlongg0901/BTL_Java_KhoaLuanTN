@@ -27,6 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -145,6 +146,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
+    @Transactional
     public boolean deleteUsers(String userID) {
         return this.userRepo.deleteUsers(userID);
     }
@@ -152,5 +154,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Giangvien> getAllGV() {
         return this.userRepo.getAllGV();
+    }
+
+    @Override
+    public void updateUsers(Nguoidung user) {
+      this.userRepo.updateUsers(user);
+    }
+
+    @Override
+    public Nguoidung getNguoidungbyID(String username) {
+        return this.userRepo.getNguoidungbyID(username);
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -50,6 +51,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Nguoidung implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     protected NguoidungPK nguoidungPK;
     @Size(max = 50)

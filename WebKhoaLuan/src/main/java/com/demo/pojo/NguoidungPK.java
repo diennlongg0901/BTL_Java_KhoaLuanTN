@@ -79,7 +79,7 @@ public class NguoidungPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.NguoidungPK[ maND=" + maND + ", chucvumaChucVu=" + chucvumaChucVu + " ]";
+        return "com.demo.pojo.NguoidungPK[ maND=" + maND +"]";
     }
     
 }

@@ -87,6 +87,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/HoiDong.jsp" />
     </definition>
+    <definition name="update" extends="baseLayout">
+        <put-attribute name="title" value="Update người dùng" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/update.jsp" />
+    </definition>
     
     
 </tiles-definitions>

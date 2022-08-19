@@ -7,6 +7,7 @@ package com.demo.service;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import java.util.List;
@@ -25,6 +26,7 @@ public interface UserService extends UserDetailsService {
     List<Nguoidung> getUsers(String username);
     List<Nguoidung> getAllUsers();
     List<Giangvien> getAllGV();
+    Nguoidung getNguoidungbyID(String username);
     boolean deleteUsers(String userID);
-
+    void updateUsers(Nguoidung user);
 }
