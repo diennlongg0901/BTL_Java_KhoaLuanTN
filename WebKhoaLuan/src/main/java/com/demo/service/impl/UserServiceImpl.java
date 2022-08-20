@@ -4,6 +4,8 @@
  */
 package com.demo.service.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.GiangvienPK;
 import com.demo.pojo.Giaovu;
@@ -16,10 +18,14 @@ import com.demo.pojo.Sinhvien;
 import com.demo.pojo.SinhvienPK;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -39,6 +45,8 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private Cloudinary cloudinary; 
     
     //LẤY NGƯỜI DÙNG 
     @Override
@@ -77,59 +85,67 @@ public class UserServiceImpl implements UserService {
     //THÊM NGƯỜI DÙNG
     @Override
     public boolean addUser(Nguoidung user) {
-        String password = user.getUsername();
-        NguoidungPK nguoidungPK = new NguoidungPK();
-        user.setPassword(this.passwordEncoder.encode(password));
-        user.setHoatDong(Short.parseShort("1"));
-        nguoidungPK.setMaND(user.getUsername());
-        nguoidungPK.setChucvumaChucVu(user.getChucvu().getMaChucVu());
-        user.setNguoidungPK(nguoidungPK);
-        this.userRepo.addUser(user);
-        switch (user.getChucvu().getMaChucVu()) {
-            case "ROLE_QT":
-                Quantri qt = new Quantri();
-                qt.setNguoidung(user);
-                QuantriPK quantriPK = new QuantriPK();
-                quantriPK.setMaQT(user.getUsername());
-                quantriPK.setNguoidungmaND(user.getUsername());
-                quantriPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-                qt.setQuantriPK(quantriPK);
-                addUserQT(qt);
-                break;
-            case "ROLE_GVU":
-                Giaovu gvu = new Giaovu();
-                gvu.setNguoidung(user);
-                GiaovuPK giaovuPK = new GiaovuPK();
-                giaovuPK.setMaGV(user.getUsername());
-                giaovuPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-                giaovuPK.setNguoidungmaND(user.getUsername());
-                gvu.setGiaovuPK(giaovuPK);
-                addUserGVU(gvu);
-                break;
-            case "ROLE_GV":
-                Giangvien gv = new Giangvien();
-                gv.setNguoidung(user);
-                GiangvienPK giangvienPK = new GiangvienPK();
-                giangvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-                giangvienPK.setMaGV(user.getUsername());
-                giangvienPK.setMaND(user.getUsername());
-                gv.setGiangvienPK(giangvienPK);
-                addUserGV(gv);
-                break;
-            case "ROLE_SV":
-                Sinhvien sv = new Sinhvien();
-                sv.setNguoidung(user);
-                SinhvienPK sinhvienPK = new SinhvienPK();
-                sinhvienPK.setMaSV(user.getUsername());
-                sinhvienPK.setMaND(user.getUsername());
-                sinhvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-                sinhvienPK.setMaNganh(Short.parseShort("1"));
-                sinhvienPK.setMaKhoa(Short.parseShort("1"));
-                sv.setSinhvienPK(sinhvienPK);
-                addUserSV(sv);
-                break;
+        try {
+            String password = user.getUsername();
+            NguoidungPK nguoidungPK = new NguoidungPK();
+            user.setPassword(this.passwordEncoder.encode(password));
+            user.setHoatDong(Short.parseShort("1"));
+            nguoidungPK.setMaND(user.getUsername());
+            nguoidungPK.setChucvumaChucVu(user.getChucvu().getMaChucVu());
+            user.setNguoidungPK(nguoidungPK);
+            Map m = this.cloudinary.uploader().upload(user.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            user.setAnh((String) m.get("secure_url"));
+            this.userRepo.addUser(user);
+            switch (user.getChucvu().getMaChucVu()) {
+                case "ROLE_QT":
+                    Quantri qt = new Quantri();
+                    qt.setNguoidung(user);
+                    QuantriPK quantriPK = new QuantriPK();
+                    quantriPK.setMaQT(user.getUsername());
+                    quantriPK.setNguoidungmaND(user.getUsername());
+                    quantriPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
+                    qt.setQuantriPK(quantriPK);
+                    addUserQT(qt);
+                    break;
+                case "ROLE_GVU":
+                    Giaovu gvu = new Giaovu();
+                    gvu.setNguoidung(user);
+                    GiaovuPK giaovuPK = new GiaovuPK();
+                    giaovuPK.setMaGV(user.getUsername());
+                    giaovuPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
+                    giaovuPK.setNguoidungmaND(user.getUsername());
+                    gvu.setGiaovuPK(giaovuPK);
+                    addUserGVU(gvu);
+                    break;
+                case "ROLE_GV":
+                    Giangvien gv = new Giangvien();
+                    gv.setNguoidung(user);
+                    GiangvienPK giangvienPK = new GiangvienPK();
+                    giangvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
+                    giangvienPK.setMaGV(user.getUsername());
+                    giangvienPK.setMaND(user.getUsername());
+                    gv.setGiangvienPK(giangvienPK);
+                    addUserGV(gv);
+                    break;
+                case "ROLE_SV":
+                    Sinhvien sv = new Sinhvien();
+                    sv.setNguoidung(user);
+                    SinhvienPK sinhvienPK = new SinhvienPK();
+                    sinhvienPK.setMaSV(user.getUsername());
+                    sinhvienPK.setMaND(user.getUsername());
+                    sinhvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
+                    sinhvienPK.setMaNganh(Short.parseShort("1"));
+                    sinhvienPK.setMaKhoa(Short.parseShort("1"));
+                    sv.setSinhvienPK(sinhvienPK);
+                    addUserSV(sv);
+                    break;
+            }
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return true;
+        return false;
     }
 
     @Override

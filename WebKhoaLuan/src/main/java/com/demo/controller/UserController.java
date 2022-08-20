@@ -82,7 +82,7 @@ public class UserController {
         return "DangKy";
     }
 
-    @PostMapping("/quantri/DangKy")
+    @PostMapping(value = "/quantri/DangKy", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String DangKy(Model model, @ModelAttribute(value = "nguoidung") Nguoidung nd,
             @ModelAttribute(value = "quantri") Quantri qt,
             @ModelAttribute(value = "sinhvien") Sinhvien sv,
@@ -110,6 +110,7 @@ public class UserController {
         } else {
             errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
         }
+        
         model.addAttribute("errMsg", errMsg);
         return "DangKy";
     }

@@ -16,11 +16,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.servlet.ServletRequest;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.test.web.servlet.MockMvcExtensionsKt;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -82,10 +84,13 @@ public class UserRepoImpl implements UserRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(user);
+            
+     
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
         }
+        
         return false;
     }
   
