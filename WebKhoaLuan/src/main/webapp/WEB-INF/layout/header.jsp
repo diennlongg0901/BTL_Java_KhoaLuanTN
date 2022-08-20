@@ -12,10 +12,10 @@
         <a class="nav-link active" href="<c:url value="/" />"><strong>Trường Đại học AA</strong></a>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="#"><strong>Liên hệ</strong></a>
+                <a class="nav-link" href="#"><strong>Thông báo mới</strong></a>        
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#footer"><strong>Thông báo mới</strong></a>
+                <a class="nav-link" href="#footer"><strong>Liên hệ</strong></a>
             </li>          
             <c:if test="${pageContext.request.isUserInRole('ROLE_QT')}">
                 <li class="nav-item dropdown">

@@ -7,6 +7,7 @@ package com.demo.service;
 import com.demo.pojo.Chitiethoidong;
 import com.demo.pojo.ChitiethoidongPK;
 import com.demo.pojo.Hoidong;
+import java.util.List;
 
 /**
  *
@@ -16,4 +17,6 @@ public interface CouncilService {
     boolean addCouncil(Hoidong council);
     Object getNewCouncil();
     boolean addDetailCouncil (Chitiethoidong detailCouncil);
+    List<Chitiethoidong> getListCouncilDetail();
+//    List<Chitiethoidong> getCouncilDetail(int id);
 }

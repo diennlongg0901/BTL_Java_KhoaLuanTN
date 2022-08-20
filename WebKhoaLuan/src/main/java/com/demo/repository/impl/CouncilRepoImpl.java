@@ -7,6 +7,7 @@ package com.demo.repository.impl;
 import com.demo.pojo.Chitiethoidong;
 import com.demo.pojo.Hoidong;
 import com.demo.repository.CouncilRepo;
+import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,20 @@ public class CouncilRepoImpl implements CouncilRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Hoidong ORDER BY maHD DESC");
         return q.setMaxResults(1).getSingleResult();
+    }
+
+//    @Override
+//    public List<Chitiethoidong> getCouncilDetail(int id) {
+//        Session session = this.sessionFactory.getObject().getCurrentSession();
+//        Query q = session.createQuery("FROM Chitiethoidong WHERE hoidong_maHD (:id)");
+//        q.setParameter("id", id);
+//        return q.getResultList();
+//    }
+
+    @Override
+    public List<Chitiethoidong> getListCouncilDetail() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Chitiethoidong ORDER BY hoidong_maHD ASC");
+        return q.getResultList();
     }
 }

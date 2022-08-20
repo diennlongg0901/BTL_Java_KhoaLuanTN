@@ -149,7 +149,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersQT(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Quantri WHERE maGV = (:userID) AND maChucVu = 'ROLE_QT'");
+        Query q = session.createQuery("DELETE FROM Quantri WHERE maQT = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_QT'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
@@ -157,7 +157,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersGVU(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Giaovu WHERE maGV = (:userID) AND maChucVu = 'ROLE_GVU'");
+        Query q = session.createQuery("DELETE FROM Giaovu WHERE maGV = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_GVU'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }

@@ -18,12 +18,12 @@
                     <label class="form-label">Tên hội đồng</label>
                     <form:input type="text" class="form-control" path="tenHD"/>
                 </div>
-                
+
                 <div class="form-outline mt-4">
-                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới" />
+                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới hội đồng" />
                 </div>
             </form:form>
-                
+
             <form:form method="post" action="${action}" modelAttribute="chitiethoidong" >
                 <div class="form-outline mt-4">
                     <label class="form-label">Thành viên hội đồng</label>
@@ -33,57 +33,54 @@
                         </c:forEach>
                     </form:select>
                 </div>
-                
+
                 <div class="form-outline mt-4">
                     <label class="form-label">Mã thư ký</label>
                     <form:select id="vaiTro" path="vaiTro" >
-                        <%--<c:forEach items="${giangvien}" var="gv">--%>
-                            <form:option value="Chủ tịch" >Chủ tịch</form:option>
-                            <form:option value="Thư ký" >Thư ký</form:option>
-                            <form:option value="Phản biện" >Phản biện</form:option>
-                            <form:option value="Thành viên 1" >Thành viên 1</form:option>
-                            <form:option value="Thành viên 2" >Thành viên 2</form:option>
-                        <%--</c:forEach>--%>
+                        <form:option value="Chu tich" >Chủ tịch</form:option>
+                        <form:option value="Thu ky" >Thư ký</form:option>
+                        <form:option value="Phan bien" >Phản biện</form:option>
+                        <form:option value="Thanh vien 1" >Thành viên 1</form:option>
+                        <form:option value="Thanh vien 2" >Thành viên 2</form:option>                      
                     </form:select>
                 </div>
-                
-<!--                <div class="form-outline mt-4">
-                    <label class="form-label">Mã phản biện</label>
-                    <select id="vaiTro">
-                        <%--<c:forEach items="${giangvien}" var="gv">--%>
-                            <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        <%--</c:forEach>--%>
-                    </select>
-                </div>
-                
                 <div class="form-outline mt-4">
-                    <label>Mã thành viên 1</label>
-                    <select id="vaiTro">
-                        <%--<c:forEach items="${giangvien}" var="gv">--%>
-                            <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        <%--</c:forEach>--%>
-                    </select>
-                </div>
-                
-                <div class="form-outline mt-4">
-                    <label>Mã thành viên 2</label>
-                    <select id="vaiTro">
-                        <%--<c:forEach items="${giangvien}" var="gv">--%>
-                            <option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</option>
-                        <%--</c:forEach>--%>
-                    </select>
-                </div>-->
-                <div class="form-outline mt-4">
-                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới" />
+                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Thêm thành viên hội đồng" />
                 </div>
             </form:form>
         </div>
     </c:if>
     <h3>Thông tin danh sách hội đồng</h3>
     <div class="form-outline mt-4">
-        <label>Chủ tịch</label>
-        <label>Thư ký</label>
-        <label>Phản biện</label>
-        <label>Thành viên</label>
+        <form action="" >
+            <div class="form-outline mt-4">
+                <label class="form-label">Nhập mã hội đồng</label>
+                <input type="number" class="form-control" name="id"/>
+                <input type="submit" class="btn btn-primary btn-block mb-4 mt-4" value="Tìm hội đồng"/>
+            </div>
+        </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Mã số hội đồng</th>
+                        <th>Tên hội đồng</th>
+                        <th>Mã giảng viên</th>
+                        <th>Họ tên giảng viên</th>
+                        <th>Vai trò</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${dschitiethoidong}" var="hd">
+                        <tr>
+                            <td>${hd.chitiethoidongPK.hoidongmaHD}</td>
+                            <td>${hd.hoidong.tenHD}</td>
+                            <td>${hd.chitiethoidongPK.giangvienmaGV}</td>
+                            <td>${hd.giangvien.nguoidung.ho} ${hd.giangvien.nguoidung.ten}</td>
+                            <td>${hd.vaiTro}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+            
     </div>
 </div>

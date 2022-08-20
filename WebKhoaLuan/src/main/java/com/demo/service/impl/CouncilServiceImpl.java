@@ -9,6 +9,7 @@ import com.demo.pojo.ChitiethoidongPK;
 import com.demo.pojo.Hoidong;
 import com.demo.repository.CouncilRepo;
 import com.demo.service.CouncilService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +35,7 @@ public class CouncilServiceImpl implements CouncilService{
         cthdPK.setGiangvienmaND(detailCouncil.getChitiethoidongPK().getGiangvienmaGV());
         cthdPK.setGiangvienmaGV(detailCouncil.getChitiethoidongPK().getGiangvienmaGV());
         cthdPK.setGiangvienmaChucVu("ROLE_GV");
-        cthdPK.setHoidongmaHD(h.getMaHD());
-//        Chitiethoidong cthd = new Chitiethoidong();
-//        detailCouncil.setHoidongmaHD(h.getMaHD());
-//        detailCouncil.setGiangvienmaChucVu("ROLE_GV");
-//        cthd.setChitiethoidongPK(detailCouncil);      
+        cthdPK.setHoidongmaHD(h.getMaHD());   
         detailCouncil.setChitiethoidongPK(cthdPK);
         return this.councilRepo.addDetailCouncil(detailCouncil);
     }
@@ -47,5 +44,18 @@ public class CouncilServiceImpl implements CouncilService{
     public Object getNewCouncil() {
         return this.councilRepo.getNewCouncil();
     }
+
+//    @Override
+//    public List<Chitiethoidong> getCouncilDetail(int id) {
+//        return this.councilRepo.getCouncilDetail(id);
+//    }
+
+    @Override
+    public List<Chitiethoidong> getListCouncilDetail() {
+        return this.councilRepo.getListCouncilDetail();
+    }
+
+    
+    
     
 }

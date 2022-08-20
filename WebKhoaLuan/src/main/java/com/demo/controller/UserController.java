@@ -117,22 +117,24 @@ public class UserController {
     @RequestMapping(value = "/quantri/QLTaiKhoan/{nguoidungPK.maND}")
     public String xoaTK(Model model, @PathVariable(value = "nguoidungPK.maND") String userID){
         String errMsg = " ";
-        String role = userID.substring(0, 3);
+        String role = userID.substring(0, 2);     
         try {
-            switch (role) {
-                case "GV0":
+            if (userID.substring(0, 3).equals("GVU")) {
+                this.userService.deleteUsersGVU(userID);
+            } else {
+                switch (role) {
+                case "GV":
                     this.userService.deleteUsersGV(userID);
                     break;
-                case "GVU":
-                    this.userService.deleteUsersGVU(userID);
-                    break;
-                case "SV0":
+                case "SV":
                     this.userService.deleteUsersSV(userID);
                     break;
-                case "QT0":
+                case "QT":
                     this.userService.deleteUsersQT(userID);
                     break;
         }
+            }
+            
             return "redirect:/quantri/QLTaiKhoan";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!" + " " + userID + " " + e;

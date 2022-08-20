@@ -169,13 +169,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUsersQT(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void deleteUsersQT(String userID) {
+        this.userRepo.deleteUsersQT(userID);
+        this.userRepo.deleteUsers(userID);
     }
 
      @Override
-    public void deleteUsersGVU(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void deleteUsersGVU(String userID) {
+        this.userRepo.deleteUsersGVU(userID);
+        this.userRepo.deleteUsers(userID);
     }
     
     @Override

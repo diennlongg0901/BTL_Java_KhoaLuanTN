@@ -6,6 +6,7 @@ package com.demo.repository;
 
 import com.demo.pojo.Chitiethoidong;
 import com.demo.pojo.Hoidong;
+import java.util.List;
 
 
 /**
@@ -13,7 +14,13 @@ import com.demo.pojo.Hoidong;
  * @author ADMIN
  */
 public interface CouncilRepo {
+    
+    //THÊM HỘI ĐỒNG, CHI TIẾT HỘI ĐỒNG
     boolean addCouncil(Hoidong council);
-    Object getNewCouncil();
     boolean addDetailCouncil (Chitiethoidong detailCouncil);
+    
+    //LẤY DANH SÁCH HỘI ĐỒNG
+    Object getNewCouncil();
+    List<Chitiethoidong> getListCouncilDetail();
+//    List<Chitiethoidong> getCouncilDetail(int id);
 }
