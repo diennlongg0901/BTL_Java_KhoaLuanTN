@@ -4,6 +4,7 @@
  */
 package com.demo.pojo;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -24,6 +25,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -50,6 +52,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Nguoidung.findByChucvumaChucVu", query = "SELECT n FROM Nguoidung n WHERE n.nguoidungPK.chucvumaChucVu = :chucvumaChucVu")})
 public class Nguoidung implements Serializable {
 
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
     private static final long serialVersionUID = 1L;
     
     @EmbeddedId
@@ -75,6 +91,10 @@ public class Nguoidung implements Serializable {
     @Size(max = 100)
     @Column(name = "anh")
     private String anh;
+    
+    @Transient
+    private MultipartFile file;
+    
     @Size(max = 100)
     @Column(name = "diaChi")
     private String diaChi;

@@ -4,6 +4,7 @@
  */
 package com.demo.config;
 
+import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -36,6 +37,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
+    
+    @Bean
+    public Cloudinary cloudinary(){
+        return new Cloudinary();
+    } 
     
     @Override
     protected void configure(AuthenticationManagerBuilder a) throws Exception{
