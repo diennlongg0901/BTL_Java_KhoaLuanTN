@@ -28,7 +28,11 @@ public interface UserRepo {
     List<Nguoidung> getUsers(String username);
     Nguoidung getUserbyID(String id);
     List<Nguoidung> getAllUsers();
-    List<Giangvien> getAllGV();
+    List<Nguoidung> getAllGV();
+    List<Giangvien> getListGV();
+    List<Nguoidung> getAllSV();
+    List<Nguoidung> getAllGVU();
+    List<Nguoidung> getAllQT();
 
     //XÓA NGƯỜI DÙNG 
     void deleteUsers(String userID);
@@ -39,5 +43,5 @@ public interface UserRepo {
     
     //CẬP NHẬT NGƯỜI DÙNG
     void updateUsers(Nguoidung user);
-
+    void updateParticularUsers(Nguoidung user);
 }

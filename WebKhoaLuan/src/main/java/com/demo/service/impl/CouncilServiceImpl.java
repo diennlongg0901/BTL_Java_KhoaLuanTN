@@ -45,10 +45,10 @@ public class CouncilServiceImpl implements CouncilService{
         return this.councilRepo.getNewCouncil();
     }
 
-//    @Override
-//    public List<Chitiethoidong> getCouncilDetail(int id) {
-//        return this.councilRepo.getCouncilDetail(id);
-//    }
+    @Override
+    public List<Chitiethoidong> getCouncilDetail(String tenHD) {
+        return this.councilRepo.getCouncilDetail(tenHD);
+    }
 
     @Override
     public List<Chitiethoidong> getListCouncilDetail() {

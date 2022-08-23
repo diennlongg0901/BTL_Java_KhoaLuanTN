@@ -24,8 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -63,12 +61,7 @@ public class UserServiceImpl implements UserService {
     public Nguoidung getUserbyID(String username) {
         return this.userRepo.getUserbyID(username);
     }
-    
-    @Override
-    public List<Giangvien> getAllGV() {
-        return this.userRepo.getAllGV();
-    }
-    
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<Nguoidung> user = this.getUsers(username);
@@ -80,6 +73,31 @@ public class UserServiceImpl implements UserService {
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(u.getChucvu().getMaChucVu()));
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
+    }
+    
+    @Override
+    public List<Nguoidung> getAllGV() {
+        return this.userRepo.getAllGV();
+    }
+    
+    @Override
+    public List<Giangvien> getListGV() {
+        return this.userRepo.getListGV();
+    }
+    
+    @Override
+    public List<Nguoidung> getAllSV() {
+        return this.userRepo.getAllSV();
+    }
+
+    @Override
+    public List<Nguoidung> getAllGVU() {
+        return this.userRepo.getAllGVU();
+    }
+
+    @Override
+    public List<Nguoidung> getAllQT() {
+        return this.userRepo.getAllQT();
     }
 
     //THÊM NGƯỜI DÙNG
@@ -174,10 +192,49 @@ public class UserServiceImpl implements UserService {
 
     //CẬP NHẬT NGƯỜI DÙNG
     @Override
-    public void updateUsers(Nguoidung user) {
+    public void updateUsers(String userID, Nguoidung user) {
+      Nguoidung u = new Nguoidung();
+      u.setHo(user.getHo());
+      u.setTen(user.getTen());
+      u.setNgaySinh(user.getNgaySinh());
+      u.setUsername(user.getUsername());
+      u.setGioiTinh(user.getGioiTinh());
+      u.setHoatDong(Short.parseShort(user.getHoatDong().toString()));
       this.userRepo.updateUsers(user);
     }
-
+    
+    @Override
+    public void updateParticularUsers(Nguoidung user) {
+        Nguoidung u = new Nguoidung();
+        NguoidungPK uPK = new NguoidungPK();
+        uPK.setMaND(user.getNguoidungPK().getMaND());
+        uPK.setChucvumaChucVu(user.getNguoidungPK().getChucvumaChucVu());
+        u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
+//        u.setNguoidungPK(uPK);
+//        u.setHo(user.getHo());
+//        u.setTen(user.getTen());
+//        u.setAnh(user.getAnh());
+//        u.setHoatDong(user.getHoatDong());
+//        u.setGioiTinh(user.getGioiTinh());
+//        u.setUsername(user.getUsername());
+        if (!user.getSdt().isEmpty()) {
+            u.setSdt(user.getSdt());
+        }
+        if (!user.getEmail().isEmpty()) {
+            u.setEmail(user.getEmail());
+        }
+        if (!user.getNgaySinh().toString().isEmpty()) {
+            u.setNgaySinh(user.getNgaySinh());
+        }
+        if (!user.getDiaChi().isEmpty()) {
+            u.setDiaChi(user.getDiaChi());
+        }
+        if (!user.getPassword().isEmpty()) {
+            u.setPassword(this.passwordEncoder.encode(user.getPassword()));  
+        }
+        this.userRepo.updateUsers(u);
+    }
+    
     //XÓA NGƯỜI DÙNG
     @Override
     public void deleteUsers(String userID) {

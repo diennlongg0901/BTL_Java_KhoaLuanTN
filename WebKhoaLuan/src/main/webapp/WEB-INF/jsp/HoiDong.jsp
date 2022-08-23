@@ -35,13 +35,13 @@
                 </div>
 
                 <div class="form-outline mt-4">
-                    <label class="form-label">Mã thư ký</label>
+                    <label class="form-label">Vai trò trong hội đồng</label>
                     <form:select id="vaiTro" path="vaiTro" >
-                        <form:option value="Chu tich" >Chủ tịch</form:option>
-                        <form:option value="Thu ky" >Thư ký</form:option>
-                        <form:option value="Phan bien" >Phản biện</form:option>
-                        <form:option value="Thanh vien 1" >Thành viên 1</form:option>
-                        <form:option value="Thanh vien 2" >Thành viên 2</form:option>                      
+                        <form:option value="Chủ tịch" >Chủ tịch</form:option>
+                        <form:option value="Thư ký" >Thư ký</form:option>
+                        <form:option value="Phản biện" >Phản biện</form:option>
+                        <form:option value="Thành viên 1" >Thành viên 1</form:option>
+                        <form:option value="Thành viên 2" >Thành viên 2</form:option>                      
                     </form:select>
                 </div>
                 <div class="form-outline mt-4">
@@ -55,7 +55,7 @@
         <form action="" >
             <div class="form-outline mt-4">
                 <label class="form-label">Nhập mã hội đồng</label>
-                <input type="number" class="form-control" name="id"/>
+                <input type="text" class="form-control" name="tenHD"/>
                 <input type="submit" class="btn btn-primary btn-block mb-4 mt-4" value="Tìm hội đồng"/>
             </div>
         </form>
@@ -80,7 +80,6 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
-            
+            </table>            
     </div>
 </div>

@@ -28,7 +28,7 @@
                         <li><a class="dropdown-item" href="<c:url value="/giaovu/PhanCongGV"/>">Phân công giảng viên hướng dẫn</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Tạo hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/giaovu/ThongKeDiem"/>">Xem thống kê điểm</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -40,7 +40,7 @@
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Xem danh sách khóa luận</a></li>
                         <li><a class="dropdown-item" href="#">Chấm điểm khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Xem thông tin hội đồng</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/giangvien/"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/giangvien/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -52,7 +52,7 @@
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Đăng ký đề tài khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/sinhvien/KhoaLuan"/>">Nộp khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/sinhvien/DiemKL"/>">Xem điểm khóa luận</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/sinhvien/"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/sinhvien/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>

@@ -14,10 +14,11 @@
 <c:url value="/quantri/QLTaiKhoan" var="action" />
 <div class="container">
     <div class="form-outline mb-4">
-        <label class="form-label" for="vaiTro">Vai trò người dùng</label>
-        <select id="vaiTro" name="vaiTro">
+        <label class="form-label" for="vaiTro">Lọc người dùng theo chức vụ</label>
+        <select id="vaiTro" name="vaiTro" onchange="window.location.href = this.value">
+            <option value="" >Chức vụ</option>
             <c:forEach items="${chucvu}" var="c">
-                <option value="${c.maChucVu}">${c.tenChucVu}</option>
+                <option value="${action}/${c.maChucVu}" >${c.tenChucVu}</option>
             </c:forEach>
         </select>
     </div>
@@ -59,29 +60,13 @@
                     <td>${nd.hoatDong}</td>
                     <td>${nd.chucvu.tenChucVu}</td>
                     <td><a href=" <c:url value="/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}" />">Xóa</a></td>
-                    <td><a href="<c:url value='/update/${nd.username}' />" >Sửa</a></td>
-<!--                        <input href="/quantri/QLKhoaLuan/delete + ${nd.nguoidungPK.maND}" type="submit" class="btn btn-primary btn-block mb-4" value="Xóa tài khoản"/>
-                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật"/>-->
-                    
+                    <td><a href="<c:url value='/quantri/ThongTinND/${nd.nguoidungPK.maND}' />" >Cập nhật</a></td>              
                 </tr>
             </c:forEach>
-<!--            <form action="${action}" >
-                <td >
-                        <form action="${action}{}"  method="delele"><input type="submit" value="Delete"/></form>
-                    
-                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản"/>
-                </td>
-            </form>-->
         </tbody>
-
     </table>
-
-    <!--    <hr>
-    
-        <div class="mt-4">
-            
-        </div>-->
 </div>
+
 <!--<script src="<c:url value="/static/main.js" />"></script>
 <script>
 

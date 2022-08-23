@@ -7,6 +7,7 @@ package com.demo.repository.impl;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
@@ -16,13 +17,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.servlet.ServletRequest;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
-import org.springframework.test.web.servlet.MockMvcExtensionsKt;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -56,8 +55,17 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public Nguoidung getUserbyID(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        return session.get(Nguoidung.class, id);
-        
+//        Nguoidung user = new Nguoidung();
+//        NguoidungPK userPK = new NguoidungPK();
+//        userPK.setMaND(id);
+//        userPK.setChucvumaChucVu("ROLE_SV");
+//        user.setNguoidungPK(userPK);
+//        return session.get(Nguoidung.class, id);
+//        return user;     
+
+        Query q = session.createQuery("FROM Nguoidung WHERE username = (:id)");
+        q.setParameter("id", id);
+        return (Nguoidung) q.setMaxResults(1).getSingleResult();
     }
     
     @Override
@@ -72,9 +80,37 @@ public class UserRepoImpl implements UserRepo {
     }
     
     @Override
-    public List<Giangvien> getAllGV() {
+    public List<Nguoidung> getAllGV() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_GV'");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Giangvien> getListGV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Giangvien");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Nguoidung> getAllSV() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_SV'");
+        return q.getResultList();
+    }
+    
+    @Override
+    public List<Nguoidung> getAllGVU() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_GVU'");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Nguoidung> getAllQT() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_QT'");
         return q.getResultList();
     }
 
@@ -84,8 +120,6 @@ public class UserRepoImpl implements UserRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(user);
-            
-     
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
@@ -186,6 +220,12 @@ public class UserRepoImpl implements UserRepo {
     //CẬP NHẬT NGƯỜI DÙNG
     @Override
     public void updateUsers(Nguoidung user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        session.update(user);
+    }  
+
+    @Override
+    public void updateParticularUsers(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         session.update(user);
     }

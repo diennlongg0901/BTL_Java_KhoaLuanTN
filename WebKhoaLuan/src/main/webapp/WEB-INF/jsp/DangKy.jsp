@@ -23,7 +23,6 @@
     <div class="form-group container">
         <h4 class="mt-4">Thông tin chung  tài khoản người dùng:</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
-
             <div class="form-outline mt-4">
                 <label class="form-label" for="vaiTro">Vai trò người dùng</label>
                 <form:select id="vaiTro" path="chucvu" onchange="chonCV()">
@@ -34,23 +33,19 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="form-outline mt-4 col">
                     <form:input type="text" id="ho" path="ho" class="form-control" placeholder="Họ" />
                 </div>
-                <div class="col">
+                <div class="form-outline mt-4 col">
                     <form:input type="text" id="ten" path="ten" class="form-control" placeholder="Tên" />
                 </div>
             </div>
 
-
-
             <div class ="row">
-                <div class="form-outline mt-4 col">
-                    <!--                    <label class="form-label" for="username">Username</label>-->
+                <div class="form-outline mt-4 col">                    
                     <form:input type="text" id="username" path="username" class="form-control" placeholder="Username" />
                 </div>
 
-                <!--                <label for="date" class="col-1 col-form-label mt-4">Ngày sinh</label>-->
                 <div class="col mt-4">
                     <div class="input-group date" id="datepicker">
                         <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />
@@ -63,9 +58,8 @@
                 </div>
             </div>
             <div class ="row">
-
                 <div class="d-flex col mt-4">
-                    <label class="form-label" for="gioiTinh">Giới tính</label>
+                    <label class="form-label col-xl-2" for="gioiTinh">Giới tính:</label>
                     <div class="form-check form-check-inline">
                         <form:radiobutton class="form-check-input" path="gioiTinh" value="Nam" checked="checked" />
                         <label class="form-check-label" for="nam">Nam</label>
@@ -87,33 +81,6 @@
                 <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
             </div>
         </form:form>
-
-        <h4 class="mt-4" id="title"></h4>
-        <form:form method="post" action="${action1}" modelAttribute="sinhvien" >
-            <div class="form-outline mt-4">
-                <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
-                <select class="sinhVien" id="khoa" hidden="hidden">
-                    <c:forEach items="${khoa}" var="k">
-                        <option value="${k.maKhoa}" >${k.tenKhoa}</option>
-                    </c:forEach>
-                </select>
-            </div>
-
-            <div class="form-outline mt-4">
-                <label class="form-label sinhVien" for="nganh" hidden="hidden" >Ngành</label>
-                <form:select class="sinhVien" id="nganh" path="nganh" hidden="hidden">
-                    <c:forEach items="${nganh}" var="n">
-                        <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
-                    </c:forEach>
-                </form:select>
-            </div>
-
-            <div class="form-outline mt-4">
-                <input type="submit" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Xác nhận"/>
-                <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" hidden="hidden" value="Hủy"/>
-            </div>
-        </form:form>
-
     </div>
 </div>
 
@@ -121,85 +88,4 @@
     $(function () {
         $('#datepicker').datepicker();
     });
-</script>
-
-<script type="text/javascript">
-    function chonCV() {
-        var x = document.getElementById("vaiTro").value;
-        const gv = document.getElementsByClassName("giangVien");
-        const gvu = document.getElementsByClassName("giaoVu");
-        const sv = document.getElementsByClassName("sinhVien");
-        if (x === "ROLE_SV") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho sinh viên: ";
-            sv[0].hidden = false;
-            sv[1].hidden = false;
-            sv[2].hidden = false;
-            sv[3].hidden = false;
-            sv[4].hidden = false;
-            sv[5].hidden = false;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        } else if (x === "ROLE_GV") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giảng viên: ";
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = false;
-            gv[1].hidden = false;
-            gv[2].hidden = false;
-            gv[3].hidden = false;
-            gv[4].hidden = false;
-            gv[5].hidden = false;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        } else if (x === "ROLE_GVU") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giáo vụ: ";
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = false;
-            gvu[1].hidden = false;
-            gvu[2].hidden = false;
-            gvu[3].hidden = false;
-        } else {
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        }
-    }
 </script>

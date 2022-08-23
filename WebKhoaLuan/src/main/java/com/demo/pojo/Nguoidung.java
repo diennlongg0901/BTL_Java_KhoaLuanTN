@@ -118,7 +118,15 @@ public class Nguoidung implements Serializable {
     @ManyToOne(optional = false)
     private Chucvu chucvu;
     @Transient
-    private String comfirmPassword;
+    private String confirmPassword;
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
     
     public Nguoidung() {
     }

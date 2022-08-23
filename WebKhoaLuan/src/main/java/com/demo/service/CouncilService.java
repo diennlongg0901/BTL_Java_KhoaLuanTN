@@ -18,5 +18,5 @@ public interface CouncilService {
     Object getNewCouncil();
     boolean addDetailCouncil (Chitiethoidong detailCouncil);
     List<Chitiethoidong> getListCouncilDetail();
-//    List<Chitiethoidong> getCouncilDetail(int id);
+    List<Chitiethoidong> getCouncilDetail(String tenHD);
 }

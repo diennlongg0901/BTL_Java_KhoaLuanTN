@@ -22,5 +22,5 @@ public interface CouncilRepo {
     //LẤY DANH SÁCH HỘI ĐỒNG
     Object getNewCouncil();
     List<Chitiethoidong> getListCouncilDetail();
-//    List<Chitiethoidong> getCouncilDetail(int id);
+    List<Chitiethoidong> getCouncilDetail(String tenHD);
 }

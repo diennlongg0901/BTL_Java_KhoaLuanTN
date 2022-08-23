@@ -4,27 +4,16 @@
  */
 package com.demo.controller;
 
-
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
-import antlr.Utils;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
-import com.demo.pojo.Nguoidung_;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import java.lang.reflect.Method;
-import java.util.Map;
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,8 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -55,12 +42,6 @@ public class UserController {
         return "DangNhap";
     }
 
-    @RequestMapping(value = "/update/{id}")
-    public String updateTK(@PathVariable("id") String id, Model model){
-        model.addAttribute("nguoidungPK", this.userService.getUserbyID(id));
-        return "QLTaiKhoan";
-    }
-
     //QUẢN TRỊ
     @GetMapping("/quantri/QLTaiKhoan")
     public String QLTaiKhoan(Model model) {
@@ -68,7 +49,7 @@ public class UserController {
         model.addAttribute("chucvu", this.roleService.getChucvu());
         return "QLTaiKhoan";
     }
-    
+
     @GetMapping("/quantri/DangKy")
     public String DangKyView(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
@@ -77,8 +58,6 @@ public class UserController {
         model.addAttribute("giaovu", new Giaovu());
         model.addAttribute("giangvien", new Giangvien());
         model.addAttribute("chucvu", this.roleService.getChucvu());
-        model.addAttribute("nganh", this.roleService.getNganh());
-        model.addAttribute("khoa", this.roleService.getKhoa());
         return "DangKy";
     }
 
@@ -106,59 +85,184 @@ public class UserController {
                 case "ROLE_SV":
                     this.userDetailsService.addUserSV(sv);
                     return "redirect:/quantri/QLTaiKhoan";
-            }            
+            }
         } else {
             errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
         }
-        
         model.addAttribute("errMsg", errMsg);
         return "DangKy";
     }
-    
+
     @RequestMapping(value = "/quantri/QLTaiKhoan/{nguoidungPK.maND}")
-    public String xoaTK(Model model, @PathVariable(value = "nguoidungPK.maND") String userID){
+    public String xoaTK(Model model, @PathVariable(value = "nguoidungPK.maND") String userID) {
         String errMsg = " ";
-        String role = userID.substring(0, 2);     
+        String role = userID.substring(0, 2);
         try {
             if (userID.substring(0, 3).equals("GVU")) {
                 this.userService.deleteUsersGVU(userID);
             } else {
                 switch (role) {
-                case "GV":
-                    this.userService.deleteUsersGV(userID);
-                    break;
-                case "SV":
-                    this.userService.deleteUsersSV(userID);
-                    break;
-                case "QT":
-                    this.userService.deleteUsersQT(userID);
-                    break;
-        }
+                    case "GV":
+                        this.userService.deleteUsersGV(userID);
+                        break;
+                    case "SV":
+                        this.userService.deleteUsersSV(userID);
+                        break;
+                    case "QT":
+                        this.userService.deleteUsersQT(userID);
+                        break;
+                }
             }
-            
             return "redirect:/quantri/QLTaiKhoan";
         } catch (Exception e) {
-            errMsg = "Đã có lỗi!" + " " + userID + " " + e;
+            errMsg = "Đã có lỗi!";
         }
         model.addAttribute("errMSG", errMsg);
-        return "redirect:/";      
+        return "redirect:/";
     }
-    
+
+    @GetMapping("/quantri/QLTaiKhoan/ROLE_SV")
+    public String dsSinhVien(Model model) {
+        model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nguoidung", this.userService.getAllSV());
+        return "QLTaiKhoan";
+    }
+
+    @GetMapping("/quantri/QLTaiKhoan/ROLE_GV")
+    public String dsGiangVien(Model model) {
+        model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nguoidung", this.userService.getAllGV());
+        return "QLTaiKhoan";
+    }
+
+    @GetMapping("/quantri/QLTaiKhoan/ROLE_GVU")
+    public String dsGiaoVu(Model model) {
+        model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nguoidung", this.userService.getAllGVU());
+        return "QLTaiKhoan";
+    }
+
+    @GetMapping("/quantri/QLTaiKhoan/ROLE_QT")
+    public String dsQuanTri(Model model) {
+        model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nguoidung", this.userService.getAllQT());
+        return "QLTaiKhoan";
+    }
+
+    @GetMapping("/quantri/ThongTinND/{id}")
+    public String CapNhatView(Model model) {
+        model.addAttribute("nganh", this.roleService.getNganh());
+        model.addAttribute("khoa", this.roleService.getKhoa());
+        model.addAttribute("sinhvien", new Sinhvien());
+        model.addAttribute("nguoidung", new Nguoidung());
+        return "ThongTinNguoiDung";
+    }
+
+    @RequestMapping("/quantri/ThongTinND/{id}")
+    public String CapNhatND(Model model, @PathVariable(value = "id") String id,
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        model.addAttribute("nganh", this.roleService.getNganh());
+        model.addAttribute("khoa", this.roleService.getKhoa());
+        model.addAttribute("sinhvien", new Sinhvien());
+        model.addAttribute("giaovu", new Giaovu());
+        model.addAttribute("giangvien", new Giangvien());
+        model.addAttribute("quantri", new Quantri());
+        String errMsg = " ";
+        String role = id.substring(0, 2);
+        NguoidungPK userPK = new NguoidungPK();
+        userPK.setMaND(id);
+        if (id.substring(0, 3).equals("GVU")) {
+            userPK.setChucvumaChucVu("ROLE_GVU");
+            nd.setNguoidungPK(userPK);
+            this.userService.updateUsers(id, nd);
+            return "redirect:/quantri/QLTaiKhoan";
+        } else {
+            switch (role) {
+                case "GV":
+                    userPK.setChucvumaChucVu("ROLE_GV");
+                    nd.setNguoidungPK(userPK);
+                    this.userService.updateUsers(id, nd);
+                    return "redirect:/quantri/QLTaiKhoan";
+                case "SV":
+                    userPK.setChucvumaChucVu("ROLE_SV");
+                    nd.setNguoidungPK(userPK);
+                    this.userService.updateUsers(id, nd);
+                    return "redirect:/quantri/QLTaiKhoan";
+                case "QT":
+                    userPK.setChucvumaChucVu("ROLE_QT");
+                    nd.setNguoidungPK(userPK);
+                    this.userService.updateUsers(id, nd);
+                    return "redirect:/quantri/QLTaiKhoan";
+            }
+        }
+        return "ThongTinNguoiDung";
+    }
+
     //GIÁO VỤ
     @GetMapping("/giaovu/")
-    public String GiaoVu() {
+    public String GiaoVu(Model model) {
+        model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
     //GIẢNG VIÊN
     @GetMapping("/giangvien/")
-    public String GiangVien() {
+    public String GiangVien(Model model) {
+        model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
-    
+
     //SINH VIÊN
-    @GetMapping("/sinhvien/")
-    public String SinhVien() {
+//    @GetMapping("/sinhvien/")
+//    public String SinhVien(Model model) {
+//        model.addAttribute("nguoidung", new Nguoidung());
+//        return "ThongTinNguoiDung";
+//    }
+    @GetMapping("/sinhvien/ThongTinSV/{id}")
+    public String SinhVien(Model model) {
+        model.addAttribute("nguoidung", new Nguoidung());
+        return "ThongTinNguoiDung";
+    }
+
+    @RequestMapping("/sinhvien/ThongTinSV/{id}")
+    public String CapNhatSV(Model model, @PathVariable(value = "id") String id,
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        String errMsg = " ";
+        NguoidungPK userPK = new NguoidungPK();
+        Nguoidung user = new Nguoidung();
+        userPK.setMaND(id);
+        userPK.setChucvumaChucVu("ROLE_SV");
+        user = this.userService.getUserbyID(id);
+        nd.setNguoidungPK(userPK);
+        nd.setHo(user.getHo());
+        nd.setTen(user.getTen());
+        nd.setUsername(user.getUsername());
+        nd.setAnh(user.getAnh());
+        nd.setGioiTinh(user.getGioiTinh());
+        nd.setHoatDong(user.getHoatDong());
+        try {
+            if (!nd.getPassword().isEmpty()) {
+                if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    this.userService.updateParticularUsers(nd);
+                } else {
+                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
+                }
+            } else {
+                nd.setNguoidungPK(userPK);
+                nd.setHo(user.getHo());
+                nd.setTen(user.getTen());
+                nd.setUsername(user.getUsername());
+                nd.setAnh(user.getAnh());
+                nd.setGioiTinh(user.getGioiTinh());
+                nd.setHoatDong(user.getHoatDong());
+                nd.setPassword(user.getPassword());
+                this.userService.updateParticularUsers(nd);
+            }
+            return "redirect:/";
+        } catch (Exception e) {
+            errMsg = "Đã có lỗi!";
+        }
+        model.addAttribute("errMsg", errMsg);
         return "ThongTinNguoiDung";
     }
 }
