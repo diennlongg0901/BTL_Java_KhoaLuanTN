@@ -17,6 +17,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Tạo tài khoản</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/QLTaiKhoan"/>">Chỉnh sửa tài khoản</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/quantri/ThongTinQT/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>

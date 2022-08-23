@@ -14,7 +14,7 @@ import com.demo.pojo.SinhvienPK;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import javax.annotation.Resource;
-import jdk.vm.ci.aarch64.AArch64;
+import org.jboss.logging.NDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -155,9 +155,9 @@ public class UserController {
     public String CapNhatView(Model model) {
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
-        model.addAttribute("sinhvien", new Sinhvien());
         model.addAttribute("nguoidung", new Nguoidung());
-        return "ThongTinNguoiDung";
+        model.addAttribute("sinhvien", new Sinhvien());
+        return "CapNhatND";
     }
 
     @RequestMapping("/quantri/ThongTinND/{id}")
@@ -204,11 +204,54 @@ public class UserController {
                     return "redirect:/quantri/QLTaiKhoan";
             }
         }
+        return "CapNhatND";
+    }
+    
+    @GetMapping("/quantri/ThongTinQT/{id}")
+    public String QuanTri(Model model) {    
+        model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
-//    @RequestMapping("/quantri/ThongTinND/{id}")
-//    public String CapNhatRieng(Model model, @PathVariable(value = "id") String id,
+    @RequestMapping("/quantri/ThongTinQT/{id}")
+    public String CapNhatQT(Model model, @PathVariable(value = "id") String id,
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        String errMsg = " ";
+        NguoidungPK userPK = new NguoidungPK();
+        userPK.setMaND(id);
+        userPK.setChucvumaChucVu("ROLE_QT");
+        nd.setNguoidungPK(userPK);
+        try {
+            if (!nd.getPassword().isEmpty()) {
+                if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    
+                    this.userService.updateParticularUsers(nd);
+                } else {
+                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
+                }
+            } else {
+                this.userService.updateParticularUsers(nd);
+            }
+            return "redirect:/";
+        } catch (Exception e) {
+            errMsg = "Đã có lỗi!";
+        }
+        model.addAttribute("errMsg", errMsg);
+        return "ThongTinNguoiDung";
+    }
+
+//    @GetMapping("/quantri/CapNhatND/{id}")
+//    public String CNCTView(Model model) {
+//        model.addAttribute("nganh", this.roleService.getNganh());
+//        model.addAttribute("khoa", this.roleService.getKhoa());
+//        model.addAttribute("nguoidung", new Nguoidung());
+//        model.addAttribute("sinhvien", new Sinhvien());
+//        return "CapNhatND";
+//    }
+//    
+//    @RequestMapping("/quantri/CapNhatND/{id}")
+//    public String CapNhatChiTiet(Model model, @PathVariable(value = "id") String id,
+//            @ModelAttribute(value = "nguoidung") Nguoidung nd,
 //            @ModelAttribute(value = "sinhvien") Sinhvien sv) {
 //        String errMsg = " ";
 //        SinhvienPK svPK = new SinhvienPK();
@@ -224,6 +267,7 @@ public class UserController {
 //        }
 //        return "ThongTinNguoiDung";
 //    }
+    
     //GIÁO VỤ
     @GetMapping("/giaovu/ThongTinGVU/{id}")
     public String GiaoVu(Model model) {
@@ -238,9 +282,11 @@ public class UserController {
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_GVU");
+        nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
                 if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    
                     this.userService.updateParticularUsers(nd);
                 } else {
                     errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
@@ -270,6 +316,7 @@ public class UserController {
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_GV");
+        nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
                 if (nd.getPassword().equals(nd.getConfirmPassword())) {
@@ -290,8 +337,9 @@ public class UserController {
 
     //SINH VIÊN
     @GetMapping("/sinhvien/ThongTinSV/{id}")
-    public String SinhVien(Model model) {
+    public String SinhVien(Model model, @PathVariable(value = "id") String id) {
         model.addAttribute("nguoidung", new Nguoidung());
+        model.addAttribute("thongtinnguoidung", this.userService.getUserbyID(id));
         return "ThongTinNguoiDung";
     }
 
@@ -302,10 +350,10 @@ public class UserController {
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_SV");
+        nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
                 if (nd.getPassword().equals(nd.getConfirmPassword())) {
-                    nd.setNguoidungPK(userPK);
                     this.userService.updateParticularUsers(nd);
                 } else {
                     errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
