@@ -13,6 +13,7 @@ import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +37,11 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserService userDetailsService;
+    
+    @ModelAttribute
+    public void commonAttributes(Model model, HttpSession session){
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
+    }
 
     @GetMapping("/DangNhap")
     public String DangNhap(Model model) {
@@ -219,15 +225,17 @@ public class UserController {
 //        return "ThongTinNguoiDung";
 //    }
     @GetMapping("/sinhvien/ThongTinSV/{id}")
-    public String SinhVien(Model model) {
+    public String SinhVien(Model model,@PathVariable(value = "id") String id) {
+        model.addAttribute("thongtinnguoidung", this.userService.getUserbyID(id));
         model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
     @RequestMapping("/sinhvien/ThongTinSV/{id}")
-    public String CapNhatSV(Model model, @PathVariable(value = "id") String id,
+    public String CapNhatSV(Model model,HttpSession session, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
         String errMsg = " ";
+        
         NguoidungPK userPK = new NguoidungPK();
         Nguoidung user = new Nguoidung();
         userPK.setMaND(id);
@@ -263,6 +271,8 @@ public class UserController {
             errMsg = "Đã có lỗi!";
         }
         model.addAttribute("errMsg", errMsg);
+        
+       
         return "ThongTinNguoiDung";
     }
 }
