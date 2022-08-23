@@ -33,6 +33,7 @@ public interface UserRepo {
     List<Nguoidung> getAllSV();
     List<Nguoidung> getAllGVU();
     List<Nguoidung> getAllQT();
+    Sinhvien getSVbyID(String id);
 
     //XÓA NGƯỜI DÙNG 
     void deleteUsers(String userID);
@@ -44,4 +45,5 @@ public interface UserRepo {
     //CẬP NHẬT NGƯỜI DÙNG
     void updateUsers(Nguoidung user);
     void updateParticularUsers(Nguoidung user);
+    void updateUsersSV (Sinhvien user);
 }

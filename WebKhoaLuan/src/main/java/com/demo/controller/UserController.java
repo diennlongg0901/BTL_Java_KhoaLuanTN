@@ -10,9 +10,11 @@ import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
+import com.demo.pojo.SinhvienPK;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import javax.annotation.Resource;
+import jdk.vm.ci.aarch64.AArch64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -160,10 +162,10 @@ public class UserController {
 
     @RequestMapping("/quantri/ThongTinND/{id}")
     public String CapNhatND(Model model, @PathVariable(value = "id") String id,
-            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+            @ModelAttribute(value = "nguoidung") Nguoidung nd,
+            @ModelAttribute(value = "sinhvien") Sinhvien sv) {
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
-        model.addAttribute("sinhvien", new Sinhvien());
         model.addAttribute("giaovu", new Giaovu());
         model.addAttribute("giangvien", new Giangvien());
         model.addAttribute("quantri", new Quantri());
@@ -187,6 +189,13 @@ public class UserController {
                     userPK.setChucvumaChucVu("ROLE_SV");
                     nd.setNguoidungPK(userPK);
                     this.userService.updateUsers(id, nd);
+                    SinhvienPK svPK = new SinhvienPK();
+                    svPK.setMaSV(id);
+                    svPK.setMaND(id);
+                    svPK.setMaChucVu("ROLE_SV");
+                    sv.setSinhvienPK(svPK);
+                    sv.setNienKhoa(sv.getNienKhoa());
+                    this.userService.updateUsersSV(sv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "QT":
                     userPK.setChucvumaChucVu("ROLE_QT");
@@ -198,26 +207,88 @@ public class UserController {
         return "ThongTinNguoiDung";
     }
 
+//    @RequestMapping("/quantri/ThongTinND/{id}")
+//    public String CapNhatRieng(Model model, @PathVariable(value = "id") String id,
+//            @ModelAttribute(value = "sinhvien") Sinhvien sv) {
+//        String errMsg = " ";
+//        SinhvienPK svPK = new SinhvienPK();
+//        svPK.setMaSV(id);
+//        svPK.setMaND(id);
+//        svPK.setMaChucVu("ROLE_SV");
+//        sv.setSinhvienPK(svPK);
+//        try {
+//            this.userService.updateUsersSV(sv);
+//            return "redirect:/quantri/QLTaiKhoan";
+//        } catch (Exception e) {
+//            errMsg = "Đã có lỗi!";
+//        }
+//        return "ThongTinNguoiDung";
+//    }
     //GIÁO VỤ
-    @GetMapping("/giaovu/")
+    @GetMapping("/giaovu/ThongTinGVU/{id}")
     public String GiaoVu(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
+    @RequestMapping("/giaovu/ThongTinGVU/{id}")
+    public String CapNhatGVU(Model model, @PathVariable(value = "id") String id,
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        String errMsg = " ";
+        NguoidungPK userPK = new NguoidungPK();
+        userPK.setMaND(id);
+        userPK.setChucvumaChucVu("ROLE_GVU");
+        try {
+            if (!nd.getPassword().isEmpty()) {
+                if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    this.userService.updateParticularUsers(nd);
+                } else {
+                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
+                }
+            } else {
+                this.userService.updateParticularUsers(nd);
+            }
+            return "redirect:/";
+        } catch (Exception e) {
+            errMsg = "Đã có lỗi!";
+        }
+        model.addAttribute("errMsg", errMsg);
+        return "ThongTinNguoiDung";
+    }
+
     //GIẢNG VIÊN
-    @GetMapping("/giangvien/")
+    @GetMapping("/giangvien/ThongTinGV/{id}")
     public String GiangVien(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
+    @RequestMapping("/giangvien/ThongTinGV/{id}")
+    public String CapNhatGV(Model model, @PathVariable(value = "id") String id,
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
+        String errMsg = " ";
+        NguoidungPK userPK = new NguoidungPK();
+        userPK.setMaND(id);
+        userPK.setChucvumaChucVu("ROLE_GV");
+        try {
+            if (!nd.getPassword().isEmpty()) {
+                if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    this.userService.updateParticularUsers(nd);
+                } else {
+                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
+                }
+            } else {
+                this.userService.updateParticularUsers(nd);
+            }
+            return "redirect:/";
+        } catch (Exception e) {
+            errMsg = "Đã có lỗi!";
+        }
+        model.addAttribute("errMsg", errMsg);
+        return "ThongTinNguoiDung";
+    }
+
     //SINH VIÊN
-//    @GetMapping("/sinhvien/")
-//    public String SinhVien(Model model) {
-//        model.addAttribute("nguoidung", new Nguoidung());
-//        return "ThongTinNguoiDung";
-//    }
     @GetMapping("/sinhvien/ThongTinSV/{id}")
     public String SinhVien(Model model) {
         model.addAttribute("nguoidung", new Nguoidung());
@@ -229,33 +300,17 @@ public class UserController {
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
         String errMsg = " ";
         NguoidungPK userPK = new NguoidungPK();
-        Nguoidung user = new Nguoidung();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_SV");
-        user = this.userService.getUserbyID(id);
-        nd.setNguoidungPK(userPK);
-        nd.setHo(user.getHo());
-        nd.setTen(user.getTen());
-        nd.setUsername(user.getUsername());
-        nd.setAnh(user.getAnh());
-        nd.setGioiTinh(user.getGioiTinh());
-        nd.setHoatDong(user.getHoatDong());
         try {
             if (!nd.getPassword().isEmpty()) {
                 if (nd.getPassword().equals(nd.getConfirmPassword())) {
+                    nd.setNguoidungPK(userPK);
                     this.userService.updateParticularUsers(nd);
                 } else {
                     errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
                 }
             } else {
-                nd.setNguoidungPK(userPK);
-                nd.setHo(user.getHo());
-                nd.setTen(user.getTen());
-                nd.setUsername(user.getUsername());
-                nd.setAnh(user.getAnh());
-                nd.setGioiTinh(user.getGioiTinh());
-                nd.setHoatDong(user.getHoatDong());
-                nd.setPassword(user.getPassword());
                 this.userService.updateParticularUsers(nd);
             }
             return "redirect:/";

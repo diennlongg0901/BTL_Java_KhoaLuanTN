@@ -34,6 +34,7 @@ public interface UserService extends UserDetailsService {
     List<Nguoidung> getAllSV();
     List<Nguoidung> getAllGVU();
     List<Nguoidung> getAllQT();
+    Sinhvien getSVbyID(String id);
     
     //XÓA NGƯỜI DÙNG   
     void deleteUsers(String userID);
@@ -45,4 +46,5 @@ public interface UserService extends UserDetailsService {
     //CẬP NHẬT NGƯỜI DÙNG
     void updateUsers(String userID, Nguoidung user);
     void updateParticularUsers(Nguoidung user);
+    void updateUsersSV (Sinhvien user);
 }

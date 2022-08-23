@@ -47,8 +47,8 @@
     </div>
 </form:form>
 
-<%--<form:form method="post" action="${action}" modelAttribute="giangvien">--%>
-<!--                <div class="form-outline mt-4">
+<form:form method="post" action="${action}" modelAttribute="giangvien">
+                <div class="form-outline mt-4">
                     <label class="form-label giangVien" for="hocVi" hidden="hidden" >Học vị</label>
                     <input type="text" id="hocVi" class="form-control giangVien" hidden="hidden"/>
                 </div>
@@ -56,25 +56,25 @@
                 <div class="form-outline mt-4">
                     <label class="form-label giangVien" for="hocHam" hidden="hidden" >Học hàm</label>
                     <input type="text" id="hocHam" class="form-control giangVien" hidden="hidden"/>
-                </div>-->
+                </div>
 
-<!--                <div class="form-outline mt-4">
+                <div class="form-outline mt-4">
                     <input type="submit" class="btn btn-primary btn-block mb-4 giangVien" hidden="hidden" value="Xác nhận"/>
                     <input type="reset" class="btn btn-primary btn-block mb-4 giangVien" hidden="hidden" value="Hủy"/>
-                </div>-->
-<%--</form:form>--%>
+                </div>
+</form:form>
 
-<%--<form:form method="post" action="${action}" modelAttribute="giaovu">--%>
-<!--                <div class="form-outline mt-4">
+<form:form method="post" action="${action}" modelAttribute="giaovu">
+                <div class="form-outline mt-4">
                     <label class="form-label giaoVu" for="phongBan" hidden="hidden" >Phòng ban</label>
                     <input type="text" id="phongBan" class="form-control giaoVu" hidden="hidden"/>
-                </div>-->
+                </div>
 
-<!--                <div class="form-outline mt-4">
+                <div class="form-outline mt-4">
                     <input type="submit" class="btn btn-primary btn-block mb-4 giaoVu" hidden="hidden" value="Xác nhận"/>
                     <input type="reset" class="btn btn-primary btn-block mb-4 giaoVu" hidden="hidden" value="Hủy"/>
-                </div>-->
-<%--</form:form>--%>
+                </div>
+</form:form>
 
 <script type="text/javascript">
     function chonCV() {

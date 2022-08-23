@@ -203,14 +203,14 @@
                 </div>
             </div>
             <div class="d-flex col mt-4">
-                <label class="form-label col-xl-2" for="gioiTinh">Tình trạng tài khoản:</label>
+                <label class="form-label col-xl-2" for="tinhTrang">Tình trạng tài khoản:</label>
                 <div class="form-check form-check-inline">
                     <form:radiobutton class="form-check-input" path="hoatDong" value="1" checked="checked" />
-                    <label class="form-check-label" for="nam">Hoạt động</label>
+                    <label class="form-check-label" for="hoatDong">Hoạt động</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <form:radiobutton class="form-check-input" path="hoatDong" value="0" />
-                    <label class="form-check-label" for="nu">Không hoạt động</label>
+                    <label class="form-check-label" for="khongHoatDong">Không hoạt động</label>
                 </div>
             </div>
             <div class="form-outline mt-4">
@@ -238,12 +238,28 @@
                 </form:select>
             </div>
 
+            <div class="form-outline mt-4 col">
+                <form:input type="text" id="nienKhoa" path="nienKhoa" class="form-control" placeholder="Niên khóa" />
+            </div>
+
+            <div class="d-flex col mt-4">
+                <label class="form-label col-xl-2" for="tinhTrangSV">Tình trạng sinh viên:</label>
+                <div class="form-check form-check-inline">
+                    <form:radiobutton class="form-check-input" path="tinhTrang" value="1" checked="checked" />
+                    <label class="form-check-label" for="chuaTotNghiep">Chưa tốt nghiệp</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <form:radiobutton class="form-check-input" path="tinhTrang" value="0" />
+                    <label class="form-check-label" for="totNghiep">Đã tốt nghiệp</label>
+                </div>
+            </div>
+
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4 sinhVien" value="Cập nhật thông tin riêng"/>
                 <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" value="Hủy"/>
             </div>
-        </div>
-    </form:form>
+        </form:form>    
+    </div>
 </c:if>
 
 <script type="text/javascript">

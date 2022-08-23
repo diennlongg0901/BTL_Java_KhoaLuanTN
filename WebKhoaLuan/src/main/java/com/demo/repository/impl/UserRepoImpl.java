@@ -55,14 +55,6 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public Nguoidung getUserbyID(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-//        Nguoidung user = new Nguoidung();
-//        NguoidungPK userPK = new NguoidungPK();
-//        userPK.setMaND(id);
-//        userPK.setChucvumaChucVu("ROLE_SV");
-//        user.setNguoidungPK(userPK);
-//        return session.get(Nguoidung.class, id);
-//        return user;     
-
         Query q = session.createQuery("FROM Nguoidung WHERE username = (:id)");
         q.setParameter("id", id);
         return (Nguoidung) q.setMaxResults(1).getSingleResult();
@@ -228,5 +220,19 @@ public class UserRepoImpl implements UserRepo {
     public void updateParticularUsers(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         session.update(user);
+    }
+
+    @Override
+    public void updateUsersSV(Sinhvien user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        session.update(user);
+    }
+
+    @Override
+    public Sinhvien getSVbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Sinhvien WHERE maSv = (:id)");
+        q.setParameter("id", id);
+        return (Sinhvien) q.setMaxResults(1).getSingleResult();
     }
 }

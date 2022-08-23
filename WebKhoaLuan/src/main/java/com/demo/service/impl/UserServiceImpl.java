@@ -99,6 +99,11 @@ public class UserServiceImpl implements UserService {
     public List<Nguoidung> getAllQT() {
         return this.userRepo.getAllQT();
     }
+    
+    @Override
+    public Sinhvien getSVbyID(String id) {
+        return this.userRepo.getSVbyID(id);
+    }
 
     //THÊM NGƯỜI DÙNG
     @Override
@@ -210,13 +215,6 @@ public class UserServiceImpl implements UserService {
         uPK.setMaND(user.getNguoidungPK().getMaND());
         uPK.setChucvumaChucVu(user.getNguoidungPK().getChucvumaChucVu());
         u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
-//        u.setNguoidungPK(uPK);
-//        u.setHo(user.getHo());
-//        u.setTen(user.getTen());
-//        u.setAnh(user.getAnh());
-//        u.setHoatDong(user.getHoatDong());
-//        u.setGioiTinh(user.getGioiTinh());
-//        u.setUsername(user.getUsername());
         if (!user.getSdt().isEmpty()) {
             u.setSdt(user.getSdt());
         }
@@ -233,6 +231,11 @@ public class UserServiceImpl implements UserService {
             u.setPassword(this.passwordEncoder.encode(user.getPassword()));  
         }
         this.userRepo.updateUsers(u);
+    }
+    
+    @Override
+    public void updateUsersSV(Sinhvien user) {
+        this.userRepo.updateUsersSV(user);
     }
     
     //XÓA NGƯỜI DÙNG
