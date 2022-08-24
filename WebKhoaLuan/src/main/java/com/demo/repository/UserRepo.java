@@ -46,4 +46,6 @@ public interface UserRepo {
     void updateUsers(Nguoidung user);
     void updateParticularUsers(Nguoidung user);
     void updateUsersSV (Sinhvien user);
+    void updateUsersGV (Giangvien user);
+    void updateUsersGVU (Giaovu user);
 }

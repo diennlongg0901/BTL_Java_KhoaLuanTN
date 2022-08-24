@@ -47,4 +47,6 @@ public interface UserService extends UserDetailsService {
     void updateUsers(String userID, Nguoidung user);
     void updateParticularUsers(Nguoidung user);
     void updateUsersSV (Sinhvien user);
+    void updateUsersGV (Giangvien user);
+    void updateUsersGVU (Giaovu user);
 }

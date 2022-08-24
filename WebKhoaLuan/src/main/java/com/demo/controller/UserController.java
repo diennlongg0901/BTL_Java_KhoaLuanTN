@@ -5,7 +5,11 @@
 package com.demo.controller;
 
 import com.demo.pojo.Giangvien;
+import com.demo.pojo.GiangvienPK;
 import com.demo.pojo.Giaovu;
+import com.demo.pojo.GiaovuPK;
+import com.demo.pojo.Nganh;
+import com.demo.pojo.NganhPK;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
@@ -14,7 +18,6 @@ import com.demo.pojo.SinhvienPK;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import javax.annotation.Resource;
-import org.jboss.logging.NDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -157,18 +160,17 @@ public class UserController {
         model.addAttribute("khoa", this.roleService.getKhoa());
         model.addAttribute("nguoidung", new Nguoidung());
         model.addAttribute("sinhvien", new Sinhvien());
+        model.addAttribute("giaovu", new Giaovu());
+        model.addAttribute("giangvien", new Giangvien());
+        model.addAttribute("quantri", new Quantri());
         return "CapNhatND";
     }
 
     @RequestMapping("/quantri/ThongTinND/{id}")
     public String CapNhatND(Model model, @PathVariable(value = "id") String id,
-            @ModelAttribute(value = "nguoidung") Nguoidung nd,
-            @ModelAttribute(value = "sinhvien") Sinhvien sv) {
+            @ModelAttribute(value = "nguoidung") Nguoidung nd) {
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
-        model.addAttribute("giaovu", new Giaovu());
-        model.addAttribute("giangvien", new Giangvien());
-        model.addAttribute("quantri", new Quantri());
         String errMsg = " ";
         String role = id.substring(0, 2);
         NguoidungPK userPK = new NguoidungPK();
@@ -177,6 +179,14 @@ public class UserController {
             userPK.setChucvumaChucVu("ROLE_GVU");
             nd.setNguoidungPK(userPK);
             this.userService.updateUsers(id, nd);
+            Giaovu gvu = new Giaovu();
+            GiaovuPK gvuPK = new GiaovuPK();
+            gvuPK.setMaGV(id);
+            gvuPK.setNguoidungmaND(id);
+            gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+            gvu.setPhongBan(nd.getPhongBan());
+            gvu.setGiaovuPK(gvuPK);
+            this.userService.updateUsersGVU(gvu);
             return "redirect:/quantri/QLTaiKhoan";
         } else {
             switch (role) {
@@ -184,17 +194,30 @@ public class UserController {
                     userPK.setChucvumaChucVu("ROLE_GV");
                     nd.setNguoidungPK(userPK);
                     this.userService.updateUsers(id, nd);
+                    GiangvienPK gvPK = new GiangvienPK();
+                    Giangvien gv = new Giangvien();
+                    gvPK.setMaND(id);
+                    gvPK.setMaGV(id);
+                    gvPK.setMaChucVu("ROLE_GV");
+                    gv.setHocHam(nd.getHocHam());
+                    gv.setHocVi(nd.getHocVi());
+                    gv.setGiangvienPK(gvPK);
+                    this.userService.updateUsersGV(gv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "SV":
                     userPK.setChucvumaChucVu("ROLE_SV");
                     nd.setNguoidungPK(userPK);
-                    this.userService.updateUsers(id, nd);
+                    this.userService.updateUsers(id, nd);                   
                     SinhvienPK svPK = new SinhvienPK();
+                    Sinhvien sv = new Sinhvien();
                     svPK.setMaSV(id);
                     svPK.setMaND(id);
                     svPK.setMaChucVu("ROLE_SV");
+                    svPK.setMaNganh(nd.getNganh());
+                    svPK.setMaKhoa(nd.getKhoa());
                     sv.setSinhvienPK(svPK);
-                    sv.setNienKhoa(sv.getNienKhoa());
+                    sv.setNienKhoa(nd.getNienKhoa());
+                    sv.setTinhTrang(nd.getTinhTrang());
                     this.userService.updateUsersSV(sv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "QT":

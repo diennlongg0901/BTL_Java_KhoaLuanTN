@@ -10,6 +10,7 @@
 <h2 class="text-center mt-5">CẬP NHẬT THÔNG TIN TÀI KHOẢN</h2>
 <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
     <div class="form-group container">
+        <h4 class="mt-4">Phần thông tin chung</h4>
         <div class="row">
             <div class="form-outline mt-4 col">
                 <form:input type="text" id="ho" path="ho" class="form-control" placeholder="Họ" />
@@ -47,9 +48,9 @@
                     <label class="form-check-label" for="nu">Nữ</label>
                 </div>
             </div>
-            <div class="col mt-4">
-                <form:input type="file" id="anh" path="file" class="form-control"  />
-            </div>
+            <!--            <div class="col mt-4">
+            <%--<form:input type="file" id="anh" path="anh" class="form-control"  />--%>
+        </div>-->
         </div>
         <div class="d-flex col mt-4">
             <label class="form-label col-xl-2" for="tinhTrang">Tình trạng tài khoản:</label>
@@ -62,16 +63,12 @@
                 <label class="form-check-label" for="khongHoatDong">Không hoạt động</label>
             </div>
         </div>
-        <div class="form-outline mt-4">
-            <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản người dùng"/>
-            <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
-        </div>
-    </form:form>
 
-    <form:form method="post" action="${action}" modelAttribute="sinhvien" >
+        <h4 class="mt-4">Phần thông tin riêng</h4>
+        <h6 class="mt-4">Sinh viên</h6>
         <div class="form-outline mt-4">
             <label class="form-label sinhVien" for="khoa" >Khoa</label>
-            <form:select class="sinhVien" id="khoa" path="nganh.khoa.maKhoa">
+            <form:select class="sinhVien" id="khoa" path="khoa">
                 <c:forEach items="${khoa}" var="k">
                     <form:option value="${k.maKhoa}" >${k.tenKhoa}</form:option>
                 </c:forEach>
@@ -103,12 +100,35 @@
             </div>
         </div>
 
+        <h6 class="mt-4">Giảng viên</h6>
         <div class="form-outline mt-4">
-            <input type="submit" class="btn btn-primary btn-block mb-4 sinhVien" value="Cập nhật thông tin riêng"/>
-            <input type="reset" class="btn btn-primary btn-block mb-4 sinhVien" value="Hủy"/>
+            <label class="form-label giangVien" for="hocVi">Học vị</label>
+            <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden"/>
         </div>
-    </form:form>    
+
+        <div class="form-outline mt-4">
+            <label class="form-label giangVien" for="hocHam">Học hàm</label>
+            <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien"/>
+        </div>
+
+        <h6 class="mt-4">Giáo vụ</h6>
+        <div class="form-outline mt-4">
+            <label class="form-label giaoVu" for="phongBan">Phòng ban</label>
+            <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu"/>
+        </div>
+
+        <div class="form-outline mt-4">
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="Cập nhật tài khoản người dùng"/>
+            <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
+        </div>
+    </form:form>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datepicker').datepicker();
+    });
+</script>
 
 <script type="text/javascript">
     function chonCV() {

@@ -51,7 +51,7 @@ public class Giangvien implements Serializable {
         @JoinColumn(name = "maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    @OneToMany(mappedBy = "giangvien")
     private Collection<Chitiethoidong> chitiethoidongCollection;
 
     public Giangvien() {

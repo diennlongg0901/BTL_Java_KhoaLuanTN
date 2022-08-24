@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,8 +45,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
-    private Cloudinary cloudinary; 
-    
+    private Cloudinary cloudinary;
+
     //LẤY NGƯỜI DÙNG 
     @Override
     public List<Nguoidung> getUsers(String username) {
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
     public List<Nguoidung> getAllUsers() {
         return this.userRepo.getAllUsers();
     }
-    
+
     @Override
     public Nguoidung getUserbyID(String username) {
         return this.userRepo.getUserbyID(username);
@@ -65,8 +66,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<Nguoidung> user = this.getUsers(username);
-        if (user.isEmpty())
-        {
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("Tài khoản người dùng quản trị không có!");
         }
         Nguoidung u = user.get(0);
@@ -74,17 +74,17 @@ public class UserServiceImpl implements UserService {
         auth.add(new SimpleGrantedAuthority(u.getChucvu().getMaChucVu()));
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
-    
+
     @Override
     public List<Nguoidung> getAllGV() {
         return this.userRepo.getAllGV();
     }
-    
+
     @Override
     public List<Giangvien> getListGV() {
         return this.userRepo.getListGV();
     }
-    
+
     @Override
     public List<Nguoidung> getAllSV() {
         return this.userRepo.getAllSV();
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     public List<Nguoidung> getAllQT() {
         return this.userRepo.getAllQT();
     }
-    
+
     @Override
     public Sinhvien getSVbyID(String id) {
         return this.userRepo.getSVbyID(id);
@@ -173,10 +173,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUserQT(Quantri userQT) {
-        userQT.setChucVu("Quản trị người dùng");     
+        userQT.setChucVu("Quản trị người dùng");
         return this.userRepo.addUserQT(userQT);
     }
-    
+
     @Override
     public boolean addUserGVU(Giaovu userGVU) {
         userGVU.setPhongBan("1");
@@ -198,16 +198,29 @@ public class UserServiceImpl implements UserService {
     //CẬP NHẬT NGƯỜI DÙNG
     @Override
     public void updateUsers(String userID, Nguoidung user) {
-      Nguoidung u = new Nguoidung();
-      u.setHo(user.getHo());
-      u.setTen(user.getTen());
-      u.setNgaySinh(user.getNgaySinh());
-      u.setUsername(user.getUsername());
-      u.setGioiTinh(user.getGioiTinh());
-      u.setHoatDong(Short.parseShort(user.getHoatDong().toString()));
-      this.userRepo.updateUsers(user);
+        Nguoidung u = new Nguoidung();
+        u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
+        if (!user.getHo().isEmpty()) {
+            u.setHo(user.getHo());
+        }
+        if (!user.getTen().isEmpty()) {
+            u.setTen(user.getTen());
+        }
+        if (!user.getNgaySinh().toString().isEmpty()) {
+            u.setNgaySinh(user.getNgaySinh());
+        }
+        if (!user.getUsername().isEmpty()) {
+            u.setUsername(user.getUsername());
+        }
+        if (!user.getGioiTinh().isEmpty()) {
+            u.setGioiTinh(user.getGioiTinh());
+        }
+        if (!user.getHoatDong().equals(u.getHoatDong())) {
+            u.setHoatDong(Short.parseShort(user.getHoatDong().toString()));
+        }
+        this.userRepo.updateUsers(user);
     }
-    
+
     @Override
     public void updateParticularUsers(Nguoidung user) {
         Nguoidung u = new Nguoidung();
@@ -228,20 +241,30 @@ public class UserServiceImpl implements UserService {
             u.setDiaChi(user.getDiaChi());
         }
         if (!user.getPassword().isEmpty()) {
-            u.setPassword(this.passwordEncoder.encode(user.getPassword()));  
+            u.setPassword(this.passwordEncoder.encode(user.getPassword()));
         }
         this.userRepo.updateUsers(u);
     }
-    
+
     @Override
     public void updateUsersSV(Sinhvien user) {
         this.userRepo.updateUsersSV(user);
     }
-    
+
+    @Override
+    public void updateUsersGV(Giangvien user) {
+        this.userRepo.updateUsersGV(user);
+    }
+
+    @Override
+    public void updateUsersGVU(Giaovu user) {
+        this.userRepo.updateUsersGVU(user);
+    }
+
     //XÓA NGƯỜI DÙNG
     @Override
     public void deleteUsers(String userID) {
-        this.userRepo.deleteUsers(userID);       
+        this.userRepo.deleteUsers(userID);
     }
 
     @Override
@@ -250,12 +273,12 @@ public class UserServiceImpl implements UserService {
         this.userRepo.deleteUsers(userID);
     }
 
-     @Override
+    @Override
     public void deleteUsersGVU(String userID) {
         this.userRepo.deleteUsersGVU(userID);
         this.userRepo.deleteUsers(userID);
     }
-    
+
     @Override
     public void deleteUsersGV(String userID) {
         this.userRepo.deleteUsersGV(userID);

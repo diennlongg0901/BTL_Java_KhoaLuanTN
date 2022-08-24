@@ -7,7 +7,6 @@ package com.demo.repository.impl;
 import com.demo.pojo.Giangvien;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
 import com.demo.pojo.Sinhvien;
 import com.demo.repository.UserRepo;
@@ -58,6 +57,14 @@ public class UserRepoImpl implements UserRepo {
         Query q = session.createQuery("FROM Nguoidung WHERE username = (:id)");
         q.setParameter("id", id);
         return (Nguoidung) q.setMaxResults(1).getSingleResult();
+    }
+    
+    @Override
+    public Sinhvien getSVbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Sinhvien WHERE maSv = (:id)");
+        q.setParameter("id", id);
+        return (Sinhvien) q.setMaxResults(1).getSingleResult();
     }
     
     @Override
@@ -225,14 +232,34 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void updateUsersSV(Sinhvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        session.update(user);
+        Query q = session.createQuery("UPDATE Sinhvien SET nienKhoa = (:nienKhoa), tinhTrang = (:tinhTrang), maKhoa = (:maKhoa), maNganh = (:maNganh) "
+                + "WHERE maSV = (:userID) AND maChucVu = 'ROLE_SV'");
+        q.setParameter("userID", user.getSinhvienPK().getMaND());
+        q.setParameter("nienKhoa", user.getNienKhoa());
+        q.setParameter("tinhTrang", user.getTinhTrang());
+        q.setParameter("maKhoa", user.getSinhvienPK().getMaKhoa());
+        q.setParameter("maNganh", user.getSinhvienPK().getMaNganh());
+        q.executeUpdate();
     }
-
+    
     @Override
-    public Sinhvien getSVbyID(String id) {
+    public void updateUsersGV(Giangvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Sinhvien WHERE maSv = (:id)");
-        q.setParameter("id", id);
-        return (Sinhvien) q.setMaxResults(1).getSingleResult();
+        Query q = session.createQuery("UPDATE Giangvien SET hocVi = (:hocVi), hocHam = (:hocHam) "
+                + "WHERE maGV = (:userID) AND maChucVu = 'ROLE_GV'");
+        q.setParameter("userID", user.getGiangvienPK().getMaND());
+        q.setParameter("hocVi", user.getHocVi());
+        q.setParameter("hocHam", user.getHocHam());
+        q.executeUpdate();
     }
+    
+    @Override
+    public void updateUsersGVU(Giaovu user) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("UPDATE Giaovu SET phongBan = (:phongBan) "
+                + "WHERE maGV = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_GVU'");
+        q.setParameter("userID", user.getGiaovuPK().getNguoidungmaND());
+        q.setParameter("phongBan", user.getPhongBan());
+        q.executeUpdate();
+    } 
 }

@@ -91,8 +91,7 @@ public class Nguoidung implements Serializable {
     @Column(name = "anh")
     private String anh;
     
-    @Transient
-    private MultipartFile file;
+    
     
     @Size(max = 100)
     @Column(name = "diaChi")
@@ -119,6 +118,81 @@ public class Nguoidung implements Serializable {
     private Chucvu chucvu;
     @Transient
     private String confirmPassword;
+    @Transient
+    private MultipartFile file;
+    //SINH VIÊN
+    @Transient
+    private String nienKhoa;
+    @Transient
+    private short tinhTrang;
+    @Transient
+    private int khoa;
+    @Transient
+    private int nganh;
+    //GIẢNG VIÊN
+    @Transient
+    private String hocHam;
+    @Transient
+    private String hocVi;
+    //GIÁO VỤ
+    @Transient
+    private String phongBan;
+    
+    public String getHocHam() {
+        return hocHam;
+    }
+
+    public void setHocHam(String hocHam) {
+        this.hocHam = hocHam;
+    }
+
+    public String getHocVi() {
+        return hocVi;
+    }
+
+    public void setHocVi(String hocVi) {
+        this.hocVi = hocVi;
+    }
+
+    public String getPhongBan() {
+        return phongBan;
+    }
+
+    public void setPhongBan(String phongBan) {
+        this.phongBan = phongBan;
+    }
+    
+    public String getNienKhoa() {
+        return nienKhoa;
+    }
+
+    public void setNienKhoa(String nienKhoa) {
+        this.nienKhoa = nienKhoa;
+    }
+
+    public short getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(short tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+    public int getKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(int khoa) {
+        this.khoa = khoa;
+    }
+
+    public int getNganh() {
+        return nganh;
+    }
+
+    public void setNganh(int nganh) {
+        this.nganh = nganh;
+    }
 
     public String getConfirmPassword() {
         return confirmPassword;
