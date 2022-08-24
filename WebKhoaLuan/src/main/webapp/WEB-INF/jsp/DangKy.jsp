@@ -75,6 +75,7 @@
                     <form:input type="file" id="anh" path="file" class="form-control"  />
                 </div>
             </div>
+
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo tài khoản người dùng"/>
                 <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>

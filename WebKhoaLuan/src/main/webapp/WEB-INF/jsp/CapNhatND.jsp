@@ -48,9 +48,9 @@
                     <label class="form-check-label" for="nu">Nữ</label>
                 </div>
             </div>
-            <!--            <div class="col mt-4">
-            <%--<form:input type="file" id="anh" path="anh" class="form-control"  />--%>
-        </div>-->
+            <div class="col mt-4">
+                <form:input type="file" id="anh" path="anh" class="form-control"  />
+            </div>
         </div>
         <div class="d-flex col mt-4">
             <label class="form-label col-xl-2" for="tinhTrang">Tình trạng tài khoản:</label>
@@ -102,19 +102,16 @@
 
         <h6 class="mt-4">Giảng viên</h6>
         <div class="form-outline mt-4">
-            <label class="form-label giangVien" for="hocVi">Học vị</label>
-            <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden"/>
+            <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" placeholder="Học vị giảng viên"/>
         </div>
 
         <div class="form-outline mt-4">
-            <label class="form-label giangVien" for="hocHam">Học hàm</label>
-            <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien"/>
+            <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien" placeholder="Học hàm giảng viên"/>
         </div>
 
         <h6 class="mt-4">Giáo vụ</h6>
         <div class="form-outline mt-4">
-            <label class="form-label giaoVu" for="phongBan">Phòng ban</label>
-            <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu"/>
+            <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" placeholder="Phòng ban giáo vụ" />
         </div>
 
         <div class="form-outline mt-4">

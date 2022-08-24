@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -199,6 +201,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUsers(String userID, Nguoidung user) {
         Nguoidung u = new Nguoidung();
+        Map m;
         u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
         if (!user.getHo().isEmpty()) {
             u.setHo(user.getHo());
@@ -218,12 +221,19 @@ public class UserServiceImpl implements UserService {
         if (!user.getHoatDong().equals(u.getHoatDong())) {
             u.setHoatDong(Short.parseShort(user.getHoatDong().toString()));
         }
+        try {
+            m = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            u.setAnh((String) m.get("secure_url"));
+        } catch (IOException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.userRepo.updateUsers(user);
     }
 
     @Override
     public void updateParticularUsers(Nguoidung user) {
         Nguoidung u = new Nguoidung();
+        Map m;
         NguoidungPK uPK = new NguoidungPK();
         uPK.setMaND(user.getNguoidungPK().getMaND());
         uPK.setChucvumaChucVu(user.getNguoidungPK().getChucvumaChucVu());
@@ -242,6 +252,12 @@ public class UserServiceImpl implements UserService {
         }
         if (!user.getPassword().isEmpty()) {
             u.setPassword(this.passwordEncoder.encode(user.getPassword()));
+        }
+        try {
+            m = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+            u.setAnh((String) m.get("secure_url"));
+        } catch (IOException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.userRepo.updateUsers(u);
     }

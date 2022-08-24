@@ -31,6 +31,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">Ảnh đại diện</th>
                 <th scope="col">Mã</th>
                 <th scope="col">Họ</th>
                 <th scope="col">Tên</th>
@@ -48,6 +49,9 @@
         <tbody>
             <c:forEach items="${nguoidung}" var="nd">
                 <tr>
+                    <td>
+                        <img src="${nd.anh}" alt="alt" class="img-fluid rounded" style="width: 50px; height: 50px;"/>
+                    </td>
                     <td>${nd.nguoidungPK.maND}</td>
                     <td>${nd.ho}</td>
                     <td>${nd.ten}</td>
