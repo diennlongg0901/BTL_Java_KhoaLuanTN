@@ -23,8 +23,9 @@
         <h4 class="mt-4">Thông tin chung  tài khoản người dùng:</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
             <div class="form-outline mt-4">
-                <label class="form-label" for="vaiTro">Vai trò người dùng</label>
-                <form:select id="vaiTro" path="chucvu" onchange="chonCV()">
+                <label class="form-label" for="vaiTro">Chức vụ người dùng</label>
+                <form:select id="vaiTro" path="chucvu" onchange="chonChucVu()">
+                    <form:option value="" path="chucvu">Chức vụ</form:option>
                     <c:forEach items="${chucvu}" var="c">
                         <form:option value="${c.maChucVu}" path="chucvu" >${c.tenChucVu}</form:option>
                     </c:forEach>
@@ -68,12 +69,35 @@
                         <label class="form-check-label" for="nu">Nữ</label>
                     </div>
                 </div>
-
-                        
                 <div class="col mt-4">   
-                    
                     <form:input type="file" id="anh" path="file" class="form-control"  />
                 </div>
+            </div>
+
+            <h4 id="title" class="mt-4"></h4>
+            <div class="row">
+                <div class="form-outline mt-4 col">
+                    <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
+                    <form:select class="sinhVien" id="khoa" path="khoa" hidden="hidden">
+                        <c:forEach items="${khoa}" var="k">
+                            <form:option value="${k.maKhoa}" >${k.tenKhoa}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
+                <div class="form-outline mt-4 col">
+                    <label class="form-label sinhVien" for="nganh" hidden="hidden" >Ngành</label>
+                    <form:select class="sinhVien" id="nganh" path="nganh" hidden="hidden">
+                        <c:forEach items="${nganh}" var="n">
+                            <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
+                        </c:forEach>
+                    </form:select>
+                </div>
+            </div>
+            
+            <div class="form-outline">
+                    <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden" placeholder="Học vị giảng viên" />
+                    <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien mt-4" hidden="hidden" placeholder="Học hàm giảng viên" />
+                    <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" hidden="hidden" placeholder="Phòng ban giáo vụ" />
             </div>
 
             <div class="form-outline mt-4">
@@ -88,4 +112,49 @@
     $(function () {
         $('#datepicker').datepicker();
     });
+</script>
+
+<script type="text/javascript">
+    function chonChucVu() {
+        var x = document.getElementById("vaiTro").value;
+        const gv = document.getElementsByClassName("giangVien");
+        const gvu = document.getElementsByClassName("giaoVu");
+        const sv = document.getElementsByClassName("sinhVien");
+        if (x === "ROLE_SV") {
+            document.getElementById("title").innerHTML = "Thông tin dành riêng cho sinh viên: ";
+            sv[0].hidden = false;
+            sv[1].hidden = false;
+            sv[2].hidden = false;
+            sv[3].hidden = false;
+            gv[0].hidden = true;
+            gv[1].hidden = true;
+            gvu[0].hidden = true;
+        } else if (x === "ROLE_GV") {
+            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giảng viên: ";
+            sv[0].hidden = true;
+            sv[1].hidden = true;
+            sv[2].hidden = true;
+            sv[3].hidden = true;
+            gv[0].hidden = false;
+            gv[1].hidden = false;
+            gvu[0].hidden = true;
+        } else if (x === "ROLE_GVU") {
+            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giáo vụ: ";
+            sv[0].hidden = true;
+            sv[1].hidden = true;
+            sv[2].hidden = true;
+            sv[3].hidden = true;
+            gv[0].hidden = true;
+            gv[1].hidden = true;
+            gvu[0].hidden = false;
+        } else {
+            sv[0].hidden = true;
+            sv[1].hidden = true;
+            sv[2].hidden = true;
+            sv[3].hidden = true;
+            gv[0].hidden = true;
+            gv[1].hidden = true;
+            gvu[0].hidden = true;
+        }
+    }
 </script>

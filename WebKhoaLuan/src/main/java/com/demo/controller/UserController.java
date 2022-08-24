@@ -8,15 +8,16 @@ import com.demo.pojo.Giangvien;
 import com.demo.pojo.GiangvienPK;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.GiaovuPK;
-import com.demo.pojo.Nganh;
-import com.demo.pojo.NganhPK;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
+import com.demo.pojo.QuantriPK;
 import com.demo.pojo.Sinhvien;
 import com.demo.pojo.SinhvienPK;
+import com.demo.repository.CouncilRepo;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
+import java.util.Calendar;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
  *
  * @author PC
@@ -40,6 +40,8 @@ public class UserController {
     private RoleService roleService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CouncilRepo councilRepo;
     @Autowired
     private UserService userDetailsService;
     
@@ -69,6 +71,8 @@ public class UserController {
         model.addAttribute("giaovu", new Giaovu());
         model.addAttribute("giangvien", new Giangvien());
         model.addAttribute("chucvu", this.roleService.getChucvu());
+        model.addAttribute("nganh", this.roleService.getNganh());
+        model.addAttribute("khoa", this.roleService.getKhoa());
         return "DangKy";
     }
 
@@ -85,15 +89,41 @@ public class UserController {
         if (this.userDetailsService.addUser(nd) == true) {
             switch (nd.getChucvu().getMaChucVu()) {
                 case "ROLE_QT":
+                    QuantriPK qtPK = new QuantriPK();
+                    qtPK.setMaQT(nd.getUsername());
+                    qtPK.setNguoidungmaND(nd.getUsername());
+                    qtPK.setNguoidungchucvumaChucVu("ROLE_QT");
+                    qt.setChucVu("Quản trị người dùng");
+                    qt.setQuantriPK(qtPK);
                     this.userDetailsService.addUserQT(qt);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "ROLE_GVU":
+                    GiaovuPK gvuPK = new GiaovuPK();
+                    gvuPK.setMaGV(nd.getUsername());
+                    gvuPK.setNguoidungmaND(nd.getUsername());
+                    gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+                    gvu.setPhongBan(nd.getPhongBan());
+                    gvu.setGiaovuPK(gvuPK);
                     this.userDetailsService.addUserGVU(gvu);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "ROLE_GV":
+                    GiangvienPK gvPK = new GiangvienPK();
+                    gvPK.setMaGV(nd.getUsername());
+                    gvPK.setMaND(nd.getUsername());
+                    gvPK.setMaChucVu("ROLE_GV");
+                    gv.setHocVi(nd.getHocVi());
+                    gv.setHocVi(nd.getHocHam());
+                    gv.setGiangvienPK(gvPK);
                     this.userDetailsService.addUserGV(gv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "ROLE_SV":
+                    SinhvienPK svPK = new SinhvienPK();
+                    svPK.setMaND(nd.getUsername());
+                    svPK.setMaND(nd.getUsername());
+                    svPK.setMaChucVu("ROLE_SV");
+                    sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+                    sv.setTinhTrang(Short.parseShort("1"));
+                    sv.setSinhvienPK(svPK);
                     this.userDetailsService.addUserSV(sv);
                     return "redirect:/quantri/QLTaiKhoan";
             }
@@ -104,9 +134,9 @@ public class UserController {
         return "DangKy";
     }
 
-    @RequestMapping(value = "/quantri/QLTaiKhoan/{nguoidungPK.maND}")
+    @RequestMapping("/quantri/QLTaiKhoan/{nguoidungPK.maND}")
     public String xoaTK(Model model, @PathVariable(value = "nguoidungPK.maND") String userID) {
-        String errMsg = " ";
+        String errMsg = "";
         String role = userID.substring(0, 2);
         try {
             if (userID.substring(0, 3).equals("GVU")) {
@@ -114,6 +144,7 @@ public class UserController {
             } else {
                 switch (role) {
                     case "GV":
+                        this.councilRepo.deleteMember(userID);
                         this.userService.deleteUsersGV(userID);
                         break;
                     case "SV":
@@ -124,6 +155,7 @@ public class UserController {
                         break;
                 }
             }
+            model.addAttribute("errMSG", errMsg);
             return "redirect:/quantri/QLTaiKhoan";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
@@ -172,12 +204,11 @@ public class UserController {
         return "CapNhatND";
     }
 
-    @RequestMapping("/quantri/ThongTinND/{id}")
+    @RequestMapping(value = "/quantri/ThongTinND/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String CapNhatND(Model model, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
         model.addAttribute("nganh", this.roleService.getNganh());
         model.addAttribute("khoa", this.roleService.getKhoa());
-        String errMsg = " ";
         String role = id.substring(0, 2);
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
@@ -237,15 +268,16 @@ public class UserController {
     }
     
     @GetMapping("/quantri/ThongTinQT/{id}")
-    public String QuanTri(Model model) {    
+    public String QuanTri(Model model, @PathVariable(value = "id") String id) {    
         model.addAttribute("nguoidung", new Nguoidung());
+        model.addAttribute("thongtinnguoidung", this.userService.getUserbyID(id));
         return "ThongTinNguoiDung";
     }
 
-    @RequestMapping("/quantri/ThongTinQT/{id}")
+    @RequestMapping(value = "/quantri/ThongTinQT/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String CapNhatQT(Model model, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
-        String errMsg = " ";
+        String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_QT");
@@ -261,6 +293,7 @@ public class UserController {
             } else {
                 this.userService.updateParticularUsers(nd);
             }
+            model.addAttribute("errMsg", errMsg);
             return "redirect:/";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
@@ -268,46 +301,19 @@ public class UserController {
         model.addAttribute("errMsg", errMsg);
         return "ThongTinNguoiDung";
     }
-
-//    @GetMapping("/quantri/CapNhatND/{id}")
-//    public String CNCTView(Model model) {
-//        model.addAttribute("nganh", this.roleService.getNganh());
-//        model.addAttribute("khoa", this.roleService.getKhoa());
-//        model.addAttribute("nguoidung", new Nguoidung());
-//        model.addAttribute("sinhvien", new Sinhvien());
-//        return "CapNhatND";
-//    }
-//    
-//    @RequestMapping("/quantri/CapNhatND/{id}")
-//    public String CapNhatChiTiet(Model model, @PathVariable(value = "id") String id,
-//            @ModelAttribute(value = "nguoidung") Nguoidung nd,
-//            @ModelAttribute(value = "sinhvien") Sinhvien sv) {
-//        String errMsg = " ";
-//        SinhvienPK svPK = new SinhvienPK();
-//        svPK.setMaSV(id);
-//        svPK.setMaND(id);
-//        svPK.setMaChucVu("ROLE_SV");
-//        sv.setSinhvienPK(svPK);
-//        try {
-//            this.userService.updateUsersSV(sv);
-//            return "redirect:/quantri/QLTaiKhoan";
-//        } catch (Exception e) {
-//            errMsg = "Đã có lỗi!";
-//        }
-//        return "ThongTinNguoiDung";
-//    }
     
     //GIÁO VỤ
     @GetMapping("/giaovu/ThongTinGVU/{id}")
-    public String GiaoVu(Model model) {
+    public String GiaoVu(Model model, @PathVariable(value = "id") String id) {
         model.addAttribute("nguoidung", new Nguoidung());
+        model.addAttribute("thongtinnguoidung", this.userService.getUserbyID(id));
         return "ThongTinNguoiDung";
     }
 
-    @RequestMapping("/giaovu/ThongTinGVU/{id}")
+    @RequestMapping(value = "/giaovu/ThongTinGVU/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8" )
     public String CapNhatGVU(Model model, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
-        String errMsg = " ";
+        String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_GVU");
@@ -315,14 +321,14 @@ public class UserController {
         try {
             if (!nd.getPassword().isEmpty()) {
                 if (nd.getPassword().equals(nd.getConfirmPassword())) {
-                    
                     this.userService.updateParticularUsers(nd);
                 } else {
-                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại";
+                    errMsg = "Xác nhận mật khẩu sai. Vui long kiểm tra lại!";
                 }
             } else {
                 this.userService.updateParticularUsers(nd);
             }
+            model.addAttribute("errMsg", errMsg);
             return "redirect:/";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
@@ -333,33 +339,16 @@ public class UserController {
 
     //GIẢNG VIÊN
     @GetMapping("/giangvien/ThongTinGV/{id}")
-    public String GiangVien(Model model) {
+    public String GiangVien(Model model, @PathVariable(value = "id") String id) {
         model.addAttribute("nguoidung", new Nguoidung());
-        return "ThongTinNguoiDung";
-    }
-
-<<<<<<< HEAD
-    @RequestMapping("/giangvien/ThongTinGV/{id}")
-    public String CapNhatGV(Model model, @PathVariable(value = "id") String id,
-=======
-    //SINH VIÊN
-//    @GetMapping("/sinhvien/")
-//    public String SinhVien(Model model) {
-//        model.addAttribute("nguoidung", new Nguoidung());
-//        return "ThongTinNguoiDung";
-//    }
-    @GetMapping("/sinhvien/ThongTinSV/{id}")
-    public String SinhVien(Model model,@PathVariable(value = "id") String id) {
         model.addAttribute("thongtinnguoidung", this.userService.getUserbyID(id));
-        model.addAttribute("nguoidung", new Nguoidung());
         return "ThongTinNguoiDung";
     }
 
-    @RequestMapping("/sinhvien/ThongTinSV/{id}")
-    public String CapNhatSV(Model model,HttpSession session, @PathVariable(value = "id") String id,
->>>>>>> 8995414a378fca638bf25f39417ddb92ffb626d7
+    @RequestMapping(value = "/giangvien/ThongTinGV/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    public String CapNhatGV(Model model,HttpSession session, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
-        String errMsg = " ";
+        String errMsg = "";
         
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
@@ -375,6 +364,7 @@ public class UserController {
             } else {
                 this.userService.updateParticularUsers(nd);
             }
+            model.addAttribute("errMsg", errMsg);
             return "redirect:/";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
@@ -391,10 +381,10 @@ public class UserController {
         return "ThongTinNguoiDung";
     }
 
-    @RequestMapping("/sinhvien/ThongTinSV/{id}")
+    @RequestMapping(value = "/sinhvien/ThongTinSV/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String CapNhatSV(Model model, @PathVariable(value = "id") String id,
             @ModelAttribute(value = "nguoidung") Nguoidung nd) {
-        String errMsg = " ";
+        String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         userPK.setChucvumaChucVu("ROLE_SV");
@@ -409,13 +399,12 @@ public class UserController {
             } else {
                 this.userService.updateParticularUsers(nd);
             }
+            model.addAttribute("errMsg", errMsg);
             return "redirect:/";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
         }
-        model.addAttribute("errMsg", errMsg);
-        
-       
+        model.addAttribute("errMsg", errMsg);  
         return "ThongTinNguoiDung";
     }
 }

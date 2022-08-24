@@ -21,8 +21,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Quản lý tài khoản</strong></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Tạo tài khoản</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/quantri/QLTaiKhoan"/>">Chỉnh sửa tài khoản</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Đăng ký tài khoản</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/quantri/QLTaiKhoan"/>">Quản lý tài khoản</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/ThongTinQT/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
@@ -32,10 +32,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng giáo vụ</strong></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Tạo đề tài khóa luận</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Đề tài khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/giaovu/PhanCongGV"/>">Phân công giảng viên hướng dẫn</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Tạo hội đồng</a></li>
-                        <li><a class="dropdown-item" href="<c:url value="/giaovu/ThongKeDiem"/>">Xem thống kê điểm</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Hội đồng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/giaovu/ThongKeDiem"/>">Thống kê điểm</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinGVU/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
@@ -45,9 +45,9 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng giảng viên</strong></a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Xem danh sách khóa luận</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Danh sách khóa luận</a></li>
                         <li><a class="dropdown-item" href="#">Chấm điểm khóa luận</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Xem thông tin hội đồng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Thông tin hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giangvien/ThongTinGV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>

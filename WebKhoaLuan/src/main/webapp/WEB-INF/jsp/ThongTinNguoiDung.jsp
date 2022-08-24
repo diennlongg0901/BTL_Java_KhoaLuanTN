@@ -45,6 +45,7 @@
                 </div>
             </div>
         </div>
+        <hr class="mt-5">
         <div class="form-group container">
             <h4 class="mt-4">Cập nhật Thông tin cá nhân</h4>
             <div class="row">
@@ -124,7 +125,7 @@
                 </div>
             </div>
         </div>
-
+        <hr class="mt-5">
         <h4 class="mt-4">Cập nhật Thông tin cá nhân</h4>
         <div class="form-group container">
             <c:if test="${currentUser != null}" >
@@ -186,7 +187,6 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-
                             <h4 class="form-outline mt-4">Họ tên: ${thongtinnguoidung.ho} ${thongtinnguoidung.ten}</h4>
                         </div>
                         <div class="col">
@@ -201,7 +201,6 @@
                             <h4 class="form-outline mt-4">Địa chỉ: ${thongtinnguoidung.diaChi}</h4>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col">
                             <h4 class="form-outline mt-4">Email: ${thongtinnguoidung.email}</h4>
@@ -213,6 +212,7 @@
                 </div>
             </div>
         </div>
+        <hr class="mt-5">
         <div class="form-group container">
             <h4 class="mt-5">Cập nhật Thông tin cá nhân</h4>
             <div class="row">
@@ -290,6 +290,7 @@
                         </div>
                     </div>
                 </div>
+                        <hr class="mt-5">
                 <h4 class="mt-4">Cập nhật thông tin cá nhân</h4>
                 <div class="row">
                     <div class="form-outline mt-4 col">

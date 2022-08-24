@@ -16,6 +16,7 @@ import com.demo.pojo.Quantri;
 import com.demo.pojo.QuantriPK;
 import com.demo.pojo.Sinhvien;
 import com.demo.pojo.SinhvienPK;
+import com.demo.repository.CouncilRepo;
 import com.demo.repository.UserRepo;
 import com.demo.service.UserService;
 import java.io.IOException;
@@ -23,7 +24,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -122,50 +122,50 @@ public class UserServiceImpl implements UserService {
                     ObjectUtils.asMap("resource_type", "auto"));
             user.setAnh((String) m.get("secure_url"));
             this.userRepo.addUser(user);
-            switch (user.getChucvu().getMaChucVu()) {
-                case "ROLE_QT":
-                    Quantri qt = new Quantri();
-                    qt.setNguoidung(user);
-                    QuantriPK quantriPK = new QuantriPK();
-                    quantriPK.setMaQT(user.getUsername());
-                    quantriPK.setNguoidungmaND(user.getUsername());
-                    quantriPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-                    qt.setQuantriPK(quantriPK);
-                    addUserQT(qt);
-                    break;
-                case "ROLE_GVU":
-                    Giaovu gvu = new Giaovu();
-                    gvu.setNguoidung(user);
-                    GiaovuPK giaovuPK = new GiaovuPK();
-                    giaovuPK.setMaGV(user.getUsername());
-                    giaovuPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-                    giaovuPK.setNguoidungmaND(user.getUsername());
-                    gvu.setGiaovuPK(giaovuPK);
-                    addUserGVU(gvu);
-                    break;
-                case "ROLE_GV":
-                    Giangvien gv = new Giangvien();
-                    gv.setNguoidung(user);
-                    GiangvienPK giangvienPK = new GiangvienPK();
-                    giangvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-                    giangvienPK.setMaGV(user.getUsername());
-                    giangvienPK.setMaND(user.getUsername());
-                    gv.setGiangvienPK(giangvienPK);
-                    addUserGV(gv);
-                    break;
-                case "ROLE_SV":
-                    Sinhvien sv = new Sinhvien();
-                    sv.setNguoidung(user);
-                    SinhvienPK sinhvienPK = new SinhvienPK();
-                    sinhvienPK.setMaSV(user.getUsername());
-                    sinhvienPK.setMaND(user.getUsername());
-                    sinhvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-                    sinhvienPK.setMaNganh(Short.parseShort("1"));
-                    sinhvienPK.setMaKhoa(Short.parseShort("1"));
-                    sv.setSinhvienPK(sinhvienPK);
-                    addUserSV(sv);
-                    break;
-            }
+//            switch (user.getChucvu().getMaChucVu()) {
+//                case "ROLE_QT":
+//                    Quantri qt = new Quantri();
+//                    qt.setNguoidung(user);
+//                    QuantriPK quantriPK = new QuantriPK();
+//                    quantriPK.setMaQT(user.getUsername());
+//                    quantriPK.setNguoidungmaND(user.getUsername());
+//                    quantriPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
+//                    qt.setQuantriPK(quantriPK);
+//                    addUserQT(qt);
+//                    break;
+//                case "ROLE_GVU":
+//                    Giaovu gvu = new Giaovu();
+//                    gvu.setNguoidung(user);
+//                    GiaovuPK giaovuPK = new GiaovuPK();
+//                    giaovuPK.setMaGV(user.getUsername());
+//                    giaovuPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
+//                    giaovuPK.setNguoidungmaND(user.getUsername());
+//                    gvu.setGiaovuPK(giaovuPK);
+//                    addUserGVU(gvu);
+//                    break;
+//                case "ROLE_GV":
+//                    Giangvien gv = new Giangvien();
+//                    gv.setNguoidung(user);
+//                    GiangvienPK giangvienPK = new GiangvienPK();
+//                    giangvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
+//                    giangvienPK.setMaGV(user.getUsername());
+//                    giangvienPK.setMaND(user.getUsername());
+//                    gv.setGiangvienPK(giangvienPK);
+//                    addUserGV(gv);
+//                    break;
+//                case "ROLE_SV":
+//                    Sinhvien sv = new Sinhvien();
+//                    sv.setNguoidung(user);
+//                    SinhvienPK sinhvienPK = new SinhvienPK();
+//                    sinhvienPK.setMaSV(user.getUsername());
+//                    sinhvienPK.setMaND(user.getUsername());
+//                    sinhvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
+//                    sinhvienPK.setMaNganh(Short.parseShort("1"));
+//                    sinhvienPK.setMaKhoa(Short.parseShort("1"));
+//                    sv.setSinhvienPK(sinhvienPK);
+//                    addUserSV(sv);
+//                    break;
+//            }
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -175,20 +175,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUserQT(Quantri userQT) {
-        userQT.setChucVu("Quản trị người dùng");
         return this.userRepo.addUserQT(userQT);
     }
 
     @Override
     public boolean addUserGVU(Giaovu userGVU) {
-        userGVU.setPhongBan("1");
         return this.userRepo.addUserGVU(userGVU);
     }
 
     @Override
     public boolean addUserSV(Sinhvien userSV) {
-        userSV.setTinhTrang(Short.parseShort("1"));
-        userSV.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
         return this.userRepo.addUserSV(userSV);
     }
 

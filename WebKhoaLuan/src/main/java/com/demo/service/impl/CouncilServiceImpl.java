@@ -22,6 +22,7 @@ public class CouncilServiceImpl implements CouncilService{
     @Autowired
     private CouncilRepo councilRepo;
     
+    //THÊM HỘI ĐỒNG
     @Override
     public boolean addCouncil(Hoidong council) {
         return this.councilRepo.addCouncil(council);
@@ -40,6 +41,7 @@ public class CouncilServiceImpl implements CouncilService{
         return this.councilRepo.addDetailCouncil(detailCouncil);
     }
 
+    //LẤY HỘI ĐỒNG
     @Override
     public Object getNewCouncil() {
         return this.councilRepo.getNewCouncil();
@@ -54,8 +56,10 @@ public class CouncilServiceImpl implements CouncilService{
     public List<Chitiethoidong> getListCouncilDetail() {
         return this.councilRepo.getListCouncilDetail();
     }
-
     
-    
-    
+    //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
+    @Override
+    public void deleteMember(String userID) {
+        this.councilRepo.deleteMember(userID);
+    }
 }

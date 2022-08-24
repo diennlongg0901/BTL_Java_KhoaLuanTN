@@ -39,7 +39,6 @@ public class CouncilController {
         model.addAttribute("hoidong", new Hoidong());
         model.addAttribute("chitiethoidong", new Chitiethoidong());
         model.addAttribute("dschitiethoidong", this.councilService.getListCouncilDetail());
-//        model.addAttribute("dschitiethoidong", this.councilService.getCouncilDetail("k31"));
         return "HoiDong";
     }
     

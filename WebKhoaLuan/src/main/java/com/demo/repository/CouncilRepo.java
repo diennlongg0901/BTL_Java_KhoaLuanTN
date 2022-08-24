@@ -23,4 +23,7 @@ public interface CouncilRepo {
     Object getNewCouncil();
     List<Chitiethoidong> getListCouncilDetail();
     List<Chitiethoidong> getCouncilDetail(String tenHD);
+    
+    //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
+    void deleteMember(String userID);
 }

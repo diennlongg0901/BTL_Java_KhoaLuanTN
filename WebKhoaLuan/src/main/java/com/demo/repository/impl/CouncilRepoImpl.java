@@ -9,10 +9,6 @@ import com.demo.pojo.Hoidong;
 import com.demo.repository.CouncilRepo;
 import java.util.List;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -30,6 +26,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
 
+    //THÊM HỘI ĐỒNG
     @Override
     public boolean addCouncil(Hoidong council) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -52,6 +49,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         return false;
     }
 
+    //LẤY THÔNG TIN HỘI ĐỒNG
     @Override
     public Object getNewCouncil() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -62,17 +60,6 @@ public class CouncilRepoImpl implements CouncilRepo {
     @Override
     public List<Chitiethoidong> getCouncilDetail(String tenHD) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-//        CriteriaBuilder builder = session.getCriteriaBuilder();
-//        CriteriaQuery<Chitiethoidong> query = builder.createQuery(Chitiethoidong.class);
-//        Root r = query.from(Chitiethoidong.class);
-//        query = query.select(r);
-//        if (!tenHD.isEmpty()) {
-//            Predicate p = builder.like(r.get("hoidong.tenHD").as(String.class), String.format("%%s%%", tenHD));
-//            query = query.where(p);
-//        }
-//        Query q = session.createQuery(query);
-//        return q.getResultList();
-        
         Query q = session.createQuery("FROM Chitiethoidong WHERE hoidong.tenHD = (:tenHD)");
         q.setParameter("tenHD", tenHD);
         return q.getResultList();
@@ -83,5 +70,14 @@ public class CouncilRepoImpl implements CouncilRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Chitiethoidong ORDER BY hoidong_maHD DESC");
         return q.getResultList();
+    }
+
+    //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
+    @Override
+    public void deleteMember(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Chitiethoidong WHERE giangvien_maGV = (:userID) AND giangvien_maND = (:userID) AND maChucVu = 'ROLE_GV'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
     }
 }
