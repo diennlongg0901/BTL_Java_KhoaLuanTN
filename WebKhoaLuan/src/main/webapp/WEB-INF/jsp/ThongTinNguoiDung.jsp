@@ -74,10 +74,10 @@
             <h4 class="mt-4">Thay đổi mật khẩu</h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Mật khẩu mới" />
+                    <form:input type="text" id="password" path="password" class="form-control" placeholder="Mật khẩu mới" />
                 </div>
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Nhập lại mật khẩu" />
+                    <form:input type="text" id="confirmPassword" path="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
                 </div>
             </div>
             <div class="form-outline mt-4">
@@ -159,11 +159,11 @@
             <h4>Thay đổi mật khẩu</h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Mật khẩu mới" />
+                    <form:input type="text" id="password" path="password" class="form-control" placeholder="Mật khẩu mới" />
                 </div>
 
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Nhập lại mật khẩu" />
+                    <form:input type="text" id="confirmPassword" path="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu" />
                 </div>
             </div>
 

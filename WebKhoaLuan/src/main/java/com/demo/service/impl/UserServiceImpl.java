@@ -122,50 +122,56 @@ public class UserServiceImpl implements UserService {
                     ObjectUtils.asMap("resource_type", "auto"));
             user.setAnh((String) m.get("secure_url"));
             this.userRepo.addUser(user);
-//            switch (user.getChucvu().getMaChucVu()) {
-//                case "ROLE_QT":
-//                    Quantri qt = new Quantri();
-//                    qt.setNguoidung(user);
-//                    QuantriPK quantriPK = new QuantriPK();
-//                    quantriPK.setMaQT(user.getUsername());
-//                    quantriPK.setNguoidungmaND(user.getUsername());
-//                    quantriPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-//                    qt.setQuantriPK(quantriPK);
-//                    addUserQT(qt);
-//                    break;
-//                case "ROLE_GVU":
-//                    Giaovu gvu = new Giaovu();
-//                    gvu.setNguoidung(user);
-//                    GiaovuPK giaovuPK = new GiaovuPK();
-//                    giaovuPK.setMaGV(user.getUsername());
-//                    giaovuPK.setNguoidungchucvumaChucVu(user.getChucvu().getMaChucVu());
-//                    giaovuPK.setNguoidungmaND(user.getUsername());
-//                    gvu.setGiaovuPK(giaovuPK);
-//                    addUserGVU(gvu);
-//                    break;
-//                case "ROLE_GV":
-//                    Giangvien gv = new Giangvien();
-//                    gv.setNguoidung(user);
-//                    GiangvienPK giangvienPK = new GiangvienPK();
-//                    giangvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-//                    giangvienPK.setMaGV(user.getUsername());
-//                    giangvienPK.setMaND(user.getUsername());
-//                    gv.setGiangvienPK(giangvienPK);
-//                    addUserGV(gv);
-//                    break;
-//                case "ROLE_SV":
-//                    Sinhvien sv = new Sinhvien();
-//                    sv.setNguoidung(user);
-//                    SinhvienPK sinhvienPK = new SinhvienPK();
-//                    sinhvienPK.setMaSV(user.getUsername());
-//                    sinhvienPK.setMaND(user.getUsername());
-//                    sinhvienPK.setMaChucVu(user.getChucvu().getMaChucVu());
-//                    sinhvienPK.setMaNganh(Short.parseShort("1"));
-//                    sinhvienPK.setMaKhoa(Short.parseShort("1"));
-//                    sv.setSinhvienPK(sinhvienPK);
-//                    addUserSV(sv);
-//                    break;
-//            }
+            switch (user.getChucvu().getMaChucVu()) {
+                case "ROLE_QT":
+                    Quantri qt = new Quantri();
+                    QuantriPK qtPK = new QuantriPK();
+                    qtPK.setMaQT(user.getUsername());
+                    qtPK.setNguoidungmaND(user.getUsername());
+                    qtPK.setNguoidungchucvumaChucVu("ROLE_QT");
+                    qt.setChucVu("Quản trị người dùng");
+                    qt.setNguoidung(user);
+                    qt.setQuantriPK(qtPK);
+                    addUserQT(qt);
+                    break;
+                case "ROLE_GVU":
+                    Giaovu gvu = new Giaovu();
+                    GiaovuPK gvuPK = new GiaovuPK();
+                    gvuPK.setMaGV(user.getUsername());
+                    gvuPK.setNguoidungmaND(user.getUsername());
+                    gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+                    gvu.setPhongBan(user.getPhongBan());
+                    gvu.setNguoidung(user);
+                    gvu.setGiaovuPK(gvuPK);
+                    addUserGVU(gvu);
+                    break;
+                case "ROLE_GV":
+                    Giangvien gv = new Giangvien();
+                    GiangvienPK gvPK = new GiangvienPK();
+                    gvPK.setMaGV(user.getUsername());
+                    gvPK.setMaND(user.getUsername());
+                    gvPK.setMaChucVu("ROLE_GV");
+                    gv.setHocVi(user.getHocVi());
+                    gv.setHocVi(user.getHocHam());
+                    gv.setNguoidung(user);
+                    gv.setGiangvienPK(gvPK);
+                    addUserGV(gv);
+                    break;
+                case "ROLE_SV":
+                    Sinhvien sv = new Sinhvien();
+                    SinhvienPK svPK = new SinhvienPK();
+                    svPK.setMaND(user.getUsername());
+                    svPK.setMaND(user.getUsername());
+                    svPK.setMaChucVu("ROLE_SV");
+                    svPK.setMaKhoa(user.getKhoa());
+                    svPK.setMaNganh(user.getNganh());
+                    sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+                    sv.setTinhTrang(Short.parseShort("1"));
+                    sv.setNguoidung(user);
+                    sv.setSinhvienPK(svPK);
+                    addUserSV(sv);
+                    break;
+            }
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();

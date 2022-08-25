@@ -90,9 +90,6 @@ public class Nguoidung implements Serializable {
     @Size(max = 100)
     @Column(name = "anh")
     private String anh;
-    
-    
-    
     @Size(max = 100)
     @Column(name = "diaChi")
     private String diaChi;

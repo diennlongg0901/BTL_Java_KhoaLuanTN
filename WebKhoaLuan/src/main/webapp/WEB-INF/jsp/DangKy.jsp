@@ -16,7 +16,6 @@
 </c:if>
 
 <c:url value="/quantri/DangKy" var="action" />
-<c:url value="/quantri/DKBoSung" var="action1" />
 <div class="container">
     <h2 class="text-center mt-5">ĐĂNG KÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
     <div class="form-group container">
@@ -25,9 +24,9 @@
             <div class="form-outline mt-4">
                 <label class="form-label" for="vaiTro">Chức vụ người dùng</label>
                 <form:select id="vaiTro" path="chucvu" onchange="chonChucVu()">
-                    <form:option value="" path="chucvu">Chức vụ</form:option>
+                    <form:option value="">Chức vụ</form:option>
                     <c:forEach items="${chucvu}" var="c">
-                        <form:option value="${c.maChucVu}" path="chucvu" >${c.tenChucVu}</form:option>
+                        <form:option value="${c.maChucVu}" >${c.tenChucVu}</form:option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -77,16 +76,16 @@
             <h4 id="title" class="mt-4"></h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <label class="form-label sinhVien" for="khoa" hidden="hidden" >Khoa</label>
-                    <form:select class="sinhVien" id="khoa" path="khoa" hidden="hidden">
+                    <label class="form-label" for="khoa">Khoa</label>
+                    <form:select id="khoa" path="khoa">
                         <c:forEach items="${khoa}" var="k">
                             <form:option value="${k.maKhoa}" >${k.tenKhoa}</form:option>
                         </c:forEach>
                     </form:select>
                 </div>
                 <div class="form-outline mt-4 col">
-                    <label class="form-label sinhVien" for="nganh" hidden="hidden" >Ngành</label>
-                    <form:select class="sinhVien" id="nganh" path="nganh" hidden="hidden">
+                    <label class="form-label" for="nganh" >Ngành</label>
+                    <form:select id="nganh" path="nganh">
                         <c:forEach items="${nganh}" var="n">
                             <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
                         </c:forEach>
@@ -95,9 +94,9 @@
             </div>
             
             <div class="form-outline">
-                    <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden" placeholder="Học vị giảng viên" />
-                    <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien mt-4" hidden="hidden" placeholder="Học hàm giảng viên" />
-                    <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" hidden="hidden" placeholder="Phòng ban giáo vụ" />
+                    <form:input type="text" id="hocVi" path="hocVi" class="form-control" placeholder="Học vị giảng viên" />
+                    <form:input type="text" id="hocHam" path="hocHam" class="form-control mt-4" placeholder="Học hàm giảng viên" />
+                    <form:input type="number" id="phongBan" path="phongBan" class="form-control" placeholder="Phòng ban giáo vụ" />
             </div>
 
             <div class="form-outline mt-4">
@@ -114,7 +113,7 @@
     });
 </script>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
     function chonChucVu() {
         var x = document.getElementById("vaiTro").value;
         const gv = document.getElementsByClassName("giangVien");
@@ -157,4 +156,4 @@
             gvu[0].hidden = true;
         }
     }
-</script>
+</script>-->
