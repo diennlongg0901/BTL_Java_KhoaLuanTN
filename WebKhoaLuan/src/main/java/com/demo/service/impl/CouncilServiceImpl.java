@@ -33,10 +33,10 @@ public class CouncilServiceImpl implements CouncilService{
         Hoidong h = new Hoidong();
         h = (Hoidong)this.councilRepo.getNewCouncil();
         ChitiethoidongPK cthdPK = new ChitiethoidongPK();
-        cthdPK.setGiangvienmaND(detailCouncil.getChitiethoidongPK().getGiangvienmaGV());
-        cthdPK.setGiangvienmaGV(detailCouncil.getChitiethoidongPK().getGiangvienmaGV());
-        cthdPK.setGiangvienmaChucVu("ROLE_GV");
-        cthdPK.setHoidongmaHD(h.getMaHD());   
+        cthdPK.setMaND(detailCouncil.getChitiethoidongPK().getMaGV());
+        cthdPK.setMaGV(detailCouncil.getChitiethoidongPK().getMaCV());
+        cthdPK.setMaCV("ROLE_GV");
+        cthdPK.setMaHD(h.getMaHD());   
         detailCouncil.setChitiethoidongPK(cthdPK);
         return this.councilRepo.addDetailCouncil(detailCouncil);
     }

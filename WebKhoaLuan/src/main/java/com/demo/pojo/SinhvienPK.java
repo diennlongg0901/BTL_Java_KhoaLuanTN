@@ -13,14 +13,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class SinhvienPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 10)
     @Column(name = "maSV")
     private String maSV;
     @Basic(optional = false)
@@ -31,24 +31,26 @@ public class SinhvienPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "maChucVu")
-    private String maChucVu;
+    @Column(name = "maCV")
+    private String maCV;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "maNganh")
-    private int maNganh;
+    private String maNganh;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "maKhoa")
-    private int maKhoa;
+    private String maKhoa;
 
     public SinhvienPK() {
     }
 
-    public SinhvienPK(String maSV, String maND, String maChucVu, int maNganh, int maKhoa) {
+    public SinhvienPK(String maSV, String maND, String maCV, String maNganh, String maKhoa) {
         this.maSV = maSV;
         this.maND = maND;
-        this.maChucVu = maChucVu;
+        this.maCV = maCV;
         this.maNganh = maNganh;
         this.maKhoa = maKhoa;
     }
@@ -69,27 +71,27 @@ public class SinhvienPK implements Serializable {
         this.maND = maND;
     }
 
-    public String getMaChucVu() {
-        return maChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setMaChucVu(String maChucVu) {
-        this.maChucVu = maChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
-    public int getMaNganh() {
+    public String getMaNganh() {
         return maNganh;
     }
 
-    public void setMaNganh(int maNganh) {
+    public void setMaNganh(String maNganh) {
         this.maNganh = maNganh;
     }
 
-    public int getMaKhoa() {
+    public String getMaKhoa() {
         return maKhoa;
     }
 
-    public void setMaKhoa(int maKhoa) {
+    public void setMaKhoa(String maKhoa) {
         this.maKhoa = maKhoa;
     }
 
@@ -98,9 +100,9 @@ public class SinhvienPK implements Serializable {
         int hash = 0;
         hash += (maSV != null ? maSV.hashCode() : 0);
         hash += (maND != null ? maND.hashCode() : 0);
-        hash += (maChucVu != null ? maChucVu.hashCode() : 0);
-        hash += (int) maNganh;
-        hash += (int) maKhoa;
+        hash += (maCV != null ? maCV.hashCode() : 0);
+        hash += (maNganh != null ? maNganh.hashCode() : 0);
+        hash += (maKhoa != null ? maKhoa.hashCode() : 0);
         return hash;
     }
 
@@ -117,13 +119,13 @@ public class SinhvienPK implements Serializable {
         if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.maChucVu == null && other.maChucVu != null) || (this.maChucVu != null && !this.maChucVu.equals(other.maChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
-        if (this.maNganh != other.maNganh) {
+        if ((this.maNganh == null && other.maNganh != null) || (this.maNganh != null && !this.maNganh.equals(other.maNganh))) {
             return false;
         }
-        if (this.maKhoa != other.maKhoa) {
+        if ((this.maKhoa == null && other.maKhoa != null) || (this.maKhoa != null && !this.maKhoa.equals(other.maKhoa))) {
             return false;
         }
         return true;
@@ -131,7 +133,7 @@ public class SinhvienPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.SinhvienPK[ maSV=" + maSV + ", maND=" + maND + ", maChucVu=" + maChucVu + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
+        return "com.demo.pojo.SinhvienPK[ maSV=" + maSV + ", maND=" + maND + ", maCV=" + maCV + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
     }
     
 }

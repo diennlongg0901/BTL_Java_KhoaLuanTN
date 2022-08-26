@@ -13,34 +13,34 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class QuantriPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 10)
     @Column(name = "maQT")
     private String maQT;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "nguoidung_maND")
-    private String nguoidungmaND;
+    @Column(name = "maND")
+    private String maND;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "nguoidung_chucvu_maChucVu")
-    private String nguoidungchucvumaChucVu;
+    @Column(name = "maCV")
+    private String maCV;
 
     public QuantriPK() {
     }
 
-    public QuantriPK(String maQT, String nguoidungmaND, String nguoidungchucvumaChucVu) {
+    public QuantriPK(String maQT, String maND, String maCV) {
         this.maQT = maQT;
-        this.nguoidungmaND = nguoidungmaND;
-        this.nguoidungchucvumaChucVu = nguoidungchucvumaChucVu;
+        this.maND = maND;
+        this.maCV = maCV;
     }
 
     public String getMaQT() {
@@ -51,28 +51,28 @@ public class QuantriPK implements Serializable {
         this.maQT = maQT;
     }
 
-    public String getNguoidungmaND() {
-        return nguoidungmaND;
+    public String getMaND() {
+        return maND;
     }
 
-    public void setNguoidungmaND(String nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
+    public void setMaND(String maND) {
+        this.maND = maND;
     }
 
-    public String getNguoidungchucvumaChucVu() {
-        return nguoidungchucvumaChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setNguoidungchucvumaChucVu(String nguoidungchucvumaChucVu) {
-        this.nguoidungchucvumaChucVu = nguoidungchucvumaChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (maQT != null ? maQT.hashCode() : 0);
-        hash += (nguoidungmaND != null ? nguoidungmaND.hashCode() : 0);
-        hash += (nguoidungchucvumaChucVu != null ? nguoidungchucvumaChucVu.hashCode() : 0);
+        hash += (maND != null ? maND.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -86,10 +86,10 @@ public class QuantriPK implements Serializable {
         if ((this.maQT == null && other.maQT != null) || (this.maQT != null && !this.maQT.equals(other.maQT))) {
             return false;
         }
-        if ((this.nguoidungmaND == null && other.nguoidungmaND != null) || (this.nguoidungmaND != null && !this.nguoidungmaND.equals(other.nguoidungmaND))) {
+        if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.nguoidungchucvumaChucVu == null && other.nguoidungchucvumaChucVu != null) || (this.nguoidungchucvumaChucVu != null && !this.nguoidungchucvumaChucVu.equals(other.nguoidungchucvumaChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ public class QuantriPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.QuantriPK[ maQT=" + maQT + ", nguoidungmaND=" + nguoidungmaND + ", nguoidungchucvumaChucVu=" + nguoidungchucvumaChucVu + " ]";
+        return "com.demo.pojo.QuantriPK[ maQT=" + maQT + ", maND=" + maND + ", maCV=" + maCV + " ]";
     }
     
 }

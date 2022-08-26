@@ -20,129 +20,131 @@ public class DiemPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Column(name = "khoaluan_maKL")
-    private int khoaluanmaKL;
+    @Column(name = "maTC")
+    private int maTC;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "khoaluan_hoidong_maHD")
-    private int khoaluanhoidongmaHD;
+    @Column(name = "maKL")
+    private int maKL;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "khoaluan_maSV")
-    private String khoaluanmaSV;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "khoaluan_maND")
-    private String khoaluanmaND;
+    @Column(name = "maDT")
+    private int maDT;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "khoaluan_maChucVu")
-    private String khoaluanmaChucVu;
+    @Column(name = "maSV")
+    private String maSV;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "khoaluan_maNganh")
-    private int khoaluanmaNganh;
+    @Size(min = 1, max = 10)
+    @Column(name = "maND")
+    private String maND;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "khoaluan_maKhoa")
-    private int khoaluanmaKhoa;
+    @Size(min = 1, max = 10)
+    @Column(name = "maCV")
+    private String maCV;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tieuchi_maTC")
-    private int tieuchimaTC;
+    @Size(min = 1, max = 10)
+    @Column(name = "maNganh")
+    private String maNganh;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "maKhoa")
+    private String maKhoa;
 
     public DiemPK() {
     }
 
-    public DiemPK(int khoaluanmaKL, int khoaluanhoidongmaHD, String khoaluanmaSV, String khoaluanmaND, String khoaluanmaChucVu, int khoaluanmaNganh, int khoaluanmaKhoa, int tieuchimaTC) {
-        this.khoaluanmaKL = khoaluanmaKL;
-        this.khoaluanhoidongmaHD = khoaluanhoidongmaHD;
-        this.khoaluanmaSV = khoaluanmaSV;
-        this.khoaluanmaND = khoaluanmaND;
-        this.khoaluanmaChucVu = khoaluanmaChucVu;
-        this.khoaluanmaNganh = khoaluanmaNganh;
-        this.khoaluanmaKhoa = khoaluanmaKhoa;
-        this.tieuchimaTC = tieuchimaTC;
+    public DiemPK(int maTC, int maKL, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
+        this.maTC = maTC;
+        this.maKL = maKL;
+        this.maDT = maDT;
+        this.maSV = maSV;
+        this.maND = maND;
+        this.maCV = maCV;
+        this.maNganh = maNganh;
+        this.maKhoa = maKhoa;
     }
 
-    public int getKhoaluanmaKL() {
-        return khoaluanmaKL;
+    public int getMaTC() {
+        return maTC;
     }
 
-    public void setKhoaluanmaKL(int khoaluanmaKL) {
-        this.khoaluanmaKL = khoaluanmaKL;
+    public void setMaTC(int maTC) {
+        this.maTC = maTC;
     }
 
-    public int getKhoaluanhoidongmaHD() {
-        return khoaluanhoidongmaHD;
+    public int getMaKL() {
+        return maKL;
     }
 
-    public void setKhoaluanhoidongmaHD(int khoaluanhoidongmaHD) {
-        this.khoaluanhoidongmaHD = khoaluanhoidongmaHD;
+    public void setMaKL(int maKL) {
+        this.maKL = maKL;
     }
 
-    public String getKhoaluanmaSV() {
-        return khoaluanmaSV;
+    public int getMaDT() {
+        return maDT;
     }
 
-    public void setKhoaluanmaSV(String khoaluanmaSV) {
-        this.khoaluanmaSV = khoaluanmaSV;
+    public void setMaDT(int maDT) {
+        this.maDT = maDT;
     }
 
-    public String getKhoaluanmaND() {
-        return khoaluanmaND;
+    public String getMaSV() {
+        return maSV;
     }
 
-    public void setKhoaluanmaND(String khoaluanmaND) {
-        this.khoaluanmaND = khoaluanmaND;
+    public void setMaSV(String maSV) {
+        this.maSV = maSV;
     }
 
-    public String getKhoaluanmaChucVu() {
-        return khoaluanmaChucVu;
+    public String getMaND() {
+        return maND;
     }
 
-    public void setKhoaluanmaChucVu(String khoaluanmaChucVu) {
-        this.khoaluanmaChucVu = khoaluanmaChucVu;
+    public void setMaND(String maND) {
+        this.maND = maND;
     }
 
-    public int getKhoaluanmaNganh() {
-        return khoaluanmaNganh;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setKhoaluanmaNganh(int khoaluanmaNganh) {
-        this.khoaluanmaNganh = khoaluanmaNganh;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
-    public int getKhoaluanmaKhoa() {
-        return khoaluanmaKhoa;
+    public String getMaNganh() {
+        return maNganh;
     }
 
-    public void setKhoaluanmaKhoa(int khoaluanmaKhoa) {
-        this.khoaluanmaKhoa = khoaluanmaKhoa;
+    public void setMaNganh(String maNganh) {
+        this.maNganh = maNganh;
     }
 
-    public int getTieuchimaTC() {
-        return tieuchimaTC;
+    public String getMaKhoa() {
+        return maKhoa;
     }
 
-    public void setTieuchimaTC(int tieuchimaTC) {
-        this.tieuchimaTC = tieuchimaTC;
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) khoaluanmaKL;
-        hash += (int) khoaluanhoidongmaHD;
-        hash += (khoaluanmaSV != null ? khoaluanmaSV.hashCode() : 0);
-        hash += (khoaluanmaND != null ? khoaluanmaND.hashCode() : 0);
-        hash += (khoaluanmaChucVu != null ? khoaluanmaChucVu.hashCode() : 0);
-        hash += (int) khoaluanmaNganh;
-        hash += (int) khoaluanmaKhoa;
-        hash += (int) tieuchimaTC;
+        hash += (int) maTC;
+        hash += (int) maKL;
+        hash += (int) maDT;
+        hash += (maSV != null ? maSV.hashCode() : 0);
+        hash += (maND != null ? maND.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
+        hash += (maNganh != null ? maNganh.hashCode() : 0);
+        hash += (maKhoa != null ? maKhoa.hashCode() : 0);
         return hash;
     }
 
@@ -153,28 +155,28 @@ public class DiemPK implements Serializable {
             return false;
         }
         DiemPK other = (DiemPK) object;
-        if (this.khoaluanmaKL != other.khoaluanmaKL) {
+        if (this.maTC != other.maTC) {
             return false;
         }
-        if (this.khoaluanhoidongmaHD != other.khoaluanhoidongmaHD) {
+        if (this.maKL != other.maKL) {
             return false;
         }
-        if ((this.khoaluanmaSV == null && other.khoaluanmaSV != null) || (this.khoaluanmaSV != null && !this.khoaluanmaSV.equals(other.khoaluanmaSV))) {
+        if (this.maDT != other.maDT) {
             return false;
         }
-        if ((this.khoaluanmaND == null && other.khoaluanmaND != null) || (this.khoaluanmaND != null && !this.khoaluanmaND.equals(other.khoaluanmaND))) {
+        if ((this.maSV == null && other.maSV != null) || (this.maSV != null && !this.maSV.equals(other.maSV))) {
             return false;
         }
-        if ((this.khoaluanmaChucVu == null && other.khoaluanmaChucVu != null) || (this.khoaluanmaChucVu != null && !this.khoaluanmaChucVu.equals(other.khoaluanmaChucVu))) {
+        if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if (this.khoaluanmaNganh != other.khoaluanmaNganh) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
-        if (this.khoaluanmaKhoa != other.khoaluanmaKhoa) {
+        if ((this.maNganh == null && other.maNganh != null) || (this.maNganh != null && !this.maNganh.equals(other.maNganh))) {
             return false;
         }
-        if (this.tieuchimaTC != other.tieuchimaTC) {
+        if ((this.maKhoa == null && other.maKhoa != null) || (this.maKhoa != null && !this.maKhoa.equals(other.maKhoa))) {
             return false;
         }
         return true;
@@ -182,7 +184,7 @@ public class DiemPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.DiemPK[ khoaluanmaKL=" + khoaluanmaKL + ", khoaluanhoidongmaHD=" + khoaluanhoidongmaHD + ", khoaluanmaSV=" + khoaluanmaSV + ", khoaluanmaND=" + khoaluanmaND + ", khoaluanmaChucVu=" + khoaluanmaChucVu + ", khoaluanmaNganh=" + khoaluanmaNganh + ", khoaluanmaKhoa=" + khoaluanmaKhoa + ", tieuchimaTC=" + tieuchimaTC + " ]";
+        return "com.demo.pojo.DiemPK[ maTC=" + maTC + ", maKL=" + maKL + ", maDT=" + maDT + ", maSV=" + maSV + ", maND=" + maND + ", maCV=" + maCV + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
     }
     
 }

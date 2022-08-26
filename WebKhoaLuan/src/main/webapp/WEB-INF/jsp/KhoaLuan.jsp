@@ -11,7 +11,7 @@
 <h2 class="text-center mt-5">KHÓA LUẬN TỐT NGHIỆP</h2>
 <div class="container">
     <div class="form-group container">
-        <form:form method="post" action="${action}">
+        <form:form method="post" action="${action}" modelAttribute="">
             <div class="form-outline mt-4">
                 <label class="form-label" for="ho">Mã sinh viên</label>
                 <input type="text" class="form-control"/>
@@ -25,6 +25,7 @@
             </div>
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4" value="Nộp khóa luận"/>
+                <input type="submit" class="btn btn-primary btn-block mb-4" value="Hủy"/>
             </div>
         </form:form>   
     </div>

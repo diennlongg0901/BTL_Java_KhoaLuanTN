@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,55 +32,54 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoa.findAll", query = "SELECT k FROM Khoa k"),
     @NamedQuery(name = "Khoa.findByMaKhoa", query = "SELECT k FROM Khoa k WHERE k.maKhoa = :maKhoa"),
     @NamedQuery(name = "Khoa.findByTenKhoa", query = "SELECT k FROM Khoa k WHERE k.tenKhoa = :tenKhoa"),
-    @NamedQuery(name = "Khoa.findBySoDTKhoa", query = "SELECT k FROM Khoa k WHERE k.soDTKhoa = :soDTKhoa"),
+    @NamedQuery(name = "Khoa.findBySdtKhoa", query = "SELECT k FROM Khoa k WHERE k.sdtKhoa = :sdtKhoa"),
     @NamedQuery(name = "Khoa.findByDiaChiKhoa", query = "SELECT k FROM Khoa k WHERE k.diaChiKhoa = :diaChiKhoa"),
-    @NamedQuery(name = "Khoa.findByWebSite", query = "SELECT k FROM Khoa k WHERE k.webSite = :webSite"),
-    @NamedQuery(name = "Khoa.findByEmailKhoa", query = "SELECT k FROM Khoa k WHERE k.emailKhoa = :emailKhoa")})
+    @NamedQuery(name = "Khoa.findByEmailKhoa", query = "SELECT k FROM Khoa k WHERE k.emailKhoa = :emailKhoa"),
+    @NamedQuery(name = "Khoa.findByWebsite", query = "SELECT k FROM Khoa k WHERE k.website = :website")})
 public class Khoa implements Serializable {
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "khoa")
+    private Nganh nganh;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "maKhoa")
-    private Integer maKhoa;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
+    private String maKhoa;
+    @Size(max = 100)
     @Column(name = "tenKhoa")
     private String tenKhoa;
     @Size(max = 15)
-    @Column(name = "soDTKhoa")
-    private String soDTKhoa;
+    @Column(name = "sdtKhoa")
+    private String sdtKhoa;
     @Size(max = 100)
     @Column(name = "diaChiKhoa")
     private String diaChiKhoa;
     @Size(max = 50)
-    @Column(name = "webSite")
-    private String webSite;
-    @Size(max = 50)
     @Column(name = "emailKhoa")
     private String emailKhoa;
+    @Size(max = 50)
+    @Column(name = "website")
+    private String website;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoa")
     private Collection<Nganh> nganhCollection;
+
+    
 
     public Khoa() {
     }
 
-    public Khoa(Integer maKhoa) {
+    public Khoa(String maKhoa) {
         this.maKhoa = maKhoa;
     }
 
-    public Khoa(Integer maKhoa, String tenKhoa) {
-        this.maKhoa = maKhoa;
-        this.tenKhoa = tenKhoa;
-    }
-
-    public Integer getMaKhoa() {
+    public String getMaKhoa() {
         return maKhoa;
     }
 
-    public void setMaKhoa(Integer maKhoa) {
+    public void setMaKhoa(String maKhoa) {
         this.maKhoa = maKhoa;
     }
 
@@ -91,12 +91,12 @@ public class Khoa implements Serializable {
         this.tenKhoa = tenKhoa;
     }
 
-    public String getSoDTKhoa() {
-        return soDTKhoa;
+    public String getSdtKhoa() {
+        return sdtKhoa;
     }
 
-    public void setSoDTKhoa(String soDTKhoa) {
-        this.soDTKhoa = soDTKhoa;
+    public void setSdtKhoa(String sdtKhoa) {
+        this.sdtKhoa = sdtKhoa;
     }
 
     public String getDiaChiKhoa() {
@@ -107,20 +107,20 @@ public class Khoa implements Serializable {
         this.diaChiKhoa = diaChiKhoa;
     }
 
-    public String getWebSite() {
-        return webSite;
-    }
-
-    public void setWebSite(String webSite) {
-        this.webSite = webSite;
-    }
-
     public String getEmailKhoa() {
         return emailKhoa;
     }
 
     public void setEmailKhoa(String emailKhoa) {
         this.emailKhoa = emailKhoa;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     @XmlTransient
@@ -155,6 +155,14 @@ public class Khoa implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Khoa[ maKhoa=" + maKhoa + " ]";
+    }
+
+    public Nganh getNganh() {
+        return nganh;
+    }
+
+    public void setNganh(Nganh nganh) {
+        this.nganh = nganh;
     }
     
 }

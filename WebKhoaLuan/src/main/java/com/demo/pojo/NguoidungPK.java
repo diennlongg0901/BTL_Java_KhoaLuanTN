@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class NguoidungPK implements Serializable {
@@ -26,15 +26,15 @@ public class NguoidungPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "chucvu_maChucVu")
-    private String chucvumaChucVu;
+    @Column(name = "maCV")
+    private String maCV;
 
     public NguoidungPK() {
     }
 
-    public NguoidungPK(String maND, String chucvumaChucVu) {
+    public NguoidungPK(String maND, String maCV) {
         this.maND = maND;
-        this.chucvumaChucVu = chucvumaChucVu;
+        this.maCV = maCV;
     }
 
     public String getMaND() {
@@ -45,19 +45,19 @@ public class NguoidungPK implements Serializable {
         this.maND = maND;
     }
 
-    public String getChucvumaChucVu() {
-        return chucvumaChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setChucvumaChucVu(String chucvumaChucVu) {
-        this.chucvumaChucVu = chucvumaChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (maND != null ? maND.hashCode() : 0);
-        hash += (chucvumaChucVu != null ? chucvumaChucVu.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -71,7 +71,7 @@ public class NguoidungPK implements Serializable {
         if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.chucvumaChucVu == null && other.chucvumaChucVu != null) || (this.chucvumaChucVu != null && !this.chucvumaChucVu.equals(other.chucvumaChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -79,7 +79,7 @@ public class NguoidungPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.NguoidungPK[ maND=" + maND +"]";
+        return "com.demo.pojo.NguoidungPK[ maND=" + maND + ", maCV=" + maCV + " ]";
     }
     
 }

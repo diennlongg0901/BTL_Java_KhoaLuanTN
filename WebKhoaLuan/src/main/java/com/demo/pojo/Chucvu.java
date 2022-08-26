@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Chucvu.findAll", query = "SELECT c FROM Chucvu c"),
-    @NamedQuery(name = "Chucvu.findByMaChucVu", query = "SELECT c FROM Chucvu c WHERE c.maChucVu = :maChucVu"),
-    @NamedQuery(name = "Chucvu.findByTenChucVu", query = "SELECT c FROM Chucvu c WHERE c.tenChucVu = :tenChucVu")})
+    @NamedQuery(name = "Chucvu.findByMaCV", query = "SELECT c FROM Chucvu c WHERE c.maCV = :maCV"),
+    @NamedQuery(name = "Chucvu.findByTenCV", query = "SELECT c FROM Chucvu c WHERE c.tenCV = :tenCV")})
 public class Chucvu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,50 +38,50 @@ public class Chucvu implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "maChucVu")
-    private String maChucVu;
-    @Size(max = 50)
-    @Column(name = "tenChucVu")
-    private String tenChucVu;
+    @Column(name = "maCV")
+    private String maCV;
+    @Size(max = 20)
+    @Column(name = "tenCV")
+    private String tenCV;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "chucvu")
-    private Collection<Nguoidung> nguoidungCollection;
+    private Set<Nguoidung> nguoidungSet;
 
     public Chucvu() {
     }
 
-    public Chucvu(String maChucVu) {
-        this.maChucVu = maChucVu;
+    public Chucvu(String maCV) {
+        this.maCV = maCV;
     }
 
-    public String getMaChucVu() {
-        return maChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setMaChucVu(String maChucVu) {
-        this.maChucVu = maChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
-    public String getTenChucVu() {
-        return tenChucVu;
+    public String getTenCV() {
+        return tenCV;
     }
 
-    public void setTenChucVu(String tenChucVu) {
-        this.tenChucVu = tenChucVu;
+    public void setTenCV(String tenCV) {
+        this.tenCV = tenCV;
     }
 
     @XmlTransient
-    public Collection<Nguoidung> getNguoidungCollection() {
-        return nguoidungCollection;
+    public Set<Nguoidung> getNguoidungSet() {
+        return nguoidungSet;
     }
 
-    public void setNguoidungCollection(Collection<Nguoidung> nguoidungCollection) {
-        this.nguoidungCollection = nguoidungCollection;
+    public void setNguoidungSet(Set<Nguoidung> nguoidungSet) {
+        this.nguoidungSet = nguoidungSet;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maChucVu != null ? maChucVu.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -92,7 +92,7 @@ public class Chucvu implements Serializable {
             return false;
         }
         Chucvu other = (Chucvu) object;
-        if ((this.maChucVu == null && other.maChucVu != null) || (this.maChucVu != null && !this.maChucVu.equals(other.maChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -100,7 +100,7 @@ public class Chucvu implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.Chucvu[ maChucVu=" + maChucVu + " ]";
+        return "com.demo.pojo.Chucvu[ maCV=" + maCV + " ]";
     }
     
 }

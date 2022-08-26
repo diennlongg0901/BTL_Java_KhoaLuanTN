@@ -18,7 +18,7 @@
         <select id="vaiTro" name="vaiTro" onchange="window.location.href = this.value">
             <option value="" >Chức vụ</option>
             <c:forEach items="${chucvu}" var="c">
-                <option value="${action}/${c.maChucVu}" >${c.tenChucVu}</option>
+                <option value="${action}/${c.maCV}" >${c.tenCV}</option>
             </c:forEach>
         </select>
     </div>
@@ -31,10 +31,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Ảnh đại diện</th>
+                <th scope="col">Ảnh</th>
                 <th scope="col">Mã</th>
-                <th scope="col">Họ</th>
-                <th scope="col">Tên</th>
+                <th scope="col">Họ tên</th>
                 <th scope="col">G.Tính</th>
                 <th scope="col">N.Sinh</th>
                 <th scope="col">Đ.Chỉ</th>
@@ -53,8 +52,7 @@
                         <img src="${nd.anh}" alt="alt" class="img-fluid rounded" style="width: 50px; height: 50px;"/>
                     </td>
                     <td>${nd.nguoidungPK.maND}</td>
-                    <td>${nd.ho}</td>
-                    <td>${nd.ten}</td>
+                    <td>${nd.ho} ${nd.ten}</td>
                     <td>${nd.gioiTinh}</td>
                     <td>${nd.ngaySinh}</td>
                     <td>${nd.diaChi}</td>
@@ -62,7 +60,7 @@
                     <td>${nd.sdt}</td>
                     <td>${nd.username}</td>
                     <td>${nd.hoatDong}</td>
-                    <td>${nd.chucvu.tenChucVu}</td>
+                    <td>${nd.chucvu.tenCV}</td>
                     <td><a href=" <c:url value="/quantri/QLTaiKhoan/${nd.nguoidungPK.maND}" />">Xóa</a></td>
                     <td><a href="<c:url value='/quantri/ThongTinND/${nd.nguoidungPK.maND}' />" >Cập nhật</a></td>              
                 </tr>

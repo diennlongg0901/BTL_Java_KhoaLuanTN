@@ -26,26 +26,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Chitiethoidong.findAll", query = "SELECT c FROM Chitiethoidong c"),
-    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaGV", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaGV = :giangvienmaGV"),
-    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaND", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaND = :giangvienmaND"),
-    @NamedQuery(name = "Chitiethoidong.findByGiangvienmaChucVu", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.giangvienmaChucVu = :giangvienmaChucVu"),
-    @NamedQuery(name = "Chitiethoidong.findByHoidongmaHD", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.hoidongmaHD = :hoidongmaHD"),
+    @NamedQuery(name = "Chitiethoidong.findByMaHD", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.maHD = :maHD"),
+    @NamedQuery(name = "Chitiethoidong.findByMaGV", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.maGV = :maGV"),
+    @NamedQuery(name = "Chitiethoidong.findByMaND", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.maND = :maND"),
+    @NamedQuery(name = "Chitiethoidong.findByMaCV", query = "SELECT c FROM Chitiethoidong c WHERE c.chitiethoidongPK.maCV = :maCV"),
     @NamedQuery(name = "Chitiethoidong.findByVaiTro", query = "SELECT c FROM Chitiethoidong c WHERE c.vaiTro = :vaiTro")})
 public class Chitiethoidong implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ChitiethoidongPK chitiethoidongPK;
-    @Size(max = 45)
+    @Size(max = 50)
     @Column(name = "vaiTro")
     private String vaiTro;
     @JoinColumns({
-        @JoinColumn(name = "giangvien_maGV", referencedColumnName = "maGV", insertable = false, updatable = false),
-        @JoinColumn(name = "giangvien_maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "giangvien_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)})
+        @JoinColumn(name = "maGV", referencedColumnName = "maGV", insertable = false, updatable = false),
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Giangvien giangvien;
-    @JoinColumn(name = "hoidong_maHD", referencedColumnName = "maHD", insertable = false, updatable = false)
+    @JoinColumn(name = "maHD", referencedColumnName = "maHD", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Hoidong hoidong;
 
@@ -56,8 +56,8 @@ public class Chitiethoidong implements Serializable {
         this.chitiethoidongPK = chitiethoidongPK;
     }
 
-    public Chitiethoidong(String giangvienmaGV, String giangvienmaND, String giangvienmaChucVu, int hoidongmaHD) {
-        this.chitiethoidongPK = new ChitiethoidongPK(giangvienmaGV, giangvienmaND, giangvienmaChucVu, hoidongmaHD);
+    public Chitiethoidong(int maHD, String maGV, String maND, String maCV) {
+        this.chitiethoidongPK = new ChitiethoidongPK(maHD, maGV, maND, maCV);
     }
 
     public ChitiethoidongPK getChitiethoidongPK() {

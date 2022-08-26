@@ -26,7 +26,7 @@
                 <form:select id="vaiTro" path="chucvu" onchange="chonChucVu()">
                     <form:option value="">Chức vụ</form:option>
                     <c:forEach items="${chucvu}" var="c">
-                        <form:option value="${c.maChucVu}" >${c.tenChucVu}</form:option>
+                        <form:option value="${c.maCV}" >${c.tenCV}</form:option>
                     </c:forEach>
                 </form:select>
             </div>
@@ -76,35 +76,43 @@
             <h4 id="title" class="mt-4"></h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <label class="form-label" for="khoa">Khoa</label>
-                    <form:select id="khoa" path="khoa">
+                    <label class="form-label sinhVien" for="khoa" hidden="hidden">Khoa</label>
+                    <select id="khoa" class="sinhVien" hidden="hidden">
                         <c:forEach items="${khoa}" var="k">
-                            <form:option value="${k.maKhoa}" >${k.tenKhoa}</form:option>
+                            <option value="${k.maKhoa}" >${k.maKhoa} - ${k.tenKhoa}</option>
                         </c:forEach>
-                    </form:select>
+                    </select>
                 </div>
                 <div class="form-outline mt-4 col">
-                    <label class="form-label" for="nganh" >Ngành</label>
-                    <form:select id="nganh" path="nganh">
-                        <c:forEach items="${nganh}" var="n">
-                            <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
-                        </c:forEach>
-                    </form:select>
+                    <form:input type="text" id="makhoa" path="khoaDK" class="form-control sinhVien" hidden="hidden" placeholder="Mã khoa sinh viên" />
                 </div>
             </div>
-            
-            <div class="form-outline">
-                    <form:input type="text" id="hocVi" path="hocVi" class="form-control" placeholder="Học vị giảng viên" />
-                    <form:input type="text" id="hocHam" path="hocHam" class="form-control mt-4" placeholder="Học hàm giảng viên" />
-                    <form:input type="number" id="phongBan" path="phongBan" class="form-control" placeholder="Phòng ban giáo vụ" />
+            <div class="row">
+                <div class="form-outline mt-4 col">
+                    <label class="form-label sinhVien" for="nganh" hidden="hidden">Ngành</label>
+                    <select id="nganh" class="sinhVien" hidden="hidden">
+                        <c:forEach items="${nganh}" var="n">
+                            <option value="${n.nganhPK.maNganh}">${n.nganhPK.maNganh} - ${n.tenNganh}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-outline mt-4 col">
+                    <form:input type="text" id="maNganh" path="nganhDK" class="form-control sinhVien" hidden="hidden" placeholder="Mã ngành sinh viên" />
+                </div>
             </div>
+        </div>
 
-            <div class="form-outline mt-4">
-                <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo tài khoản người dùng"/>
-                <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
-            </div>
-        </form:form>
-    </div>
+        <div class="form-outline">
+            <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden" placeholder="Học vị giảng viên" />
+            <form:input type="text" id="hocHam" path="hocHam" class="form-control mt-4 giangVien" hidden="hidden" placeholder="Học hàm giảng viên" />
+            <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" hidden="hidden" placeholder="Phòng ban giáo vụ" />
+        </div>
+
+        <div class="form-outline mt-4">
+            <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo tài khoản người dùng"/>
+            <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
+        </div>
+    </form:form>
 </div>
 
 <script type="text/javascript">
@@ -113,7 +121,7 @@
     });
 </script>
 
-<!--<script type="text/javascript">
+<script type="text/javascript">
     function chonChucVu() {
         var x = document.getElementById("vaiTro").value;
         const gv = document.getElementsByClassName("giangVien");
@@ -125,6 +133,8 @@
             sv[1].hidden = false;
             sv[2].hidden = false;
             sv[3].hidden = false;
+            sv[4].hidden = false;
+            sv[5].hidden = false;
             gv[0].hidden = true;
             gv[1].hidden = true;
             gvu[0].hidden = true;
@@ -134,6 +144,8 @@
             sv[1].hidden = true;
             sv[2].hidden = true;
             sv[3].hidden = true;
+            sv[4].hidden = true;
+            sv[5].hidden = true;
             gv[0].hidden = false;
             gv[1].hidden = false;
             gvu[0].hidden = true;
@@ -143,6 +155,8 @@
             sv[1].hidden = true;
             sv[2].hidden = true;
             sv[3].hidden = true;
+            sv[4].hidden = true;
+            sv[5].hidden = true;
             gv[0].hidden = true;
             gv[1].hidden = true;
             gvu[0].hidden = false;
@@ -151,9 +165,11 @@
             sv[1].hidden = true;
             sv[2].hidden = true;
             sv[3].hidden = true;
+            sv[4].hidden = true;
+            sv[5].hidden = true;
             gv[0].hidden = true;
             gv[1].hidden = true;
             gvu[0].hidden = true;
         }
     }
-</script>-->
+</script>

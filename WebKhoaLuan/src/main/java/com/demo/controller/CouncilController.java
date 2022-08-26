@@ -49,19 +49,19 @@ public class CouncilController {
     }
 
     //THÊM HỘI ĐỒNG
-    @PostMapping("/HoiDong")
+    @PostMapping(value = "/HoiDong", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String HoiDong(Model model, @ModelAttribute(value = "hoidong") Hoidong council,
             @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
         model.addAttribute("giangvien", this.userService.getListGV());
-        String errMsg = " ";
+        String errMsg = "";
         if (council.getTenHD() != null) {
             if (this.councilService.addCouncil(council) == true) {
-                errMsg = " ";
+                errMsg = "Thêm hội đồng thành công.";
             } else {
                 errMsg = "Đã xảy ra lỗi!";
             }
         } else if (this.councilService.addDetailCouncil(detailCouncil) == true) {
-            errMsg = " ";
+            errMsg = "Thêm thành viên hội đồng thành công.";
         } else {
             errMsg = "Đã xảy ra lỗi!";
         }

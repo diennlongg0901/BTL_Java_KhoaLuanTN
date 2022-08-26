@@ -62,7 +62,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public Sinhvien getSVbyID(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Sinhvien WHERE maSv = (:id)");
+        Query q = session.createQuery("FROM Sinhvien WHERE maSV = (:id)");
         q.setParameter("id", id);
         return (Sinhvien) q.setMaxResults(1).getSingleResult();
     }
@@ -81,7 +81,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public List<Nguoidung> getAllGV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_GV'");
+        Query q = session.createQuery("FROM Nguoidung WHERE maCV = 'ROLE_GV'");
         return q.getResultList();
     }
     
@@ -95,21 +95,21 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public List<Nguoidung> getAllSV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_SV'");
+        Query q = session.createQuery("FROM Nguoidung WHERE maCV = 'ROLE_SV'");
         return q.getResultList();
     }
     
     @Override
     public List<Nguoidung> getAllGVU() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_GVU'");
+        Query q = session.createQuery("FROM Nguoidung WHERE maCV = 'ROLE_GVU'");
         return q.getResultList();
     }
 
     @Override
     public List<Nguoidung> getAllQT() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Nguoidung WHERE chucvu_maChucVu = 'ROLE_QT'");
+        Query q = session.createQuery("FROM Nguoidung WHERE maCV = 'ROLE_QT'");
         return q.getResultList();
     }
 
@@ -187,7 +187,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersQT(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Quantri WHERE maQT = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_QT'");
+        Query q = session.createQuery("DELETE FROM Quantri WHERE maQT = (:userID) AND maCV = 'ROLE_QT'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
@@ -195,7 +195,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersGVU(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Giaovu WHERE maGV = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_GVU'");
+        Query q = session.createQuery("DELETE FROM Giaovu WHERE maGV = (:userID) AND maCV = 'ROLE_GVU'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
@@ -203,7 +203,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersGV(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Giangvien WHERE maGV = (:userID) AND maChucVu = 'ROLE_GV'");
+        Query q = session.createQuery("DELETE FROM Giangvien WHERE maGV = (:userID) AND maCV = 'ROLE_GV'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
@@ -211,7 +211,7 @@ public class UserRepoImpl implements UserRepo {
     @Override
     public void deleteUsersSV(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Sinhvien WHERE maSV = (:userID) AND maChucVu = 'ROLE_SV'");
+        Query q = session.createQuery("DELETE FROM Sinhvien WHERE maSV = (:userID) AND maCV = 'ROLE_SV'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
@@ -233,7 +233,7 @@ public class UserRepoImpl implements UserRepo {
     public void updateUsersSV(Sinhvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("UPDATE Sinhvien SET nienKhoa = (:nienKhoa), tinhTrang = (:tinhTrang), maKhoa = (:maKhoa), maNganh = (:maNganh) "
-                + "WHERE maSV = (:userID) AND maChucVu = 'ROLE_SV'");
+                + "WHERE maSV = (:userID) AND maCV = 'ROLE_SV'");
         q.setParameter("userID", user.getSinhvienPK().getMaND());
         q.setParameter("nienKhoa", user.getNienKhoa());
         q.setParameter("tinhTrang", user.getTinhTrang());
@@ -246,7 +246,7 @@ public class UserRepoImpl implements UserRepo {
     public void updateUsersGV(Giangvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("UPDATE Giangvien SET hocVi = (:hocVi), hocHam = (:hocHam) "
-                + "WHERE maGV = (:userID) AND maChucVu = 'ROLE_GV'");
+                + "WHERE maGV = (:userID) AND maCV = 'ROLE_GV'");
         q.setParameter("userID", user.getGiangvienPK().getMaND());
         q.setParameter("hocVi", user.getHocVi());
         q.setParameter("hocHam", user.getHocHam());
@@ -257,8 +257,8 @@ public class UserRepoImpl implements UserRepo {
     public void updateUsersGVU(Giaovu user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("UPDATE Giaovu SET phongBan = (:phongBan) "
-                + "WHERE maGV = (:userID) AND nguoidung_chucvu_maChucVu = 'ROLE_GVU'");
-        q.setParameter("userID", user.getGiaovuPK().getNguoidungmaND());
+                + "WHERE maGV = (:userID) AND maCV = 'ROLE_GVU'");
+        q.setParameter("userID", user.getGiaovuPK().getMaND());
         q.setParameter("phongBan", user.getPhongBan());
         q.executeUpdate();
     } 

@@ -20,73 +20,73 @@ public class ChitiethoidongPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "giangvien_maGV")
-    private String giangvienmaGV;
+    @Column(name = "maHD")
+    private int maHD;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "giangvien_maND")
-    private String giangvienmaND;
+    @Column(name = "maGV")
+    private String maGV;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "giangvien_maChucVu")
-    private String giangvienmaChucVu;
+    @Column(name = "maND")
+    private String maND;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "hoidong_maHD")
-    private int hoidongmaHD;
+    @Size(min = 1, max = 10)
+    @Column(name = "maCV")
+    private String maCV;
 
     public ChitiethoidongPK() {
     }
 
-    public ChitiethoidongPK(String giangvienmaGV, String giangvienmaND, String giangvienmaChucVu, int hoidongmaHD) {
-        this.giangvienmaGV = giangvienmaGV;
-        this.giangvienmaND = giangvienmaND;
-        this.giangvienmaChucVu = giangvienmaChucVu;
-        this.hoidongmaHD = hoidongmaHD;
+    public ChitiethoidongPK(int maHD, String maGV, String maND, String maCV) {
+        this.maHD = maHD;
+        this.maGV = maGV;
+        this.maND = maND;
+        this.maCV = maCV;
     }
 
-    public String getGiangvienmaGV() {
-        return giangvienmaGV;
+    public int getMaHD() {
+        return maHD;
     }
 
-    public void setGiangvienmaGV(String giangvienmaGV) {
-        this.giangvienmaGV = giangvienmaGV;
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
     }
 
-    public String getGiangvienmaND() {
-        return giangvienmaND;
+    public String getMaGV() {
+        return maGV;
     }
 
-    public void setGiangvienmaND(String giangvienmaND) {
-        this.giangvienmaND = giangvienmaND;
+    public void setMaGV(String maGV) {
+        this.maGV = maGV;
     }
 
-    public String getGiangvienmaChucVu() {
-        return giangvienmaChucVu;
+    public String getMaND() {
+        return maND;
     }
 
-    public void setGiangvienmaChucVu(String giangvienmaChucVu) {
-        this.giangvienmaChucVu = giangvienmaChucVu;
+    public void setMaND(String maND) {
+        this.maND = maND;
     }
 
-    public int getHoidongmaHD() {
-        return hoidongmaHD;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setHoidongmaHD(int hoidongmaHD) {
-        this.hoidongmaHD = hoidongmaHD;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (giangvienmaGV != null ? giangvienmaGV.hashCode() : 0);
-        hash += (giangvienmaND != null ? giangvienmaND.hashCode() : 0);
-        hash += (giangvienmaChucVu != null ? giangvienmaChucVu.hashCode() : 0);
-        hash += (int) hoidongmaHD;
+        hash += (int) maHD;
+        hash += (maGV != null ? maGV.hashCode() : 0);
+        hash += (maND != null ? maND.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -97,16 +97,16 @@ public class ChitiethoidongPK implements Serializable {
             return false;
         }
         ChitiethoidongPK other = (ChitiethoidongPK) object;
-        if ((this.giangvienmaGV == null && other.giangvienmaGV != null) || (this.giangvienmaGV != null && !this.giangvienmaGV.equals(other.giangvienmaGV))) {
+        if (this.maHD != other.maHD) {
             return false;
         }
-        if ((this.giangvienmaND == null && other.giangvienmaND != null) || (this.giangvienmaND != null && !this.giangvienmaND.equals(other.giangvienmaND))) {
+        if ((this.maGV == null && other.maGV != null) || (this.maGV != null && !this.maGV.equals(other.maGV))) {
             return false;
         }
-        if ((this.giangvienmaChucVu == null && other.giangvienmaChucVu != null) || (this.giangvienmaChucVu != null && !this.giangvienmaChucVu.equals(other.giangvienmaChucVu))) {
+        if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if (this.hoidongmaHD != other.hoidongmaHD) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -114,7 +114,7 @@ public class ChitiethoidongPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.ChitiethoidongPK[ giangvienmaGV=" + giangvienmaGV + ", giangvienmaND=" + giangvienmaND + ", giangvienmaChucVu=" + giangvienmaChucVu + ", hoidongmaHD=" + hoidongmaHD + " ]";
+        return "com.demo.pojo.ChitiethoidongPK[ maHD=" + maHD + ", maGV=" + maGV + ", maND=" + maND + ", maCV=" + maCV + " ]";
     }
     
 }

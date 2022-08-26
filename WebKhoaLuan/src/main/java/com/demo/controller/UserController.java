@@ -8,6 +8,8 @@ import com.demo.pojo.Giangvien;
 import com.demo.pojo.GiangvienPK;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.GiaovuPK;
+import com.demo.pojo.Nganh;
+import com.demo.pojo.NganhPK;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
@@ -89,22 +91,22 @@ public class UserController {
         model.addAttribute("khoa", this.roleService.getKhoa());
         try {
             if (this.userDetailsService.addUser(nd) == true) {
-                switch (nd.getChucvu().getMaChucVu()) {
+                switch (nd.getChucvu().getMaCV()) {
                     case "ROLE_QT":
                         QuantriPK qtPK = new QuantriPK();
                         qtPK.setMaQT(nd.getUsername());
-                        qtPK.setNguoidungmaND(nd.getUsername());
-                        qtPK.setNguoidungchucvumaChucVu("ROLE_QT");
-                        qt.setChucVu("Quản trị người dùng");
+                        qtPK.setMaND(nd.getUsername());
+                        qtPK.setMaCV("ROLE_QT");
+                        qt.setNhiemVu("Quản trị người dùng");
                         qt.setNguoidung(nd);
                         qt.setQuantriPK(qtPK);
                         this.userDetailsService.addUserQT(qt);
                         return "redirect:/quantri/QLTaiKhoan";
                     case "ROLE_GVU":
                         GiaovuPK gvuPK = new GiaovuPK();
-                        gvuPK.setMaGV(nd.getUsername());
-                        gvuPK.setNguoidungmaND(nd.getUsername());
-                        gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+                        gvuPK.setMaGVU(nd.getUsername());
+                        gvuPK.setMaND(nd.getUsername());
+                        gvuPK.setMaCV("ROLE_GVU");
                         gvu.setPhongBan(nd.getPhongBan());
                         gvu.setNguoidung(nd);
                         gvu.setGiaovuPK(gvuPK);
@@ -114,7 +116,7 @@ public class UserController {
                         GiangvienPK gvPK = new GiangvienPK();
                         gvPK.setMaGV(nd.getUsername());
                         gvPK.setMaND(nd.getUsername());
-                        gvPK.setMaChucVu("ROLE_GV");
+                        gvPK.setMaCV("ROLE_GV");
                         gv.setHocVi(nd.getHocVi());
                         gv.setHocVi(nd.getHocHam());
                         gv.setNguoidung(nd);
@@ -123,13 +125,19 @@ public class UserController {
                         return "redirect:/quantri/QLTaiKhoan";
                     case "ROLE_SV":
                         SinhvienPK svPK = new SinhvienPK();
+                        Nganh nganh = new Nganh();
+                        NganhPK nganhPK = new NganhPK();
                         svPK.setMaND(nd.getUsername());
                         svPK.setMaND(nd.getUsername());
-                        svPK.setMaChucVu("ROLE_SV");
-                        svPK.setMaKhoa(nd.getKhoa());
-                        svPK.setMaNganh(nd.getNganh());
+                        svPK.setMaCV("ROLE_SV");
+                        svPK.setMaKhoa(nd.getKhoaDK());
+                        svPK.setMaNganh(nd.getNganhDK());
+                        nganhPK.setMaNganh(nd.getNganhDK());
+                        nganhPK.setMaKhoa(nd.getKhoaDK());
+                        nganh.setNganhPK(nganhPK);
                         sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
                         sv.setTinhTrang(Short.parseShort("1"));
+                        sv.setNganh(nganh);
                         sv.setNguoidung(nd);
                         sv.setSinhvienPK(svPK);
                         this.userDetailsService.addUserSV(sv);
@@ -226,14 +234,14 @@ public class UserController {
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
         if (id.substring(0, 3).equals("GVU")) {
-            userPK.setChucvumaChucVu("ROLE_GVU");
+            userPK.setMaCV("ROLE_GVU");
             nd.setNguoidungPK(userPK);
             this.userService.updateUsers(id, nd);
             Giaovu gvu = new Giaovu();
             GiaovuPK gvuPK = new GiaovuPK();
-            gvuPK.setMaGV(id);
-            gvuPK.setNguoidungmaND(id);
-            gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+            gvuPK.setMaGVU(id);
+            gvuPK.setMaND(id);
+            gvuPK.setMaCV("ROLE_GVU");
             gvu.setPhongBan(nd.getPhongBan());
             gvu.setGiaovuPK(gvuPK);
             this.userService.updateUsersGVU(gvu);
@@ -241,35 +249,35 @@ public class UserController {
         } else {
             switch (role) {
                 case "GV":
-                    userPK.setChucvumaChucVu("ROLE_GV");
+                    userPK.setMaCV("ROLE_GV");
                     nd.setNguoidungPK(userPK);
                     this.userService.updateUsers(id, nd);
                     GiangvienPK gvPK = new GiangvienPK();
                     Giangvien gv = new Giangvien();
                     gvPK.setMaND(id);
                     gvPK.setMaGV(id);
-                    gvPK.setMaChucVu("ROLE_GV");
+                    gvPK.setMaCV("ROLE_GV");
                     gv.setHocHam(nd.getHocHam());
                     gv.setHocVi(nd.getHocVi());
                     gv.setGiangvienPK(gvPK);
                     this.userService.updateUsersGV(gv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "SV":
-                    userPK.setChucvumaChucVu("ROLE_SV");
+                    userPK.setMaCV("ROLE_SV");
                     nd.setNguoidungPK(userPK);
                     this.userService.updateUsers(id, nd);
                     SinhvienPK svPK = new SinhvienPK();
                     Sinhvien sv = new Sinhvien();
                     svPK.setMaSV(id);
                     svPK.setMaND(id);
-                    svPK.setMaChucVu("ROLE_SV");
+                    svPK.setMaCV("ROLE_SV");
                     sv.setSinhvienPK(svPK);
                     sv.setNienKhoa(nd.getNienKhoa());
                     sv.setTinhTrang(nd.getTinhTrang());
                     this.userService.updateUsersSV(sv);
                     return "redirect:/quantri/QLTaiKhoan";
                 case "QT":
-                    userPK.setChucvumaChucVu("ROLE_QT");
+                    userPK.setMaCV("ROLE_QT");
                     nd.setNguoidungPK(userPK);
                     this.userService.updateUsers(id, nd);
                     return "redirect:/quantri/QLTaiKhoan";
@@ -291,7 +299,7 @@ public class UserController {
         String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
-        userPK.setChucvumaChucVu("ROLE_QT");
+        userPK.setMaCV("ROLE_QT");
         nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
@@ -327,7 +335,7 @@ public class UserController {
         String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
-        userPK.setChucvumaChucVu("ROLE_GVU");
+        userPK.setMaCV("ROLE_GVU");
         nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
@@ -363,7 +371,7 @@ public class UserController {
 
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
-        userPK.setChucvumaChucVu("ROLE_GV");
+        userPK.setMaCV("ROLE_GV");
         nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {
@@ -398,7 +406,7 @@ public class UserController {
         String errMsg = "";
         NguoidungPK userPK = new NguoidungPK();
         userPK.setMaND(id);
-        userPK.setChucvumaChucVu("ROLE_SV");
+        userPK.setMaCV("ROLE_SV");
         nd.setNguoidungPK(userPK);
         try {
             if (!nd.getPassword().isEmpty()) {

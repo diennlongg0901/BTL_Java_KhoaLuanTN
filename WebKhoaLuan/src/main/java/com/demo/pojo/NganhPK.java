@@ -8,54 +8,56 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class NganhPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "maNganh")
-    private int maNganh;
+    private String maNganh;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "khoa_maKhoa")
-    private int khoamaKhoa;
+    @Size(min = 1, max = 10)
+    @Column(name = "maKhoa")
+    private String maKhoa;
 
     public NganhPK() {
     }
 
-    public NganhPK(int maNganh, int khoamaKhoa) {
+    public NganhPK(String maNganh, String maKhoa) {
         this.maNganh = maNganh;
-        this.khoamaKhoa = khoamaKhoa;
+        this.maKhoa = maKhoa;
     }
 
-    public int getMaNganh() {
+    public String getMaNganh() {
         return maNganh;
     }
 
-    public void setMaNganh(int maNganh) {
+    public void setMaNganh(String maNganh) {
         this.maNganh = maNganh;
     }
 
-    public int getKhoamaKhoa() {
-        return khoamaKhoa;
+    public String getMaKhoa() {
+        return maKhoa;
     }
 
-    public void setKhoamaKhoa(int khoamaKhoa) {
-        this.khoamaKhoa = khoamaKhoa;
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (int) maNganh;
-        hash += (int) khoamaKhoa;
+        hash += (maNganh != null ? maNganh.hashCode() : 0);
+        hash += (maKhoa != null ? maKhoa.hashCode() : 0);
         return hash;
     }
 
@@ -66,10 +68,10 @@ public class NganhPK implements Serializable {
             return false;
         }
         NganhPK other = (NganhPK) object;
-        if (this.maNganh != other.maNganh) {
+        if ((this.maNganh == null && other.maNganh != null) || (this.maNganh != null && !this.maNganh.equals(other.maNganh))) {
             return false;
         }
-        if (this.khoamaKhoa != other.khoamaKhoa) {
+        if ((this.maKhoa == null && other.maKhoa != null) || (this.maKhoa != null && !this.maKhoa.equals(other.maKhoa))) {
             return false;
         }
         return true;
@@ -77,7 +79,7 @@ public class NganhPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.NganhPK[ maNganh=" + maNganh + ", khoamaKhoa=" + khoamaKhoa + " ]";
+        return "com.demo.pojo.NganhPK[ maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
     }
     
 }

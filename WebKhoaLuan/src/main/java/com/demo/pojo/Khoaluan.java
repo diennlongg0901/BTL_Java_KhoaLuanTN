@@ -5,7 +5,8 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -17,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -31,39 +34,41 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Khoaluan.findAll", query = "SELECT k FROM Khoaluan k"),
     @NamedQuery(name = "Khoaluan.findByMaKL", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maKL = :maKL"),
-    @NamedQuery(name = "Khoaluan.findByDeTaiKL", query = "SELECT k FROM Khoaluan k WHERE k.deTaiKL = :deTaiKL"),
     @NamedQuery(name = "Khoaluan.findByNam", query = "SELECT k FROM Khoaluan k WHERE k.nam = :nam"),
     @NamedQuery(name = "Khoaluan.findByGhiChu", query = "SELECT k FROM Khoaluan k WHERE k.ghiChu = :ghiChu"),
-    @NamedQuery(name = "Khoaluan.findByHoidongmaHD", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.hoidongmaHD = :hoidongmaHD"),
-    @NamedQuery(name = "Khoaluan.findByMaSV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maSV = :maSV"),
+    @NamedQuery(name = "Khoaluan.findByNgayNop", query = "SELECT k FROM Khoaluan k WHERE k.ngayNop = :ngayNop"),
+    @NamedQuery(name = "Khoaluan.findByMaDT", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maDT = :maDT"),
+    @NamedQuery(name = "Khoaluan.findBySinhvienmaSV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.sinhvienmaSV = :sinhvienmaSV"),
     @NamedQuery(name = "Khoaluan.findByMaND", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maND = :maND"),
-    @NamedQuery(name = "Khoaluan.findByMaChucVu", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maChucVu = :maChucVu"),
+    @NamedQuery(name = "Khoaluan.findByMaCV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maCV = :maCV"),
     @NamedQuery(name = "Khoaluan.findByMaNganh", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maNganh = :maNganh"),
-    @NamedQuery(name = "Khoaluan.findByMaKhoa", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maKhoa = :maKhoa")})
+    @NamedQuery(name = "Khoaluan.findBySinhvienmaKhoa", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.sinhvienmaKhoa = :sinhvienmaKhoa")})
 public class Khoaluan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected KhoaluanPK khoaluanPK;
-    @Size(max = 100)
-    @Column(name = "deTaiKL")
-    private String deTaiKL;
+    @Size(max = 15)
     @Column(name = "nam")
-    private Integer nam;
+    private String nam;
     @Size(max = 100)
     @Column(name = "ghiChu")
     private String ghiChu;
+    @Column(name = "ngayNop")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ngayNop;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoaluan")
-    private Collection<Diem> diemCollection;
-    @JoinColumn(name = "hoidong_maHD", referencedColumnName = "maHD", insertable = false, updatable = false)
+    private Set<Diem> diemSet;
+    @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Hoidong hoidong;
+    private Detai detai;
     @JoinColumns({
-        @JoinColumn(name = "maSV", referencedColumnName = "maSV", insertable = false, updatable = false),
+        @JoinColumn(name = "sinhvien_maSV", referencedColumnName = "maSV", insertable = false, updatable = false),       
         @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false),
-        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
-        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false),
+        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false), 
+        @JoinColumn(name = "sinhvien_maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)
+        })
     @ManyToOne(optional = false)
     private Sinhvien sinhvien;
 
@@ -74,8 +79,8 @@ public class Khoaluan implements Serializable {
         this.khoaluanPK = khoaluanPK;
     }
 
-    public Khoaluan(int maKL, int hoidongmaHD, String maSV, String maND, String maChucVu, int maNganh, int maKhoa) {
-        this.khoaluanPK = new KhoaluanPK(maKL, hoidongmaHD, maSV, maND, maChucVu, maNganh, maKhoa);
+    public Khoaluan(int maKL, int maDT, String sinhvienmaSV, String maND, String maCV, String maNganh, String sinhvienmaKhoa) {
+        this.khoaluanPK = new KhoaluanPK(maKL, maDT, sinhvienmaSV, maND, maCV, maNganh, sinhvienmaKhoa);
     }
 
     public KhoaluanPK getKhoaluanPK() {
@@ -86,19 +91,11 @@ public class Khoaluan implements Serializable {
         this.khoaluanPK = khoaluanPK;
     }
 
-    public String getDeTaiKL() {
-        return deTaiKL;
-    }
-
-    public void setDeTaiKL(String deTaiKL) {
-        this.deTaiKL = deTaiKL;
-    }
-
-    public Integer getNam() {
+    public String getNam() {
         return nam;
     }
 
-    public void setNam(Integer nam) {
+    public void setNam(String nam) {
         this.nam = nam;
     }
 
@@ -110,21 +107,29 @@ public class Khoaluan implements Serializable {
         this.ghiChu = ghiChu;
     }
 
+    public Date getNgayNop() {
+        return ngayNop;
+    }
+
+    public void setNgayNop(Date ngayNop) {
+        this.ngayNop = ngayNop;
+    }
+
     @XmlTransient
-    public Collection<Diem> getDiemCollection() {
-        return diemCollection;
+    public Set<Diem> getDiemSet() {
+        return diemSet;
     }
 
-    public void setDiemCollection(Collection<Diem> diemCollection) {
-        this.diemCollection = diemCollection;
+    public void setDiemSet(Set<Diem> diemSet) {
+        this.diemSet = diemSet;
     }
 
-    public Hoidong getHoidong() {
-        return hoidong;
+    public Detai getDetai() {
+        return detai;
     }
 
-    public void setHoidong(Hoidong hoidong) {
-        this.hoidong = hoidong;
+    public void setDetai(Detai detai) {
+        this.detai = detai;
     }
 
     public Sinhvien getSinhvien() {

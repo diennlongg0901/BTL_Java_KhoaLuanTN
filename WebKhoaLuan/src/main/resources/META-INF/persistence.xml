@@ -28,6 +28,7 @@
     <class>com.demo.config.Khoaluan</class>
     <class>com.demo.config.Hoidong</class>
     <class>com.demo.pojo.Nguoidung</class>
+    <class>com.demo.pojo.Detai</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class KhoaluanPK implements Serializable {
@@ -23,13 +23,13 @@ public class KhoaluanPK implements Serializable {
     private int maKL;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "hoidong_maHD")
-    private int hoidongmaHD;
+    @Column(name = "maDT")
+    private int maDT;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "maSV")
-    private String maSV;
+    @Size(min = 1, max = 10)
+    @Column(name = "sinhvien_maSV")
+    private String sinhvienmaSV;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -38,28 +38,30 @@ public class KhoaluanPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "maChucVu")
-    private String maChucVu;
+    @Column(name = "maCV")
+    private String maCV;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "maNganh")
-    private int maNganh;
+    private String maNganh;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "maKhoa")
-    private int maKhoa;
+    @Size(min = 1, max = 10)
+    @Column(name = "sinhvien_maKhoa")
+    private String sinhvienmaKhoa;
 
     public KhoaluanPK() {
     }
 
-    public KhoaluanPK(int maKL, int hoidongmaHD, String maSV, String maND, String maChucVu, int maNganh, int maKhoa) {
+    public KhoaluanPK(int maKL, int maDT, String sinhvienmaSV, String maND, String maCV, String maNganh, String sinhvienmaKhoa) {
         this.maKL = maKL;
-        this.hoidongmaHD = hoidongmaHD;
-        this.maSV = maSV;
+        this.maDT = maDT;
+        this.sinhvienmaSV = sinhvienmaSV;
         this.maND = maND;
-        this.maChucVu = maChucVu;
+        this.maCV = maCV;
         this.maNganh = maNganh;
-        this.maKhoa = maKhoa;
+        this.sinhvienmaKhoa = sinhvienmaKhoa;
     }
 
     public int getMaKL() {
@@ -70,20 +72,20 @@ public class KhoaluanPK implements Serializable {
         this.maKL = maKL;
     }
 
-    public int getHoidongmaHD() {
-        return hoidongmaHD;
+    public int getMaDT() {
+        return maDT;
     }
 
-    public void setHoidongmaHD(int hoidongmaHD) {
-        this.hoidongmaHD = hoidongmaHD;
+    public void setMaDT(int maDT) {
+        this.maDT = maDT;
     }
 
-    public String getMaSV() {
-        return maSV;
+    public String getSinhvienmaSV() {
+        return sinhvienmaSV;
     }
 
-    public void setMaSV(String maSV) {
-        this.maSV = maSV;
+    public void setSinhvienmaSV(String sinhvienmaSV) {
+        this.sinhvienmaSV = sinhvienmaSV;
     }
 
     public String getMaND() {
@@ -94,40 +96,40 @@ public class KhoaluanPK implements Serializable {
         this.maND = maND;
     }
 
-    public String getMaChucVu() {
-        return maChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setMaChucVu(String maChucVu) {
-        this.maChucVu = maChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
-    public int getMaNganh() {
+    public String getMaNganh() {
         return maNganh;
     }
 
-    public void setMaNganh(int maNganh) {
+    public void setMaNganh(String maNganh) {
         this.maNganh = maNganh;
     }
 
-    public int getMaKhoa() {
-        return maKhoa;
+    public String getSinhvienmaKhoa() {
+        return sinhvienmaKhoa;
     }
 
-    public void setMaKhoa(int maKhoa) {
-        this.maKhoa = maKhoa;
+    public void setSinhvienmaKhoa(String sinhvienmaKhoa) {
+        this.sinhvienmaKhoa = sinhvienmaKhoa;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) maKL;
-        hash += (int) hoidongmaHD;
-        hash += (maSV != null ? maSV.hashCode() : 0);
+        hash += (int) maDT;
+        hash += (sinhvienmaSV != null ? sinhvienmaSV.hashCode() : 0);
         hash += (maND != null ? maND.hashCode() : 0);
-        hash += (maChucVu != null ? maChucVu.hashCode() : 0);
-        hash += (int) maNganh;
-        hash += (int) maKhoa;
+        hash += (maCV != null ? maCV.hashCode() : 0);
+        hash += (maNganh != null ? maNganh.hashCode() : 0);
+        hash += (sinhvienmaKhoa != null ? sinhvienmaKhoa.hashCode() : 0);
         return hash;
     }
 
@@ -141,22 +143,22 @@ public class KhoaluanPK implements Serializable {
         if (this.maKL != other.maKL) {
             return false;
         }
-        if (this.hoidongmaHD != other.hoidongmaHD) {
+        if (this.maDT != other.maDT) {
             return false;
         }
-        if ((this.maSV == null && other.maSV != null) || (this.maSV != null && !this.maSV.equals(other.maSV))) {
+        if ((this.sinhvienmaSV == null && other.sinhvienmaSV != null) || (this.sinhvienmaSV != null && !this.sinhvienmaSV.equals(other.sinhvienmaSV))) {
             return false;
         }
         if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.maChucVu == null && other.maChucVu != null) || (this.maChucVu != null && !this.maChucVu.equals(other.maChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
-        if (this.maNganh != other.maNganh) {
+        if ((this.maNganh == null && other.maNganh != null) || (this.maNganh != null && !this.maNganh.equals(other.maNganh))) {
             return false;
         }
-        if (this.maKhoa != other.maKhoa) {
+        if ((this.sinhvienmaKhoa == null && other.sinhvienmaKhoa != null) || (this.sinhvienmaKhoa != null && !this.sinhvienmaKhoa.equals(other.sinhvienmaKhoa))) {
             return false;
         }
         return true;
@@ -164,7 +166,7 @@ public class KhoaluanPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.KhoaluanPK[ maKL=" + maKL + ", hoidongmaHD=" + hoidongmaHD + ", maSV=" + maSV + ", maND=" + maND + ", maChucVu=" + maChucVu + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
+        return "com.demo.pojo.KhoaluanPK[ maKL=" + maKL + ", maDT=" + maDT + ", sinhvienmaSV=" + sinhvienmaSV + ", maND=" + maND + ", maCV=" + maCV + ", maNganh=" + maNganh + ", sinhvienmaKhoa=" + sinhvienmaKhoa + " ]";
     }
     
 }

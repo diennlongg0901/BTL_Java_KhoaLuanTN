@@ -13,66 +13,66 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class GiaovuPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "maGV")
-    private String maGV;
+    @Size(min = 1, max = 10)
+    @Column(name = "maGVU")
+    private String maGVU;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "nguoidung_maND")
-    private String nguoidungmaND;
+    @Column(name = "maND")
+    private String maND;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "nguoidung_chucvu_maChucVu")
-    private String nguoidungchucvumaChucVu;
+    @Column(name = "maCV")
+    private String maCV;
 
     public GiaovuPK() {
     }
 
-    public GiaovuPK(String maGV, String nguoidungmaND, String nguoidungchucvumaChucVu) {
-        this.maGV = maGV;
-        this.nguoidungmaND = nguoidungmaND;
-        this.nguoidungchucvumaChucVu = nguoidungchucvumaChucVu;
+    public GiaovuPK(String maGVU, String maND, String maCV) {
+        this.maGVU = maGVU;
+        this.maND = maND;
+        this.maCV = maCV;
     }
 
-    public String getMaGV() {
-        return maGV;
+    public String getMaGVU() {
+        return maGVU;
     }
 
-    public void setMaGV(String maGV) {
-        this.maGV = maGV;
+    public void setMaGVU(String maGVU) {
+        this.maGVU = maGVU;
     }
 
-    public String getNguoidungmaND() {
-        return nguoidungmaND;
+    public String getMaND() {
+        return maND;
     }
 
-    public void setNguoidungmaND(String nguoidungmaND) {
-        this.nguoidungmaND = nguoidungmaND;
+    public void setMaND(String maND) {
+        this.maND = maND;
     }
 
-    public String getNguoidungchucvumaChucVu() {
-        return nguoidungchucvumaChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setNguoidungchucvumaChucVu(String nguoidungchucvumaChucVu) {
-        this.nguoidungchucvumaChucVu = nguoidungchucvumaChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (maGV != null ? maGV.hashCode() : 0);
-        hash += (nguoidungmaND != null ? nguoidungmaND.hashCode() : 0);
-        hash += (nguoidungchucvumaChucVu != null ? nguoidungchucvumaChucVu.hashCode() : 0);
+        hash += (maGVU != null ? maGVU.hashCode() : 0);
+        hash += (maND != null ? maND.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -83,13 +83,13 @@ public class GiaovuPK implements Serializable {
             return false;
         }
         GiaovuPK other = (GiaovuPK) object;
-        if ((this.maGV == null && other.maGV != null) || (this.maGV != null && !this.maGV.equals(other.maGV))) {
+        if ((this.maGVU == null && other.maGVU != null) || (this.maGVU != null && !this.maGVU.equals(other.maGVU))) {
             return false;
         }
-        if ((this.nguoidungmaND == null && other.nguoidungmaND != null) || (this.nguoidungmaND != null && !this.nguoidungmaND.equals(other.nguoidungmaND))) {
+        if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.nguoidungchucvumaChucVu == null && other.nguoidungchucvumaChucVu != null) || (this.nguoidungchucvumaChucVu != null && !this.nguoidungchucvumaChucVu.equals(other.nguoidungchucvumaChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ public class GiaovuPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.GiaovuPK[ maGV=" + maGV + ", nguoidungmaND=" + nguoidungmaND + ", nguoidungchucvumaChucVu=" + nguoidungchucvumaChucVu + " ]";
+        return "com.demo.pojo.GiaovuPK[ maGVU=" + maGVU + ", maND=" + maND + ", maCV=" + maCV + " ]";
     }
     
 }

@@ -60,7 +60,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     @Override
     public List<Chitiethoidong> getCouncilDetail(String tenHD) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Chitiethoidong WHERE hoidong.tenHD = (:tenHD)");
+        Query q = session.createQuery("FROM Chitiethoidong WHERE tenHD = (:tenHD)");
         q.setParameter("tenHD", tenHD);
         return q.getResultList();
     }
@@ -68,7 +68,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     @Override
     public List<Chitiethoidong> getListCouncilDetail() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Chitiethoidong ORDER BY hoidong_maHD DESC");
+        Query q = session.createQuery("FROM Chitiethoidong ORDER BY maHD DESC");
         return q.getResultList();
     }
 
@@ -76,7 +76,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     @Override
     public void deleteMember(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Chitiethoidong WHERE giangvien_maGV = (:userID) AND giangvien_maND = (:userID) AND maChucVu = 'ROLE_GV'");
+        Query q = session.createQuery("DELETE FROM Chitiethoidong WHERE maGV = (:userID) AND maND = (:userID) AND maCV = 'ROLE_GV'");
         q.setParameter("userID", userID);
         q.executeUpdate();
     }

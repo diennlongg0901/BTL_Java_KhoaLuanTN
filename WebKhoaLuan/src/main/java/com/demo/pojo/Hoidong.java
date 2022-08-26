@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,13 +40,14 @@ public class Hoidong implements Serializable {
     @Basic(optional = false)
     @Column(name = "maHD")
     private Integer maHD;
-    @Size(max = 50)
+    @Size(max = 150)
     @Column(name = "tenHD")
     private String tenHD;
+    @Size(max = 45)
+    @Column(name = "tinhTrangHD")
+    private String tinhTrangHD;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Collection<Chitiethoidong> chitiethoidongCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Collection<Khoaluan> khoaluanCollection;
+    private Set<Chitiethoidong> chitiethoidongSet;
 
     public Hoidong() {
     }
@@ -72,21 +73,12 @@ public class Hoidong implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Chitiethoidong> getChitiethoidongCollection() {
-        return chitiethoidongCollection;
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
     }
 
-    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
-        this.chitiethoidongCollection = chitiethoidongCollection;
-    }
-
-    @XmlTransient
-    public Collection<Khoaluan> getKhoaluanCollection() {
-        return khoaluanCollection;
-    }
-
-    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
-        this.khoaluanCollection = khoaluanCollection;
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
 
     @Override
@@ -112,6 +104,14 @@ public class Hoidong implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Hoidong[ maHD=" + maHD + " ]";
+    }
+
+    public String getTinhTrangHD() {
+        return tinhTrangHD;
+    }
+
+    public void setTinhTrangHD(String tinhTrangHD) {
+        this.tinhTrangHD = tinhTrangHD;
     }
     
 }

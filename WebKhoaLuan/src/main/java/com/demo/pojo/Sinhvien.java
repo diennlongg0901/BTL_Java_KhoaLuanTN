@@ -5,8 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -18,7 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sinhvien.findByNienKhoa", query = "SELECT s FROM Sinhvien s WHERE s.nienKhoa = :nienKhoa"),
     @NamedQuery(name = "Sinhvien.findByTinhTrang", query = "SELECT s FROM Sinhvien s WHERE s.tinhTrang = :tinhTrang"),
     @NamedQuery(name = "Sinhvien.findByMaND", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maND = :maND"),
-    @NamedQuery(name = "Sinhvien.findByMaChucVu", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maChucVu = :maChucVu"),
+    @NamedQuery(name = "Sinhvien.findByMaCV", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maCV = :maCV"),
     @NamedQuery(name = "Sinhvien.findByMaNganh", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maNganh = :maNganh"),
     @NamedQuery(name = "Sinhvien.findByMaKhoa", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maKhoa = :maKhoa")})
 public class Sinhvien implements Serializable {
@@ -44,27 +42,23 @@ public class Sinhvien implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SinhvienPK sinhvienPK;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
+    @Size(max = 15)
     @Column(name = "nienKhoa")
     private String nienKhoa;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "tinhTrang")
-    private short tinhTrang;
+    private Short tinhTrang;
     @JoinColumns({
         @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
-        @JoinColumn(name = "maKhoa", referencedColumnName = "khoa_maKhoa", insertable = false, updatable = false)})
+        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nganh nganh;
     @JoinColumns({
         @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
-    private Collection<Khoaluan> khoaluanCollection;
+    private Set<Khoaluan> khoaluanSet;
 
     public Sinhvien() {
     }
@@ -73,14 +67,8 @@ public class Sinhvien implements Serializable {
         this.sinhvienPK = sinhvienPK;
     }
 
-    public Sinhvien(SinhvienPK sinhvienPK, String nienKhoa, short tinhTrang) {
-        this.sinhvienPK = sinhvienPK;
-        this.nienKhoa = nienKhoa;
-        this.tinhTrang = tinhTrang;
-    }
-
-    public Sinhvien(String maSV, String maND, String maChucVu, int maNganh, int maKhoa) {
-        this.sinhvienPK = new SinhvienPK(maSV, maND, maChucVu, maNganh, maKhoa);
+    public Sinhvien(String maSV, String maND, String maCV, String maNganh, String maKhoa) {
+        this.sinhvienPK = new SinhvienPK(maSV, maND, maCV, maNganh, maKhoa);
     }
 
     public SinhvienPK getSinhvienPK() {
@@ -99,11 +87,11 @@ public class Sinhvien implements Serializable {
         this.nienKhoa = nienKhoa;
     }
 
-    public short getTinhTrang() {
+    public Short getTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(short tinhTrang) {
+    public void setTinhTrang(Short tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 
@@ -124,12 +112,12 @@ public class Sinhvien implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Khoaluan> getKhoaluanCollection() {
-        return khoaluanCollection;
+    public Set<Khoaluan> getKhoaluanSet() {
+        return khoaluanSet;
     }
 
-    public void setKhoaluanCollection(Collection<Khoaluan> khoaluanCollection) {
-        this.khoaluanCollection = khoaluanCollection;
+    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
+        this.khoaluanSet = khoaluanSet;
     }
 
     @Override

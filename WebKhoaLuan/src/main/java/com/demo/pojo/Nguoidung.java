@@ -4,10 +4,9 @@
  */
 package com.demo.pojo;
 
-import java.io.File;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -26,10 +25,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.springframework.web.multipart.MultipartFile;
 
-
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Entity
 @Table(name = "nguoidung")
@@ -48,25 +46,10 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Nguoidung.findByEmail", query = "SELECT n FROM Nguoidung n WHERE n.email = :email"),
     @NamedQuery(name = "Nguoidung.findBySdt", query = "SELECT n FROM Nguoidung n WHERE n.sdt = :sdt"),
     @NamedQuery(name = "Nguoidung.findByHoatDong", query = "SELECT n FROM Nguoidung n WHERE n.hoatDong = :hoatDong"),
-    @NamedQuery(name = "Nguoidung.findByChucvumaChucVu", query = "SELECT n FROM Nguoidung n WHERE n.nguoidungPK.chucvumaChucVu = :chucvumaChucVu")})
+    @NamedQuery(name = "Nguoidung.findByMaCV", query = "SELECT n FROM Nguoidung n WHERE n.nguoidungPK.maCV = :maCV")})
 public class Nguoidung implements Serializable {
 
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
-
     private static final long serialVersionUID = 1L;
-    
     @EmbeddedId
     protected NguoidungPK nguoidungPK;
     @Size(max = 50)
@@ -103,14 +86,14 @@ public class Nguoidung implements Serializable {
     @Column(name = "hoatDong")
     private Short hoatDong;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Collection<Quantri> quantriCollection;
+    private Set<Quantri> quantriSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Collection<Giangvien> giangvienCollection;
+    private Set<Giangvien> giangvienSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Collection<Giaovu> giaovuCollection;
+    private Set<Giaovu> giaovuSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nguoidung")
-    private Collection<Sinhvien> sinhvienCollection;
-    @JoinColumn(name = "chucvu_maChucVu", referencedColumnName = "maChucVu", insertable = false, updatable = false)
+    private Set<Sinhvien> sinhvienSet;
+    @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Chucvu chucvu;
     @Transient
@@ -123,9 +106,13 @@ public class Nguoidung implements Serializable {
     @Transient
     private short tinhTrang;
     @Transient
-    private int khoa;
+    private String khoa;
     @Transient
-    private int nganh;
+    private String nganh;
+    @Transient
+    private String khoaDK;
+    @Transient
+    private String nganhDK;
     //GIẢNG VIÊN
     @Transient
     private String hocHam;
@@ -134,7 +121,71 @@ public class Nguoidung implements Serializable {
     //GIÁO VỤ
     @Transient
     private String phongBan;
+
+    public String getKhoaDK() {
+        return khoaDK;
+    }
+
+    public void setKhoaDK(String khoaDK) {
+        this.khoaDK = khoaDK;
+    }
+
+    public String getNganhDK() {
+        return nganhDK;
+    }
+
+    public void setNganhDK(String nganhDK) {
+        this.nganhDK = nganhDK;
+    }
     
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public String getNienKhoa() {
+        return nienKhoa;
+    }
+
+    public void setNienKhoa(String nienKhoa) {
+        this.nienKhoa = nienKhoa;
+    }
+    
+    public short getTinhTrang() {
+        return tinhTrang;
+    }
+
+    public void setTinhTrang(short tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+    public String getKhoa() {
+        return khoa;
+    }
+
+    public void setKhoa(String khoa) {
+        this.khoa = khoa;
+    }
+
+    public String getNganh() {
+        return nganh;
+    }
+
+    public void setNganh(String nganh) {
+        this.nganh = nganh;
+    }
+
     public String getHocHam() {
         return hocHam;
     }
@@ -158,47 +209,6 @@ public class Nguoidung implements Serializable {
     public void setPhongBan(String phongBan) {
         this.phongBan = phongBan;
     }
-    
-    public String getNienKhoa() {
-        return nienKhoa;
-    }
-
-    public void setNienKhoa(String nienKhoa) {
-        this.nienKhoa = nienKhoa;
-    }
-
-    public short getTinhTrang() {
-        return tinhTrang;
-    }
-
-    public void setTinhTrang(short tinhTrang) {
-        this.tinhTrang = tinhTrang;
-    }
-
-    public int getKhoa() {
-        return khoa;
-    }
-
-    public void setKhoa(int khoa) {
-        this.khoa = khoa;
-    }
-
-    public int getNganh() {
-        return nganh;
-    }
-
-    public void setNganh(int nganh) {
-        this.nganh = nganh;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-    
     public Nguoidung() {
     }
 
@@ -206,8 +216,8 @@ public class Nguoidung implements Serializable {
         this.nguoidungPK = nguoidungPK;
     }
 
-    public Nguoidung(String maND, String chucvumaChucVu) {
-        this.nguoidungPK = new NguoidungPK(maND, chucvumaChucVu);
+    public Nguoidung(String maND, String maCV) {
+        this.nguoidungPK = new NguoidungPK(maND, maCV);
     }
 
     public NguoidungPK getNguoidungPK() {
@@ -307,39 +317,39 @@ public class Nguoidung implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Quantri> getQuantriCollection() {
-        return quantriCollection;
+    public Set<Quantri> getQuantriSet() {
+        return quantriSet;
     }
 
-    public void setQuantriCollection(Collection<Quantri> quantriCollection) {
-        this.quantriCollection = quantriCollection;
-    }
-
-    @XmlTransient
-    public Collection<Giangvien> getGiangvienCollection() {
-        return giangvienCollection;
-    }
-
-    public void setGiangvienCollection(Collection<Giangvien> giangvienCollection) {
-        this.giangvienCollection = giangvienCollection;
+    public void setQuantriSet(Set<Quantri> quantriSet) {
+        this.quantriSet = quantriSet;
     }
 
     @XmlTransient
-    public Collection<Giaovu> getGiaovuCollection() {
-        return giaovuCollection;
+    public Set<Giangvien> getGiangvienSet() {
+        return giangvienSet;
     }
 
-    public void setGiaovuCollection(Collection<Giaovu> giaovuCollection) {
-        this.giaovuCollection = giaovuCollection;
+    public void setGiangvienSet(Set<Giangvien> giangvienSet) {
+        this.giangvienSet = giangvienSet;
     }
 
     @XmlTransient
-    public Collection<Sinhvien> getSinhvienCollection() {
-        return sinhvienCollection;
+    public Set<Giaovu> getGiaovuSet() {
+        return giaovuSet;
     }
 
-    public void setSinhvienCollection(Collection<Sinhvien> sinhvienCollection) {
-        this.sinhvienCollection = sinhvienCollection;
+    public void setGiaovuSet(Set<Giaovu> giaovuSet) {
+        this.giaovuSet = giaovuSet;
+    }
+
+    @XmlTransient
+    public Set<Sinhvien> getSinhvienSet() {
+        return sinhvienSet;
+    }
+
+    public void setSinhvienSet(Set<Sinhvien> sinhvienSet) {
+        this.sinhvienSet = sinhvienSet;
     }
 
     public Chucvu getChucvu() {

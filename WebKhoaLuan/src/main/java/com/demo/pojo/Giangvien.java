@@ -5,7 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -34,25 +34,25 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Giangvien.findByHocVi", query = "SELECT g FROM Giangvien g WHERE g.hocVi = :hocVi"),
     @NamedQuery(name = "Giangvien.findByHocHam", query = "SELECT g FROM Giangvien g WHERE g.hocHam = :hocHam"),
     @NamedQuery(name = "Giangvien.findByMaND", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maND = :maND"),
-    @NamedQuery(name = "Giangvien.findByMaChucVu", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maChucVu = :maChucVu")})
+    @NamedQuery(name = "Giangvien.findByMaCV", query = "SELECT g FROM Giangvien g WHERE g.giangvienPK.maCV = :maCV")})
 public class Giangvien implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected GiangvienPK giangvienPK;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "hocVi")
     private String hocVi;
-    @Size(max = 50)
+    @Size(max = 100)
     @Column(name = "hocHam")
     private String hocHam;
     @JoinColumns({
         @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
-    @OneToMany(mappedBy = "giangvien")
-    private Collection<Chitiethoidong> chitiethoidongCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    private Set<Chitiethoidong> chitiethoidongSet;
 
     public Giangvien() {
     }
@@ -61,8 +61,8 @@ public class Giangvien implements Serializable {
         this.giangvienPK = giangvienPK;
     }
 
-    public Giangvien(String maGV, String maND, String maChucVu) {
-        this.giangvienPK = new GiangvienPK(maGV, maND, maChucVu);
+    public Giangvien(String maGV, String maND, String maCV) {
+        this.giangvienPK = new GiangvienPK(maGV, maND, maCV);
     }
 
     public GiangvienPK getGiangvienPK() {
@@ -98,12 +98,12 @@ public class Giangvien implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Chitiethoidong> getChitiethoidongCollection() {
-        return chitiethoidongCollection;
+    public Set<Chitiethoidong> getChitiethoidongSet() {
+        return chitiethoidongSet;
     }
 
-    public void setChitiethoidongCollection(Collection<Chitiethoidong> chitiethoidongCollection) {
-        this.chitiethoidongCollection = chitiethoidongCollection;
+    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
+        this.chitiethoidongSet = chitiethoidongSet;
     }
 
     @Override

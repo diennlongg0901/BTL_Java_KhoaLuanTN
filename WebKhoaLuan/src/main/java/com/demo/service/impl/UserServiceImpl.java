@@ -10,6 +10,8 @@ import com.demo.pojo.Giangvien;
 import com.demo.pojo.GiangvienPK;
 import com.demo.pojo.Giaovu;
 import com.demo.pojo.GiaovuPK;
+import com.demo.pojo.Nganh;
+import com.demo.pojo.NganhPK;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Quantri;
@@ -73,7 +75,7 @@ public class UserServiceImpl implements UserService {
         }
         Nguoidung u = user.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
-        auth.add(new SimpleGrantedAuthority(u.getChucvu().getMaChucVu()));
+        auth.add(new SimpleGrantedAuthority(u.getChucvu().getMaCV()));
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
 
@@ -116,20 +118,20 @@ public class UserServiceImpl implements UserService {
             user.setPassword(this.passwordEncoder.encode(password));
             user.setHoatDong(Short.parseShort("1"));
             nguoidungPK.setMaND(user.getUsername());
-            nguoidungPK.setChucvumaChucVu(user.getChucvu().getMaChucVu());
+            nguoidungPK.setMaCV(user.getChucvu().getMaCV());
             user.setNguoidungPK(nguoidungPK);
             Map m = this.cloudinary.uploader().upload(user.getFile().getBytes(),
                     ObjectUtils.asMap("resource_type", "auto"));
             user.setAnh((String) m.get("secure_url"));
             this.userRepo.addUser(user);
-            switch (user.getChucvu().getMaChucVu()) {
+            switch (user.getChucvu().getMaCV()) {
                 case "ROLE_QT":
                     Quantri qt = new Quantri();
                     QuantriPK qtPK = new QuantriPK();
                     qtPK.setMaQT(user.getUsername());
-                    qtPK.setNguoidungmaND(user.getUsername());
-                    qtPK.setNguoidungchucvumaChucVu("ROLE_QT");
-                    qt.setChucVu("Quản trị người dùng");
+                    qtPK.setMaND(user.getUsername());
+                    qtPK.setMaCV("ROLE_QT");
+                    qt.setNhiemVu("Quản trị người dùng");
                     qt.setNguoidung(user);
                     qt.setQuantriPK(qtPK);
                     addUserQT(qt);
@@ -137,9 +139,9 @@ public class UserServiceImpl implements UserService {
                 case "ROLE_GVU":
                     Giaovu gvu = new Giaovu();
                     GiaovuPK gvuPK = new GiaovuPK();
-                    gvuPK.setMaGV(user.getUsername());
-                    gvuPK.setNguoidungmaND(user.getUsername());
-                    gvuPK.setNguoidungchucvumaChucVu("ROLE_GVU");
+                    gvuPK.setMaGVU(user.getUsername());
+                    gvuPK.setMaND(user.getUsername());
+                    gvuPK.setMaCV("ROLE_GVU");
                     gvu.setPhongBan(user.getPhongBan());
                     gvu.setNguoidung(user);
                     gvu.setGiaovuPK(gvuPK);
@@ -150,7 +152,7 @@ public class UserServiceImpl implements UserService {
                     GiangvienPK gvPK = new GiangvienPK();
                     gvPK.setMaGV(user.getUsername());
                     gvPK.setMaND(user.getUsername());
-                    gvPK.setMaChucVu("ROLE_GV");
+                    gvPK.setMaCV("ROLE_GV");
                     gv.setHocVi(user.getHocVi());
                     gv.setHocVi(user.getHocHam());
                     gv.setNguoidung(user);
@@ -160,13 +162,19 @@ public class UserServiceImpl implements UserService {
                 case "ROLE_SV":
                     Sinhvien sv = new Sinhvien();
                     SinhvienPK svPK = new SinhvienPK();
+                    Nganh nganh = new Nganh();
+                    NganhPK nganhPK = new NganhPK();
                     svPK.setMaND(user.getUsername());
-                    svPK.setMaND(user.getUsername());
-                    svPK.setMaChucVu("ROLE_SV");
-                    svPK.setMaKhoa(user.getKhoa());
-                    svPK.setMaNganh(user.getNganh());
+                    svPK.setMaSV(user.getUsername());
+                    svPK.setMaCV("ROLE_SV");
+                    svPK.setMaKhoa(user.getKhoaDK());
+                    svPK.setMaNganh(user.getNganhDK());
+                    nganhPK.setMaNganh(user.getNganhDK());
+                    nganhPK.setMaKhoa(user.getKhoaDK());
+                    nganh.setNganhPK(nganhPK);
                     sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
                     sv.setTinhTrang(Short.parseShort("1"));
+                    sv.setNganh(nganh);
                     sv.setNguoidung(user);
                     sv.setSinhvienPK(svPK);
                     addUserSV(sv);
@@ -238,7 +246,7 @@ public class UserServiceImpl implements UserService {
         Map m;
         NguoidungPK uPK = new NguoidungPK();
         uPK.setMaND(user.getNguoidungPK().getMaND());
-        uPK.setChucvumaChucVu(user.getNguoidungPK().getChucvumaChucVu());
+        uPK.setMaCV(user.getNguoidungPK().getMaCV());
         u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
         if (!user.getSdt().isEmpty()) {
             u.setSdt(user.getSdt());

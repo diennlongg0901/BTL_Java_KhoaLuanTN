@@ -70,7 +70,7 @@
             <label class="form-label sinhVien" for="khoa" >Khoa</label>
             <form:select class="sinhVien" id="khoa" path="khoa">
                 <c:forEach items="${khoa}" var="k">
-                    <form:option value="${k.maKhoa}" >${k.tenKhoa}</form:option>
+                    <form:option value="${k.maKhoa}" >${k.maKhoa} - ${k.tenKhoa}</form:option>
                 </c:forEach>
             </form:select>
         </div>
@@ -79,7 +79,7 @@
             <label class="form-label sinhVien" for="nganh" >Ngành</label>
             <form:select class="sinhVien" id="nganh" path="nganh">
                 <c:forEach items="${nganh}" var="n">
-                    <form:option value="${n.nganhPK.maNganh}" >${n.tenNganh}</form:option>
+                    <form:option value="${n.nganhPK.maNganh}" >${n.nganhPK.maNganh} - ${n.tenNganh}</form:option>
                 </c:forEach>
             </form:select>
         </div>
@@ -91,12 +91,12 @@
         <div class="d-flex col mt-4">
             <label class="form-label col-xl-2" for="tinhTrangSV">Tình trạng sinh viên:</label>
             <div class="form-check form-check-inline">
-                <form:radiobutton class="form-check-input" path="tinhTrang" value="1" checked="checked" />
-                <label class="form-check-label" for="chuaTotNghiep">Chưa tốt nghiệp</label>
-            </div>
-            <div class="form-check form-check-inline">
                 <form:radiobutton class="form-check-input" path="tinhTrang" value="0" />
                 <label class="form-check-label" for="totNghiep">Đã tốt nghiệp</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <form:radiobutton class="form-check-input" path="tinhTrang" value="1" checked="checked" />
+                <label class="form-check-label" for="chuaTotNghiep">Chưa tốt nghiệp</label>
             </div>
         </div>
 
@@ -125,85 +125,4 @@
     $(function () {
         $('#datepicker').datepicker();
     });
-</script>
-
-<script type="text/javascript">
-    function chonCV() {
-        var x = document.getElementById("vaiTro").value;
-        const gv = document.getElementsByClassName("giangVien");
-        const gvu = document.getElementsByClassName("giaoVu");
-        const sv = document.getElementsByClassName("sinhVien");
-        if (x === "ROLE_SV") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho sinh viên: ";
-            sv[0].hidden = false;
-            sv[1].hidden = false;
-            sv[2].hidden = false;
-            sv[3].hidden = false;
-            sv[4].hidden = false;
-            sv[5].hidden = false;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        } else if (x === "ROLE_GV") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giảng viên: ";
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = false;
-            gv[1].hidden = false;
-            gv[2].hidden = false;
-            gv[3].hidden = false;
-            gv[4].hidden = false;
-            gv[5].hidden = false;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        } else if (x === "ROLE_GVU") {
-            document.getElementById("title").innerHTML = "Thông tin dành riêng cho giáo vụ: ";
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = false;
-            gvu[1].hidden = false;
-            gvu[2].hidden = false;
-            gvu[3].hidden = false;
-        } else {
-            sv[0].hidden = true;
-            sv[1].hidden = true;
-            sv[2].hidden = true;
-            sv[3].hidden = true;
-            sv[4].hidden = true;
-            sv[5].hidden = true;
-            gv[0].hidden = true;
-            gv[1].hidden = true;
-            gv[2].hidden = true;
-            gv[3].hidden = true;
-            gv[4].hidden = true;
-            gv[5].hidden = true;
-            gvu[0].hidden = true;
-            gvu[1].hidden = true;
-            gvu[2].hidden = true;
-            gvu[3].hidden = true;
-        }
-    }
 </script>

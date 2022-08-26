@@ -13,14 +13,14 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author PC
+ * @author ADMIN
  */
 @Embeddable
 public class GiangvienPK implements Serializable {
 
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1, max = 10)
     @Column(name = "maGV")
     private String maGV;
     @Basic(optional = false)
@@ -31,16 +31,16 @@ public class GiangvienPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "maChucVu")
-    private String maChucVu;
+    @Column(name = "maCV")
+    private String maCV;
 
     public GiangvienPK() {
     }
 
-    public GiangvienPK(String maGV, String maND, String maChucVu) {
+    public GiangvienPK(String maGV, String maND, String maCV) {
         this.maGV = maGV;
         this.maND = maND;
-        this.maChucVu = maChucVu;
+        this.maCV = maCV;
     }
 
     public String getMaGV() {
@@ -59,12 +59,12 @@ public class GiangvienPK implements Serializable {
         this.maND = maND;
     }
 
-    public String getMaChucVu() {
-        return maChucVu;
+    public String getMaCV() {
+        return maCV;
     }
 
-    public void setMaChucVu(String maChucVu) {
-        this.maChucVu = maChucVu;
+    public void setMaCV(String maCV) {
+        this.maCV = maCV;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class GiangvienPK implements Serializable {
         int hash = 0;
         hash += (maGV != null ? maGV.hashCode() : 0);
         hash += (maND != null ? maND.hashCode() : 0);
-        hash += (maChucVu != null ? maChucVu.hashCode() : 0);
+        hash += (maCV != null ? maCV.hashCode() : 0);
         return hash;
     }
 
@@ -89,7 +89,7 @@ public class GiangvienPK implements Serializable {
         if ((this.maND == null && other.maND != null) || (this.maND != null && !this.maND.equals(other.maND))) {
             return false;
         }
-        if ((this.maChucVu == null && other.maChucVu != null) || (this.maChucVu != null && !this.maChucVu.equals(other.maChucVu))) {
+        if ((this.maCV == null && other.maCV != null) || (this.maCV != null && !this.maCV.equals(other.maCV))) {
             return false;
         }
         return true;
@@ -97,7 +97,7 @@ public class GiangvienPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.GiangvienPK[ maGV=" + maGV + ", maND=" + maND + ", maChucVu=" + maChucVu + " ]";
+        return "com.demo.pojo.GiangvienPK[ maGV=" + maGV + ", maND=" + maND + ", maCV=" + maCV + " ]";
     }
     
 }

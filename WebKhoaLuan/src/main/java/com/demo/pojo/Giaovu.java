@@ -5,7 +5,6 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,23 +26,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Giaovu.findAll", query = "SELECT g FROM Giaovu g"),
-    @NamedQuery(name = "Giaovu.findByMaGV", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.maGV = :maGV"),
+    @NamedQuery(name = "Giaovu.findByMaGVU", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.maGVU = :maGVU"),
     @NamedQuery(name = "Giaovu.findByPhongBan", query = "SELECT g FROM Giaovu g WHERE g.phongBan = :phongBan"),
-    @NamedQuery(name = "Giaovu.findByNguoidungmaND", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.nguoidungmaND = :nguoidungmaND"),
-    @NamedQuery(name = "Giaovu.findByNguoidungchucvumaChucVu", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.nguoidungchucvumaChucVu = :nguoidungchucvumaChucVu")})
+    @NamedQuery(name = "Giaovu.findByMaND", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.maND = :maND"),
+    @NamedQuery(name = "Giaovu.findByMaCV", query = "SELECT g FROM Giaovu g WHERE g.giaovuPK.maCV = :maCV")})
 public class Giaovu implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected GiaovuPK giaovuPK;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "phongBan")
     private String phongBan;
     @JoinColumns({
-        @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "nguoidung_chucvu_maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
 
@@ -55,13 +51,8 @@ public class Giaovu implements Serializable {
         this.giaovuPK = giaovuPK;
     }
 
-    public Giaovu(GiaovuPK giaovuPK, String phongBan) {
-        this.giaovuPK = giaovuPK;
-        this.phongBan = phongBan;
-    }
-
-    public Giaovu(String maGV, String nguoidungmaND, String nguoidungchucvumaChucVu) {
-        this.giaovuPK = new GiaovuPK(maGV, nguoidungmaND, nguoidungchucvumaChucVu);
+    public Giaovu(String maGVU, String maND, String maCV) {
+        this.giaovuPK = new GiaovuPK(maGVU, maND, maCV);
     }
 
     public GiaovuPK getGiaovuPK() {

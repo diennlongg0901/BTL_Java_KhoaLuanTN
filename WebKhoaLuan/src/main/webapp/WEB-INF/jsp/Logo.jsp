@@ -39,7 +39,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng giảng viên</strong></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Danh sách khóa luận</a></li>
-                        <li><a class="dropdown-item" href="#">Chấm điểm khóa luận</a></li>
+                        <li><a class="dropdown-item" href="<c:url value="/giangvien/DiemKL"/>">Chấm điểm khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Thông tin hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giangvien/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>

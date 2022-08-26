@@ -27,20 +27,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Quantri.findAll", query = "SELECT q FROM Quantri q"),
     @NamedQuery(name = "Quantri.findByMaQT", query = "SELECT q FROM Quantri q WHERE q.quantriPK.maQT = :maQT"),
-    @NamedQuery(name = "Quantri.findByChucVu", query = "SELECT q FROM Quantri q WHERE q.chucVu = :chucVu"),
-    @NamedQuery(name = "Quantri.findByNguoidungmaND", query = "SELECT q FROM Quantri q WHERE q.quantriPK.nguoidungmaND = :nguoidungmaND"),
-    @NamedQuery(name = "Quantri.findByNguoidungchucvumaChucVu", query = "SELECT q FROM Quantri q WHERE q.quantriPK.nguoidungchucvumaChucVu = :nguoidungchucvumaChucVu")})
+    @NamedQuery(name = "Quantri.findByNhiemVu", query = "SELECT q FROM Quantri q WHERE q.nhiemVu = :nhiemVu"),
+    @NamedQuery(name = "Quantri.findByMaND", query = "SELECT q FROM Quantri q WHERE q.quantriPK.maND = :maND"),
+    @NamedQuery(name = "Quantri.findByMaCV", query = "SELECT q FROM Quantri q WHERE q.quantriPK.maCV = :maCV")})
 public class Quantri implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected QuantriPK quantriPK;
-    @Size(max = 45)
-    @Column(name = "chucVu")
-    private String chucVu;
+    @Size(max = 100)
+    @Column(name = "nhiemVu")
+    private String nhiemVu;
     @JoinColumns({
-        @JoinColumn(name = "nguoidung_maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "nguoidung_chucvu_maChucVu", referencedColumnName = "chucvu_maChucVu", insertable = false, updatable = false)})
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
 
@@ -51,8 +51,8 @@ public class Quantri implements Serializable {
         this.quantriPK = quantriPK;
     }
 
-    public Quantri(String maQT, String nguoidungmaND, String nguoidungchucvumaChucVu) {
-        this.quantriPK = new QuantriPK(maQT, nguoidungmaND, nguoidungchucvumaChucVu);
+    public Quantri(String maQT, String maND, String maCV) {
+        this.quantriPK = new QuantriPK(maQT, maND, maCV);
     }
 
     public QuantriPK getQuantriPK() {
@@ -63,12 +63,12 @@ public class Quantri implements Serializable {
         this.quantriPK = quantriPK;
     }
 
-    public String getChucVu() {
-        return chucVu;
+    public String getNhiemVu() {
+        return nhiemVu;
     }
 
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
+    public void setNhiemVu(String nhiemVu) {
+        this.nhiemVu = nhiemVu;
     }
 
     public Nguoidung getNguoidung() {

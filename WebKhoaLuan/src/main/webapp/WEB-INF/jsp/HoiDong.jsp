@@ -11,7 +11,7 @@
 <c:url value="/HoiDong" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h3>Tạo hội đồng</h3>
+        <h4>Thêm mới hội đồng</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" modelAttribute="hoidong" >
                 <div class="row">
@@ -29,9 +29,9 @@
                 <div class="row">
                     <div class="form-outline mt-4 col-md-5">
                         <label class="form-label">Thành viên hội đồng</label>
-                        <form:select id="vaiTro" path="chitiethoidongPK.giangvienmaGV">
+                        <form:select id="vaiTro" path="chitiethoidongPK.maGV">
                             <c:forEach items="${giangvien}" var="gv">
-                                <form:option value="${gv.giangvienPK.maGV}" path="giangvienmaGV" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
+                                <form:option value="${gv.giangvienPK.maGV}" path="maGV" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
                             </c:forEach>
                         </form:select>
                     </div>
@@ -56,7 +56,7 @@
         <hr class="mt-5">
     </c:if>
 
-    <h3>Thông tin danh sách hội đồng</h3>
+    <h4>Thông tin danh sách hội đồng</h4>
     <div class="form-outline mt-4">
         <form action="" >
             <div class="row">
