@@ -4,6 +4,7 @@
  */
 package com.demo.service.impl;
 
+import com.demo.pojo.Dangkykhoaluan;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Khoaluan;
 import com.demo.repository.ThesisRepo;
@@ -47,5 +48,16 @@ public class ThesisServiceImpl implements ThesisService {
     @Override
     public List<Khoaluan> getThesis() {
         return this.thesisRepo.getThesis();
+    }
+
+    @Override
+    public boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan) {
+        
+        return this.thesisRepo.addDK_thesis(dangkykhoaluan);
+    }
+
+    @Override
+    public List<Dangkykhoaluan> getDangkykhoaluans() {
+       return this.thesisRepo.getDangkykhoaluans();
     }
 }

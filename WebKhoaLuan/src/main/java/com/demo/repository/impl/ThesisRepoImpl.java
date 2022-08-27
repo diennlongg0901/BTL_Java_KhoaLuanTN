@@ -4,6 +4,7 @@
  */
 package com.demo.repository.impl;
 
+import com.demo.pojo.Dangkykhoaluan;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Khoaluan;
 import com.demo.repository.ThesisRepo;
@@ -79,5 +80,24 @@ public class ThesisRepoImpl implements ThesisRepo {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Khoaluan");
         return q.getResultList();
+    }
+
+    @Override
+    public boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(dangkykhoaluan);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public List<Dangkykhoaluan> getDangkykhoaluans() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query query = session.createQuery("FROM dangkykhoaluan");
+        return query.getResultList();
     }
 }

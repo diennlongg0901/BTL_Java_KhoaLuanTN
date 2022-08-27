@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,6 +39,16 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Dangkykhoaluan implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Transient
+    private int maDetai;
+
+    public int getMaDetai() {
+        return maDetai;
+    }
+
+    public void setMaDetai(int maDetai) {
+        this.maDetai = maDetai;
+    }
     @EmbeddedId
     protected DangkykhoaluanPK dangkykhoaluanPK;
     @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false)

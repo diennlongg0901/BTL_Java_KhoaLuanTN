@@ -4,6 +4,7 @@
  */
 package com.demo.service;
 
+import com.demo.pojo.Dangkykhoaluan;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Khoaluan;
 import java.util.List;
@@ -19,7 +20,9 @@ public interface ThesisService {
     boolean addTopic(Detai topic);
     List<Detai> getTopics();
     boolean deleteTopic(int topicID);
-    
+    //Đăng ký khóa luận
+    boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan);
+    List<Dangkykhoaluan> getDangkykhoaluans();
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);
     List<Khoaluan> getThesis();
