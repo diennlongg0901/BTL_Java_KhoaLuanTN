@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detai.findByHanNop", query = "SELECT d FROM Detai d WHERE d.hanNop = :hanNop")})
 public class Detai implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "detai")
+    private Set<Dangkykhoaluan> dangkykhoaluanSet;
+
     @Size(max = 15)
     @Column(name = "nam")
     private String nam;
@@ -139,6 +142,15 @@ public class Detai implements Serializable {
 
     public void setNam(String nam) {
         this.nam = nam;
+    }
+
+    @XmlTransient
+    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
+        return dangkykhoaluanSet;
+    }
+
+    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
+        this.dangkykhoaluanSet = dangkykhoaluanSet;
     }
     
 }

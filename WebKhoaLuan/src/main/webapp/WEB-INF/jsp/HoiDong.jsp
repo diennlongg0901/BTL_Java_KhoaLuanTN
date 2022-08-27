@@ -11,7 +11,7 @@
 <c:url value="/HoiDong" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h4>Thêm mới hội đồng</h4>
+        <h4 class="mt-5">Thêm mới hội đồng</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" modelAttribute="hoidong" >
                 <div class="row">
@@ -81,9 +81,9 @@
             <tbody>
                 <c:forEach items="${dschitiethoidong}" var="hd">
                     <tr>
-                        <td>${hd.chitiethoidongPK.hoidongmaHD}</td>
+                        <td>${hd.chitiethoidongPK.maHD}</td>
                         <td>${hd.hoidong.tenHD}</td>
-                        <td>${hd.chitiethoidongPK.giangvienmaGV}</td>
+                        <td>${hd.chitiethoidongPK.maGV}</td>
                         <td>${hd.giangvien.nguoidung.ho} ${hd.giangvien.nguoidung.ten}</td>
                         <td>${hd.vaiTro}</td>
                     </tr>

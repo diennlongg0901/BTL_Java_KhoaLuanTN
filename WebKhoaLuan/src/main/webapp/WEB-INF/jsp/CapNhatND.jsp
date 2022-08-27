@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="col mt-4">
-                <form:input type="file" id="anh" path="anh" class="form-control"  />
+                <form:input type="file" id="anh" path="file" class="form-control"  />
             </div>
         </div>
         <div class="d-flex col mt-4">

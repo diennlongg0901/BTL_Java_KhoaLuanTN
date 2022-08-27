@@ -34,7 +34,7 @@ public class ThesisController {
         return "DeTaiKhoaLuan";
     }
     
-    @RequestMapping("/DeTaiKhoaLuan") 
+    @RequestMapping(value = "/DeTaiKhoaLuan", produces = "application/x-www-form-urlencoded;charset=UTF-8") 
     public String DeTaiKL(Model model, @ModelAttribute(value = "detaimoi") Detai topic) {
         String errMsg = "";
         topic.setNam(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
@@ -94,6 +94,4 @@ public class ThesisController {
     public String ThongKeDiem() {
         return "ThongKeDiem";
     }
-    
-    
 }

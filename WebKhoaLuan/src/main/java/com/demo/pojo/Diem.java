@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,6 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Diem.findByMaKhoa", query = "SELECT d FROM Diem d WHERE d.diemPK.maKhoa = :maKhoa"),
     @NamedQuery(name = "Diem.findByDiem", query = "SELECT d FROM Diem d WHERE d.diem = :diem")})
 public class Diem implements Serializable {
+
+    @Size(max = 300)
+    @Column(name = "nhanXet")
+    private String nhanXet;
+    @Size(max = 200)
+    @Column(name = "ketQua")
+    private String ketQua;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -123,6 +131,22 @@ public class Diem implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Diem[ diemPK=" + diemPK + " ]";
+    }
+
+    public String getNhanXet() {
+        return nhanXet;
+    }
+
+    public void setNhanXet(String nhanXet) {
+        this.nhanXet = nhanXet;
+    }
+
+    public String getKetQua() {
+        return ketQua;
+    }
+
+    public void setKetQua(String ketQua) {
+        this.ketQua = ketQua;
     }
     
 }

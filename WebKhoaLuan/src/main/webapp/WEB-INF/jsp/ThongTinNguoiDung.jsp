@@ -20,26 +20,26 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <h4 class="form-outline mt-4">Họ tên: ${thongtinnguoidung.ho} ${thongtinnguoidung.ten}</h4>
+                            <h6 class="form-outline mt-4"><strong>Họ tên: </strong>${thongtinnguoidung.ho} ${thongtinnguoidung.ten}</h6>
                         </div>
                         <div class="col">
-                            <h4 class="form-outline mt-4">Giới tính: ${thongtinnguoidung.gioiTinh}</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h4 class="form-outline mt-4">Ngày sinh: ${thongtinnguoidung.ngaySinh}</h4>
-                        </div>
-                        <div class="col">
-                            <h4 class="form-outline mt-4">Địa chỉ: ${thongtinnguoidung.diaChi}</h4>
+                            <h6 class="form-outline mt-4"><strong>Giới tính: </strong>${thongtinnguoidung.gioiTinh}</h6>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <h4 class="form-outline mt-4">Email: ${thongtinnguoidung.email}</h4>
+                            <h6 class="form-outline mt-4"><strong>Ngày sinh: </strong>${thongtinnguoidung.ngaySinh}</h6>
                         </div>
                         <div class="col">
-                            <h4 class="form-outline mt-4">Số điện thoại: ${thongtinnguoidung.sdt}</h4>
+                            <h6 class="form-outline mt-4"><strong>Địa chỉ: </strong>${thongtinnguoidung.diaChi}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6 class="form-outline mt-4"><strong>Email: </strong>${thongtinnguoidung.email}</h6>
+                        </div>
+                        <div class="col">
+                            <h6 class="form-outline mt-4"><strong>Số điện thoại: </strong>${thongtinnguoidung.sdt}</h6>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ import com.demo.pojo.ChitiethoidongPK;
 import com.demo.pojo.Hoidong;
 import com.demo.repository.CouncilRepo;
 import com.demo.service.CouncilService;
+import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,16 +26,16 @@ public class CouncilServiceImpl implements CouncilService{
     //THÊM HỘI ĐỒNG
     @Override
     public boolean addCouncil(Hoidong council) {
+        council.setTinhTrangHD("Khóa luận" + String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
         return this.councilRepo.addCouncil(council);
     }
 
     @Override
     public boolean addDetailCouncil(Chitiethoidong detailCouncil) {
-        Hoidong h = new Hoidong();
-        h = (Hoidong)this.councilRepo.getNewCouncil();
+        Hoidong h = (Hoidong)this.councilRepo.getNewCouncil();
         ChitiethoidongPK cthdPK = new ChitiethoidongPK();
         cthdPK.setMaND(detailCouncil.getChitiethoidongPK().getMaGV());
-        cthdPK.setMaGV(detailCouncil.getChitiethoidongPK().getMaCV());
+        cthdPK.setMaGV(detailCouncil.getChitiethoidongPK().getMaGV());
         cthdPK.setMaCV("ROLE_GV");
         cthdPK.setMaHD(h.getMaHD());   
         detailCouncil.setChitiethoidongPK(cthdPK);

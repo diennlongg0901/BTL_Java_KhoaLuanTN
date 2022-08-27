@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sinhvien.findByMaKhoa", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maKhoa = :maKhoa")})
 public class Sinhvien implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
+    private Set<Dangkykhoaluan> dangkykhoaluanSet;
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SinhvienPK sinhvienPK;
@@ -143,6 +146,15 @@ public class Sinhvien implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Sinhvien[ sinhvienPK=" + sinhvienPK + " ]";
+    }
+
+    @XmlTransient
+    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
+        return dangkykhoaluanSet;
+    }
+
+    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
+        this.dangkykhoaluanSet = dangkykhoaluanSet;
     }
     
 }

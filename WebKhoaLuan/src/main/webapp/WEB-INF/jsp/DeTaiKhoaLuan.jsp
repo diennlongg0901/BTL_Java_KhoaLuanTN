@@ -33,6 +33,7 @@
                 </div>
                 <div class="form-outline mt-4">
                     <input type="submit" class="btn btn-primary btn-block mb-4" value="Thêm đề tài" />
+                    <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy" />
                 </div>
             </form:form>
         </div>
@@ -56,6 +57,7 @@
                         <td>${dt.tenDT}</td>
                         <td>${dt.noiDung}</td>
                         <td>${dt.hanNop}</td>
+                        <td><a href=" <c:url value="/DeTaiKhoaLuan/${dt.maDT}" />">Xóa</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

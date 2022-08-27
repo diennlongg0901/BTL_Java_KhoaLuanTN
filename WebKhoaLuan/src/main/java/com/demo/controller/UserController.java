@@ -17,6 +17,7 @@ import com.demo.pojo.QuantriPK;
 import com.demo.pojo.Sinhvien;
 import com.demo.pojo.SinhvienPK;
 import com.demo.repository.CouncilRepo;
+import com.demo.service.CouncilService;
 import com.demo.service.RoleService;
 import com.demo.service.UserService;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private CouncilRepo councilRepo;
+    private CouncilService councilService;
     @Autowired
     private UserService userDetailsService;
 
@@ -91,59 +92,60 @@ public class UserController {
         model.addAttribute("khoa", this.roleService.getKhoa());
         try {
             if (this.userDetailsService.addUser(nd) == true) {
-                switch (nd.getChucvu().getMaCV()) {
-                    case "ROLE_QT":
-                        QuantriPK qtPK = new QuantriPK();
-                        qtPK.setMaQT(nd.getUsername());
-                        qtPK.setMaND(nd.getUsername());
-                        qtPK.setMaCV("ROLE_QT");
-                        qt.setNhiemVu("Quản trị người dùng");
-                        qt.setNguoidung(nd);
-                        qt.setQuantriPK(qtPK);
-                        this.userDetailsService.addUserQT(qt);
-                        return "redirect:/quantri/QLTaiKhoan";
-                    case "ROLE_GVU":
-                        GiaovuPK gvuPK = new GiaovuPK();
-                        gvuPK.setMaGVU(nd.getUsername());
-                        gvuPK.setMaND(nd.getUsername());
-                        gvuPK.setMaCV("ROLE_GVU");
-                        gvu.setPhongBan(nd.getPhongBan());
-                        gvu.setNguoidung(nd);
-                        gvu.setGiaovuPK(gvuPK);
-                        this.userDetailsService.addUserGVU(gvu);
-                        return "redirect:/quantri/QLTaiKhoan";
-                    case "ROLE_GV":
-                        GiangvienPK gvPK = new GiangvienPK();
-                        gvPK.setMaGV(nd.getUsername());
-                        gvPK.setMaND(nd.getUsername());
-                        gvPK.setMaCV("ROLE_GV");
-                        gv.setHocVi(nd.getHocVi());
-                        gv.setHocVi(nd.getHocHam());
-                        gv.setNguoidung(nd);
-                        gv.setGiangvienPK(gvPK);
-                        this.userDetailsService.addUserGV(gv);
-                        return "redirect:/quantri/QLTaiKhoan";
-                    case "ROLE_SV":
-                        SinhvienPK svPK = new SinhvienPK();
-                        Nganh nganh = new Nganh();
-                        NganhPK nganhPK = new NganhPK();
-                        svPK.setMaND(nd.getUsername());
-                        svPK.setMaND(nd.getUsername());
-                        svPK.setMaCV("ROLE_SV");
-                        svPK.setMaKhoa(nd.getKhoaDK());
-                        svPK.setMaNganh(nd.getNganhDK());
-                        nganhPK.setMaNganh(nd.getNganhDK());
-                        nganhPK.setMaKhoa(nd.getKhoaDK());
-                        nganh.setNganhPK(nganhPK);
-                        sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
-                        sv.setTinhTrang(Short.parseShort("1"));
-                        sv.setNganh(nganh);
-                        sv.setNguoidung(nd);
-                        sv.setSinhvienPK(svPK);
-                        this.userDetailsService.addUserSV(sv);
-                        return "redirect:/quantri/QLTaiKhoan";
-                }
-            } else {
+//                switch (nd.getChucvu().getMaCV()) {
+//                    case "ROLE_QT":
+//                        QuantriPK qtPK = new QuantriPK();
+//                        qtPK.setMaQT(nd.getUsername());
+//                        qtPK.setMaND(nd.getUsername());
+//                        qtPK.setMaCV("ROLE_QT");
+//                        qt.setNhiemVu("Quản trị người dùng");
+//                        qt.setNguoidung(nd);
+//                        qt.setQuantriPK(qtPK);
+//                        this.userDetailsService.addUserQT(qt);
+//                        return "redirect:/quantri/QLTaiKhoan";
+//                    case "ROLE_GVU":
+//                        GiaovuPK gvuPK = new GiaovuPK();
+//                        gvuPK.setMaGVU(nd.getUsername());
+//                        gvuPK.setMaND(nd.getUsername());
+//                        gvuPK.setMaCV("ROLE_GVU");
+//                        gvu.setPhongBan(nd.getPhongBan());
+//                        gvu.setNguoidung(nd);
+//                        gvu.setGiaovuPK(gvuPK);
+//                        this.userDetailsService.addUserGVU(gvu);
+//                        return "redirect:/quantri/QLTaiKhoan";
+//                    case "ROLE_GV":
+//                        GiangvienPK gvPK = new GiangvienPK();
+//                        gvPK.setMaGV(nd.getUsername());
+//                        gvPK.setMaND(nd.getUsername());
+//                        gvPK.setMaCV("ROLE_GV");
+//                        gv.setHocVi(nd.getHocVi());
+//                        gv.setHocVi(nd.getHocHam());
+//                        gv.setNguoidung(nd);
+//                        gv.setGiangvienPK(gvPK);
+//                        this.userDetailsService.addUserGV(gv);
+//                        return "redirect:/quantri/QLTaiKhoan";
+//                    case "ROLE_SV":
+//                        SinhvienPK svPK = new SinhvienPK();
+//                        Nganh nganh = new Nganh();
+//                        NganhPK nganhPK = new NganhPK();
+//                        svPK.setMaND(nd.getUsername());
+//                        svPK.setMaND(nd.getUsername());
+//                        svPK.setMaCV("ROLE_SV");
+//                        svPK.setMaKhoa(nd.getKhoaDK());
+//                        svPK.setMaNganh(nd.getNganhDK());
+//                        nganhPK.setMaNganh(nd.getNganhDK());
+//                        nganhPK.setMaKhoa(nd.getKhoaDK());
+//                        nganh.setNganhPK(nganhPK);
+//                        sv.setNienKhoa(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+//                        sv.setTinhTrang(Short.parseShort("1"));
+//                        sv.setNganh(nganh);
+//                        sv.setNguoidung(nd);
+//                        sv.setSinhvienPK(svPK);
+//                        this.userDetailsService.addUserSV(sv);
+//                        return "redirect:/quantri/QLTaiKhoan";
+//                }
+                return "redirect:/quantri/QLTaiKhoan";
+            } else {              
                 errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
             }
             model.addAttribute("errMsg", errMsg);
@@ -165,7 +167,7 @@ public class UserController {
             } else {
                 switch (role) {
                     case "GV":
-                        this.councilRepo.deleteMember(userID);
+                        this.councilService.deleteMember(userID);
                         this.userService.deleteUsersGV(userID);
                         break;
                     case "SV":
@@ -271,6 +273,8 @@ public class UserController {
                     svPK.setMaSV(id);
                     svPK.setMaND(id);
                     svPK.setMaCV("ROLE_SV");
+                    svPK.setMaKhoa(nd.getKhoa());
+                    svPK.setMaNganh(nd.getNganh());
                     sv.setSinhvienPK(svPK);
                     sv.setNienKhoa(nd.getNienKhoa());
                     sv.setTinhTrang(nd.getTinhTrang());

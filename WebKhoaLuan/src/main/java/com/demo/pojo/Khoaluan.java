@@ -45,6 +45,17 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoaluan.findBySinhvienmaKhoa", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.sinhvienmaKhoa = :sinhvienmaKhoa")})
 public class Khoaluan implements Serializable {
 
+    @JoinColumns({
+        @JoinColumn(name = "maDK", referencedColumnName = "maDK", insertable = false, updatable = false),
+        @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false),
+        @JoinColumn(name = "maSV", referencedColumnName = "sinhvien_maSV", insertable = false, updatable = false),
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false),
+        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
+        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private Dangkykhoaluan dangkykhoaluan;
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected KhoaluanPK khoaluanPK;
@@ -163,6 +174,14 @@ public class Khoaluan implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Khoaluan[ khoaluanPK=" + khoaluanPK + " ]";
+    }
+
+    public Dangkykhoaluan getDangkykhoaluan() {
+        return dangkykhoaluan;
+    }
+
+    public void setDangkykhoaluan(Dangkykhoaluan dangkykhoaluan) {
+        this.dangkykhoaluan = dangkykhoaluan;
     }
     
 }

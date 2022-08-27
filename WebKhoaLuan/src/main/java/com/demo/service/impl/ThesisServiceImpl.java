@@ -10,11 +10,13 @@ import com.demo.repository.ThesisRepo;
 import com.demo.service.ThesisService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author ADMIN
  */
+@Service
 public class ThesisServiceImpl implements ThesisService {
     
     @Autowired

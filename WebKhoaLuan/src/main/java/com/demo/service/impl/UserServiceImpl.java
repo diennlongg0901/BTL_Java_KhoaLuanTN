@@ -210,9 +210,8 @@ public class UserServiceImpl implements UserService {
     //CẬP NHẬT NGƯỜI DÙNG
     @Override
     public void updateUsers(String userID, Nguoidung user) {
-        Nguoidung u = new Nguoidung();
+        Nguoidung u = this.userRepo.getUserbyID(userID);
         Map m;
-        u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
         if (!user.getHo().isEmpty()) {
             u.setHo(user.getHo());
         }
@@ -237,17 +236,14 @@ public class UserServiceImpl implements UserService {
         } catch (IOException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.userRepo.updateUsers(user);
+        this.userRepo.updateUsers(u);
     }
 
     @Override
     public void updateParticularUsers(Nguoidung user) {
-        Nguoidung u = new Nguoidung();
+        Nguoidung u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
         Map m;
-        NguoidungPK uPK = new NguoidungPK();
-        uPK.setMaND(user.getNguoidungPK().getMaND());
-        uPK.setMaCV(user.getNguoidungPK().getMaCV());
-        u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
+        u.setNguoidungPK(user.getNguoidungPK());
         if (!user.getSdt().isEmpty()) {
             u.setSdt(user.getSdt());
         }
@@ -262,12 +258,6 @@ public class UserServiceImpl implements UserService {
         }
         if (!user.getPassword().isEmpty()) {
             u.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        }
-        try {
-            m = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-            u.setAnh((String) m.get("secure_url"));
-        } catch (IOException ex) {
-            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.userRepo.updateUsers(u);
     }
