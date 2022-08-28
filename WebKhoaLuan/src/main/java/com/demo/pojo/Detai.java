@@ -35,15 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detai.findAll", query = "SELECT d FROM Detai d"),
     @NamedQuery(name = "Detai.findByMaDT", query = "SELECT d FROM Detai d WHERE d.maDT = :maDT"),
     @NamedQuery(name = "Detai.findByTenDT", query = "SELECT d FROM Detai d WHERE d.tenDT = :tenDT"),
-    @NamedQuery(name = "Detai.findByHanNop", query = "SELECT d FROM Detai d WHERE d.hanNop = :hanNop")})
+    @NamedQuery(name = "Detai.findByHanNop", query = "SELECT d FROM Detai d WHERE d.hanNop = :hanNop"),
+    @NamedQuery(name = "Detai.findByNoiDung", query = "SELECT d FROM Detai d WHERE d.noiDung = :noiDung"),
+    @NamedQuery(name = "Detai.findByNam", query = "SELECT d FROM Detai d WHERE d.nam = :nam")})
 public class Detai implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "detai")
-    private Set<Dangkykhoaluan> dangkykhoaluanSet;
-
-    @Size(max = 15)
-    @Column(name = "nam")
-    private String nam;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,8 +55,11 @@ public class Detai implements Serializable {
     @Size(max = 2000)
     @Column(name = "noiDung")
     private String noiDung;
+    @Size(max = 15)
+    @Column(name = "nam")
+    private String nam;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "detai")
-    private Set<Khoaluan> khoaluanSet;
+    private Set<Dangkykhoaluan> dangkykhoaluanSet;
 
     public Detai() {
     }
@@ -94,13 +92,29 @@ public class Detai implements Serializable {
         this.hanNop = hanNop;
     }
 
-    @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
+    public String getNoiDung() {
+        return noiDung;
     }
 
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
+    public void setNoiDung(String noiDung) {
+        this.noiDung = noiDung;
+    }
+
+    public String getNam() {
+        return nam;
+    }
+
+    public void setNam(String nam) {
+        this.nam = nam;
+    }
+
+    @XmlTransient
+    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
+        return dangkykhoaluanSet;
+    }
+
+    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
+        this.dangkykhoaluanSet = dangkykhoaluanSet;
     }
 
     @Override
@@ -126,31 +140,6 @@ public class Detai implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Detai[ maDT=" + maDT + " ]";
-    }
-
-    public String getNoiDung() {
-        return noiDung;
-    }
-
-    public void setNoiDung(String noiDung) {
-        this.noiDung = noiDung;
-    }
-
-    public String getNam() {
-        return nam;
-    }
-
-    public void setNam(String nam) {
-        this.nam = nam;
-    }
-
-    @XmlTransient
-    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
-        return dangkykhoaluanSet;
-    }
-
-    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
-        this.dangkykhoaluanSet = dangkykhoaluanSet;
     }
     
 }

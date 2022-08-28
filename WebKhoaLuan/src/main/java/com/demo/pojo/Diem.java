@@ -29,21 +29,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Diem.findAll", query = "SELECT d FROM Diem d"),
     @NamedQuery(name = "Diem.findByMaTC", query = "SELECT d FROM Diem d WHERE d.diemPK.maTC = :maTC"),
     @NamedQuery(name = "Diem.findByMaKL", query = "SELECT d FROM Diem d WHERE d.diemPK.maKL = :maKL"),
+    @NamedQuery(name = "Diem.findByKhoaluanmaDK", query = "SELECT d FROM Diem d WHERE d.diemPK.khoaluanmaDK = :khoaluanmaDK"),
     @NamedQuery(name = "Diem.findByMaDT", query = "SELECT d FROM Diem d WHERE d.diemPK.maDT = :maDT"),
     @NamedQuery(name = "Diem.findByMaSV", query = "SELECT d FROM Diem d WHERE d.diemPK.maSV = :maSV"),
     @NamedQuery(name = "Diem.findByMaND", query = "SELECT d FROM Diem d WHERE d.diemPK.maND = :maND"),
     @NamedQuery(name = "Diem.findByMaCV", query = "SELECT d FROM Diem d WHERE d.diemPK.maCV = :maCV"),
     @NamedQuery(name = "Diem.findByMaNganh", query = "SELECT d FROM Diem d WHERE d.diemPK.maNganh = :maNganh"),
     @NamedQuery(name = "Diem.findByMaKhoa", query = "SELECT d FROM Diem d WHERE d.diemPK.maKhoa = :maKhoa"),
-    @NamedQuery(name = "Diem.findByDiem", query = "SELECT d FROM Diem d WHERE d.diem = :diem")})
+    @NamedQuery(name = "Diem.findByDiem", query = "SELECT d FROM Diem d WHERE d.diem = :diem"),
+    @NamedQuery(name = "Diem.findByNhanXet", query = "SELECT d FROM Diem d WHERE d.nhanXet = :nhanXet"),
+    @NamedQuery(name = "Diem.findByKetQua", query = "SELECT d FROM Diem d WHERE d.ketQua = :ketQua")})
 public class Diem implements Serializable {
-
-    @Size(max = 300)
-    @Column(name = "nhanXet")
-    private String nhanXet;
-    @Size(max = 200)
-    @Column(name = "ketQua")
-    private String ketQua;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -51,14 +47,21 @@ public class Diem implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "diem")
     private BigDecimal diem;
+    @Size(max = 300)
+    @Column(name = "nhanXet")
+    private String nhanXet;
+    @Size(max = 200)
+    @Column(name = "ketQua")
+    private String ketQua;
     @JoinColumns({
         @JoinColumn(name = "maKL", referencedColumnName = "maKL", insertable = false, updatable = false),
+        @JoinColumn(name = "khoaluan_maDK", referencedColumnName = "maDK", insertable = false, updatable = false),
         @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false),
-        @JoinColumn(name = "maSV", referencedColumnName = "sinhvien_maSV", insertable = false, updatable = false),
+        @JoinColumn(name = "maSV", referencedColumnName = "maSV", insertable = false, updatable = false),
         @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
         @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false),
         @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
-        @JoinColumn(name = "maKhoa", referencedColumnName = "sinhvien_maKhoa", insertable = false, updatable = false)})
+        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Khoaluan khoaluan;
     @JoinColumn(name = "maTC", referencedColumnName = "maTC", insertable = false, updatable = false)
@@ -72,8 +75,8 @@ public class Diem implements Serializable {
         this.diemPK = diemPK;
     }
 
-    public Diem(int maTC, int maKL, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
-        this.diemPK = new DiemPK(maTC, maKL, maDT, maSV, maND, maCV, maNganh, maKhoa);
+    public Diem(int maTC, int maKL, int khoaluanmaDK, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
+        this.diemPK = new DiemPK(maTC, maKL, khoaluanmaDK, maDT, maSV, maND, maCV, maNganh, maKhoa);
     }
 
     public DiemPK getDiemPK() {
@@ -90,6 +93,22 @@ public class Diem implements Serializable {
 
     public void setDiem(BigDecimal diem) {
         this.diem = diem;
+    }
+
+    public String getNhanXet() {
+        return nhanXet;
+    }
+
+    public void setNhanXet(String nhanXet) {
+        this.nhanXet = nhanXet;
+    }
+
+    public String getKetQua() {
+        return ketQua;
+    }
+
+    public void setKetQua(String ketQua) {
+        this.ketQua = ketQua;
     }
 
     public Khoaluan getKhoaluan() {
@@ -131,22 +150,6 @@ public class Diem implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Diem[ diemPK=" + diemPK + " ]";
-    }
-
-    public String getNhanXet() {
-        return nhanXet;
-    }
-
-    public void setNhanXet(String nhanXet) {
-        this.nhanXet = nhanXet;
-    }
-
-    public String getKetQua() {
-        return ketQua;
-    }
-
-    public void setKetQua(String ketQua) {
-        this.ketQua = ketQua;
     }
     
 }

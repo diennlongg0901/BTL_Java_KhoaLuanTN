@@ -51,13 +51,12 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan) {
-        
-        return this.thesisRepo.addDK_thesis(dangkykhoaluan);
+    public boolean addRegistration(Dangkykhoaluan dangkykhoaluan) {        
+        return this.thesisRepo.addRegistration(dangkykhoaluan);
     }
 
     @Override
-    public List<Dangkykhoaluan> getDangkykhoaluans() {
-       return this.thesisRepo.getDangkykhoaluans();
+    public List<Dangkykhoaluan> getRegistedThesises() {
+       return this.thesisRepo.getRegistedThesises();
     }
 }

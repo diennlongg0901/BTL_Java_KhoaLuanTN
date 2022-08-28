@@ -28,6 +28,10 @@ public class DiemPK implements Serializable {
     private int maKL;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "khoaluan_maDK")
+    private int khoaluanmaDK;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "maDT")
     private int maDT;
     @Basic(optional = false)
@@ -59,9 +63,10 @@ public class DiemPK implements Serializable {
     public DiemPK() {
     }
 
-    public DiemPK(int maTC, int maKL, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
+    public DiemPK(int maTC, int maKL, int khoaluanmaDK, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
         this.maTC = maTC;
         this.maKL = maKL;
+        this.khoaluanmaDK = khoaluanmaDK;
         this.maDT = maDT;
         this.maSV = maSV;
         this.maND = maND;
@@ -84,6 +89,14 @@ public class DiemPK implements Serializable {
 
     public void setMaKL(int maKL) {
         this.maKL = maKL;
+    }
+
+    public int getKhoaluanmaDK() {
+        return khoaluanmaDK;
+    }
+
+    public void setKhoaluanmaDK(int khoaluanmaDK) {
+        this.khoaluanmaDK = khoaluanmaDK;
     }
 
     public int getMaDT() {
@@ -139,6 +152,7 @@ public class DiemPK implements Serializable {
         int hash = 0;
         hash += (int) maTC;
         hash += (int) maKL;
+        hash += (int) khoaluanmaDK;
         hash += (int) maDT;
         hash += (maSV != null ? maSV.hashCode() : 0);
         hash += (maND != null ? maND.hashCode() : 0);
@@ -159,6 +173,9 @@ public class DiemPK implements Serializable {
             return false;
         }
         if (this.maKL != other.maKL) {
+            return false;
+        }
+        if (this.khoaluanmaDK != other.khoaluanmaDK) {
             return false;
         }
         if (this.maDT != other.maDT) {
@@ -184,7 +201,7 @@ public class DiemPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.demo.pojo.DiemPK[ maTC=" + maTC + ", maKL=" + maKL + ", maDT=" + maDT + ", maSV=" + maSV + ", maND=" + maND + ", maCV=" + maCV + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
+        return "com.demo.pojo.DiemPK[ maTC=" + maTC + ", maKL=" + maKL + ", khoaluanmaDK=" + khoaluanmaDK + ", maDT=" + maDT + ", maSV=" + maSV + ", maND=" + maND + ", maCV=" + maCV + ", maNganh=" + maNganh + ", maKhoa=" + maKhoa + " ]";
     }
     
 }

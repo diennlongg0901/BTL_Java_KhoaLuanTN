@@ -9,7 +9,6 @@ import com.demo.pojo.DangkykhoaluanPK;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Nguoidung;
-import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
 import com.demo.service.ThesisService;
@@ -31,13 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ThesisController {
     
     @Autowired
-    private ThesisService thesisService;
-    
+    private ThesisService thesisService;    
     @Autowired
-    private UserService userService; 
-    
+    private UserService userService;     
     @Autowired
     private RoleService roleService;
+    
     //ĐỀ TÀI KHÓA LUẬN
     @GetMapping(value="/DeTaiKhoaLuan",produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String DeTaiKLView(Model model) {
@@ -77,40 +75,50 @@ public class ThesisController {
         }
     }
     
-    //KHÓA LUẬN
+    //ĐĂNG KÝ KHÓA LUẬN
     @GetMapping(value ="/sinhvien/DangKyKL/{id}",produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String DangKyKLView(Model model, @PathVariable("id") String id) {
         model.addAttribute("detai", this.thesisService.getTopics());
         model.addAttribute("dangkykhoaluan", new Dangkykhoaluan());
         model.addAttribute("nguoidung", this.userService.getUserbyID(id));
-        model.addAttribute("sinhvien", new Sinhvien());
-        
-        model.addAttribute("nganh", this.roleService.getNganh());
-        model.addAttribute("khoa", this.roleService.getKhoa());
         return "DangKyKhoaLuan";
     }
     
     @RequestMapping(value="/sinhvien/DangKyKL/{id}",produces = "application/x-www-form-urlencoded;charset=UTF-8")
-    public String DangKyKL(Model model,@PathVariable("id") String id ,@ModelAttribute(value = "dangkykhoaluan") Dangkykhoaluan dk,
-            @ModelAttribute(value = "detai") Detai detai, @ModelAttribute(value = "nguoidung") Nguoidung nguoidung,
-            @ModelAttribute(value ="dangkykhoaluanPK") DangkykhoaluanPK dangkykhoaluanPK,
-            @ModelAttribute (value ="sinhvien") Sinhvien sinhvien) {
-        model.addAttribute("detai", this.thesisService.getTopics());
-        Sinhvien sv = new Sinhvien();
-        sv=this.userService.getSVbyID(id);
-        NguoidungPK pk = new NguoidungPK();
-        pk.setMaND(id);
-        nguoidung.setNguoidungPK(pk);
-        dangkykhoaluanPK = new DangkykhoaluanPK();
-        dangkykhoaluanPK.setMaDT(dk.getMaDetai());
-        dangkykhoaluanPK.setMaND(id);
-        dangkykhoaluanPK.setSinhvienmaSV(id);
-        dangkykhoaluanPK.setMaCV("ROLE_SV");
-        dangkykhoaluanPK.setMaKhoa(sv.getSinhvienPK().getMaKhoa());
-        dangkykhoaluanPK.setMaNganh(sv.getSinhvienPK().getMaNganh());
-        dk.setDangkykhoaluanPK(dangkykhoaluanPK);
-        this.thesisService.addDK_thesis(dk);
+    public String DangKyKL(Model model,@PathVariable("id") String id ,@ModelAttribute(value = "dangkykhoaluan") Dangkykhoaluan dk) {
+        model.addAttribute("detai", this.thesisService.getTopics());     
+        Sinhvien sv = this.userService.getSVbyID(id);
+        DangkykhoaluanPK dkklPK = new DangkykhoaluanPK();
+        dkklPK.setMaDT(dk.getMaDT());
+        dkklPK.setMaND(id);
+        dkklPK.setSinhvienmaSV(id);
+        dkklPK.setMaCV("ROLE_SV");
+        dkklPK.setMaKhoa(sv.getSinhvienPK().getMaKhoa());
+        dkklPK.setMaNganh(sv.getSinhvienPK().getMaNganh());
+        dk.setDangkykhoaluanPK(dkklPK);
+        this.thesisService.addRegistration(dk);
         return "DangKyKhoaLuan";
+    }
+    
+    //KHÓA LUẬN
+    @GetMapping("/giaovu/dsDangKyKhoaLuan")
+    public String dsKhoaLuan(Model model) {
+        model.addAttribute("dsdangkykhoaluan", this.thesisService.getRegistedThesises());
+        return "DangKyKhoaLuan";
+    }
+    
+    @GetMapping("/giaovu/PhanCongGV/{id}")
+    public String PhanCongGVView(Model model) {
+        model.addAttribute("giangvien", this.userService.getAllGV());
+        model.addAttribute("khoaluan", new Khoaluan());
+        return "PhanCongGiangVien";
+    }
+    
+    @RequestMapping("/giaovu/PhanCongGV/{id}")
+    public String PhanCongGV(Model model, @PathVariable(value = "id") int id, 
+            @ModelAttribute(value = "khoaluan") Khoaluan kl) {
+        model.addAttribute("giangvien", this.userService.getAllGV());
+        return "PhanCongGiangVien";
     }
     
     @GetMapping("/sinhvien/KhoaLuan")
@@ -122,12 +130,7 @@ public class ThesisController {
     public String NopKL(Model model) {
         return "KhoaLuan";
     }
-    
-    @RequestMapping("/giaovu/PhanCongGV")
-    public String PhanCongGV() {
-        return "PhanCongGiangVien";
-    }
-    
+
     @RequestMapping("/giaovu/ThongKeDiem")
     public String ThongKeDiem() {
         return "ThongKeDiem";

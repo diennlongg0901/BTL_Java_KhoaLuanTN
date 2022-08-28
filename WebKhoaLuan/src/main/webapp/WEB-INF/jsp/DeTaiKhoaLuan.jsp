@@ -36,6 +36,7 @@
                     <input type="submit" class="btn btn-primary btn-block mb-4" value="Thêm đề tài" />
                     <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy" />
                 </div>
+                <hr>
                 <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
                 <div class="form-outline mt-4">
                     <table class="table">
@@ -63,7 +64,32 @@
             </form:form>
         </div>
     </c:if>
-    <hr>
+
+    <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
+        <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
+        <div class="form-outline mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Năm</th>
+                        <th>Tên đề tài</th>
+                        <th>Nội dung</th>
+                        <th>Thời hạn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${detai}" var="dt">
+                        <tr>
+                            <td>${dt.nam}</td>
+                            <td>${dt.tenDT}</td>
+                            <td>${dt.noiDung}</td>
+                            <td>${dt.hanNop}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
 
     <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
         <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
@@ -89,6 +115,7 @@
                 </tbody>
             </table>
         </div>
+
         <div class="form-outline mt-4">
             <a href="<c:url value="/sinhvien/DangKyKL/${pageContext.request.userPrincipal.name}"/>">
                 <input type="Button" class="btn btn-primary btn-block mb-4" value="Đăng ký đề tài làm khóa luận"/>

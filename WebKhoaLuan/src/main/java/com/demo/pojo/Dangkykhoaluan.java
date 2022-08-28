@@ -7,6 +7,7 @@ package com.demo.pojo;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -17,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,22 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Dangkykhoaluan.findByMaND", query = "SELECT d FROM Dangkykhoaluan d WHERE d.dangkykhoaluanPK.maND = :maND"),
     @NamedQuery(name = "Dangkykhoaluan.findByMaCV", query = "SELECT d FROM Dangkykhoaluan d WHERE d.dangkykhoaluanPK.maCV = :maCV"),
     @NamedQuery(name = "Dangkykhoaluan.findByMaNganh", query = "SELECT d FROM Dangkykhoaluan d WHERE d.dangkykhoaluanPK.maNganh = :maNganh"),
-    @NamedQuery(name = "Dangkykhoaluan.findByMaKhoa", query = "SELECT d FROM Dangkykhoaluan d WHERE d.dangkykhoaluanPK.maKhoa = :maKhoa")})
+    @NamedQuery(name = "Dangkykhoaluan.findByMaKhoa", query = "SELECT d FROM Dangkykhoaluan d WHERE d.dangkykhoaluanPK.maKhoa = :maKhoa"),
+    @NamedQuery(name = "Dangkykhoaluan.findByMaSV2", query = "SELECT d FROM Dangkykhoaluan d WHERE d.maSV2 = :maSV2")})
 public class Dangkykhoaluan implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Transient
-    private int maDetai;
-
-    public int getMaDetai() {
-        return maDetai;
-    }
-
-    public void setMaDetai(int maDetai) {
-        this.maDetai = maDetai;
-    }
     @EmbeddedId
     protected DangkykhoaluanPK dangkykhoaluanPK;
+    @Size(max = 10)
+    @Column(name = "maSV2")
+    private String maSV2;
     @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Detai detai;
@@ -64,6 +60,16 @@ public class Dangkykhoaluan implements Serializable {
     private Sinhvien sinhvien;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dangkykhoaluan")
     private Set<Khoaluan> khoaluanSet;
+    @Transient
+    private int maDT;
+
+    public int getMaDT() {
+        return maDT;
+    }
+
+    public void setMaDT(int maDT) {
+        this.maDT = maDT;
+    }
 
     public Dangkykhoaluan() {
     }
@@ -82,6 +88,14 @@ public class Dangkykhoaluan implements Serializable {
 
     public void setDangkykhoaluanPK(DangkykhoaluanPK dangkykhoaluanPK) {
         this.dangkykhoaluanPK = dangkykhoaluanPK;
+    }
+
+    public String getMaSV2() {
+        return maSV2;
+    }
+
+    public void setMaSV2(String maSV2) {
+        this.maSV2 = maSV2;
     }
 
     public Detai getDetai() {

@@ -37,24 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoaluan.findByNam", query = "SELECT k FROM Khoaluan k WHERE k.nam = :nam"),
     @NamedQuery(name = "Khoaluan.findByGhiChu", query = "SELECT k FROM Khoaluan k WHERE k.ghiChu = :ghiChu"),
     @NamedQuery(name = "Khoaluan.findByNgayNop", query = "SELECT k FROM Khoaluan k WHERE k.ngayNop = :ngayNop"),
+    @NamedQuery(name = "Khoaluan.findByMaDK", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maDK = :maDK"),
     @NamedQuery(name = "Khoaluan.findByMaDT", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maDT = :maDT"),
-    @NamedQuery(name = "Khoaluan.findBySinhvienmaSV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.sinhvienmaSV = :sinhvienmaSV"),
+    @NamedQuery(name = "Khoaluan.findByMaSV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maSV = :maSV"),
     @NamedQuery(name = "Khoaluan.findByMaND", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maND = :maND"),
     @NamedQuery(name = "Khoaluan.findByMaCV", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maCV = :maCV"),
     @NamedQuery(name = "Khoaluan.findByMaNganh", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maNganh = :maNganh"),
-    @NamedQuery(name = "Khoaluan.findBySinhvienmaKhoa", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.sinhvienmaKhoa = :sinhvienmaKhoa")})
+    @NamedQuery(name = "Khoaluan.findByMaKhoa", query = "SELECT k FROM Khoaluan k WHERE k.khoaluanPK.maKhoa = :maKhoa"),
+    @NamedQuery(name = "Khoaluan.findByMaGV", query = "SELECT k FROM Khoaluan k WHERE k.maGV = :maGV"),
+    @NamedQuery(name = "Khoaluan.findByMaSV2", query = "SELECT k FROM Khoaluan k WHERE k.maSV2 = :maSV2")})
 public class Khoaluan implements Serializable {
-
-    @JoinColumns({
-        @JoinColumn(name = "maDK", referencedColumnName = "maDK", insertable = false, updatable = false),
-        @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false),
-        @JoinColumn(name = "maSV", referencedColumnName = "sinhvien_maSV", insertable = false, updatable = false),
-        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
-        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false),
-        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
-        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private Dangkykhoaluan dangkykhoaluan;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -68,20 +60,24 @@ public class Khoaluan implements Serializable {
     @Column(name = "ngayNop")
     @Temporal(TemporalType.TIMESTAMP)
     private Date ngayNop;
+    @Size(max = 10)
+    @Column(name = "maGV")
+    private String maGV;
+    @Size(max = 10)
+    @Column(name = "maSV2")
+    private String maSV2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoaluan")
     private Set<Diem> diemSet;
-    @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Detai detai;
     @JoinColumns({
-        @JoinColumn(name = "sinhvien_maSV", referencedColumnName = "maSV", insertable = false, updatable = false),       
+        @JoinColumn(name = "maDK", referencedColumnName = "maDK", insertable = false, updatable = false),
+        @JoinColumn(name = "maDT", referencedColumnName = "maDT", insertable = false, updatable = false),
+        @JoinColumn(name = "maSV", referencedColumnName = "sinhvien_maSV", insertable = false, updatable = false),
         @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
         @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false),
-        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false), 
-        @JoinColumn(name = "sinhvien_maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)
-        })
+        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
+        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
-    private Sinhvien sinhvien;
+    private Dangkykhoaluan dangkykhoaluan;
 
     public Khoaluan() {
     }
@@ -90,8 +86,8 @@ public class Khoaluan implements Serializable {
         this.khoaluanPK = khoaluanPK;
     }
 
-    public Khoaluan(int maKL, int maDT, String sinhvienmaSV, String maND, String maCV, String maNganh, String sinhvienmaKhoa) {
-        this.khoaluanPK = new KhoaluanPK(maKL, maDT, sinhvienmaSV, maND, maCV, maNganh, sinhvienmaKhoa);
+    public Khoaluan(int maKL, int maDK, int maDT, String maSV, String maND, String maCV, String maNganh, String maKhoa) {
+        this.khoaluanPK = new KhoaluanPK(maKL, maDK, maDT, maSV, maND, maCV, maNganh, maKhoa);
     }
 
     public KhoaluanPK getKhoaluanPK() {
@@ -126,6 +122,22 @@ public class Khoaluan implements Serializable {
         this.ngayNop = ngayNop;
     }
 
+    public String getMaGV() {
+        return maGV;
+    }
+
+    public void setMaGV(String maGV) {
+        this.maGV = maGV;
+    }
+
+    public String getMaSV2() {
+        return maSV2;
+    }
+
+    public void setMaSV2(String maSV2) {
+        this.maSV2 = maSV2;
+    }
+
     @XmlTransient
     public Set<Diem> getDiemSet() {
         return diemSet;
@@ -135,20 +147,12 @@ public class Khoaluan implements Serializable {
         this.diemSet = diemSet;
     }
 
-    public Detai getDetai() {
-        return detai;
+    public Dangkykhoaluan getDangkykhoaluan() {
+        return dangkykhoaluan;
     }
 
-    public void setDetai(Detai detai) {
-        this.detai = detai;
-    }
-
-    public Sinhvien getSinhvien() {
-        return sinhvien;
-    }
-
-    public void setSinhvien(Sinhvien sinhvien) {
-        this.sinhvien = sinhvien;
+    public void setDangkykhoaluan(Dangkykhoaluan dangkykhoaluan) {
+        this.dangkykhoaluan = dangkykhoaluan;
     }
 
     @Override
@@ -174,14 +178,6 @@ public class Khoaluan implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Khoaluan[ khoaluanPK=" + khoaluanPK + " ]";
-    }
-
-    public Dangkykhoaluan getDangkykhoaluan() {
-        return dangkykhoaluan;
-    }
-
-    public void setDangkykhoaluan(Dangkykhoaluan dangkykhoaluan) {
-        this.dangkykhoaluan = dangkykhoaluan;
     }
     
 }

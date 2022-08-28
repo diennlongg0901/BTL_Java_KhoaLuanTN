@@ -13,7 +13,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
                        value="/WEB-INF/layout/footer.jsp" />
     </definition>
     <definition name="TrangChu" extends="baseLayout">
-        <put-attribute name="title" value="Trường đai học AA" />
+        <put-attribute name="title" value="The University of VietNam" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/TrangChu.jsp" />
     </definition>

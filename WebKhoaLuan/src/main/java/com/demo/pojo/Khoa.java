@@ -19,7 +19,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,12 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoa.findByEmailKhoa", query = "SELECT k FROM Khoa k WHERE k.emailKhoa = :emailKhoa"),
     @NamedQuery(name = "Khoa.findByWebsite", query = "SELECT k FROM Khoa k WHERE k.website = :website")})
 public class Khoa implements Serializable {
-
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "khoa")
-//    private Nganh nganh;
-
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "khoa")
-//    private Nganh nganh;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,6 +61,14 @@ public class Khoa implements Serializable {
     private String website;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoa")
     private Collection<Nganh> nganhCollection;
+
+    public Collection<Nganh> getNganhCollection() {
+        return nganhCollection;
+    }
+
+    public void setNganhCollection(Collection<Nganh> nganhCollection) {
+        this.nganhCollection = nganhCollection;
+    }
 
     public Khoa() {
     }
@@ -123,16 +124,7 @@ public class Khoa implements Serializable {
     public void setWebsite(String website) {
         this.website = website;
     }
-
-    @XmlTransient
-    public Collection<Nganh> getNganhCollection() {
-        return nganhCollection;
-    }
-
-    public void setNganhCollection(Collection<Nganh> nganhCollection) {
-        this.nganhCollection = nganhCollection;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -157,21 +149,5 @@ public class Khoa implements Serializable {
     public String toString() {
         return "com.demo.pojo.Khoa[ maKhoa=" + maKhoa + " ]";
     }
-
-//    public Nganh getNganh() {
-//        return nganh;
-//    }
-//
-//    public void setNganh(Nganh nganh) {
-//        this.nganh = nganh;
-//    }
-
-//    public Nganh getNganh() {
-//        return nganh;
-//    }
-//
-//    public void setNganh(Nganh nganh) {
-//        this.nganh = nganh;
-//    }
-//    
+    
 }

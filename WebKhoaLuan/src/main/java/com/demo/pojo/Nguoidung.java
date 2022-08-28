@@ -96,7 +96,7 @@ public class Nguoidung implements Serializable {
     @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Chucvu chucvu;
-    @Transient
+     @Transient
     private String confirmPassword;
     @Transient
     private MultipartFile file;
@@ -122,22 +122,6 @@ public class Nguoidung implements Serializable {
     @Transient
     private String phongBan;
 
-    public String getKhoaDK() {
-        return khoaDK;
-    }
-
-    public void setKhoaDK(String khoaDK) {
-        this.khoaDK = khoaDK;
-    }
-
-    public String getNganhDK() {
-        return nganhDK;
-    }
-
-    public void setNganhDK(String nganhDK) {
-        this.nganhDK = nganhDK;
-    }
-    
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -161,7 +145,7 @@ public class Nguoidung implements Serializable {
     public void setNienKhoa(String nienKhoa) {
         this.nienKhoa = nienKhoa;
     }
-    
+
     public short getTinhTrang() {
         return tinhTrang;
     }
@@ -184,6 +168,22 @@ public class Nguoidung implements Serializable {
 
     public void setNganh(String nganh) {
         this.nganh = nganh;
+    }
+
+    public String getKhoaDK() {
+        return khoaDK;
+    }
+
+    public void setKhoaDK(String khoaDK) {
+        this.khoaDK = khoaDK;
+    }
+
+    public String getNganhDK() {
+        return nganhDK;
+    }
+
+    public void setNganhDK(String nganhDK) {
+        this.nganhDK = nganhDK;
     }
 
     public String getHocHam() {
@@ -209,6 +209,7 @@ public class Nguoidung implements Serializable {
     public void setPhongBan(String phongBan) {
         this.phongBan = phongBan;
     }
+    
     public Nguoidung() {
     }
 

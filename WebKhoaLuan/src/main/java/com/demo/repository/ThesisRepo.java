@@ -19,10 +19,14 @@ public interface ThesisRepo {
     boolean addTopic(Detai topic);
     List<Detai> getTopics();
     boolean deleteTopic(int topicID);
-    //Đăng ký khóa luận
-    boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan);
-    List<Dangkykhoaluan> getDangkykhoaluans();
+
+    //ĐĂNG KÝ KHÓA LUẬN
+    List<Khoaluan> getThesis();
+    List<Dangkykhoaluan> getRegistedThesises();
+    
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);
-    List<Khoaluan> getThesis();
+    boolean addRegistration(Dangkykhoaluan dangkykhoaluan);
+    
+    
 }

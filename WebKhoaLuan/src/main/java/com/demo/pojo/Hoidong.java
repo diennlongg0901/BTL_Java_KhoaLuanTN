@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Hoidong.findAll", query = "SELECT h FROM Hoidong h"),
     @NamedQuery(name = "Hoidong.findByMaHD", query = "SELECT h FROM Hoidong h WHERE h.maHD = :maHD"),
-    @NamedQuery(name = "Hoidong.findByTenHD", query = "SELECT h FROM Hoidong h WHERE h.tenHD = :tenHD")})
+    @NamedQuery(name = "Hoidong.findByTenHD", query = "SELECT h FROM Hoidong h WHERE h.tenHD = :tenHD"),
+    @NamedQuery(name = "Hoidong.findByTinhTrangHD", query = "SELECT h FROM Hoidong h WHERE h.tinhTrangHD = :tinhTrangHD")})
 public class Hoidong implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,6 +73,14 @@ public class Hoidong implements Serializable {
         this.tenHD = tenHD;
     }
 
+    public String getTinhTrangHD() {
+        return tinhTrangHD;
+    }
+
+    public void setTinhTrangHD(String tinhTrangHD) {
+        this.tinhTrangHD = tinhTrangHD;
+    }
+
     @XmlTransient
     public Set<Chitiethoidong> getChitiethoidongSet() {
         return chitiethoidongSet;
@@ -104,14 +113,6 @@ public class Hoidong implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Hoidong[ maHD=" + maHD + " ]";
-    }
-
-    public String getTinhTrangHD() {
-        return tinhTrangHD;
-    }
-
-    public void setTinhTrangHD(String tinhTrangHD) {
-        this.tinhTrangHD = tinhTrangHD;
     }
     
 }

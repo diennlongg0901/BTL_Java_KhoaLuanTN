@@ -7,8 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="mt-4 p-5 bg-white text-black rounded" id="footer">
-    <h3>TRƯỜNG ĐẠI HỌC AA</h3>
-    <p>TĐ.Long - NL.Tuyen &copy; 2022</p>
+    <div class="row">
+        <div class="col-sm-1">
+            <img src="${pageContext.servletContext.contextPath}/picture/University.svg" alt="TruongDaiHocAA" class="icon-seal-small" style="height: 90px" />
+        </div>
+        <div class="col-lg-3">
+            <h3>The University of VietNam</h3>
+            <p>TĐ.Long - NL.Tuyen &copy; 2022</p>
+        </div>
+    </div>
+    
     <hr>
     <div class="row mt-3">
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">

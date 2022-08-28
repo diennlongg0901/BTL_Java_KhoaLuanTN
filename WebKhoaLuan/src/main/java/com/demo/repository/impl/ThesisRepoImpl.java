@@ -83,7 +83,7 @@ public class ThesisRepoImpl implements ThesisRepo {
     }
 
     @Override
-    public boolean addDK_thesis(Dangkykhoaluan dangkykhoaluan) {
+    public boolean addRegistration(Dangkykhoaluan dangkykhoaluan) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
             session.save(dangkykhoaluan);
@@ -95,9 +95,9 @@ public class ThesisRepoImpl implements ThesisRepo {
     }
 
     @Override
-    public List<Dangkykhoaluan> getDangkykhoaluans() {
+    public List<Dangkykhoaluan> getRegistedThesises() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query query = session.createQuery("FROM dangkykhoaluan");
+        Query query = session.createQuery("FROM Dangkykhoaluan");
         return query.getResultList();
     }
 }

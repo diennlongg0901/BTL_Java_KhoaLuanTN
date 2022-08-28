@@ -39,9 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Sinhvien.findByMaKhoa", query = "SELECT s FROM Sinhvien s WHERE s.sinhvienPK.maKhoa = :maKhoa")})
 public class Sinhvien implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
-    private Set<Dangkykhoaluan> dangkykhoaluanSet;
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SinhvienPK sinhvienPK;
@@ -50,6 +47,8 @@ public class Sinhvien implements Serializable {
     private String nienKhoa;
     @Column(name = "tinhTrang")
     private Short tinhTrang;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
+    private Set<Dangkykhoaluan> dangkykhoaluanSet;
     @JoinColumns({
         @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
         @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
@@ -60,8 +59,6 @@ public class Sinhvien implements Serializable {
         @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
-    private Set<Khoaluan> khoaluanSet;
 
     public Sinhvien() {
     }
@@ -98,6 +95,15 @@ public class Sinhvien implements Serializable {
         this.tinhTrang = tinhTrang;
     }
 
+    @XmlTransient
+    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
+        return dangkykhoaluanSet;
+    }
+
+    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
+        this.dangkykhoaluanSet = dangkykhoaluanSet;
+    }
+
     public Nganh getNganh() {
         return nganh;
     }
@@ -112,15 +118,6 @@ public class Sinhvien implements Serializable {
 
     public void setNguoidung(Nguoidung nguoidung) {
         this.nguoidung = nguoidung;
-    }
-
-    @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
-    }
-
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
     }
 
     @Override
@@ -146,15 +143,6 @@ public class Sinhvien implements Serializable {
     @Override
     public String toString() {
         return "com.demo.pojo.Sinhvien[ sinhvienPK=" + sinhvienPK + " ]";
-    }
-
-    @XmlTransient
-    public Set<Dangkykhoaluan> getDangkykhoaluanSet() {
-        return dangkykhoaluanSet;
-    }
-
-    public void setDangkykhoaluanSet(Set<Dangkykhoaluan> dangkykhoaluanSet) {
-        this.dangkykhoaluanSet = dangkykhoaluanSet;
     }
     
 }

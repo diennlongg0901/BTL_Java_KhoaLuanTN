@@ -9,7 +9,10 @@
 
 <nav class="navbar navbar-expand-sm fixed-top py-3 bg-light navbar-light">
     <div class="container-fluid">
-        <a class="nav-link active" href="<c:url value="/" />"><strong>Trường Đại học AA</strong></a>
+        <a class="navbar-brand link-dark" href="<c:url value="/" />">
+            <img src="${pageContext.servletContext.contextPath}/picture/University.svg" alt="TruongDaiHocAA" class="icon-seal-small" style="height: 70px" />
+            <strong>The University of VietNam</strong>
+        </a>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="#"><strong>Thông báo mới</strong></a>        
@@ -34,7 +37,6 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Đề tài khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/dsDangKyKhoaLuan"/>">Danh sách đăng ký khóa luận</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/PhanCongGV"/>">Phân công giảng viên hướng dẫn</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/HoiDong"/>">Hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongKeDiem"/>">Thống kê điểm</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinGVU/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
