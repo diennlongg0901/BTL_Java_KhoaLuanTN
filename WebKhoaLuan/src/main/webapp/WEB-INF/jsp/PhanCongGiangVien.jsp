@@ -12,6 +12,16 @@
     <h2 class="text-center mt-5">XÉT DUYỆT & PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN CHO KHÓA LUẬN</h2>
     <div class="form-group container">
         <h4 class="mt-5">THÔNG TIN CHI TIẾT VỀ KHÓA LUẬN</h4>
+        <h6 class="form-outline mt-4"><strong>Đề tài: </strong>${dangkykhoaluan.detai.maDT} - ${dangkykhoaluan.detai.tenDT}</h6>
+        <div class="row">
+            <div class="col">
+                <h6 class="form-outline mt-4"><strong>Sinh viên: </strong>${dangkykhoaluan.dangkykhoaluanPK.sinhvienmaSV} - ${dangkykhoaluan.sinhvien.nguoidung.ho} ${dangkykhoaluan.sinhvien.nguoidung.ten}</h6>
+            </div>
+            <div class="col">
+                <h6 class="form-outline mt-4"><strong>Sinh viên 2: </strong></h6>
+            </div>
+        </div>
+        <h6 class="form-outline mt-4"><strong>Thời hạn: </strong>${dangkykhoaluan.detai.hanNop}</h6>
         <hr>
         <h4 class="mt-4">PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN</h4>
         <form:form method="post" action="${action}" modelAttribute="khoaluan">

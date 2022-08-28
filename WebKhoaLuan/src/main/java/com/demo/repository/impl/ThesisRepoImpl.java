@@ -100,4 +100,12 @@ public class ThesisRepoImpl implements ThesisRepo {
         Query query = session.createQuery("FROM Dangkykhoaluan");
         return query.getResultList();
     }
+
+    @Override
+    public Dangkykhoaluan getRegistedThesisByID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query query = session.createQuery("FROM Dangkykhoaluan WHERE maDK = (:id)");
+        query.setParameter("id", id);
+        return (Dangkykhoaluan) query.getSingleResult();
+    }
 }

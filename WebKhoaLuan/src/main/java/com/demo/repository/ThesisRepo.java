@@ -21,12 +21,15 @@ public interface ThesisRepo {
     boolean deleteTopic(int topicID);
 
     //ĐĂNG KÝ KHÓA LUẬN
-    List<Khoaluan> getThesis();
+    boolean addRegistration(Dangkykhoaluan dangkykhoaluan);
     List<Dangkykhoaluan> getRegistedThesises();
+    Dangkykhoaluan getRegistedThesisByID(int id);
+    
     
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);
-    boolean addRegistration(Dangkykhoaluan dangkykhoaluan);
+    List<Khoaluan> getThesis();
+    
     
     
 }

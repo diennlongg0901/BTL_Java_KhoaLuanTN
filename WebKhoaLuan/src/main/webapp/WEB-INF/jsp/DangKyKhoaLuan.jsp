@@ -30,7 +30,7 @@
                                     <td>${dkkl.detai.tenDT}</td>
                                     <td>${dkkl.maSV2}</td>
                                     <td>${dkkl.detai.hanNop}</td>
-                                    <td><a href=" <c:url value="/giaovu/PhanCongGV/${dkkl.dangkykhoaluanPK.maDT}"/>">Xét duyệt</a></td>
+                                    <td><a href=" <c:url value="/giaovu/PhanCongGV/${dkkl.dangkykhoaluanPK.maDK}"/>">Xét duyệt</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>

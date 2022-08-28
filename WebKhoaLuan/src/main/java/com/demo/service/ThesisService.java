@@ -21,9 +21,12 @@ public interface ThesisService {
     List<Detai> getTopics();
     boolean deleteTopic(int topicID);
 
-    //KHÓA LUẬN
-    boolean addThesis(Khoaluan thesis);
+    //ĐĂNG KÝ KHÓA LUẬN
     boolean addRegistration(Dangkykhoaluan dangkykhoaluan);
-    List<Khoaluan> getThesis();
     List<Dangkykhoaluan> getRegistedThesises();
+    Dangkykhoaluan getRegistedThesisByID(int id);
+    
+    //KHÓA LUẬN
+    boolean addThesis(Khoaluan thesis);   
+    List<Khoaluan> getThesis();   
 }

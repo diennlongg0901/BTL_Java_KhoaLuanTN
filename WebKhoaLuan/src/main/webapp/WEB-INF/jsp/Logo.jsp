@@ -8,7 +8,7 @@
 
 <nav class="navbar navbar-expand-sm py-3 bg-light navbar-light">
     <div class="container-fluid">
-        <a class="nav-link active link-dark" href="<c:url value = "/" />">
+        <a class="navbar-brand link-dark" href="<c:url value = "/" />">
             <img src="${pageContext.servletContext.contextPath}/picture/University.svg" alt="TruongDaiHocAA" class="icon-seal-small" style="height: 70px" />
             <strong>The University of VietNam</strong>
         </a>

@@ -87,7 +87,7 @@ public class UserController {
         model.addAttribute("khoa", this.roleService.getKhoa());
         try {
             if (this.userDetailsService.addUser(nd) == true) {                
-                return "redirect:/quantri/QLTaiKhoan";
+                errMsg = "Đăng ký thành công, vui lòng kiểm tra lại!";
             } else {              
                 errMsg = "Đăng ký không thành công, vui lòng kiểm tra lại!";
             }
