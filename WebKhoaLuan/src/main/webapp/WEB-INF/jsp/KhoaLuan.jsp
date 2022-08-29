@@ -12,6 +12,7 @@
 <div class="container">
     <div class="form-group container">
         <form:form method="post" action="${action}" modelAttribute="">
+            <form:textarea class="form-control" path="noiDung" placeholder="Nội dung chi tiết đề tài khóa luận"></form:textarea>
             <div class="form-outline mt-4">
                 <label class="form-label" for="ho">Mã sinh viên</label>
                 <input type="text" class="form-control"/>

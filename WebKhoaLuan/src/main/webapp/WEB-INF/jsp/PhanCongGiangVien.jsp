@@ -15,21 +15,30 @@
         <h6 class="form-outline mt-4"><strong>Đề tài: </strong>${dangkykhoaluan.detai.maDT} - ${dangkykhoaluan.detai.tenDT}</h6>
         <div class="row">
             <div class="col">
-                <h6 class="form-outline mt-4"><strong>Sinh viên: </strong>${dangkykhoaluan.dangkykhoaluanPK.sinhvienmaSV} - ${dangkykhoaluan.sinhvien.nguoidung.ho} ${dangkykhoaluan.sinhvien.nguoidung.ten}</h6>
+                <h6 class="form-outline mt-4"><strong>Sinh viên: </strong>${dangkykhoaluan.dangkykhoaluanPK.maSV} - ${dangkykhoaluan.sinhvien.nguoidung.ho} ${dangkykhoaluan.sinhvien.nguoidung.ten}</h6>
             </div>
             <div class="col">
-                <h6 class="form-outline mt-4"><strong>Sinh viên 2: </strong></h6>
+                <h6 class="form-outline mt-4"><strong>Sinh viên 2: ${dangkykhoaluan.maSV2} - ${sinhvien.ho} ${sinhvien.ten}</strong></h6>
             </div>
         </div>
         <h6 class="form-outline mt-4"><strong>Thời hạn: </strong>${dangkykhoaluan.detai.hanNop}</h6>
         <hr>
         <h4 class="mt-4">PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN</h4>
         <form:form method="post" action="${action}" modelAttribute="khoaluan">
-            <div class="form-outline mt-4">
-                <label class="form-label">Chọn mã giảng viên hướng dẫn</label>
+            <div class="form-outline mt-4" >
+                <label class="form-label">Chọn mã giảng viên hướng dẫn:</label>
                 <form:select id="vaiTro" path="maGV">
+                    <form:option value="GV000" >Giảng viên</form:option>
                     <c:forEach items="${giangvien}" var="gv">
-                        <form:option value="${gv.giangvienPK.maGV}" path="maGV" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
+                        <form:option value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
+                    </c:forEach>
+                </form:select>
+                        
+                <label class="form-label">Chọn mã giảng viên hướng dẫn 2:</label>
+                <form:select id="vaiTro" path="maGV">
+                    <form:option value="GV000" >Giảng viên</form:option>
+                    <c:forEach items="${giangvien}" var="gv">
+                        <form:option value="${gv.giangvienPK.maGV}" path="maGV2" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
                     </c:forEach>
                 </form:select>
             </div>

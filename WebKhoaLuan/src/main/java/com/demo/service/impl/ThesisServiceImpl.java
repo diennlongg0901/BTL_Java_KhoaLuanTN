@@ -41,8 +41,7 @@ public class ThesisServiceImpl implements ThesisService {
 
     //KHÓA LUẬN
     @Override
-    public boolean addThesis(Khoaluan thesis) {
-        
+    public boolean addThesis(Khoaluan thesis) {        
         return this.thesisRepo.addThesis(thesis);
     }
 

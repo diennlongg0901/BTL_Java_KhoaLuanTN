@@ -8,7 +8,6 @@ import com.demo.pojo.Dangkykhoaluan;
 import com.demo.pojo.DangkykhoaluanPK;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Khoaluan;
-import com.demo.pojo.KhoaluanPK;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.RoleService;
@@ -92,7 +91,7 @@ public class ThesisController {
         DangkykhoaluanPK dkklPK = new DangkykhoaluanPK();
         dkklPK.setMaDT(dk.getMaDT());
         dkklPK.setMaND(id);
-        dkklPK.setSinhvienmaSV(id);
+        dkklPK.setMaSV(id);
         dkklPK.setMaCV("ROLE_SV");
         dkklPK.setMaKhoa(sv.getSinhvienPK().getMaKhoa());
         dkklPK.setMaNganh(sv.getSinhvienPK().getMaNganh());
@@ -113,6 +112,7 @@ public class ThesisController {
         model.addAttribute("giangvien", this.userService.getListGV());
         model.addAttribute("khoaluan", new Khoaluan());
         model.addAttribute("dangkykhoaluan", this.thesisService.getRegistedThesisByID(id));
+        model.addAttribute("sinhvien", this.userService.getUserbyID(this.thesisService.getRegistedThesisByID(id).getMaSV2()));
         return "PhanCongGiangVien";
     }
     
@@ -121,18 +121,9 @@ public class ThesisController {
             @ModelAttribute(value = "khoaluan") Khoaluan kl) {
         model.addAttribute("giangvien", this.userService.getAllGV());
         Dangkykhoaluan dkkl = this.thesisService.getRegistedThesisByID(id);
-        DangkykhoaluanPK dkklPK = dkkl.getDangkykhoaluanPK();
-        KhoaluanPK klPK = new KhoaluanPK();       
-        klPK.setMaDK(id);
-        klPK.setMaDT(dkkl.getMaDT());
-        klPK.setMaSV(dkkl.getSinhvien().getSinhvienPK().getMaSV());
-        klPK.setMaND(dkkl.getSinhvien().getSinhvienPK().getMaND());
-        klPK.setMaCV("ROLE_SV");
-        klPK.setMaKhoa(dkkl.getSinhvien().getSinhvienPK().getMaKhoa());
-        klPK.setMaNganh(dkkl.getSinhvien().getSinhvienPK().getMaNganh());
-        kl.setKhoaluanPK(klPK);
-//        kl.setDangkykhoaluan(dkkl);
+        kl.setMaSV2(dkkl.getMaSV2());
         kl.setNam(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+        kl.setDangkykhoaluan(dkkl);        
         this.thesisService.addThesis(kl);
         return "PhanCongGiangVien";
     }
