@@ -81,7 +81,19 @@ public class Khoaluan implements Serializable {
         @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa")})
     @ManyToOne(optional = false)
     private Dangkykhoaluan dangkykhoaluan;
+    
+    @Size(max = 100)
+    @Column(name = "file")
+    private String file;
 
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+    
     public Khoaluan() {
     }
 

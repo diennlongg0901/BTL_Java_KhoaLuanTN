@@ -28,7 +28,9 @@ public interface ThesisRepo {
     
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);
+    boolean updateThesis(Khoaluan thesis);
     List<Khoaluan> getThesis();
+    Khoaluan getThesisbyID(String id);
     
     
     

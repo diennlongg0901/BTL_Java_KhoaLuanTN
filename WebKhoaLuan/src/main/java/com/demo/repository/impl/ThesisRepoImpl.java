@@ -108,4 +108,24 @@ public class ThesisRepoImpl implements ThesisRepo {
         query.setParameter("id", id);
         return (Dangkykhoaluan) query.getSingleResult();
     }
+
+    @Override
+    public Khoaluan getThesisbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query query = session.createQuery("FROM Khoaluan WHERE maSV = (:id)");
+        query.setParameter("id", id);
+        return (Khoaluan) query.getSingleResult();
+    }
+
+    @Override
+    public boolean updateThesis(Khoaluan khoaluan) {
+        try{
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        session.update(khoaluan);
+        return true;
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
 }

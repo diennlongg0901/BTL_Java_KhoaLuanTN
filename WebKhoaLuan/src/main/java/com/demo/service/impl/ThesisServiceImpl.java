@@ -64,4 +64,15 @@ public class ThesisServiceImpl implements ThesisService {
     public Dangkykhoaluan getRegistedThesisByID(int id) {
         return this.thesisRepo.getRegistedThesisByID(id);
     }
+
+    @Override
+    public Khoaluan getThesisbyID(String id) {
+        return this.thesisRepo.getThesisbyID(id);
+    }
+
+    @Override
+    public boolean updateThesis(Khoaluan khoaluan) {
+        
+        return this.thesisRepo.updateThesis(khoaluan);
+    }
 }

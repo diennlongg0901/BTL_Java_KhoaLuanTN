@@ -13,7 +13,7 @@
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
         <h4 class="mt-5">Thêm mới hội đồng</h4>
         <div class="form-group container">
-            <form:form method="post" action="${action}" modelAttribute="hoidong" >
+            <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="hoidong" >
                 <div class="row">
                     <div class="form-outline mt-4 col-md-9">
                         <form:input type="text" class="form-control" path="tenHD" placeholder="Tên hội đồng" />
@@ -25,7 +25,7 @@
                 </div>
             </form:form>
 
-            <form:form method="post" action="${action}" modelAttribute="chitiethoidong" >
+            <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="chitiethoidong" >
                 <div class="row">
                     <div class="form-outline mt-4 col-md-5">
                         <label class="form-label">Thành viên hội đồng</label>

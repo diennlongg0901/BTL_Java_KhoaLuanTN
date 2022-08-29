@@ -14,7 +14,7 @@
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
         <h4 class="mt-4">Thêm đề tài khóa luận</h4>
         <div class="form-group container">
-            <form:form method="post" action="${action}" modelAttribute="detaimoi" >
+            <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="detaimoi" >
                 <div class="form-outline mt-4">
                     <form:input type="text" class="form-control" path="tenDT" placeholder="Tên đề tài"/>
                 </div>
