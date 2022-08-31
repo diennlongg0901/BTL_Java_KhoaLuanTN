@@ -12,6 +12,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="footer"
                        value="/WEB-INF/layout/footer.jsp" />
     </definition>
+    
     <definition name="TrangChu" extends="baseLayout">
         <put-attribute name="title" value="The University of VietNam" />
         <put-attribute name="content"
@@ -40,14 +41,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     </definition>
     
     <definition name="Diem" extends="baseLayout">
-        <put-attribute name="title" value="SINH VIÊN - ĐIỂM KHÓA LUẬN" />
+        <put-attribute name="title" value="ĐIỂM KHÓA LUẬN" />
         <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/Diem.jsp" />
     </definition>
     
     <definition name="KhoaLuan" extends="baseLayout">
-        <put-attribute name="title" value="SINH VIÊN - KHÓA LUẬN" />
+        <put-attribute name="title" value="KHÓA LUẬN" />
         <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/KhoaLuan.jsp" />
@@ -100,6 +101,13 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/DangKyKhoaLuan.jsp" />
+    </definition>
+    
+    <definition name="KhoaLuanHD" extends="baseLayout">
+        <put-attribute name="title" value="DANH SÁCH KHÓA LUẬN THEO HỘI ĐỒNG" />
+        <put-attribute name="header" value="/WEB-INF/jsp/Logo.jsp" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/KhoaLuanHD.jsp" />
     </definition>
 </tiles-definitions>
 

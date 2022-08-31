@@ -110,11 +110,19 @@ public class ThesisRepoImpl implements ThesisRepo {
     }
 
     @Override
-    public Khoaluan getThesisbyID(String id) {
+    public Khoaluan getThesisBySV(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query query = session.createQuery("FROM Khoaluan WHERE maSV = (:id)");
         query.setParameter("id", id);
         return (Khoaluan) query.getSingleResult();
+    }
+    
+    @Override
+    public List<Khoaluan> getThesisByGV(String idGV) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Khoaluan WHERE maGV = (:idGV) OR maGV2 = (:idGV)");
+        q.setParameter("idGV", idGV);
+        return q.getResultList();
     }
 
     @Override
@@ -127,5 +135,21 @@ public class ThesisRepoImpl implements ThesisRepo {
             ex.printStackTrace();
         }
         return false;
+    }
+    
+    @Override
+    public Khoaluan getThesisbyID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Khoaluan WHERE maKL = (:id)");
+        q.setParameter("id", id);
+        return (Khoaluan) q.getSingleResult();
+    }
+
+    @Override
+    public List<Khoaluan> getThesisByIDCouncil(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Khoaluan WHERE maHD = (:id)");
+        q.setParameter("id", id);
+        return q.getResultList();
     }
 }

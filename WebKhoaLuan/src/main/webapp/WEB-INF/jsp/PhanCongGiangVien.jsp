@@ -26,16 +26,18 @@
         <h4 class="mt-4">PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="khoaluan">
             <div class="form-outline mt-4" >
-                <label class="form-label">Chọn mã giảng viên hướng dẫn:</label>
-                <form:select id="vaiTro" path="maGV">
+                <label class="form-label">Chọn mã giảng viên hướng dẫn: </label>
+                <form:select id="maGV" path="maGV">
                     <form:option value="GV000" >Giảng viên</form:option>
                     <c:forEach items="${giangvien}" var="gv">
                         <form:option path="maGV" value="${gv.giangvienPK.maGV}" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
                     </c:forEach>
                 </form:select>
-                        
-                <label class="form-label">Chọn mã giảng viên hướng dẫn 2:</label>
-                <form:select id="vaiTro" path="maGV2">
+            </div>
+
+            <div class="form-outline mt-4" >
+                <label class="form-label">Chọn mã giảng viên hướng dẫn 2: </label>
+                <form:select id="maGV2" path="maGV2">
                     <form:option value="GV000" >Giảng viên</form:option>
                     <c:forEach items="${giangvien}" var="gv">
                         <form:option value="${gv.giangvienPK.maGV}" path="maGV2" >${gv.giangvienPK.maGV} - ${gv.nguoidung.ho} ${gv.nguoidung.ten}</form:option>
@@ -43,9 +45,19 @@
                 </form:select>
             </div>
 
+            <div class="form-outline mt-4" >
+                <label class="form-label">Chọn mã hội đồng: </label>
+                <form:select id="hoiDong" path="hoidong.maHD">
+                    <form:option value="0" >Hội đồng</form:option>
+                    <c:forEach items="${hoidong}" var="hd">
+                        <form:option path="hoidong.maHD" value="${hd.maHD}" >${hd.maHD} - ${hd.tenHD}</form:option>
+                    </c:forEach>
+                </form:select>
+            </div>
+
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4" value="Xác nhận"/>
-                <a href="/giaovu/dsDangKyKhoaLuan">
+                <a href="/WebKhoaLuan/giaovu/dsDangKyKhoaLuan">
                     <input type="button" class="btn btn-primary btn-block mb-4" value="Trở về"/>
                 </a>
             </div>

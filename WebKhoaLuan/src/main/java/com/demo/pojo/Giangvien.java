@@ -46,8 +46,10 @@ public class Giangvien implements Serializable {
     @Size(max = 100)
     @Column(name = "hocHam")
     private String hocHam;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "giangvien")
+    private Set<Diem> diemSet;
     @JoinColumns({
-        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),       
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
         @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;
@@ -87,6 +89,15 @@ public class Giangvien implements Serializable {
 
     public void setHocHam(String hocHam) {
         this.hocHam = hocHam;
+    }
+
+    @XmlTransient
+    public Set<Diem> getDiemSet() {
+        return diemSet;
+    }
+
+    public void setDiemSet(Set<Diem> diemSet) {
+        this.diemSet = diemSet;
     }
 
     public Nguoidung getNguoidung() {

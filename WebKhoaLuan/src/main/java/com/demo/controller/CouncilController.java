@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +33,7 @@ public class CouncilController {
     private UserService userDetailsService;
 
     //LẤY DANH SÁCH HỘI ĐỒNG
-    @GetMapping("/HoiDong")
+    @GetMapping("/giaovu/HoiDong")
     public String HoiDong(Model model) {
         model.addAttribute("nguoidung", this.userService.getAllUsers());
         model.addAttribute("giangvien", this.userService.getListGV());
@@ -49,7 +50,7 @@ public class CouncilController {
     }
 
     //THÊM HỘI ĐỒNG
-    @PostMapping(value = "/HoiDong", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+    @PostMapping(value = "/giaovu/HoiDong", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String HoiDong(Model model, @ModelAttribute(value = "hoidong") Hoidong council,
             @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
         model.addAttribute("giangvien", this.userService.getListGV());
@@ -66,6 +67,12 @@ public class CouncilController {
             errMsg = "Đã xảy ra lỗi!";
         }
         model.addAttribute("errMsg", errMsg);
+        return "HoiDong";
+    }
+    
+    @GetMapping("/giangvien/HoiDong/{id}")
+    public String HoiDong(Model model, @PathVariable(value = "id") String id) {
+        model.addAttribute("hoidonggv", this.councilService.getCouncilByGV(id));
         return "HoiDong";
     }
 }

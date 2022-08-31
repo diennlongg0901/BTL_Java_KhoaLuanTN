@@ -30,8 +30,8 @@ public interface ThesisRepo {
     boolean addThesis(Khoaluan thesis);
     boolean updateThesis(Khoaluan thesis);
     List<Khoaluan> getThesis();
-    Khoaluan getThesisbyID(String id);
-    
-    
-    
+    List<Khoaluan> getThesisByGV(String idGV);
+    Khoaluan getThesisBySV(String id);
+    List<Khoaluan>getThesisByIDCouncil(int id);
+    Khoaluan getThesisbyID(int id);
 }

@@ -13,7 +13,7 @@
     <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
         <div class="form-group container">
             <h4 class="mt-4">Thông tin cá nhân</h4>
-            <div class="row mt-5">
+            <div class="row mt-4">
                 <div class="col-md-3">
                     <img src="${thongtinnguoidung.anh}" alt="alt" class="img-fluid rounded-circle" style="width: 150px;height: 150px;"/>
                 </div>

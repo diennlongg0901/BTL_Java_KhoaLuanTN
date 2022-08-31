@@ -80,4 +80,29 @@ public class CouncilRepoImpl implements CouncilRepo {
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
+
+    @Override
+    public List<Hoidong> getCouncils() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Hoidong ORDER BY maHD DESC");
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Chitiethoidong> getCouncilByGV(String idGV) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Chitiethoidong WHERE maGV = (:idGV) ORDER BY maHD DESC");
+        q.setParameter("idGV", idGV);
+        return q.getResultList();
+    }
+
+    @Override
+    public Integer countMember(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        int total = 0;
+        Query q = session.createQuery("FROM Chitiethoidong WHERE maHD = (:id)");
+        q.setParameter("id", id);
+        total = q.getMaxResults();
+        return total;
+    }
 }

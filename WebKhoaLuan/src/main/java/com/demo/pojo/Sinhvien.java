@@ -50,7 +50,7 @@ public class Sinhvien implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sinhvien")
     private Set<Dangkykhoaluan> dangkykhoaluanSet;
     @JoinColumns({
-        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),
+        @JoinColumn(name = "maNganh", referencedColumnName = "maNganh", insertable = false, updatable = false),        
         @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nganh nganh;

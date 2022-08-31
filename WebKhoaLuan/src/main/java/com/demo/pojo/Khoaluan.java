@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,7 +43,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoaluan.findByNgayNop", query = "SELECT k FROM Khoaluan k WHERE k.ngayNop = :ngayNop"),
     @NamedQuery(name = "Khoaluan.findByMaSV2", query = "SELECT k FROM Khoaluan k WHERE k.maSV2 = :maSV2"),
     @NamedQuery(name = "Khoaluan.findByMaGV", query = "SELECT k FROM Khoaluan k WHERE k.maGV = :maGV"),
-    @NamedQuery(name = "Khoaluan.findByMaGV2", query = "SELECT k FROM Khoaluan k WHERE k.maGV2 = :maGV2")})
+    @NamedQuery(name = "Khoaluan.findByMaGV2", query = "SELECT k FROM Khoaluan k WHERE k.maGV2 = :maGV2"),
+    @NamedQuery(name = "Khoaluan.findByFile", query = "SELECT k FROM Khoaluan k WHERE k.file = :file")})
 public class Khoaluan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +71,9 @@ public class Khoaluan implements Serializable {
     @Size(max = 10)
     @Column(name = "maGV2")
     private String maGV2;
+    @Size(max = 100)
+    @Column(name = "file")
+    private String file;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoaluan")
     private Set<Diem> diemSet;
     @JoinColumns({
@@ -81,19 +86,22 @@ public class Khoaluan implements Serializable {
         @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa")})
     @ManyToOne(optional = false)
     private Dangkykhoaluan dangkykhoaluan;
-    
-    @Size(max = 100)
-    @Column(name = "file")
-    private String file;
+    @JoinColumns({
+        @JoinColumn(name = "maHD", referencedColumnName = "maHD")})
+    @ManyToOne(optional = false)
+    private Hoidong hoidong;
+    @Transient
+    private int maDT;
 
-    public String getFile() {
-        return file;
+    public int getMaDT() {
+        return maDT;
     }
 
-    public void setFile(String file) {
-        this.file = file;
+    public void setMaDT(int maDT) {
+        this.maDT = maDT;
     }
-    
+
+
     public Khoaluan() {
     }
 
@@ -157,6 +165,14 @@ public class Khoaluan implements Serializable {
         this.maGV2 = maGV2;
     }
 
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     @XmlTransient
     public Set<Diem> getDiemSet() {
         return diemSet;
@@ -172,6 +188,14 @@ public class Khoaluan implements Serializable {
 
     public void setDangkykhoaluan(Dangkykhoaluan dangkykhoaluan) {
         this.dangkykhoaluan = dangkykhoaluan;
+    }
+
+    public Hoidong getHoidong() {
+        return hoidong;
+    }
+
+    public void setHoidong(Hoidong hoidong) {
+        this.hoidong = hoidong;
     }
 
     @Override

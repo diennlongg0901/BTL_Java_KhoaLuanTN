@@ -63,4 +63,19 @@ public class CouncilServiceImpl implements CouncilService{
     public void deleteMember(String userID) {
         this.councilRepo.deleteMember(userID);
     }
+
+    @Override
+    public List<Hoidong> getCouncils() {
+        return this.councilRepo.getCouncils();
+    }
+
+    @Override
+    public List<Chitiethoidong> getCouncilByGV(String idGV) {
+        return this.councilRepo.getCouncilByGV(idGV);
+    }
+
+    @Override
+    public Integer countMember(int id) {
+        return this.councilRepo.countMember(id);
+    }
 }

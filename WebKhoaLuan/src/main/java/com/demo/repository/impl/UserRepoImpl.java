@@ -46,7 +46,6 @@ public class UserRepoImpl implements UserRepo {
             Predicate p = builder.equal(r.get("username").as(String.class), username.trim());
             query = query.where(p);
         }
-
         Query q = s.createQuery(query);
         return q.getResultList();
     }
@@ -122,8 +121,7 @@ public class UserRepoImpl implements UserRepo {
             return true;
         } catch (HibernateException e) {
             System.err.println(e.getMessage());
-        }
-        
+        }     
         return false;
     }
   

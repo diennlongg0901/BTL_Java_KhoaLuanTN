@@ -39,7 +39,7 @@ public class Quantri implements Serializable {
     @Column(name = "nhiemVu")
     private String nhiemVu;
     @JoinColumns({
-        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),        
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
         @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
     @ManyToOne(optional = false)
     private Nguoidung nguoidung;

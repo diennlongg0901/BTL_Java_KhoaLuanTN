@@ -49,6 +49,8 @@ public class Hoidong implements Serializable {
     private String tinhTrangHD;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
     private Set<Chitiethoidong> chitiethoidongSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
+    private Set<Khoaluan> khoaluanSet;
 
     public Hoidong() {
     }
@@ -88,6 +90,15 @@ public class Hoidong implements Serializable {
 
     public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
         this.chitiethoidongSet = chitiethoidongSet;
+    }
+
+    @XmlTransient
+    public Set<Khoaluan> getKhoaluanSet() {
+        return khoaluanSet;
+    }
+
+    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
+        this.khoaluanSet = khoaluanSet;
     }
 
     @Override

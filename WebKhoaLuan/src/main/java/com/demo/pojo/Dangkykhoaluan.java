@@ -71,7 +71,6 @@ public class Dangkykhoaluan implements Serializable {
         this.maDT = maDT;
     }
 
-
     public Dangkykhoaluan() {
     }
 

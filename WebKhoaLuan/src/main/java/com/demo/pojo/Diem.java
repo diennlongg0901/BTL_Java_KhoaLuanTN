@@ -10,10 +10,12 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -26,8 +28,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Diem.findAll", query = "SELECT d FROM Diem d"),
-    @NamedQuery(name = "Diem.findByMaTC", query = "SELECT d FROM Diem d WHERE d.diemPK.maTC = :maTC"),
+    @NamedQuery(name = "Diem.findByMaGV", query = "SELECT d FROM Diem d WHERE d.diemPK.maGV = :maGV"),
+    @NamedQuery(name = "Diem.findByMaND", query = "SELECT d FROM Diem d WHERE d.diemPK.maND = :maND"),
+    @NamedQuery(name = "Diem.findByMaCV", query = "SELECT d FROM Diem d WHERE d.diemPK.maCV = :maCV"),
     @NamedQuery(name = "Diem.findByMaKL", query = "SELECT d FROM Diem d WHERE d.diemPK.maKL = :maKL"),
+    @NamedQuery(name = "Diem.findByMaTC", query = "SELECT d FROM Diem d WHERE d.diemPK.maTC = :maTC"),
     @NamedQuery(name = "Diem.findByDiem", query = "SELECT d FROM Diem d WHERE d.diem = :diem"),
     @NamedQuery(name = "Diem.findByNhanXet", query = "SELECT d FROM Diem d WHERE d.nhanXet = :nhanXet"),
     @NamedQuery(name = "Diem.findByKetQua", query = "SELECT d FROM Diem d WHERE d.ketQua = :ketQua")})
@@ -45,12 +50,28 @@ public class Diem implements Serializable {
     @Size(max = 100)
     @Column(name = "ketQua")
     private String ketQua;
+    @JoinColumns({
+        @JoinColumn(name = "maGV", referencedColumnName = "maGV", insertable = false, updatable = false),
+        @JoinColumn(name = "maND", referencedColumnName = "maND", insertable = false, updatable = false),
+        @JoinColumn(name = "maCV", referencedColumnName = "maCV", insertable = false, updatable = false)})
+    @ManyToOne(optional = false)
+    private Giangvien giangvien;
     @JoinColumn(name = "maKL", referencedColumnName = "maKL", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Khoaluan khoaluan;
     @JoinColumn(name = "maTC", referencedColumnName = "maTC", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Tieuchi tieuchi;
+    @Transient
+    private String maGVHD;
+
+    public String getMaGVHD() {
+        return maGVHD;
+    }
+
+    public void setMaGVHD(String maGVHD) {
+        this.maGVHD = maGVHD;
+    }
 
     public Diem() {
     }
@@ -59,8 +80,8 @@ public class Diem implements Serializable {
         this.diemPK = diemPK;
     }
 
-    public Diem(int maTC, int maKL) {
-        this.diemPK = new DiemPK(maTC, maKL);
+    public Diem(String maGV, String maND, String maCV, int maKL, int maTC) {
+        this.diemPK = new DiemPK(maGV, maND, maCV, maKL, maTC);
     }
 
     public DiemPK getDiemPK() {
@@ -93,6 +114,14 @@ public class Diem implements Serializable {
 
     public void setKetQua(String ketQua) {
         this.ketQua = ketQua;
+    }
+
+    public Giangvien getGiangvien() {
+        return giangvien;
+    }
+
+    public void setGiangvien(Giangvien giangvien) {
+        this.giangvien = giangvien;
     }
 
     public Khoaluan getKhoaluan() {

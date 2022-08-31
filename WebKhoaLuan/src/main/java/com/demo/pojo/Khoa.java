@@ -58,7 +58,7 @@ public class Khoa implements Serializable {
     @Size(max = 50)
     @Column(name = "website")
     private String website;
-     @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoa")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "khoa")
     private Collection<Nganh> nganhCollection;
 
     public Collection<Nganh> getNganhCollection() {
@@ -123,7 +123,7 @@ public class Khoa implements Serializable {
     public void setWebsite(String website) {
         this.website = website;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;

@@ -29,6 +29,9 @@ public interface ThesisService {
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);   
     boolean updateThesis(Khoaluan thesis);
-    List<Khoaluan> getThesis();   
-    Khoaluan getThesisbyID(String id);
+    List<Khoaluan> getThesis();
+    List<Khoaluan> getThesisByGV(String idGV);
+    List<Khoaluan>getThesisByIDCouncil(int id);
+    Khoaluan getThesisBySV(String id);
+    Khoaluan getThesisbyID(int id);
 }

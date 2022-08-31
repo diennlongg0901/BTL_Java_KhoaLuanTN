@@ -44,15 +44,15 @@ public class ThesisServiceImpl implements ThesisService {
     public boolean addThesis(Khoaluan thesis) {        
         return this.thesisRepo.addThesis(thesis);
     }
+    
+    @Override
+    public boolean addRegistration(Dangkykhoaluan dangkykhoaluan) {        
+        return this.thesisRepo.addRegistration(dangkykhoaluan);
+    }
 
     @Override
     public List<Khoaluan> getThesis() {
         return this.thesisRepo.getThesis();
-    }
-
-    @Override
-    public boolean addRegistration(Dangkykhoaluan dangkykhoaluan) {        
-        return this.thesisRepo.addRegistration(dangkykhoaluan);
     }
 
     @Override
@@ -66,13 +66,30 @@ public class ThesisServiceImpl implements ThesisService {
     }
 
     @Override
-    public Khoaluan getThesisbyID(String id) {
+    public Khoaluan getThesisbyID(int id) {
         return this.thesisRepo.getThesisbyID(id);
     }
 
     @Override
-    public boolean updateThesis(Khoaluan khoaluan) {
-        
+    public List<Khoaluan> getThesisByGV(String idGV) {
+        return this.thesisRepo.getThesisByGV(idGV);
+    }
+    
+    @Override
+    public boolean updateThesis(Khoaluan khoaluan) {       
         return this.thesisRepo.updateThesis(khoaluan);
     }
+
+
+    @Override
+    public Khoaluan getThesisBySV(String idSV) {
+        return this.thesisRepo.getThesisBySV(idSV);
+    }
+
+    @Override
+    public List<Khoaluan> getThesisByIDCouncil(int i) {
+       return this.thesisRepo.getThesisByIDCouncil(i);
+    }
+
+    
 }

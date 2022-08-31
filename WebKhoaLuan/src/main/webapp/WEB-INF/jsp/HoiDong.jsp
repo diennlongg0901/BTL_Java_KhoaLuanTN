@@ -50,13 +50,12 @@
                         <input type="submit" class="btn btn-primary btn-block mb-4" value="Thêm thành viên hội đồng" />
                     </div>
                 </div>
-
             </form:form>
         </div>
         <hr class="mt-5">
     </c:if>
 
-    <h4>Thông tin danh sách hội đồng</h4>
+    <h4>Danh sách hội đồng giảng viên tham gia</h4>
     <div class="form-outline mt-4">
         <form action="" >
             <div class="row">
@@ -71,21 +70,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Mã số hội đồng</th>
-                    <th>Tên hội đồng</th>
-                    <th>Mã giảng viên</th>
-                    <th>Họ tên giảng viên</th>
+                    <th>Hội đồng</th>
+                    <th>Giảng viên</th>
                     <th>Vai trò</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${dschitiethoidong}" var="hd">
+                <c:forEach items="${hoidonggv}" var="hdgv">
                     <tr>
-                        <td>${hd.chitiethoidongPK.maHD}</td>
-                        <td>${hd.hoidong.tenHD}</td>
-                        <td>${hd.chitiethoidongPK.maGV}</td>
-                        <td>${hd.giangvien.nguoidung.ho} ${hd.giangvien.nguoidung.ten}</td>
-                        <td>${hd.vaiTro}</td>
+                        <td>${hdgv.chitiethoidongPK.maHD}.${hdgv.hoidong.tenHD}</td>
+                        <td>${hdgv.chitiethoidongPK.maGV} - ${hdgv.giangvien.nguoidung.ho} ${hd.giangvien.nguoidung.ten}</td>
+                        <td>${hdgv.vaiTro}</td>
+                        <td><a href=" <c:url value="/giangvien/KhoaLuanHD/${hdgv.chitiethoidongPK.maHD}" />">Danh sách khóa luận</a></td>
                     </tr>
                 </c:forEach>
             </tbody>

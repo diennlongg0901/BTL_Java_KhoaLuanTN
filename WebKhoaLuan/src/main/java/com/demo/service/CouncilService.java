@@ -19,8 +19,11 @@ public interface CouncilService {
     
     //LẤY THÔNG TIN HỘI ĐỒNG
     Object getNewCouncil();
+    List<Hoidong> getCouncils();
     List<Chitiethoidong> getListCouncilDetail();
     List<Chitiethoidong> getCouncilDetail(String tenHD);
+    List<Chitiethoidong> getCouncilByGV(String idGV);
+    Integer countMember(int id);
     
     //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
     void deleteMember(String userID);
