@@ -50,8 +50,10 @@ public class ScoreController {
         return "Diem";
     }
     
-    @RequestMapping("/giaovu/ThongKeDiem")
-    public String ThongKeDiem() {
+    @RequestMapping(value = {"/giaovu/ThongKeDiem", "/quantri/ThongKeDiem"} )
+    public String ThongKeDiem(Model model) {
+        model.addAttribute("scoreStats", this.scoreService.scoreStats(null));
+        model.addAttribute("sinhvien", this.userService.getAllSV());
         return "ThongKeDiem";
     }
     

@@ -6,6 +6,7 @@ package com.demo.repository;
 
 import com.demo.pojo.Diem;
 import com.demo.pojo.Tieuchi;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,4 +23,7 @@ public interface ScoreRepo {
     //ĐIỂM
     boolean addScore(Diem score);
     double calculation(double scoreHD, double scoreGVHD);
+    
+    //THỐNG KÊ ĐIỂM
+    List<Object> scoreStats(String kw);
 }

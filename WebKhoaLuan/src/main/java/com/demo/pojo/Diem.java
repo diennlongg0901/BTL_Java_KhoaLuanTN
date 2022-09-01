@@ -64,6 +64,7 @@ public class Diem implements Serializable {
     private Tieuchi tieuchi;
     @Transient
     private String maGVHD;
+    
 
     public String getMaGVHD() {
         return maGVHD;

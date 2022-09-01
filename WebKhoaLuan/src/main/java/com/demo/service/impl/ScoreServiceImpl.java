@@ -9,6 +9,7 @@ import com.demo.pojo.Tieuchi;
 import com.demo.repository.CouncilRepo;
 import com.demo.repository.ScoreRepo;
 import com.demo.service.ScoreService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,5 +112,10 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Diem> getThesisScores(int thesisID) {
         return this.scoreRepo.getThesisScores(thesisID);
+    }
+
+    @Override
+    public List<Object> scoreStats(String kw) {
+        return this.scoreRepo.scoreStats(kw);
     }
 }

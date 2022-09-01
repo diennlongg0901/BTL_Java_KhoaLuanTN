@@ -28,5 +28,7 @@
         <tiles:insertAttribute name="header"/>
         <tiles:insertAttribute name="content"/>
         <tiles:insertAttribute name="footer"/>
+        
+        <script src="<c:url value="/static/stats.js" />"></script>
     </body>
 </html>
