@@ -30,6 +30,7 @@
     <class>com.demo.pojo.Nguoidung</class>
     <class>com.demo.pojo.Detai</class>
     <class>com.demo.pojo.Dangkykhoaluan</class>
+    <class>com.demo.pojo.Tongketkhoaluan</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/khoaluantndb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
