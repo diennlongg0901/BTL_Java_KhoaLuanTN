@@ -14,7 +14,8 @@
     </div>
 </c:if>
 
-<h2 class="text-center mt-5">QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
+<!-- PHẦN QUẢN TRỊ XEM DANH SÁCH TÀI KHOẢN NGƯỜI DÙNG -->
+<h2 class="text-center mt-5"><strong>QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG</strong></h2>
 <c:url value="/quantri/QLTaiKhoan" var="action" />
 <div class="container form-outline mt-4">
     <label class="form-label" for="vaiTro">Lọc người dùng theo chức vụ</label>

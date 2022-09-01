@@ -29,8 +29,6 @@ public class CouncilController {
     private UserService userService;
     @Autowired
     private CouncilService councilService;
-    @Autowired
-    private UserService userDetailsService;
 
     //LẤY DANH SÁCH HỘI ĐỒNG
     @GetMapping("/giaovu/HoiDong")
@@ -42,14 +40,20 @@ public class CouncilController {
         model.addAttribute("dschitiethoidong", this.councilService.getListCouncilDetail());
         return "HoiDong";
     }
-    
+
     @RequestMapping("/Hoidong")
     public String DSHoiDong(Model model, @RequestParam(value = "tenHD", required = false, defaultValue = "") String tenHD) {
         model.addAttribute("dschitiethoidong", this.councilService.getCouncilDetail(tenHD));
         return "HoiDong";
     }
+    
+    @GetMapping("/giangvien/HoiDong/{id}")
+    public String HoiDong(Model model, @PathVariable(value = "id") String id) {
+        model.addAttribute("hoidonggv", this.councilService.getCouncilByGV(id));
+        return "HoiDong";
+    }
 
-    //THÊM HỘI ĐỒNG
+    //THÊM HỘI ĐỒNG VÀ CHI TIẾT HỘI ĐỒNG
     @PostMapping(value = "/giaovu/HoiDong", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String HoiDong(Model model, @ModelAttribute(value = "hoidong") Hoidong council,
             @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
@@ -61,18 +65,16 @@ public class CouncilController {
             } else {
                 errMsg = "Đã xảy ra lỗi!";
             }
-        } else if (this.councilService.addDetailCouncil(detailCouncil) == true) {
-            errMsg = "Thêm thành viên hội đồng thành công.";
+        } else if (this.councilService.countMember((int)this.councilService.getNewCouncil()) <= 5) {
+            if (this.councilService.addDetailCouncil(detailCouncil) == true) {
+                errMsg = "Thêm thành viên hội đồng thành công.";
+            } else {
+                errMsg = "Đã xảy ra lỗi!";
+            }
         } else {
-            errMsg = "Đã xảy ra lỗi!";
+            errMsg = "Vượt quá số lượn thành viên!";
         }
         model.addAttribute("errMsg", errMsg);
-        return "HoiDong";
-    }
-    
-    @GetMapping("/giangvien/HoiDong/{id}")
-    public String HoiDong(Model model, @PathVariable(value = "id") String id) {
-        model.addAttribute("hoidonggv", this.councilService.getCouncilByGV(id));
         return "HoiDong";
     }
 }

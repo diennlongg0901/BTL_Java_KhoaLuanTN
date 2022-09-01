@@ -9,7 +9,6 @@ import com.demo.pojo.DangkykhoaluanPK;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Diem;
 import com.demo.pojo.DiemPK;
-import com.demo.pojo.Hoidong;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Nguoidung;
 import com.demo.pojo.Sinhvien;
@@ -17,22 +16,10 @@ import com.demo.service.CouncilService;
 import com.demo.service.RoleService;
 import com.demo.service.ThesisService;
 import com.demo.service.UserService;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.Firestore;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Method;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,8 +35,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ThesisController {
 
-//    @Autowired
-//    private Firestore firestore;
     @Autowired
     private ThesisService thesisService;
     @Autowired
@@ -171,8 +156,6 @@ public class ThesisController {
         Khoaluan kl = this.thesisService.getThesisBySV(id);
         kl.setGhiChu(khoaluan.getGhiChu());
         kl.setNgayNop(date);
-//        DocumentReference dr = this.firestore.document(khoaluan.getFile());
-//        dr.set(khoaluan.getFile());
         kl.setFile(khoaluan.getFile());
         this.thesisService.updateThesis(kl);
 
@@ -188,21 +171,6 @@ public class ThesisController {
     @GetMapping("/giangvien/KhoaLuanHD/{id}")
     public String dsKhoaLuanHD(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("dskhoaluanhd", this.thesisService.getThesisByIDCouncil(id));
-        return "KhoaLuanHD";
-    }
-    
-    @PostMapping(value = "/giangvien/KhoaLuanHD/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-    public String ChamDiemHD(Model model, @PathVariable(value = "id") int id,
-            @ModelAttribute(value = "diem") Diem diem) {
-        Khoaluan kl = this.thesisService.getThesisbyID(id);
-        DiemPK dPK  = new DiemPK();
-        dPK.setMaKL(id);
-        dPK.setMaND(diem.getMaGVHD());
-        dPK.setMaGV(diem.getMaGVHD());
-        dPK.setMaCV("ROLE_GV");
-        dPK.setMaTC(1);
-        diem.setDiemPK(dPK);
-//        this.scoreService.addScore(diem);
         return "KhoaLuanHD";
     }
 }

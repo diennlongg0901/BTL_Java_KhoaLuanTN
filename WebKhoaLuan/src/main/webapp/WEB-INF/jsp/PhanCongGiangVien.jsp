@@ -8,10 +8,17 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
 <div class="container">
-    <h2 class="text-center mt-5">XÉT DUYỆT & PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN CHO KHÓA LUẬN</h2>
+    <h2 class="text-center mt-5"><strong>XÉT DUYỆT & PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN CHO KHÓA LUẬN</strong></h2>
     <div class="form-group container">
-        <h4 class="mt-5 text-info">Thông tin chi tiết về khóa luận</h4>
+        <!-- PHẦN GIÁO VỤ XEM THÔNG TIN CHI TIẾT VỀ KHÓA LUẬN -->
+        <h4 class="mt-5">Thông tin chi tiết về khóa luận</h4>
         <h6 class="form-outline mt-4"><strong>Đề tài: </strong>${dangkykhoaluan.detai.maDT} - ${dangkykhoaluan.detai.tenDT}</h6>
         <div class="row">
             <div class="col">
@@ -22,8 +29,10 @@
             </div>
         </div>
         <h6 class="form-outline mt-4"><strong>Thời hạn: </strong>${dangkykhoaluan.detai.hanNop}</h6>
+        
+        <!-- PHẦN GIÁO VỤ PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN VÀ HỘI ĐỒNG CHO KHÓA LUẬN -->
         <hr>
-        <h4 class="mt-4 text-info">Phân công giảng viên hướng dẫn</h4>
+        <h4 class="mt-4">Phân công giảng viên hướng dẫn</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="khoaluan">
             <div class="form-outline mt-4" >
                 <label class="form-label">Chọn mã giảng viên hướng dẫn: </label>
@@ -34,7 +43,6 @@
                     </c:forEach>
                 </form:select>
             </div>
-
             <div class="form-outline mt-4" >
                 <label class="form-label">Chọn mã giảng viên hướng dẫn 2: </label>
                 <form:select id="maGV2" path="maGV2">
@@ -44,7 +52,6 @@
                     </c:forEach>
                 </form:select>
             </div>
-
             <div class="form-outline mt-4" >
                 <label class="form-label">Chọn mã hội đồng: </label>
                 <form:select id="hoiDong" path="hoidong.maHD">
@@ -54,7 +61,6 @@
                     </c:forEach>
                 </form:select>
             </div>
-
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4" value="Xác nhận"/>
                 <a href="/WebKhoaLuan/giaovu/dsDangKyKhoaLuan">

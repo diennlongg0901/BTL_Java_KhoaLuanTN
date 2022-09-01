@@ -17,9 +17,10 @@
 
 <c:url value="/quantri/DangKy" var="action" />
 <div class="container">
-    <h2 class="text-center mt-5">ĐĂNG KÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
+    <h2 class="text-center mt-5"><strong>ĐĂNG KÝ TÀI KHOẢN NGƯỜI DÙNG</strong></h2>
     <div class="form-group container">
-        <h4 class="mt-4 text-info">Thông tin chung  tài khoản người dùng:</h4>
+        <!-- NHẬP THÔNG TIN CHUNG CỦA TÀI KHOẢN NGƯỜI DÙNG -->
+        <h4 class="mt-4">Thông tin chung  tài khoản người dùng:</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
             <div class="form-outline mt-4">
                 <label class="form-label" for="vaiTro">Chức vụ người dùng</label>
@@ -30,7 +31,6 @@
                     </c:forEach>
                 </form:select>
             </div>
-
             <div class="row">
                 <div class="form-outline mt-4 col">
                     <form:input type="text" id="ho" path="ho" class="form-control" placeholder="Họ" />
@@ -39,7 +39,6 @@
                     <form:input type="text" id="ten" path="ten" class="form-control" placeholder="Tên" />
                 </div>
             </div>
-
             <div class ="row">
                 <div class="form-outline mt-4 col">                    
                     <form:input type="text" id="username" path="username" class="form-control" placeholder="Username" />
@@ -73,7 +72,8 @@
                 </div>
             </div>
 
-            <h4 id="title" class="mt-4 text-info"></h4>
+            <!-- NHẬP THÔNG TIN RIÊNG CHO TỪNG TÀI KHOẢN NGƯỜI DÙNG -->
+            <h4 id="title" class="mt-4 "></h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
                     <label class="form-label sinhVien" for="khoa" hidden="hidden">Khoa</label>
@@ -115,12 +115,14 @@
     </form:form>
 </div>
 
+<!-- XỬ LÝ CHỌN NGÀY THÁNG NĂM -->
 <script type="text/javascript">
     $(function () {
         $('#datepicker').datepicker();
     });
 </script>
 
+<!-- XỬ LÝ ẨN HIỆN PHẦN THÔNG TIN RIÊNG TÀI KHOẢN NGƯỜI DÙNG -->
 <script type="text/javascript">
     function chonChucVu() {
         var x = document.getElementById("vaiTro").value;

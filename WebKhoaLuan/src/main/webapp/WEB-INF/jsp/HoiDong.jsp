@@ -7,11 +7,18 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 class="text-center mt-5">THÔNG TIN HỘI ĐỒNG</h2>
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
+<h2 class="text-center mt-5"><strong>THÔNG TIN HỘI ĐỒNG</strong></h2>
 <c:url value="/HoiDong" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h4 class="mt-4 text-info">Thêm mới hội đồng</h4>
+        <!-- PHẦN GIÁO VỤ THÊM MỚI HỘI ĐỒNG -->
+        <h4 class="mt-4">Thêm mới hội đồng</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="hoidong" >
                 <div class="row">
@@ -24,6 +31,7 @@
                 </div>
             </form:form>
 
+            <!-- PHẦN GIÁO VỤ THÊM THÀNH VIÊN VÀO HỘI ĐỒNG MỚI TẠO-->
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="chitiethoidong" >
                 <div class="row">
                     <div class="form-outline mt-4 col-md-5">
@@ -34,7 +42,6 @@
                             </c:forEach>
                         </form:select>
                     </div>
-
                     <div class="form-outline mt-4 col-md-4">
                         <label class="form-label">Vai trò trong hội đồng</label>
                         <form:select id="vaiTro" path="vaiTro" >
@@ -50,10 +57,32 @@
                     </div>
                 </div>
             </form:form>
+
+            <!-- PHẦN GIÁO VỤ XEM DANH SÁCH HỘI ĐỒNG -->
+            <hr class="mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Hội đồng</th>
+                        <th>Giảng viên</th>
+                        <th>Vai trò</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${dschitiethoidong}" var="cthd">
+                        <tr>
+                            <td>${cthd.chitiethoidongPK.maHD}.${cthd.hoidong.tenHD}</td>
+                            <td>${cthd.chitiethoidongPK.maGV} - ${cthd.giangvien.nguoidung.ho} ${cthd.giangvien.nguoidung.ten}</td>
+                            <td>${cthd.vaiTro}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
         </div>
     </c:if>
 
-    <h4 class="mt-4 text-info">Danh sách hội đồng giảng viên tham gia</h4>
+    <!-- PHẦN GIẢNG VIÊN TÌM HỘI ĐỒNG CÓ THAM GIA -->
+    <h4 class="mt-4">Danh sách hội đồng giảng viên tham gia</h4>
     <div class="form-outline mt-4">
         <form action="" >
             <div class="row">
@@ -65,6 +94,8 @@
                 </div>
             </div>
         </form>
+
+        <!-- PHẦN GIẢNG VIÊN XEM HỘI ĐỒNG CÓ THAM GIA -->
         <hr class="mt-4">
         <table class="table">
             <thead>
@@ -79,7 +110,7 @@
                 <c:forEach items="${hoidonggv}" var="hdgv">
                     <tr>
                         <td>${hdgv.chitiethoidongPK.maHD}.${hdgv.hoidong.tenHD}</td>
-                        <td>${hdgv.chitiethoidongPK.maGV} - ${hdgv.giangvien.nguoidung.ho} ${hd.giangvien.nguoidung.ten}</td>
+                        <td>${hdgv.chitiethoidongPK.maGV} - ${hdgv.giangvien.nguoidung.ho} ${hdgv.giangvien.nguoidung.ten}</td>
                         <td>${hdgv.vaiTro}</td>
                         <td><a href=" <c:url value="/giangvien/KhoaLuanHD/${hdgv.chitiethoidongPK.maHD}" />">Danh sách khóa luận</a></td>
                     </tr>

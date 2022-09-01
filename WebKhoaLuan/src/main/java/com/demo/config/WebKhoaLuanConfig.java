@@ -6,10 +6,6 @@ package com.demo.config;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import java.io.FileInputStream;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +15,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -53,20 +48,6 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
         ));
         return c;
     }
-
-//    @Bean
-//    public void connectFirebase() {
-//        try {
-//            FileInputStream serviceAccount = new FileInputStream("quanlykhoaluan.json");
-//            FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//                .setDatabaseUrl("https://console.firebase.google.com/project/quanlykhoaluan-4fa3a/storage/quanlykhoaluan-4fa3a.appspot.com/files")
-//                .build();
-//            FirebaseApp.initializeApp(options);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

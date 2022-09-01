@@ -8,8 +8,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
+<!-- PHẦN GIÁO VỤ XEM DANH SÁCH SINH VIÊN ĐĂNG KÝ KHÓA LUẬN -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-    <h2 class="text-center mt-5">DANH SÁCH ĐĂNG KÝ ĐỀ TÀI KHÓA LUẬN</h2>
+    <h2 class="text-center mt-5"><strong>DANH SÁCH ĐĂNG KÝ ĐỀ TÀI KHÓA LUẬN</strong></h2>
     <div class="form-group container">
         <div class="form-outline mt-4">
             <table class="table">
@@ -39,6 +46,7 @@
     </div>
 </c:if>
 
+<!-- PHẦN SINH VIÊN ĐĂNG KÝ ĐỀ TÀI LÀM KHÓA LUẬN -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
     <h2 class="text-center mt-5">ĐĂNG KÝ ĐỀ TÀI KHÓA LUẬN</h2>
     <form:form method="post" modelAttribute="dangkykhoaluan" action="${action}">

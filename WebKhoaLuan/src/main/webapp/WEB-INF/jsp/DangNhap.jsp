@@ -9,7 +9,7 @@
 
 <c:if test="${param.error != null}">
     <div class="alert alert-danger">
-        Đã có lỗi! Vui lòng thử lại!
+        Đã có lỗi! Vui lòng thử đăng nhập lại!
     </div>
 </c:if>
 
@@ -19,9 +19,10 @@
     </div>
 </c:if>
 
+<!-- ĐĂNG NHẬP TÀI KHOẢN NGƯỜI DÙNG -->
 <c:url value="/DangNhap" var="action" />
 <div class="container">
-    <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>
+    <h2 class="text-center mt-5"><strong>ĐĂNG NHẬP</strong></h2>
     <div class="form-group container">
         <form method="post" action="${action}">
             <div class="form-outline mb-4">

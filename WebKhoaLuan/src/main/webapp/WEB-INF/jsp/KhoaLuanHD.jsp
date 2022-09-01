@@ -7,7 +7,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<h2 class="text-center mt-5">DANH SÁCH KHÓA LUẬN TỐT NGHIỆP THEO HỘI ĐỒNG</h2>
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
+<!-- PHẦN GIẢNG VIÊN XEM DANH SÁCH KHÓA LUẬN MÀ HỘI ĐỒNG CHẤM -->
+<h2 class="text-center mt-5"><strong>DANH SÁCH KHÓA LUẬN TỐT NGHIỆP THEO HỘI ĐỒNG</strong></h2>
     <table class="table mt-4">
         <thead>
             <tr>

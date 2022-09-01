@@ -9,8 +9,15 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
+<!-- PHẦN GIẢNG VIÊN CHẤM ĐIỂM KHÓA LUẬN -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
-    <h2 class="text-center mt-5">CHẤM ĐIỂM KHÓA LUẬN</h2>    
+    <h2 class="text-center mt-5"><strong>CHẤM ĐIỂM KHÓA LUẬN</strong></h2>    
     <div class="container mt-5">
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="diem">
             <div class="form-outline mt-4">
@@ -31,10 +38,11 @@
     </div>   
 </c:if>
 
+<!-- PHẦN SINH VIÊN XEM ĐIỂM KHÓA LUẬN -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
-    <h2 class="text-center mt-5">ĐIỂM KHÓA LUẬN</h2>
+    <h2 class="text-center mt-5"><strong>ĐIỂM KHÓA LUẬN</strong></h2>
     <div class="container mt-4">
-        <h4 class="mt-4 text-info">Thông tin về khóa luận</h4>
+        <h4 class="mt-4">Thông tin về khóa luận</h4>
         <div class="row">
             <div class="col-md-3">
                 <h6 class="form-outline mt-4"><strong>Mã khóa luận: </strong>${khoaluansv.maKL} - ${khoaluansv.nam}</h6>
@@ -63,7 +71,7 @@
             </div>
         </div>
             <hr class="mt-4">
-        <h4 class="mt-4 text-info">Điểm số chi tiết của khóa luận</h4>
+        <h4 class="mt-4">Điểm số chi tiết của khóa luận</h4>
         <div class="row">
             <div class="col-md-4">
                 <h6 class="form-outline mt-4"><strong>Điểm giảng viên hướng dẫn: </strong><fmt:formatNumber value="${diemgvhd}" maxFractionDigits="2" type = "number" /></h6>
@@ -74,7 +82,7 @@
             </div>
         </div>
         <hr class="mt-4">
-        <h4 class="mt-4 text-info">Kết quả bài khóa luận</h4>
+        <h4 class="mt-4">Kết quả bài khóa luận</h4>
         <div class="row">
             <div class="col-md-4">
                 <h5 class="form-outline mt-4 text-success"><strong>Điểm khóa luận: </strong><fmt:formatNumber value="${diemkl}" maxFractionDigits="2" type = "number" /></h5>

@@ -8,9 +8,16 @@
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
 <c:url value="/sinhvien/KhoaLuan/${pageContext.request.userPrincipal.name}" var="action" />
+<!-- PHẦN SINH VIÊN NỘP KHÓA LUẬN TỐT NGHIỆP -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
-    <h2 class="text-center mt-5">NỘP KHÓA LUẬN TỐT NGHIỆP</h2>
+    <h2 class="text-center mt-5"><strong>NỘP KHÓA LUẬN TỐT NGHIỆP</strong></h2>
     <div class="container mt-5">
         <div class="form-group container">
             <form:form method="post" action="${action}"  modelAttribute="khoaluan" >
@@ -28,8 +35,9 @@
     </div>
 </c:if>
 
+<!-- PHẦN GIẢNG VIÊN XEM DANH SÁCH KHÓA LUẬN TỐT NGHIỆP HƯỚNG DẪN -->
 <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
-    <h2 class="text-center mt-5">DANH SÁCH KHÓA LUẬN TỐT NGHIỆP CỦA GIẢNG VIÊN HƯỚNG DẪN</h2>
+    <h2 class="text-center mt-5"><strong>DANH SÁCH KHÓA LUẬN TỐT NGHIỆP CỦA GIẢNG VIÊN HƯỚNG DẪN</strong></h2>
     <table class="table mt-4">
         <thead>
             <tr>

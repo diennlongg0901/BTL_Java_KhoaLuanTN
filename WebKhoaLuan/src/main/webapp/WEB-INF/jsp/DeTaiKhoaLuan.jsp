@@ -8,11 +8,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<h2 class="text-center mt-5">ĐỀ TÀI KHÓA LUẬN</h2>
+<c:if test="${errMsg != null}">
+    <div class="alert alert-danger">
+        ${errMsg}
+    </div>
+</c:if>
+
+<h2 class="text-center mt-5"><strong>ĐỀ TÀI KHÓA LUẬN</strong></h2>
 <c:url value="/DeTaiKhoaLuan" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h4 class="mt-4 text-info">Thêm đề tài khóa luận</h4>
+        <!-- PHẦN GIÁO VỤ THÊM MỚI ĐỀ TÀI KHÓA LUẬN -->
+        <h4 class="mt-4">Thêm đề tài khóa luận</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="detaimoi" >
                 <div class="form-outline mt-4">
@@ -37,8 +44,9 @@
                     <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy" />
                 </div>
             </form:form>
+            <!-- PHẦN GIÁO VỤ XEM DANH SÁCH ĐỀ TÀI KHÓA LUẬN -->
             <hr>
-            <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
+            <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
             <div class="form-outline mt-4">
                 <table class="table">
                     <thead>
@@ -67,7 +75,8 @@
     </c:if>
 
     <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
-        <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
+        <!-- PHẦN GIẢNG VIÊN XEM ĐỀ TÀI KHÓA LUẬN -->
+        <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
         <div class="form-outline mt-4">
             <table class="table">
                 <thead>
@@ -93,7 +102,8 @@
     </c:if>
 
     <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
-        <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
+        <!-- PHẦN SINH VIÊN XEM ĐỀ TÀI KHÓA LUẬN -->
+        <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
         <div class="form-outline mt-4">
             <table class="table">
                 <thead>
