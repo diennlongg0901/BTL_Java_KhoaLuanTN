@@ -32,7 +32,7 @@
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/dsDangKyKhoaLuan"/>">Danh sách đăng ký khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/HoiDong"/>">Hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/giaovu/ThongKeDiem"/>">Thống kê điểm</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinGVU/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -44,7 +44,7 @@
                         <li><a class="dropdown-item" href="<c:url value = "/giangvien/HoiDong/${pageContext.request.userPrincipal.name}"/>">Thông tin hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Đề tài khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giangvien/dsKhoaLuan/${pageContext.request.userPrincipal.name}"/>">Danh sách khóa luận</a></li>
-                        <li><a class="dropdown-item" href="<c:url value = "/giangvien/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/giangvien/ThongTinGV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>
                 </li>
             </c:if>

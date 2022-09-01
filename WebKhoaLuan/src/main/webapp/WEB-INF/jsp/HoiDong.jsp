@@ -11,14 +11,13 @@
 <c:url value="/HoiDong" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h4 class="mt-5">Thêm mới hội đồng</h4>
+        <h4 class="mt-4 text-info">Thêm mới hội đồng</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="hoidong" >
                 <div class="row">
                     <div class="form-outline mt-4 col-md-9">
                         <form:input type="text" class="form-control" path="tenHD" placeholder="Tên hội đồng" />
                     </div>
-
                     <div class="form-outline mt-4 col-md-3">
                         <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo mới hội đồng" />
                     </div>
@@ -52,10 +51,9 @@
                 </div>
             </form:form>
         </div>
-        <hr class="mt-5">
     </c:if>
 
-    <h4>Danh sách hội đồng giảng viên tham gia</h4>
+    <h4 class="mt-4 text-info">Danh sách hội đồng giảng viên tham gia</h4>
     <div class="form-outline mt-4">
         <form action="" >
             <div class="row">
@@ -67,12 +65,14 @@
                 </div>
             </div>
         </form>
+        <hr class="mt-4">
         <table class="table">
             <thead>
                 <tr>
                     <th>Hội đồng</th>
                     <th>Giảng viên</th>
                     <th>Vai trò</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

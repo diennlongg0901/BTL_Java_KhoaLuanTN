@@ -19,7 +19,7 @@
 <div class="container">
     <h2 class="text-center mt-5">ĐĂNG KÝ TÀI KHOẢN NGƯỜI DÙNG</h2>
     <div class="form-group container">
-        <h4 class="mt-4">Thông tin chung  tài khoản người dùng:</h4>
+        <h4 class="mt-4 text-info">Thông tin chung  tài khoản người dùng:</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
             <div class="form-outline mt-4">
                 <label class="form-label" for="vaiTro">Chức vụ người dùng</label>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <h4 id="title" class="mt-4"></h4>
+            <h4 id="title" class="mt-4 text-info"></h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
                     <label class="form-label sinhVien" for="khoa" hidden="hidden">Khoa</label>

@@ -11,7 +11,7 @@
 <div class="container">
     <h2 class="text-center mt-5">XÉT DUYỆT & PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN CHO KHÓA LUẬN</h2>
     <div class="form-group container">
-        <h4 class="mt-5">THÔNG TIN CHI TIẾT VỀ KHÓA LUẬN</h4>
+        <h4 class="mt-5 text-info">Thông tin chi tiết về khóa luận</h4>
         <h6 class="form-outline mt-4"><strong>Đề tài: </strong>${dangkykhoaluan.detai.maDT} - ${dangkykhoaluan.detai.tenDT}</h6>
         <div class="row">
             <div class="col">
@@ -23,7 +23,7 @@
         </div>
         <h6 class="form-outline mt-4"><strong>Thời hạn: </strong>${dangkykhoaluan.detai.hanNop}</h6>
         <hr>
-        <h4 class="mt-4">PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN</h4>
+        <h4 class="mt-4 text-info">Phân công giảng viên hướng dẫn</h4>
         <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="khoaluan">
             <div class="form-outline mt-4" >
                 <label class="form-label">Chọn mã giảng viên hướng dẫn: </label>

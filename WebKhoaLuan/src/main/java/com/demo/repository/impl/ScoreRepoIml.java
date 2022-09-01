@@ -34,9 +34,6 @@ public class ScoreRepoIml implements ScoreRepo{
         q.setParameter("id", id);
         return (Tieuchi) q.setMaxResults(1).getSingleResult();
     }
-
-//    WHERE maTC = (:id)
-//    (Tieuchi) q.getSingleResult()
     
     @Override
     public boolean addScore(Diem score) {
@@ -53,7 +50,7 @@ public class ScoreRepoIml implements ScoreRepo{
     @Override
     public List<Diem> getScore(int thesisID, int criteriaID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Diem WHERE maKL = (:thesisID) AND maTC (:criteriaID) ");
+        Query q = session.createQuery("FROM Diem WHERE maKL = (:thesisID) AND maTC = (:criteriaID) ");
         q.setParameter("thesisID", thesisID);
         q.setParameter("criteriaID", criteriaID);
         return q.getResultList();
@@ -62,5 +59,13 @@ public class ScoreRepoIml implements ScoreRepo{
     @Override
     public double calculation(double scoreHD, double scoreGVHD) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Diem> getThesisScores(int thesisID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Diem WHERE maKL = (:thesisID)");
+        q.setParameter("thesisID", thesisID);
+        return q.getResultList();
     }
 }

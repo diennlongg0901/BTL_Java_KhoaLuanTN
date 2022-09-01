@@ -102,7 +102,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         int total = 0;
         Query q = session.createQuery("FROM Chitiethoidong WHERE maHD = (:id)");
         q.setParameter("id", id);
-        total = q.getMaxResults();
+        total = q.getResultList().size();
         return total;
     }
 }

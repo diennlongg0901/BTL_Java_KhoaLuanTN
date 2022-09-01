@@ -5,13 +5,10 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Diem;
-import com.demo.pojo.DiemPK;
 import com.demo.pojo.Tieuchi;
 import com.demo.repository.CouncilRepo;
 import com.demo.repository.ScoreRepo;
 import com.demo.service.ScoreService;
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,8 +48,9 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public double calculation(double d, double d1) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public double calculation(double gvhd, double hd) {
+       double total = ((gvhd * 0.4) + (hd * 0.6));
+       return total;
     }
 
     @Override
@@ -73,5 +71,45 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Diem> getScore(int thesisID, int criteriaID) {
         return this.scoreRepo.getScore(thesisID, thesisID);
+    }
+
+    @Override
+    public String resultThesis(double score) {
+        String result = "";
+        if (score <= 10 && score >= 8.5) {
+            result = "A";
+            return result;
+        }
+        if (score < 8.5 && score >= 8) {
+            result = "B+";
+            return result;
+        }
+        if (score < 8 && score >= 7) {
+            result = "B";
+            return result;
+        }
+        if (score < 7 && score >= 6.5) {
+            result = "C+";
+            return result;
+        }
+        if (score < 6.5 && score >= 5.5) {
+            result = "C";
+            return result;
+        }
+        if (score < 5.5 && score >= 5) {
+            result = "D+";
+            return result;
+        }
+        if (score < 5 &&score >= 4) {
+            result = "D";
+            return result;
+        }
+        result = "F";
+        return result;
+    }
+
+    @Override
+    public List<Diem> getThesisScores(int thesisID) {
+        return this.scoreRepo.getThesisScores(thesisID);
     }
 }

@@ -24,12 +24,10 @@
     <h2 class="text-center mt-5">ĐĂNG NHẬP</h2>
     <div class="form-group container">
         <form method="post" action="${action}">
-
             <div class="form-outline mb-4">
                 <label class="form-label" for="username">Username</label>
                 <input type="text" id="username" name="username" class="form-control" />
             </div>
-
             <div class="form-outline mb-4">
                 <label class="form-label" for="password">Password</label>
                 <input type="password" id="password" name="password" class="form-control" />

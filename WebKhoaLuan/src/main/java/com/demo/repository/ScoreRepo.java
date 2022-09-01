@@ -17,6 +17,7 @@ public interface ScoreRepo {
     //TIÊU CHÍ
     Tieuchi getCriteria(int id);
     List<Diem> getScore(int thesisID, int criteriaID);
+    List<Diem> getThesisScores(int thesisID);
     
     //ĐIỂM
     boolean addScore(Diem score);

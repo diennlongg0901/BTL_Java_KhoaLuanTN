@@ -39,9 +39,9 @@
                 <th scope="col">Giảng viên HD 2</th>
                 <th scope="col">Đề tài</th>
                 <th scope="col">Bài nộp</th>
+                <th></th>
             </tr>
         </thead>
-
         <tbody>
             <c:forEach items="${dskhoaluanGV}" var="kl">
                 <tr>

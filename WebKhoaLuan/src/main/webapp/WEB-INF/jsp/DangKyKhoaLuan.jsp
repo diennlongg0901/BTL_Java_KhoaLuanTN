@@ -42,7 +42,7 @@
 <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
     <h2 class="text-center mt-5">ĐĂNG KÝ ĐỀ TÀI KHÓA LUẬN</h2>
     <form:form method="post" modelAttribute="dangkykhoaluan" action="${action}">
-        <div class="form-group container-fluid">
+        <div class="form-group container">
             <div class="row">
                 <div class="form-outline mt-4 col">
                     <form:input type="text" id="maSV" path="dangkykhoaluanPK.maSV" class="form-control" value="${nguoidung.nguoidungPK.maND}" placeholder="Nhập mã sinh viên"/>
@@ -53,7 +53,7 @@
             </div>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <label class="form-label" for="khoa" >Chọn đề tài</label>
+                    <label class="form-label" for="khoa" >Chọn đề tài </label>
                     <form:select id="detai" path="maDT" >
                         <form:option value="0" >Đề tài</form:option>
                         <c:forEach items="${detai}" var="d">

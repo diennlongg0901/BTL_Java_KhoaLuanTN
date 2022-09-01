@@ -12,7 +12,7 @@
 <c:url value="/DeTaiKhoaLuan" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
-        <h4 class="mt-4">Thêm đề tài khóa luận</h4>
+        <h4 class="mt-4 text-info">Thêm đề tài khóa luận</h4>
         <div class="form-group container">
             <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="detaimoi" >
                 <div class="form-outline mt-4">
@@ -38,7 +38,7 @@
                 </div>
             </form:form>
             <hr>
-            <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
+            <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
             <div class="form-outline mt-4">
                 <table class="table">
                     <thead>
@@ -67,7 +67,7 @@
     </c:if>
 
     <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
-        <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
+        <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
         <div class="form-outline mt-4">
             <table class="table">
                 <thead>
@@ -93,7 +93,7 @@
     </c:if>
 
     <c:if test="${pageContext.request.isUserInRole('ROLE_SV')}">
-        <h4 class="mt-4">Danh sách đề tài khóa luận</h4>
+        <h4 class="mt-4 text-info">Danh sách đề tài khóa luận</h4>
         <div class="form-outline mt-4">
             <table class="table">
                 <thead>

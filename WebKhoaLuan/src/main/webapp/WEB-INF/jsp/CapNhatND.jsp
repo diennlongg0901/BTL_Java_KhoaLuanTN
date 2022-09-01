@@ -10,7 +10,7 @@
 <h2 class="text-center mt-5">CẬP NHẬT THÔNG TIN TÀI KHOẢN</h2>
 <form:form method="post" action="${action}" enctype="multipart/form-data" modelAttribute="nguoidung" >
     <div class="form-group container">
-        <h4 class="mt-4">Phần thông tin chung</h4>
+        <h4 class="mt-4 text-info">Phần thông tin chung</h4>
         <div class="row">
             <div class="form-outline mt-4 col">
                 <form:input type="text" id="ho" path="ho" class="form-control" placeholder="Họ" />
@@ -64,10 +64,10 @@
             </div>
         </div>
 
-        <h4 class="mt-4">Phần thông tin riêng</h4>
-        <h6 class="mt-4">Sinh viên</h6>
+        <h4 class="mt-4 text-info">Phần thông tin riêng</h4>
+        <h6 class="mt-4 text-info"><img src="${pageContext.servletContext.contextPath}/picture/person.svg" alt="TruongDaiHocAA" class="icon-seal-small"/> Sinh viên</h6>
         <div class="form-outline mt-4">
-            <label class="form-label sinhVien" for="khoa" >Khoa</label>
+            <label class="form-label sinhVien" for="khoa" >Khoa </label>
             <form:select class="sinhVien" id="khoa" path="khoa">
                 <c:forEach items="${khoa}" var="k">
                     <form:option value="${k.maKhoa}" >${k.maKhoa} - ${k.tenKhoa}</form:option>
@@ -76,7 +76,7 @@
         </div>
 
         <div class="form-outline mt-4">
-            <label class="form-label sinhVien" for="nganh" >Ngành</label>
+            <label class="form-label sinhVien" for="nganh" >Ngành </label>
             <form:select class="sinhVien" id="nganh" path="nganh">
                 <c:forEach items="${nganh}" var="n">
                     <form:option value="${n.nganhPK.maNganh}" >${n.nganhPK.maNganh} - ${n.tenNganh}</form:option>
@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <h6 class="mt-4">Giảng viên</h6>
+        <h6 class="mt-4 text-info"><img src="${pageContext.servletContext.contextPath}/picture/person.svg" alt="TruongDaiHocAA" class="icon-seal-small"/> Giảng viên</h6>
         <div class="form-outline mt-4">
             <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" placeholder="Học vị giảng viên"/>
         </div>
@@ -109,7 +109,7 @@
             <form:input type="text" id="hocHam" path="hocHam" class="form-control giangVien" placeholder="Học hàm giảng viên"/>
         </div>
 
-        <h6 class="mt-4">Giáo vụ</h6>
+        <h6 class="mt-4 text-info"><img src="${pageContext.servletContext.contextPath}/picture/person.svg" alt="TruongDaiHocAA" class="icon-seal-small"/> Giáo vụ</h6>
         <div class="form-outline mt-4">
             <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" placeholder="Phòng ban giáo vụ" />
         </div>

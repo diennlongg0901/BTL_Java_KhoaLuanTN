@@ -9,6 +9,7 @@ import com.demo.pojo.DiemPK;
 import com.demo.pojo.Khoaluan;
 import com.demo.service.ScoreService;
 import com.demo.service.ThesisService;
+import com.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +30,23 @@ public class ScoreController {
     private ScoreService scoreService;
     @Autowired
     private ThesisService thesisService;
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/sinhvien/DiemKL/{id}")
-    public String DiemView(Model model, @PathVariable(value = "id") String id) {
-        model.addAttribute("khoaluansv", this.thesisService.getThesisBySV(id));
-        int kl =this.thesisService.getThesisBySV(id).getMaKL();
-        model.addAttribute("diemhd", this.scoreService.getScore(kl, 1));
-        model.addAttribute("diemgvhd", this.scoreService.getScore(kl, 2));
-        model.addAttribute("", model);
+    public String DiemView(Model model, @PathVariable(value = "id") String id) {      
+        Khoaluan kl = this.thesisService.getThesisBySV(id);
+        double gvhd = this.scoreService.calculateGVHDScore(kl.getMaKL());
+        double hd = this.scoreService.calculateCouncilScore(kl.getMaKL());
+        double diemTong = this.scoreService.calculation(hd, gvhd);
+        model.addAttribute("khoaluansv", kl);
+        model.addAttribute("diemhd", hd);
+        model.addAttribute("diemgvhd", gvhd);
+        model.addAttribute("giangvienhd", this.userService.getUserbyID(kl.getMaGV()));
+        model.addAttribute("giangvienhd2", this.userService.getUserbyID(kl.getMaGV2()));
+        model.addAttribute("diemkl", diemTong);
+        model.addAttribute("ketqua", this.scoreService.resultThesis(diemTong));
+        model.addAttribute("nhanxet", this.scoreService.getThesisScores(kl.getMaKL()));
         return "Diem";
     }
     
