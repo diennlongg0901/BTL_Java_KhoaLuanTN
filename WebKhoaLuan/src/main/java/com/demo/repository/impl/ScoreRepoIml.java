@@ -4,23 +4,15 @@
  */
 package com.demo.repository.impl;
 
-import com.demo.pojo.Dangkykhoaluan;
-import com.demo.pojo.Detai;
 import com.demo.pojo.Diem;
-import com.demo.pojo.Hoidong;
-import com.demo.pojo.Khoaluan;
-import com.demo.pojo.Sinhvien;
 import com.demo.pojo.Tieuchi;
 import com.demo.pojo.Tongketkhoaluan;
 import com.demo.repository.ScoreRepo;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -150,5 +142,21 @@ public class ScoreRepoIml implements ScoreRepo {
 
         return query.getResultList();
         
+    }
+
+    @Override
+    public List<Diem> getAllScore(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Diem WHERE maKL = (:id)");
+        q.setParameter("id", id);
+        return q.getResultList();
+    }
+
+    @Override
+    public Tongketkhoaluan getResult(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Tongketkhoaluan WHERE maSV = (:id)");
+        q.setParameter("id", id);
+        return (Tongketkhoaluan) q.setMaxResults(1).getSingleResult();
     }
 }

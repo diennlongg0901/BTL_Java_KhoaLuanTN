@@ -7,6 +7,7 @@ package com.demo.service;
 import com.demo.pojo.Diem;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Tieuchi;
+import com.demo.pojo.Tongketkhoaluan;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,10 @@ public interface ScoreService {
     double calculation(double scoreHD, double scoreGVHD);
     String resultThesis(double score);
     public boolean addResult(Khoaluan thesis, String result, double score);
+    List<Diem> getAllScore(int id);
+    Tongketkhoaluan getResult(String id);
     
     //THỐNG KÊ
     List<Object> scoreStats(String kw);
-    List<Object> svStats(String string);
+    List<Object> svStats(String id);
 }

@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
-@ComponentScan(basePackages = {"com.demo.controller", "com.demo.repository", "com.demo.service"})
+@ComponentScan(basePackages = {"com.demo.controller", "com.demo.repository", "com.demo.service", "com.demo.exportview"})
 public class WebKhoaLuanConfig implements WebMvcConfigurer {
 
     @Override

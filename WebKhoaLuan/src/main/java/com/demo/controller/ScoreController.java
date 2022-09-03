@@ -10,7 +10,6 @@ import com.demo.pojo.Khoaluan;
 import com.demo.service.ScoreService;
 import com.demo.service.ThesisService;
 import com.demo.service.UserService;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,21 +26,21 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class ScoreController {
-    
+
     @Autowired
     private ScoreService scoreService;
     @Autowired
     private ThesisService thesisService;
     @Autowired
     private UserService userService;
-    
+
     @GetMapping("/sinhvien/DiemKL/{id}")
-    public String DiemView(Model model, @PathVariable(value = "id") String id) {      
+    public String DiemView(Model model, @PathVariable(value = "id") String id) {
         Khoaluan kl = this.thesisService.getThesisBySV(id);
         double gvhd = this.scoreService.calculateGVHDScore(kl.getMaKL());
         double hd = this.scoreService.calculateCouncilScore(kl.getMaKL());
         double diemTong = this.scoreService.calculation(hd, gvhd);
-        
+
         model.addAttribute("khoaluansv", kl);
         model.addAttribute("diemhd", hd);
         model.addAttribute("diemgvhd", gvhd);
@@ -50,41 +49,39 @@ public class ScoreController {
         model.addAttribute("diemkl", diemTong);
         model.addAttribute("ketqua", this.scoreService.resultThesis(diemTong));
         model.addAttribute("nhanxet", this.scoreService.getThesisScores(kl.getMaKL()));
-        
+
         String result = this.scoreService.resultThesis(diemTong);
-        
-        if (this.scoreService.addResult(kl, result, diemTong) == true) {
+        if (this.scoreService.getResult(id).getMaKL() > 0) {
             return "Diem";
         }
-        return "redirect:/";
+        this.scoreService.addResult(kl, result, diemTong);
+        return "Diem";
     }
-    
-  
-    
-    @RequestMapping(value = {"/giaovu/ThongKeDiem", "/quantri/ThongKeDiem"} )
-    public String ThongKeDiem(Model model, @RequestParam(value="nam", required = false, defaultValue = "") String nam) {        
-        model.addAttribute("scoreStats", this.scoreService.scoreStats(nam));       
+
+    @RequestMapping(value = {"/giaovu/ThongKeDiem", "/quantri/ThongKeDiem"})
+    public String ThongKeDiem(Model model, @RequestParam(value = "nam", required = false, defaultValue = "") String nam) {
+        model.addAttribute("scoreStats", this.scoreService.scoreStats(nam));
         return "ThongKeDiem";
     }
-    
-    @RequestMapping(value = {"/giaovu/ThongKeSV", "/quantri/ThongKeSV"} )
-    public String ThongKeSV(Model model, @RequestParam(value="maKhoa", required = false, defaultValue = "") String maKhoa) {        
-        model.addAttribute("svStats", this.scoreService.svStats(maKhoa));        
+
+    @RequestMapping(value = {"/giaovu/ThongKeSV", "/quantri/ThongKeSV"})
+    public String ThongKeSV(Model model, @RequestParam(value = "maKhoa", required = false, defaultValue = "") String maKhoa) {
+        model.addAttribute("svStats", this.scoreService.svStats(maKhoa));
         return "ThongKeSV";
     }
-    
+
     @GetMapping("/giangvien/ChamDiem/{id}")
     public String ChamDiemView(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("diem", new Diem());
 //        model.addAttribute("tieuchi", this.scoreService.getCriteria(id));
         return "Diem";
     }
-    
+
     @PostMapping(value = "/giangvien/ChamDiem/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String ChamDiemGVHD(Model model, @PathVariable(value = "id") int id,
             @ModelAttribute(value = "diem") Diem diem) {
         Khoaluan kl = this.thesisService.getThesisbyID(id);
-        DiemPK dPK  = new DiemPK();
+        DiemPK dPK = new DiemPK();
         dPK.setMaKL(id);
         dPK.setMaND(diem.getMaGVHD());
         dPK.setMaGV(diem.getMaGVHD());
@@ -94,18 +91,18 @@ public class ScoreController {
         this.scoreService.addScore(diem);
         return "Diem";
     }
-    
+
     @GetMapping("/giangvien/ChamDiemHD/{id}")
     public String ChamDiemHDView(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("diem", new Diem());
         return "Diem";
     }
-    
+
     @PostMapping(value = "/giangvien/ChamDiemHD/{id}", produces = "application/x-www-form-urlencoded;charset=UTF-8")
     public String ChamDiemHD(Model model, @PathVariable(value = "id") int id,
             @ModelAttribute(value = "diem") Diem diem) {
         Khoaluan kl = this.thesisService.getThesisbyID(id);
-        DiemPK dPK  = new DiemPK();
+        DiemPK dPK = new DiemPK();
         dPK.setMaKL(id);
         dPK.setMaND(diem.getMaGVHD());
         dPK.setMaGV(diem.getMaGVHD());

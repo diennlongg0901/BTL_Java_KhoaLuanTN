@@ -138,4 +138,14 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Object> svStats(String kw) {
         return this.scoreRepo.svStats(kw);
     }
+
+    @Override
+    public List<Diem> getAllScore(int id) {
+        return this.scoreRepo.getAllScore(id);
+    }
+
+    @Override
+    public Tongketkhoaluan getResult(String id) {
+        return this.scoreRepo.getResult(id);
+    }
 }

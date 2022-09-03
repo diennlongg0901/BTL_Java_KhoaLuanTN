@@ -8,26 +8,23 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <c:if test="${errMsg != null}">
     <div class="alert alert-danger">
         ${errMsg}
     </div>
 </c:if>
 
-
-
-<h2 class="text-center mt-5"><strong>THỐNG KẾ SINH VIÊN THAM GIA KHÓA LUẬN</strong></h2
-
+<h2 class="text-center mt-5"><strong>THỐNG KẾ SINH VIÊN THAM GIA KHÓA LUẬN</strong></h2>
 <div class="container">
     <form action="">
-        <div class="form-group mt-4">
-            <lable>Khoa:</lable>
-            <input type="text" name="maKhoa" class="form-control" placeholder="Nhập khoa cần tìm" />
-        </div>
+        <div class="row">
+            <div class="col-md-8 form-group mt-4">
+                <input type="text" name="maKhoa" class="form-control" placeholder="Nhập khoa cần tìm" />
+            </div>
 
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary btn-block mt-4 " value="Tìm" />
+            <div class="col-md-4 form-group">
+                <input type="submit" class="btn btn-primary btn-block mt-4 " value="Tìm" />
+            </div>
         </div>
     </form>
 </div>
@@ -36,8 +33,6 @@
     <div class="mt-4 col">
         <canvas id="svChartID"></canvas>
     </div>
-
-
     <table class="table mt-4 col" >
         <tr>
             <th>Khoa:</th>

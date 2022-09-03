@@ -8,37 +8,30 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
 <c:if test="${errMsg != null}">
     <div class="alert alert-danger">
         ${errMsg}
     </div>
 </c:if>
 
-
-
-<h2 class="text-center mt-5"><strong>THỐNG KÊ ĐIỂM KHÓA LUẬN</strong></h2
-
-<div class="container">
+<h2 class="text-center mt-5"><strong>THỐNG KÊ ĐIỂM KHÓA LUẬN</strong></h2>
+<div class="container-fluid">
     <form action="">
-        <div class="form-group mt-4">
-            <lable>Năm:</lable>
+        <div class="row">
+            <div class="col-md-8 form-group mt-4">
             <input type="text" name="nam" class="form-control" placeholder="Nhập năm cần tìm" />
         </div>
-
-        <div class="form-group">
+        <div class="col-md-4 form-group">
             <input type="submit" class="btn btn-primary btn-block mt-4 " value="Tìm" />
+        </div>
         </div>
     </form>
 </div>
-
 
 <div class="row">
     <div class="mt-4 col">
         <canvas id="scoreChartID"></canvas>
     </div>
-
-
     <table class="table mt-4 col" >
         <tr>
             <th>Điểm:</th>

@@ -7,6 +7,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix = "spring" uri = "http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <c:if test="${errMsg != null}">
@@ -99,9 +100,19 @@
                     </c:forEach>
             </div>
         </div>
-        <div class="form-outline mt-4">
-            <a href="#!">Phúc khảo điểm khóa luận</a>
+        <div class="row">
+            <div class="col-md-8 form-outline mt-4">
+                <a href="#!">Phúc khảo điểm khóa luận</a>
+            </div>
+            <div class="col-md-4 form-outline mt-4">
+                <a href="/WebKhoaLuan/sinhvien/DiemKL/xls/${pageContext.request.userPrincipal.name}">Xuất file điểm chi tiết (EXCEL)</a>
+            </div>
         </div>
-        
+        <div class="row">
+            <div class="col-md-8 form-outline"></div>
+            <div class="col-md-4 form-outline">
+                <a href="/WebKhoaLuan/sinhvien/DiemKL/pdf/${pageContext.request.userPrincipal.name}">Xuất file điểm khóa luận (PDF)</a>
+            </div>
+        </div>
     </div>
 </c:if>
