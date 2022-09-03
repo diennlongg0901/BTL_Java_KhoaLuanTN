@@ -5,10 +5,13 @@
 package com.demo.service.impl;
 
 import com.demo.pojo.Diem;
+import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Tieuchi;
+import com.demo.pojo.Tongketkhoaluan;
 import com.demo.repository.CouncilRepo;
 import com.demo.repository.ScoreRepo;
 import com.demo.service.ScoreService;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,5 +120,22 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public List<Object> scoreStats(String kw) {
         return this.scoreRepo.scoreStats(kw);
+    }
+    
+    @Override
+    public boolean addResult(Khoaluan thesis, String result, double score) {
+        Tongketkhoaluan finalResult = new Tongketkhoaluan();
+        finalResult.setDiem(BigDecimal.valueOf(score));
+        finalResult.setKetQua(result);
+        finalResult.setMaKL(thesis.getMaKL());
+        finalResult.setNam(thesis.getNam());
+        finalResult.setMaSV(thesis.getDangkykhoaluan().getSinhvien().getSinhvienPK().getMaSV());
+        finalResult.setMaKhoa(thesis.getDangkykhoaluan().getDangkykhoaluanPK().getMaKhoa());
+        return this.scoreRepo.addResult(finalResult);
+    }
+
+    @Override
+    public List<Object> svStats(String kw) {
+        return this.scoreRepo.svStats(kw);
     }
 }

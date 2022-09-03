@@ -15,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -51,12 +52,13 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/resources/static");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js");
     }
+    
 //    @Bean
 //    public InternalResourceViewResolver viewResolver () {
 //        InternalResourceViewResolver r = new InternalResourceViewResolver ();
-//        r.setPrefix("WEB-INF/resource/js");
+//        r.setPrefix("WEB-INF/resources/js");
 //        r.setSuffix(".js");
 //        return r;
 //    }

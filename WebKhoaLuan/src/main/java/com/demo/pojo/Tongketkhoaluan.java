@@ -9,17 +9,18 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Entity
 @Table(name = "tongketkhoaluan")
@@ -31,13 +32,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tongketkhoaluan.findByMaKL", query = "SELECT t FROM Tongketkhoaluan t WHERE t.maKL = :maKL"),
     @NamedQuery(name = "Tongketkhoaluan.findByKetQua", query = "SELECT t FROM Tongketkhoaluan t WHERE t.ketQua = :ketQua"),
     @NamedQuery(name = "Tongketkhoaluan.findByDiem", query = "SELECT t FROM Tongketkhoaluan t WHERE t.diem = :diem"),
-    @NamedQuery(name = "Tongketkhoaluan.findByNam", query = "SELECT t FROM Tongketkhoaluan t WHERE t.nam = :nam")})
+    @NamedQuery(name = "Tongketkhoaluan.findByNam", query = "SELECT t FROM Tongketkhoaluan t WHERE t.nam = :nam"),
+    @NamedQuery(name = "Tongketkhoaluan.findByMaKhoa", query = "SELECT t FROM Tongketkhoaluan t WHERE t.maKhoa = :maKhoa")})
 public class Tongketkhoaluan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "maKQ")
     private Integer maKQ;
     @Size(max = 10)
@@ -54,6 +56,9 @@ public class Tongketkhoaluan implements Serializable {
     @Size(max = 15)
     @Column(name = "nam")
     private String nam;
+    @Size(max = 10)
+    @Column(name = "maKhoa")
+    private String maKhoa;
 
     public Tongketkhoaluan() {
     }
@@ -108,6 +113,14 @@ public class Tongketkhoaluan implements Serializable {
 
     public void setNam(String nam) {
         this.nam = nam;
+    }
+
+    public String getMaKhoa() {
+        return maKhoa;
+    }
+
+    public void setMaKhoa(String maKhoa) {
+        this.maKhoa = maKhoa;
     }
 
     @Override

@@ -20,6 +20,8 @@
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/DangKy"/>">Đăng ký tài khoản</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/QLTaiKhoan"/>">Quản lý tài khoản</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/quantri/ThongTinQT/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
+                         <li><a class="dropdown-item" href="<c:url value = "/quantri/ThongKeDiem"/>">Thống kê điểm</a></li>
+                         <li><a class="dropdown-item" href="<c:url value = "/quantri/ThongKeSV"/>">Thống kê sinh viên</a></li>
                     </ul>
                 </li>
             </c:if>
@@ -33,6 +35,7 @@
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/HoiDong"/>">Hội đồng</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/giaovu/ThongKeDiem"/>">Thống kê điểm</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongTinGVU/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/giaovu/ThongKeSV"/>">Thống kê sinh viên</a></li>
                     </ul>
                 </li>
             </c:if>

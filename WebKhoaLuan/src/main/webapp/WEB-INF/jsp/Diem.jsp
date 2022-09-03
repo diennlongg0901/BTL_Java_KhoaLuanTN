@@ -70,7 +70,7 @@
                 <h6 class="form-outline mt-4"><strong>Hội đồng: </strong>${khoaluansv.hoidong.maHD}.${khoaluansv.hoidong.tenHD}</h6>
             </div>
         </div>
-            <hr class="mt-4">
+        <hr class="mt-4">
         <h4 class="mt-4">Điểm số chi tiết của khóa luận</h4>
         <div class="row">
             <div class="col-md-4">
@@ -102,5 +102,6 @@
         <div class="form-outline mt-4">
             <a href="#!">Phúc khảo điểm khóa luận</a>
         </div>
+        
     </div>
 </c:if>

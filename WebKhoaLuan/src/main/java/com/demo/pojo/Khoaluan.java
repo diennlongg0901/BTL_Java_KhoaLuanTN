@@ -47,6 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Khoaluan.findByFile", query = "SELECT k FROM Khoaluan k WHERE k.file = :file")})
 public class Khoaluan implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -222,5 +224,7 @@ public class Khoaluan implements Serializable {
     public String toString() {
         return "com.demo.pojo.Khoaluan[ maKL=" + maKL + " ]";
     }
+
+ 
     
 }

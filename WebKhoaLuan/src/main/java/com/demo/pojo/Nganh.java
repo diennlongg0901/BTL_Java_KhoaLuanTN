@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Nganh.findByMaKhoa", query = "SELECT n FROM Nganh n WHERE n.nganhPK.maKhoa = :maKhoa")})
 public class Nganh implements Serializable {
 
+    @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Khoa khoa;
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected NganhPK nganhPK;
@@ -47,10 +51,7 @@ public class Nganh implements Serializable {
     private String chiTiet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "nganh")
     private Set<Sinhvien> sinhvienSet;
-    @JoinColumns({
-        @JoinColumn(name = "maKhoa", referencedColumnName = "maKhoa", insertable = false, updatable = false)})
-    @ManyToOne(optional = false)
-    private Khoa khoa;
+   
 
     public Nganh() {
     }
@@ -128,5 +129,6 @@ public class Nganh implements Serializable {
     public String toString() {
         return "com.demo.pojo.Nganh[ nganhPK=" + nganhPK + " ]";
     }
-    
+
+   
 }

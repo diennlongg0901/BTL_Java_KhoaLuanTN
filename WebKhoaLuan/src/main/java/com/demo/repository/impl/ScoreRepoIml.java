@@ -4,12 +4,14 @@
  */
 package com.demo.repository.impl;
 
+import com.demo.pojo.Dangkykhoaluan;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Diem;
 import com.demo.pojo.Hoidong;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Sinhvien;
 import com.demo.pojo.Tieuchi;
+import com.demo.pojo.Tongketkhoaluan;
 import com.demo.repository.ScoreRepo;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +19,8 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -32,11 +36,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ScoreRepoIml implements ScoreRepo{
+public class ScoreRepoIml implements ScoreRepo {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
-    
+
     @Override
     public Tieuchi getCriteria(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -44,7 +48,7 @@ public class ScoreRepoIml implements ScoreRepo{
         q.setParameter("id", id);
         return (Tieuchi) q.setMaxResults(1).getSingleResult();
     }
-    
+
     @Override
     public boolean addScore(Diem score) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -55,7 +59,7 @@ public class ScoreRepoIml implements ScoreRepo{
             System.err.println(e.getMessage());
         }
         return false;
-    }  
+    }
 
     @Override
     public List<Diem> getScore(int thesisID, int criteriaID) {
@@ -82,33 +86,69 @@ public class ScoreRepoIml implements ScoreRepo{
     @Override
     public List<Object> scoreStats(String kw) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        CriteriaBuilder b =session.getCriteriaBuilder();
+        CriteriaBuilder b = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+//        Root kl = q.from(Khoaluan.class);
+//        Root dkkl = q.from(Dangkykhoaluan.class);
+//        Root diem = q.from(Diem.class);
+//        Root dt = q.from(Detai.class);
+        Root tkkl = q.from(Tongketkhoaluan.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+
+        q.multiselect(tkkl.get("ketQua"), b.countDistinct(tkkl.get("maKQ")));
+
+        if (kw != null && !kw.isEmpty()) {
+            predicates.add(b.like(tkkl.get("nam"), String.format("%%%s%%", kw)));
+        }
+
+        q.where(predicates.toArray(new Predicate[]{}));
+
+        q.groupBy(tkkl.get("ketQua"));
+
+        Query query = session.createQuery(q);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public boolean addResult(Tongketkhoaluan result) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(result);
+            return true;
+        } catch (HibernateException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public List<Object> svStats(String kw) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder b = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
         
-//        Root sv = q.from(Sinhvien.class);
-//        Root sv2 = q.from(Sinhvien.class);
-        Root kl = q.from(Khoaluan.class);
-        Root diem = q.from(Diem.class);
-        Root dt = q.from(Detai.class);
+        Root tkkl = q.from(Tongketkhoaluan.class);
         
         List<Predicate> predicates = new ArrayList<>();
-//        predicates.add(b.equal(sv.get("sinhvienPK.maSV"), kl.get("maSV")));
-//        predicates.add(b.equal(sv.get("sinhvienPK.maSV"), kl.get("maSV2")));
-//        predicates.add(b.equal(kl.get("maKL"), diem.get("DiemPK.maKL")));
-//        predicates.add(b.equal(dt.get("maDT"), kl.get("maDT")));
         
-        q.multiselect(kl.get("maKL"), kl.get("maSV2"));
         
-        q.where(predicates.toArray(new Predicate[] {}));
         
-        if(kw != null)
-            predicates.add(b.like(kl.get("nam"), kw));
-       
+        q.multiselect(tkkl.get("maKhoa"),b.countDistinct(tkkl.get("maSV")));
         
-        q.groupBy(kl.get("maKL"));
-        
+        if (kw != null && !kw.isEmpty()) {
+            predicates.add(b.like(tkkl.get("maKhoa"), String.format("%%%s%%", kw)));
+        }
+
+        q.where(predicates.toArray(new Predicate[]{}));
+
+        q.groupBy(tkkl.get("maKhoa"));
+
         Query query = session.createQuery(q);
-        
+
         return query.getResultList();
+        
     }
 }

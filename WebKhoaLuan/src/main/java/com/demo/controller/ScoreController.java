@@ -10,6 +10,7 @@ import com.demo.pojo.Khoaluan;
 import com.demo.service.ScoreService;
 import com.demo.service.ThesisService;
 import com.demo.service.UserService;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -39,6 +41,7 @@ public class ScoreController {
         double gvhd = this.scoreService.calculateGVHDScore(kl.getMaKL());
         double hd = this.scoreService.calculateCouncilScore(kl.getMaKL());
         double diemTong = this.scoreService.calculation(hd, gvhd);
+        
         model.addAttribute("khoaluansv", kl);
         model.addAttribute("diemhd", hd);
         model.addAttribute("diemgvhd", gvhd);
@@ -47,14 +50,27 @@ public class ScoreController {
         model.addAttribute("diemkl", diemTong);
         model.addAttribute("ketqua", this.scoreService.resultThesis(diemTong));
         model.addAttribute("nhanxet", this.scoreService.getThesisScores(kl.getMaKL()));
-        return "Diem";
+        
+        String result = this.scoreService.resultThesis(diemTong);
+        
+        if (this.scoreService.addResult(kl, result, diemTong) == true) {
+            return "Diem";
+        }
+        return "redirect:/";
     }
     
+  
+    
     @RequestMapping(value = {"/giaovu/ThongKeDiem", "/quantri/ThongKeDiem"} )
-    public String ThongKeDiem(Model model) {
-        model.addAttribute("scoreStats", this.scoreService.scoreStats(null));
-        model.addAttribute("sinhvien", this.userService.getAllSV());
+    public String ThongKeDiem(Model model, @RequestParam(value="nam", required = false, defaultValue = "") String nam) {        
+        model.addAttribute("scoreStats", this.scoreService.scoreStats(nam));       
         return "ThongKeDiem";
+    }
+    
+    @RequestMapping(value = {"/giaovu/ThongKeSV", "/quantri/ThongKeSV"} )
+    public String ThongKeSV(Model model, @RequestParam(value="maKhoa", required = false, defaultValue = "") String maKhoa) {        
+        model.addAttribute("svStats", this.scoreService.svStats(maKhoa));        
+        return "ThongKeSV";
     }
     
     @GetMapping("/giangvien/ChamDiem/{id}")

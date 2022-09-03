@@ -1,7 +1,7 @@
 <%-- 
-    Document   : ThongKeDiem
-    Created on : Aug 16, 2022, 1:42:34 PM
-    Author     : ADMIN
+    Document   : ThongKeSV
+    Created on : Sep 2, 2022, 3:57:42 PM
+    Author     : PC
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,13 +17,13 @@
 
 
 
-<h2 class="text-center mt-5"><strong>THỐNG KÊ ĐIỂM KHÓA LUẬN</strong></h2
+<h2 class="text-center mt-5"><strong>THỐNG KẾ SINH VIÊN THAM GIA KHÓA LUẬN</strong></h2
 
 <div class="container">
     <form action="">
         <div class="form-group mt-4">
-            <lable>Năm:</lable>
-            <input type="text" name="nam" class="form-control" placeholder="Nhập năm cần tìm" />
+            <lable>Khoa:</lable>
+            <input type="text" name="maKhoa" class="form-control" placeholder="Nhập khoa cần tìm" />
         </div>
 
         <div class="form-group">
@@ -32,19 +32,18 @@
     </form>
 </div>
 
-
 <div class="row">
     <div class="mt-4 col">
-        <canvas id="scoreChartID"></canvas>
+        <canvas id="svChartID"></canvas>
     </div>
 
 
     <table class="table mt-4 col" >
         <tr>
-            <th>Điểm:</th>
-            <th>Số lần:</th>
+            <th>Khoa:</th>
+            <th>Số sinh viên tham gia:</th>
         </tr>
-        <c:forEach items="${scoreStats}" var="s">
+        <c:forEach items="${svStats}" var="s">
             <tr>
                 <th>${s[0]}</th>
                 <th>${s[1]}</th>
@@ -55,12 +54,12 @@
 </div>
 
 <script>
-    let scoreLabels = [], scoreInfo = [];
-    <c:forEach items="${scoreStats}" var="s">
-    scoreLabels.push('${s[0]}');
-    scoreInfo.push('${s[1]}');
+    let svLabels = [], svInfo = [];
+    <c:forEach items="${svStats}" var="s">
+    svLabels.push('${s[0]}');
+    svInfo.push('${s[1]}');
     </c:forEach>
     window.onload = function () {
-        scoreChart("scoreChartID", scoreLabels, scoreInfo);
+        svChart("svChartID", svLabels, svInfo);
     }
 </script>
