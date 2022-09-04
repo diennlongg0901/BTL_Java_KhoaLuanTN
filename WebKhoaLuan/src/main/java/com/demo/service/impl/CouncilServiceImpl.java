@@ -24,6 +24,7 @@ public class CouncilServiceImpl implements CouncilService{
     private CouncilRepo councilRepo;
     
     //THÊM HỘI ĐỒNG
+    //  Thêm hội đồng mới
     @Override
     public boolean addCouncil(Hoidong council) {
         
@@ -32,6 +33,7 @@ public class CouncilServiceImpl implements CouncilService{
         return this.councilRepo.addCouncil(council);
     }
 
+    //  Thêm chi tiết hội đồng
     @Override
     public boolean addDetailCouncil(Chitiethoidong detailCouncil) {
         Hoidong h = (Hoidong)this.councilRepo.getNewCouncil();
@@ -45,39 +47,58 @@ public class CouncilServiceImpl implements CouncilService{
     }
 
     //LẤY HỘI ĐỒNG
+    //  Lấy thông tin hội đồng mới
     @Override
     public Object getNewCouncil() {
         return this.councilRepo.getNewCouncil();
     }
 
+    //  Tìm thông tin chi tiêt hội đồng theo tên hội đồng
     @Override
     public List<Chitiethoidong> getCouncilDetail(String tenHD) {
         return this.councilRepo.getCouncilDetail(tenHD);
     }
 
+    //  Lấy danh sách chi tiết hội đồng
     @Override
     public List<Chitiethoidong> getListCouncilDetail() {
         return this.councilRepo.getListCouncilDetail();
     }
     
     //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
+    //  Xóa thành viên hội đồng
     @Override
     public void deleteMember(String userID) {
         this.councilRepo.deleteMember(userID);
     }
 
+    //  Lấy danh sách thông tin hội đồng
     @Override
     public List<Hoidong> getCouncils() {
         return this.councilRepo.getCouncils();
     }
 
+    //  Lấy danh sách chi tiết hội đồng theo tên giảng viên
     @Override
     public List<Chitiethoidong> getCouncilByGV(String idGV) {
         return this.councilRepo.getCouncilByGV(idGV);
     }
 
+    //  Đếm danh sách thành viên hội đồng
     @Override
     public Integer countMember(int id) {
         return this.councilRepo.countMember(id);
+    }
+
+    //  Lấy thông tin hội đồng theo mã hội đồng
+    @Override
+    public Hoidong getCouncil(int id) {
+        return this.councilRepo.getCouncil(id);
+    }
+
+    //  Khóa hội đồng theo mã hội đồng
+    @Override
+    public void blockCouncil(int id) {
+        this.councilRepo.blockCouncil(id);
     }
 }

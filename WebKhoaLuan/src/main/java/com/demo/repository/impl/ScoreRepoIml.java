@@ -81,11 +81,6 @@ public class ScoreRepoIml implements ScoreRepo {
         return q.getResultList();
     }
 
-    @Override
-    public double calculation(double scoreHD, double scoreGVHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     //  Lấy điểm khóa luận theo mã khóa luận
     @Override
     public List<Diem> getThesisScores(int thesisID) {

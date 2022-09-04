@@ -38,8 +38,7 @@
                 <div class="form-outline mt-4 col">
                     <form:input type="text" id="ten" path="ten" class="form-control" placeholder="Tên" />
                 </div>
-            </div>
-                
+            </div>               
             <div class="row">
                 <div class="form-outline mt-4 col">
                     <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
@@ -50,8 +49,7 @@
                 <div class="form-outline mt-4 col">
                     <form:input type="text" id="sdt" path="sdt" class="form-control" placeholder="Số điện thoại" />
                 </div>
-            </div>
-                
+            </div>                
             <div class ="row">
                 <div class="form-outline mt-4 col">                    
                     <form:input type="text" id="username" path="username" class="form-control" placeholder="Username" />
@@ -114,13 +112,12 @@
                 </div>
             </div>
         </div>
-
         <div class="form-outline">
             <form:input type="text" id="hocVi" path="hocVi" class="form-control giangVien" hidden="hidden" placeholder="Học vị giảng viên" />
             <form:input type="text" id="hocHam" path="hocHam" class="form-control mt-4 giangVien" hidden="hidden" placeholder="Học hàm giảng viên" />
             <form:input type="text" id="phongBan" path="phongBan" class="form-control giaoVu" hidden="hidden" placeholder="Phòng ban giáo vụ" />
         </div>
-
+        
         <div class="form-outline mt-4">
             <input type="submit" class="btn btn-primary btn-block mb-4" value="Tạo tài khoản người dùng"/>
             <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>

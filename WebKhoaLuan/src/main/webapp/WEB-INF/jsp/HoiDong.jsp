@@ -66,6 +66,7 @@
                         <th>Hội đồng</th>
                         <th>Giảng viên</th>
                         <th>Vai trò</th>
+                        <th>Khóa hội đồng</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,7 @@
                             <td>${cthd.chitiethoidongPK.maHD}.${cthd.hoidong.tenHD}</td>
                             <td>${cthd.chitiethoidongPK.maGV} - ${cthd.giangvien.nguoidung.ho} ${cthd.giangvien.nguoidung.ten}</td>
                             <td>${cthd.vaiTro}</td>
+                            <td><a href=" <c:url value="/giaovu/Hoidong/${cthd.chitiethoidongPK.maHD}" />">Khóa hội đồng</a></td>                                
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -81,41 +83,44 @@
         </div>
     </c:if>
 
-    <!-- PHẦN GIẢNG VIÊN TÌM HỘI ĐỒNG CÓ THAM GIA -->
-    <h4 class="mt-4">Danh sách hội đồng giảng viên tham gia</h4>
-    <div class="form-outline mt-4">
-        <form action="" >
-            <div class="row">
-                <div class="form-outline col-md-9">
-                    <input type="text" class="form-control" name="tenHD" placeholder="Nhập mã hội đồng"/>
+    <c:if test="${pageContext.request.isUserInRole('ROLE_GV')}">
+        <!-- PHẦN GIẢNG VIÊN TÌM HỘI ĐỒNG CÓ THAM GIA -->
+        <h4 class="mt-4">Danh sách hội đồng giảng viên tham gia</h4>
+        <div class="form-outline mt-4">
+            <form action="" >
+                <div class="row">
+                    <div class="form-outline col-md-9">
+                        <input type="text" class="form-control" name="tenHD" placeholder="Nhập mã hội đồng"/>
+                    </div>
+                    <div class="form-outline col-md-3">
+                        <input type="submit" class="btn btn-primary btn-block mb-4" value="Tìm hội đồng"/>
+                    </div>
                 </div>
-                <div class="form-outline col-md-3">
-                    <input type="submit" class="btn btn-primary btn-block mb-4" value="Tìm hội đồng"/>
-                </div>
-            </div>
-        </form>
+            </form>
 
-        <!-- PHẦN GIẢNG VIÊN XEM HỘI ĐỒNG CÓ THAM GIA -->
-        <hr class="mt-4">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Hội đồng</th>
-                    <th>Giảng viên</th>
-                    <th>Vai trò</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${hoidonggv}" var="hdgv">
+            <!-- PHẦN GIẢNG VIÊN XEM HỘI ĐỒNG CÓ THAM GIA -->
+            <hr class="mt-4">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>${hdgv.chitiethoidongPK.maHD}.${hdgv.hoidong.tenHD}</td>
-                        <td>${hdgv.chitiethoidongPK.maGV} - ${hdgv.giangvien.nguoidung.ho} ${hdgv.giangvien.nguoidung.ten}</td>
-                        <td>${hdgv.vaiTro}</td>
-                        <td><a href=" <c:url value="/giangvien/KhoaLuanHD/${hdgv.chitiethoidongPK.maHD}" />">Danh sách khóa luận</a></td>
+                        <th>Hội đồng</th>
+                        <th>Giảng viên</th>
+                        <th>Vai trò</th>
+                        <th></th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <c:forEach items="${hoidonggv}" var="hdgv">
+                        <tr>
+                            <td>${hdgv.chitiethoidongPK.maHD}.${hdgv.hoidong.tenHD}</td>
+                            <td>${hdgv.chitiethoidongPK.maGV} - ${hdgv.giangvien.nguoidung.ho} ${hdgv.giangvien.nguoidung.ten}</td>
+                            <td>${hdgv.vaiTro}</td>
+                            <td><a href=" <c:url value="/giangvien/KhoaLuanHD/${hdgv.chitiethoidongPK.maHD}" />">Danh sách khóa luận</a></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+    </c:if>
 </div>

@@ -26,7 +26,6 @@
                 <th scope="col">Bài nộp</th>
             </tr>
         </thead>
-
         <tbody>
             <c:forEach items="${dskhoaluanhd}" var="klhd">
                 <tr>

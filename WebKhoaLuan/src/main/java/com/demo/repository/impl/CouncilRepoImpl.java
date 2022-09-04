@@ -114,4 +114,22 @@ public class CouncilRepoImpl implements CouncilRepo {
         q.setParameter("userID", userID);
         q.executeUpdate();
     }
+
+    //  Lấy thông tin hội đồng theo mã hội đồng
+    @Override
+    public Hoidong getCouncil(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Hoidong WHERE maHD = (:id)");
+        q.setParameter("id", id);
+        return (Hoidong) q.getSingleResult();
+    }
+
+    //  Khóa hội đồng theo mã hội đồng
+    @Override
+    public void blockCouncil(int id) {
+         Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("UPDATE Hoidong SET hoatDong = 0 WHERE maHD = (:id)");
+        q.setParameter("id", id);
+        q.executeUpdate();
+    }
 }

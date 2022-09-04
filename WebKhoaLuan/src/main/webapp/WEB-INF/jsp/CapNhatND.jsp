@@ -27,12 +27,10 @@
                 <form:input type="text" id="ten" path="ten" class="form-control" placeholder="Tên" />
             </div>
         </div>
-
         <div class ="row">
             <div class="form-outline mt-4 col">
                 <form:input type="text" id="username" path="username" class="form-control" placeholder="Username" />
             </div>
-
             <div class="col mt-4">
                 <div class="input-group date" id="datepicker">
                     <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />

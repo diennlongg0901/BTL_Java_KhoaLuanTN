@@ -50,22 +50,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private Cloudinary cloudinary;
 
-    //LẤY NGƯỜI DÙNG 
+    //LẤY NGƯỜI DÙNG
+    //  Lấy danh sách tài khoản người dùng theo username
     @Override
     public List<Nguoidung> getUsers(String username) {
         return this.userRepo.getUsers(username);
     }
 
+    //  Lấy danh sách tài khoản người dùng
     @Override
     public List<Nguoidung> getAllUsers() {
         return this.userRepo.getAllUsers();
     }
 
+    //  Lấy tài khoản người dùng theo username
     @Override
     public Nguoidung getUserbyID(String username) {
         return this.userRepo.getUserbyID(username);
     }
 
+    //  Lấy tài khỏan người dùng theo username
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<Nguoidung> user = this.getUsers(username);
@@ -78,37 +82,50 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails.User(u.getUsername(), u.getPassword(), auth);
     }
 
+    //  Lấy danh sách tài khoản giảng viên bảng người dùng
     @Override
     public List<Nguoidung> getAllGV() {
         return this.userRepo.getAllGV();
     }
 
+    //  Lấy danh sách tài khoản giảng viên
     @Override
     public List<Giangvien> getListGV() {
         return this.userRepo.getListGV();
     }
 
+    //  Lấy danh sách tài khoản sinh viên
     @Override
     public List<Nguoidung> getAllSV() {
         return this.userRepo.getAllSV();
     }
 
+    //  Lấy danh sách tài khoản giáo vụ
     @Override
     public List<Nguoidung> getAllGVU() {
         return this.userRepo.getAllGVU();
     }
 
+    //  Lấy danh sách tài khoản quản trị
     @Override
     public List<Nguoidung> getAllQT() {
         return this.userRepo.getAllQT();
     }
 
+    //  Lấy tài khoản sinh viên theo mã sinh viên
     @Override
     public Sinhvien getSVbyID(String id) {
         return this.userRepo.getSVbyID(id);
     }
 
+    //  Lấy tài khoản giảng viên theo mã giảng viên
+    @Override
+    public Giangvien getGVbyID(String id) {
+        return this.userRepo.getGVbyID(id);
+    }
+    
     //THÊM NGƯỜI DÙNG
+    //  Thêm mới tài khoản người dùng
     @Override
     public boolean addUser(Nguoidung user) {
         try {
@@ -189,27 +206,32 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    //  Thêm mới tài khoản quản trị
     @Override
     public boolean addUserQT(Quantri userQT) {
         return this.userRepo.addUserQT(userQT);
     }
 
+    //  Thêm mới tài khoản giáo vụ
     @Override
     public boolean addUserGVU(Giaovu userGVU) {
         return this.userRepo.addUserGVU(userGVU);
     }
 
+    //  Thêm mới tài khoản sinh viên
     @Override
     public boolean addUserSV(Sinhvien userSV) {
         return this.userRepo.addUserSV(userSV);
     }
 
+    //  Thêm mới tài khoản giảng viên
     @Override
     public boolean addUserGV(Giangvien userGV) {
         return this.userRepo.addUserGV(userGV);
     }
 
     //CẬP NHẬT NGƯỜI DÙNG
+    //  Cập nhật tài khoản người dùng
     @Override
     public void updateUsers(String userID, Nguoidung user) {
         Nguoidung u = this.userRepo.getUserbyID(userID);
@@ -241,6 +263,7 @@ public class UserServiceImpl implements UserService {
         this.userRepo.updateUsers(u);
     }
 
+    //  Cập nhật tài khoản người dùng hiện tại
     @Override
     public void updateParticularUsers(Nguoidung user) {
         Nguoidung u = this.userRepo.getUserbyID(user.getNguoidungPK().getMaND());
@@ -264,53 +287,56 @@ public class UserServiceImpl implements UserService {
         this.userRepo.updateUsers(u);
     }
 
+    //  Cập nhật tài khoản sinh viên
     @Override
     public void updateUsersSV(Sinhvien user) {
         this.userRepo.updateUsersSV(user);
     }
 
+    //  Cập nhật tài khoản giảng viên
     @Override
     public void updateUsersGV(Giangvien user) {
         this.userRepo.updateUsersGV(user);
     }
 
+    //  Cập nhật tài khoản giáo vụ
     @Override
     public void updateUsersGVU(Giaovu user) {
         this.userRepo.updateUsersGVU(user);
     }
 
     //XÓA NGƯỜI DÙNG
+    //  Xóa tài khoản người dùng
     @Override
     public void deleteUsers(String userID) {
         this.userRepo.deleteUsers(userID);
     }
 
+    //  Xóa tài khoản quản trị
     @Override
     public void deleteUsersQT(String userID) {
         this.userRepo.deleteUsersQT(userID);
         this.userRepo.deleteUsers(userID);
     }
 
+    //  Xóa tài khoản giáo vụ
     @Override
     public void deleteUsersGVU(String userID) {
         this.userRepo.deleteUsersGVU(userID);
         this.userRepo.deleteUsers(userID);
     }
 
+    //  Xóa tài khoản giảng viên
     @Override
     public void deleteUsersGV(String userID) {
         this.userRepo.deleteUsersGV(userID);
         this.userRepo.deleteUsers(userID);
     }
 
+    //  Xóa tài khoản sinh viên
     @Override
     public void deleteUsersSV(String userID) {
         this.userRepo.deleteUsersSV(userID);
         this.userRepo.deleteUsers(userID);
-    }
-
-    @Override
-    public Giangvien getGVbyID(String id) {
-        return this.userRepo.getGVbyID(id);
     }
 }

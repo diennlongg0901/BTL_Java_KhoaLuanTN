@@ -8,8 +8,6 @@ import com.demo.pojo.Diem;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Tieuchi;
 import com.demo.pojo.Tongketkhoaluan;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,9 +18,7 @@ public interface ScoreService {
     
     //TIÊU CHÍ
     Tieuchi getCriteria(int id);
-    List<Diem> getScore(int thesisID, int criteriaID);
-    List<Diem> getThesisScores(int thesisID);
-    
+
     //ĐIỂM
     boolean addScore(Diem score);
     double calculateCouncilScore(int thesisID);
@@ -31,6 +27,8 @@ public interface ScoreService {
     String resultThesis(double score);
     public boolean addResult(Khoaluan thesis, String result, double score);
     List<Diem> getAllScore(int id);
+    List<Diem> getScore(int thesisID, int criteriaID);
+    List<Diem> getThesisScores(int thesisID);
     boolean getResult(String id);
     Tongketkhoaluan getResultScore(String id);
     

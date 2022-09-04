@@ -28,7 +28,6 @@
         </div>
     </form>
 </div>
-
 <div class="row">
     <div class="mt-4 col">
         <canvas id="svChartID"></canvas>

@@ -36,4 +36,13 @@
     <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
     </button>
+    
+    <div class="container mt-3">
+        <h2 id="thongbao">Thông báo</h2>
+  <ul class="list-group">
+    <li class="list-group-item">Tuyển sinh năm 2022-2023</li>
+    <li class="list-group-item">Sinh hoạt & giao lưu sinh viên</li>
+    <li class="list-group-item">Gây quỹ, trao tặng học bổng sinh viên </li>
+  </ul>
+</div>
 </div>

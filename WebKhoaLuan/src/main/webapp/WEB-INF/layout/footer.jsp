@@ -16,7 +16,6 @@
             <p>TĐ.Long - NL.Tuyen &copy; 2022</p>
         </div>
     </div>
-    
     <hr>
     <div class="row mt-3">
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">

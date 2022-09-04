@@ -22,16 +22,19 @@ public class RoleServiceImpl implements RoleService{
     @Autowired
     private RoleRepo roleRepo;
     
+    //  Lấy danh sách chức vụ
     @Override
     public List<Chucvu> getChucvu() {
         return this.roleRepo.getChucvu();
     }
 
+    //  Lấy danh sách ngành
     @Override
     public List<Nganh> getNganh() {
         return this.roleRepo.getNganh();
     }
 
+    //  Lấy danh sách khoa
     @Override
     public List<Khoa> getKhoa() {
         return this.roleRepo.getKhoa();

@@ -45,7 +45,6 @@
             <th></th>
         </tr>
     </thead>
-
     <tbody>
         <c:forEach items="${nguoidung}" var="nd">
             <tr>

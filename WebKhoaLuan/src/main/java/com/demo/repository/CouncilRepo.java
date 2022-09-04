@@ -25,7 +25,9 @@ public interface CouncilRepo {
     List<Chitiethoidong> getListCouncilDetail();
     List<Chitiethoidong> getCouncilDetail(String tenHD);
     List<Chitiethoidong> getCouncilByGV(String idGV);
-    Integer countMember(int id); 
+    Integer countMember(int id);
+    Hoidong getCouncil(int id);
+    void blockCouncil(int id);
     
     //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
     void deleteMember(String userID);

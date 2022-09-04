@@ -70,7 +70,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </c:if>
 

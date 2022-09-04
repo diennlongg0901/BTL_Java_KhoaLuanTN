@@ -24,7 +24,7 @@ public interface ThesisRepo {
     boolean addRegistration(Dangkykhoaluan dangkykhoaluan);
     List<Dangkykhoaluan> getRegistedThesises();
     Dangkykhoaluan getRegistedThesisByID(int id);
-    
+    void deleteRegistedThesis(int idTopic);
     
     //KHÓA LUẬN
     boolean addThesis(Khoaluan thesis);

@@ -27,7 +27,6 @@
         </div>
     </form>
 </div>
-
 <div class="row">
     <div class="mt-4 col">
         <canvas id="scoreChartID"></canvas>
@@ -55,5 +54,5 @@
     </c:forEach>
     window.onload = function () {
         scoreChart("scoreChartID", scoreLabels, scoreInfo);
-    }
+    };
 </script>

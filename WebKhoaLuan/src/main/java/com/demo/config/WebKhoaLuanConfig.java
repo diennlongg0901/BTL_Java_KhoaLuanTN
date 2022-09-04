@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
@@ -65,8 +64,8 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
         //Tạo gmail
         javaMailSenderImpl.setHost("smtp.gmail.com");
         javaMailSenderImpl.setPort(587);
-        javaMailSenderImpl.setUsername(""); //Nhập email của mình
-        javaMailSenderImpl.setPassword(""); //Nhập password của mình
+        javaMailSenderImpl.setUsername("1951052229tuyen@ou.edu.vn"); //Nhập email của mình
+        javaMailSenderImpl.setPassword("lnt09022001"); //Nhập password của mình
         javaMailSenderImpl.setDefaultEncoding("UTF-8");
 
         //SET thuộc tính
@@ -77,7 +76,6 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
         mailProperties.put("mail.smtp.auth", "true");
         mailProperties.put("mail.transport.protocol", "smtp");
         mailProperties.put("mail.debug", "true");
-
         javaMailSenderImpl.setJavaMailProperties(mailProperties);
         return javaMailSenderImpl;
     }

@@ -260,7 +260,7 @@ public class UserController {
                 this.userService.updateParticularUsers(nd);
             }
             model.addAttribute("errMsg", errMsg);
-            return "redirect:/";
+            return "ThongTinNguoiDung";
         } catch (Exception e) {
             errMsg = "Đã có lỗi!";
         }

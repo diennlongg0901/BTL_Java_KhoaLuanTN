@@ -165,4 +165,12 @@ public class ThesisRepoImpl implements ThesisRepo {
         q.setParameter("id", id);
         return (Khoaluan) q.getSingleResult();
     }
+
+    @Override
+    public void deleteRegistedThesis(int idTopic) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Dangkykhoaluan WHERE maDT = (:idTopic)");
+        q.setParameter("idTopic", idTopic);
+        q.executeUpdate();
+    }
 }

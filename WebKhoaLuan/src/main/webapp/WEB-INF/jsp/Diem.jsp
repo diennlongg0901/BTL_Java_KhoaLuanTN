@@ -30,7 +30,6 @@
             <div class="form-outline mt-4">
                 <form:input type="number" step="0.05" path="diem" placeholder="Nhập điểm cho khóa luận"/>
             </div>
-
             <div class="form-outline mt-4">
                 <input type="submit" class="btn btn-primary btn-block mb-4" value="Xác nhận"/>
                 <input type="reset" class="btn btn-primary btn-block mb-4" value="Hủy"/>
@@ -77,7 +76,6 @@
             <div class="col-md-4">
                 <h6 class="form-outline mt-4"><strong>Điểm giảng viên hướng dẫn: </strong><fmt:formatNumber value="${diemgvhd}" maxFractionDigits="2" type = "number" /></h6>
             </div>
-
             <div class="col-md-4">
                 <h6 class="form-outline mt-4"><strong>Điểm hội đồng: </strong><fmt:formatNumber value="${diemhd}" maxFractionDigits="2" type = "number" /></h6>
             </div>

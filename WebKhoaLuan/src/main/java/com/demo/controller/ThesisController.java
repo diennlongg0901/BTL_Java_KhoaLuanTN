@@ -74,10 +74,11 @@ public class ThesisController {
             return "redirect:/";
         }
     }
-
+    
     @RequestMapping("/DeTaiKhoaLuan/{id}")
     public String xoaDeTai(Model model, @PathVariable(value = "id") int id) {
         String errMsg = "";
+        this.thesisService.deleteRegistedThesis(id);
         if (this.thesisService.deleteTopic(id) == true) {
             errMsg = "Xóa đề tài thành công.";
             model.addAttribute("errMsg", errMsg);
