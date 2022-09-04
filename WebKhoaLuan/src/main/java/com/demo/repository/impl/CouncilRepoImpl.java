@@ -27,6 +27,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     private LocalSessionFactoryBean sessionFactory;
 
     //THÊM HỘI ĐỒNG
+    //  Thêm vào bảng hội đồng
     @Override
     public boolean addCouncil(Hoidong council) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -38,6 +39,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         return false;
     }
 
+    //  Thêm vào bảng chi tiết hội đồng
     @Override
     public boolean addDetailCouncil(Chitiethoidong detailCouncil) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -50,6 +52,7 @@ public class CouncilRepoImpl implements CouncilRepo {
     }
 
     //LẤY THÔNG TIN HỘI ĐỒNG
+    //  Lấy thông tin hội đồng mới thêm vào
     @Override
     public Object getNewCouncil() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -57,6 +60,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         return q.setMaxResults(1).getSingleResult();
     }
 
+    //  Tìm thông tin chi tiết hội đồng
     @Override
     public List<Chitiethoidong> getCouncilDetail(String tenHD) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -65,22 +69,15 @@ public class CouncilRepoImpl implements CouncilRepo {
         return q.getResultList();
     }
 
+    //  Lấy danh sách thông tin chi tiết hội đồng
     @Override
     public List<Chitiethoidong> getListCouncilDetail() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Chitiethoidong ORDER BY maHD DESC");
         return q.getResultList();
     }
-
-    //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
-    @Override
-    public void deleteMember(String userID) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("DELETE FROM Chitiethoidong WHERE maGV = (:userID) AND maND = (:userID) AND maCV = 'ROLE_GV'");
-        q.setParameter("userID", userID);
-        q.executeUpdate();
-    }
-
+    
+    //  Lấy danh sách các hội đồng
     @Override
     public List<Hoidong> getCouncils() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -88,6 +85,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         return q.getResultList();
     }
 
+    //  Lấy thông tin chi tiết hội đồng theo giảng viên
     @Override
     public List<Chitiethoidong> getCouncilByGV(String idGV) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -96,6 +94,7 @@ public class CouncilRepoImpl implements CouncilRepo {
         return q.getResultList();
     }
 
+    //  Đếm thành viên một hội đồng
     @Override
     public Integer countMember(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -104,5 +103,15 @@ public class CouncilRepoImpl implements CouncilRepo {
         q.setParameter("id", id);
         total = q.getResultList().size();
         return total;
+    }
+
+    //XÓA HỘI ĐỒNG, THÀNH VIÊN HỘI ĐỒNG
+    //  Xóa thành viên hội đồng
+    @Override
+    public void deleteMember(String userID) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("DELETE FROM Chitiethoidong WHERE maGV = (:userID) AND maND = (:userID) AND maCV = 'ROLE_GV'");
+        q.setParameter("userID", userID);
+        q.executeUpdate();
     }
 }

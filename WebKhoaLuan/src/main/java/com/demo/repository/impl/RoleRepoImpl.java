@@ -25,6 +25,7 @@ public class RoleRepoImpl implements RoleRepo{
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
 
+    //  Lấy danh sách chức vụ
     @Override
     public List<Chucvu> getChucvu() {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -32,6 +33,7 @@ public class RoleRepoImpl implements RoleRepo{
         return q.getResultList();
     }
 
+    //  Lấy danh sách ngành
     @Override
     public List<Nganh> getNganh() {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -39,10 +41,13 @@ public class RoleRepoImpl implements RoleRepo{
         return q.getResultList();
     }
 
+    //  Lấy danh sách khoa
     @Override
     public List<Khoa> getKhoa() {
         Session s = this.sessionFactoryBean.getObject().getCurrentSession();
         Query q = s.createQuery("FROM Khoa");
         return q.getResultList();
     }
+    
+    
 }

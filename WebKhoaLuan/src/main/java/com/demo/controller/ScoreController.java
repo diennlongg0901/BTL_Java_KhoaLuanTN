@@ -40,7 +40,7 @@ public class ScoreController {
         double gvhd = this.scoreService.calculateGVHDScore(kl.getMaKL());
         double hd = this.scoreService.calculateCouncilScore(kl.getMaKL());
         double diemTong = this.scoreService.calculation(hd, gvhd);
-
+        String result = this.scoreService.resultThesis(diemTong);
         model.addAttribute("khoaluansv", kl);
         model.addAttribute("diemhd", hd);
         model.addAttribute("diemgvhd", gvhd);
@@ -49,8 +49,10 @@ public class ScoreController {
         model.addAttribute("diemkl", diemTong);
         model.addAttribute("ketqua", this.scoreService.resultThesis(diemTong));
         model.addAttribute("nhanxet", this.scoreService.getThesisScores(kl.getMaKL()));
-
-        String result = this.scoreService.resultThesis(diemTong);
+        if (kl.getNgayNop().compareTo(kl.getDangkykhoaluan().getDetai().getHanNop()) > 0) {
+            diemTong = 0.0;
+            result = "F";
+        }
         if (this.scoreService.getResult(id).getMaKL() > 0) {
             return "Diem";
         }

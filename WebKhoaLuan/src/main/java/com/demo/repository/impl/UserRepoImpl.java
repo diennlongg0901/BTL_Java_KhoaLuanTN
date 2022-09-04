@@ -35,6 +35,7 @@ public class UserRepoImpl implements UserRepo {
     private LocalSessionFactoryBean sessionFactory;
 
     //LẤY DANH SÁCH NGƯỜI DÙNG
+    //  Lấy danh sách tài khoản người dùng
     @Override
     public List<Nguoidung> getUsers(String username) {
         Session s = this.sessionFactory.getObject().getCurrentSession();
@@ -50,6 +51,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
     
+    //  Lấy tài khoản ngời dùng theo username
     @Override
     public Nguoidung getUserbyID(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -58,6 +60,7 @@ public class UserRepoImpl implements UserRepo {
         return (Nguoidung) q.setMaxResults(1).getSingleResult();
     }
     
+    //  Lấy tài khoản ngời dùng theo username
     @Override
     public Sinhvien getSVbyID(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -66,6 +69,7 @@ public class UserRepoImpl implements UserRepo {
         return (Sinhvien) q.setMaxResults(1).getSingleResult();
     }
     
+    // Lấy danh sách tất cả tài khoản người dùng
     @Override
     public List<Nguoidung> getAllUsers() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -77,6 +81,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
     
+    // Lấy danh sách tài khoản giảng viên
     @Override
     public List<Nguoidung> getAllGV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -84,6 +89,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
     
+    // Lấy danh sách tài khoản giảng viên từ bảng giảng viên
     @Override
     public List<Giangvien> getListGV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -91,6 +97,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
     
+    // Lấy danh sách tài khoản sinh viên
     @Override
     public List<Nguoidung> getAllSV() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -98,6 +105,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
     
+    // Lấy danh sách tài khoản giáo vụ
     @Override
     public List<Nguoidung> getAllGVU() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -105,6 +113,7 @@ public class UserRepoImpl implements UserRepo {
         return q.getResultList();
     }
 
+    // Lấy danh sách tài khoản quản trị
     @Override
     public List<Nguoidung> getAllQT() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -113,6 +122,7 @@ public class UserRepoImpl implements UserRepo {
     }
 
     //THÊM NGƯỜI DÙNG
+    //  Thêm mới tài khoản người dùng
     @Override
     public boolean addUser(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -125,6 +135,7 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
   
+    //  Thêm mới tài khoản quản trị
     @Override
     public boolean addUserQT(Quantri userQT) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -137,6 +148,7 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
     
+    //  Thêm mới tài khoản giáo vụ
     @Override
     public boolean addUserGVU(Giaovu userGVU) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -149,6 +161,7 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
 
+    //  Thêm mới tài khoản giảng viên
     @Override
     public boolean addUserGV(Giangvien userGV) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -161,6 +174,7 @@ public class UserRepoImpl implements UserRepo {
         return false;
     }
 
+    //  Thêm mới tài khoản sinh viên
     @Override
     public boolean addUserSV(Sinhvien userSV) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -174,6 +188,7 @@ public class UserRepoImpl implements UserRepo {
     }
 
     //XÓA NGUỜI DÙNG
+    //  Xóa tài khoản người dùng
     @Override
     public void deleteUsers(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -182,6 +197,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
     
+    //  Xóa tài khoản quản trị
     @Override
     public void deleteUsersQT(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -190,6 +206,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
     
+    //  Xóa tài khoản giáo vụ
     @Override
     public void deleteUsersGVU(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -198,6 +215,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
     
+    //  Xóa tài khoản giảng viên
     @Override
     public void deleteUsersGV(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -206,6 +224,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
 
+    //  Xóa tài khoản sinh viên
     @Override
     public void deleteUsersSV(String userID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -215,18 +234,21 @@ public class UserRepoImpl implements UserRepo {
     }
 
     //CẬP NHẬT NGƯỜI DÙNG
+    //  Cập nhật thông tin tài khoản người dùng
     @Override
     public void updateUsers(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         session.update(user);
     }  
 
+    //  Cập nhật thông tin tài khoản người dùng hiện tại
     @Override
     public void updateParticularUsers(Nguoidung user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         session.update(user);
     }
 
+    //  Cập nhật thông tin tài khoản sinh viên
     @Override
     public void updateUsersSV(Sinhvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -240,6 +262,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
     
+    //  Cập nhật thông tin tài khoản giảng viên
     @Override
     public void updateUsersGV(Giangvien user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -251,6 +274,7 @@ public class UserRepoImpl implements UserRepo {
         q.executeUpdate();
     }
     
+    //  Cập nhật thông tin tài khoản giáo vụ
     @Override
     public void updateUsersGVU(Giaovu user) {
         Session session = this.sessionFactory.getObject().getCurrentSession();

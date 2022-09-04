@@ -29,6 +29,7 @@ public class ThesisRepoImpl implements ThesisRepo {
     private LocalSessionFactoryBean sessionFactory;
 
     //ĐỀ TÀI KHÓA LUẬN
+    //  Thêm mới đề tài khóa luận
     @Override
     public boolean addTopic(Detai topic) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -41,6 +42,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return false;
     }
 
+    //   Lấy danh sách đế tài khóa luận
     @Override
     public List<Detai> getTopics() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -48,6 +50,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return q.getResultList();
     }
 
+    // Xóa đề tài khóa luận
     @Override
     public boolean deleteTopic(int topicID) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -63,6 +66,7 @@ public class ThesisRepoImpl implements ThesisRepo {
     }
     
     //KHÓA LUẬN
+    //  Thêm mới khóa luận
     @Override
     public boolean addThesis(Khoaluan thesis) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -74,14 +78,8 @@ public class ThesisRepoImpl implements ThesisRepo {
         }
         return false;
     }
-
-    @Override
-    public List<Khoaluan> getThesis() {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Khoaluan");
-        return q.getResultList();
-    }
-
+    
+    //  Thêm mới đăng ký khóa luận
     @Override
     public boolean addRegistration(Dangkykhoaluan dangkykhoaluan) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -94,6 +92,15 @@ public class ThesisRepoImpl implements ThesisRepo {
         return false;
     }
 
+    //  Lấy danh sách khóa luận
+    @Override
+    public List<Khoaluan> getThesis() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Khoaluan");
+        return q.getResultList();
+    }
+
+    //  Lấy danh sách đăng ký khóa luận
     @Override
     public List<Dangkykhoaluan> getRegistedThesises() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -101,6 +108,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return query.getResultList();
     }
 
+    //  Lấy thông tin đăng khóa luận theo mã đăng ký
     @Override
     public Dangkykhoaluan getRegistedThesisByID(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -109,6 +117,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return (Dangkykhoaluan) query.getSingleResult();
     }
 
+    //  Lấy thông tin khóa luận theo mã sinh viên
     @Override
     public Khoaluan getThesisBySV(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -117,6 +126,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return (Khoaluan) query.getSingleResult();
     }
     
+    //  Lấy danh sách khóa luận theo mã giảng viên hướng dẫn
     @Override
     public List<Khoaluan> getThesisByGV(String idGV) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -125,6 +135,7 @@ public class ThesisRepoImpl implements ThesisRepo {
         return q.getResultList();
     }
 
+    //  Cập nhật thông tin khóa luận
     @Override
     public boolean updateThesis(Khoaluan khoaluan) {
         try{
@@ -136,20 +147,22 @@ public class ThesisRepoImpl implements ThesisRepo {
         }
         return false;
     }
-    
-    @Override
-    public Khoaluan getThesisbyID(int id) {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("FROM Khoaluan WHERE maKL = (:id)");
-        q.setParameter("id", id);
-        return (Khoaluan) q.getSingleResult();
-    }
 
+    //  Lấy danh sách khóa luận có chung mã hội đồng 
     @Override
     public List<Khoaluan> getThesisByIDCouncil(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Khoaluan WHERE maHD = (:id)");
         q.setParameter("id", id);
         return q.getResultList();
+    }
+    
+    //  Lấy thông tin khóa theo mã khóa luận
+    @Override
+    public Khoaluan getThesisbyID(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Khoaluan WHERE maKL = (:id)");
+        q.setParameter("id", id);
+        return (Khoaluan) q.getSingleResult();
     }
 }
