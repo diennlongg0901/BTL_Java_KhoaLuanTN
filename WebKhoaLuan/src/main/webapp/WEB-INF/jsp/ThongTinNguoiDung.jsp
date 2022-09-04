@@ -59,19 +59,19 @@
             <h4 class="mt-4">Cập nhật Thông tin cá nhân</h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" />
+                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" value="${thongtinnguoidung.sdt}" />
                 </div>
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
+                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" value="${thongtinnguoidung.email}" />
                 </div>
             </div>
             <div class ="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" />
+                    <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" value="${thongtinnguoidung.diaChi}" />
                 </div>
                 <div class="col mt-4">
                     <div class="input-group date" id="datepicker">
-                        <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />
+                        <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" value="${thongtinnguoidung.ngaySinh}" />
                         <span class="input-group-append">
                             <span class="input-group-text bg-light d-block">
                                 <i class="fa fa-calendar"></i>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
             </div>
-                        
+
             <!-- PHẦN GIÁO VỤ THAY ĐỔI MẬT KHẨU TÀI KHOẢN -->
             <h4 class="mt-4">Thay đổi mật khẩu</h4>
             <div class="row">
@@ -147,20 +147,19 @@
                 </c:if>
                 <div class="row">
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" />
+                        <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" value="${thongtinnguoidung.sdt}" />
                     </div>
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
+                        <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" value="${thongtinnguoidung.email}" />
                     </div>
                 </div>
                 <div class ="row">
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" />
+                        <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" value="${thongtinnguoidung.diaChi}" />
                     </div>
-
                     <div class="col mt-4">
                         <div class="input-group date" id="datepicker">
-                            <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />
+                            <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" value="${thongtinnguoidung.ngaySinh}" />
                             <span class="input-group-append">
                                 <span class="input-group-text bg-light d-block">
                                     <i class="fa fa-calendar"></i>
@@ -169,7 +168,7 @@
                         </div>
                     </div>
                 </div>
-                            
+
                 <!-- PHẦN GIẢNG VIÊN THAY ĐỔI MẬT KHẨU TÀI KHOẢN -->   
                 <h4 class="mt-4">Thay đổi mật khẩu</h4>
                 <div class="row">
@@ -229,26 +228,26 @@
                 </div>
             </div>
         </div>
-                        
+
         <!-- PHẦN SINH VIÊN CẬP NHẬT THÔNG TIN TÀI KHOẢN -->
         <hr class="mt-4">
         <div class="form-group container">
             <h4 class="mt-4">Cập nhật thông tin cá nhân</h4>
             <div class="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" />
+                    <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" value="${thongtinnguoidung.sdt}" />
                 </div>
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
+                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" value="${thongtinnguoidung.email}" />
                 </div>
             </div>
             <div class ="row">
                 <div class="form-outline mt-4 col">
-                    <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" />
+                    <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" value="${thongtinnguoidung.diaChi}" />
                 </div>
                 <div class="col mt-4">
                     <div class="input-group date" id="datepicker">
-                        <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />
+                        <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" value="${thongtinnguoidung.ngaySinh}" />
                         <span class="input-group-append">
                             <span class="input-group-text bg-light d-block">
                                 <i class="fa fa-calendar"></i>
@@ -318,19 +317,19 @@
                 <h4 class="mt-4">Cập nhật thông tin cá nhân</h4>
                 <div class="row">
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" />
+                        <form:input type="text" id="std" path="sdt" class="form-control" placeholder="Số điện thoại" value="${thongtinnguoidung.sdt}" />
                     </div>
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
+                        <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" value="${thongtinnguoidung.email}" />
                     </div>
                 </div>
                 <div class ="row">
                     <div class="form-outline mt-4 col">
-                        <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" />
+                        <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ hiện tại" value="${thongtinnguoidung.diaChi}" />
                     </div>
                     <div class="col mt-4">
                         <div class="input-group date" id="datepicker">
-                            <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" />
+                            <form:input type="text" class="form-control" id="ngaySinh" path="ngaySinh" placeholder="Ngày sinh" value="${thongtinnguoidung.ngaySinh}" />
                             <span class="input-group-append">
                                 <span class="input-group-text bg-light d-block">
                                     <i class="fa fa-calendar"></i>
@@ -339,7 +338,7 @@
                         </div>
                     </div>
                 </div>
-                            
+
                 <!-- PHẦN QUẢN TRỊ THAY ĐỔI MẬT KHẨU TÀI KHOẢN -->
                 <h4 class="mt-4">Thay đổi mật khẩu</h4>
                 <div class="row">

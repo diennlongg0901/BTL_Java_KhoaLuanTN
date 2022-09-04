@@ -106,11 +106,15 @@ public class ScoreRepoIml implements ScoreRepo {
     
     //  Lấy kết quả khóa luận theo mã sinh viên
     @Override
-    public Tongketkhoaluan getResult(String id) {
+    public boolean getResult(String id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("FROM Tongketkhoaluan WHERE maSV = (:id)");
         q.setParameter("id", id);
-        return (Tongketkhoaluan) q.setMaxResults(1).getSingleResult();
+        if (q.getResultList().size() > 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     //THỐNG KÊ ĐIỂM
@@ -151,8 +155,11 @@ public class ScoreRepoIml implements ScoreRepo {
         
     }
 
-    
-    
-
-    
+    @Override
+    public Tongketkhoaluan getResultScore(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Tongketkhoaluan WHERE maSV = (:id)");
+        q.setParameter("id", id);
+        return (Tongketkhoaluan) q.setMaxResults(1).getSingleResult();
+    }
 }

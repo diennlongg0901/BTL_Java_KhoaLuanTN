@@ -39,6 +39,19 @@
                     <form:input type="text" id="ten" path="ten" class="form-control" placeholder="Tên" />
                 </div>
             </div>
+                
+            <div class="row">
+                <div class="form-outline mt-4 col">
+                    <form:input type="text" id="email" path="email" class="form-control" placeholder="Email" />
+                </div>
+                <div class="form-outline mt-4 col">
+                    <form:input type="text" id="diaChi" path="diaChi" class="form-control" placeholder="Địa chỉ" />
+                </div>
+                <div class="form-outline mt-4 col">
+                    <form:input type="text" id="sdt" path="sdt" class="form-control" placeholder="Số điện thoại" />
+                </div>
+            </div>
+                
             <div class ="row">
                 <div class="form-outline mt-4 col">                    
                     <form:input type="text" id="username" path="username" class="form-control" placeholder="Username" />

@@ -14,7 +14,7 @@
 </c:if>
 
 <h2 class="text-center mt-5"><strong>THÔNG TIN HỘI ĐỒNG</strong></h2>
-<c:url value="/HoiDong" var="action"/>
+<c:url value="/giaovu/HoiDong" var="action"/>
 <div class="container">
     <c:if test="${pageContext.request.isUserInRole('ROLE_GVU')}">
         <!-- PHẦN GIÁO VỤ THÊM MỚI HỘI ĐỒNG -->

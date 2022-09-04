@@ -284,4 +284,12 @@ public class UserRepoImpl implements UserRepo {
         q.setParameter("phongBan", user.getPhongBan());
         q.executeUpdate();
     } 
+
+    @Override
+    public Giangvien getGVbyID(String id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("FROM Giangvien WHERE maGV = (:id)");
+        q.setParameter("id", id);
+        return (Giangvien) q.setMaxResults(1).getSingleResult();
+    }
 }

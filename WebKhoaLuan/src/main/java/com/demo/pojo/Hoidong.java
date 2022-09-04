@@ -5,9 +5,7 @@
 package com.demo.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,15 +13,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ADMIN
+ * @author PC
  */
 @Entity
 @Table(name = "hoidong")
@@ -32,7 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Hoidong.findAll", query = "SELECT h FROM Hoidong h"),
     @NamedQuery(name = "Hoidong.findByMaHD", query = "SELECT h FROM Hoidong h WHERE h.maHD = :maHD"),
     @NamedQuery(name = "Hoidong.findByTenHD", query = "SELECT h FROM Hoidong h WHERE h.tenHD = :tenHD"),
-    @NamedQuery(name = "Hoidong.findByTinhTrangHD", query = "SELECT h FROM Hoidong h WHERE h.tinhTrangHD = :tinhTrangHD")})
+    @NamedQuery(name = "Hoidong.findByTinhTrangHD", query = "SELECT h FROM Hoidong h WHERE h.tinhTrangHD = :tinhTrangHD"),
+    @NamedQuery(name = "Hoidong.findByHoatDong", query = "SELECT h FROM Hoidong h WHERE h.hoatDong = :hoatDong")})
 public class Hoidong implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,10 +44,8 @@ public class Hoidong implements Serializable {
     @Size(max = 45)
     @Column(name = "tinhTrangHD")
     private String tinhTrangHD;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Set<Chitiethoidong> chitiethoidongSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hoidong")
-    private Set<Khoaluan> khoaluanSet;
+    @Column(name = "hoatDong")
+    private Short hoatDong;
 
     public Hoidong() {
     }
@@ -83,22 +78,12 @@ public class Hoidong implements Serializable {
         this.tinhTrangHD = tinhTrangHD;
     }
 
-    @XmlTransient
-    public Set<Chitiethoidong> getChitiethoidongSet() {
-        return chitiethoidongSet;
+    public Short getHoatDong() {
+        return hoatDong;
     }
 
-    public void setChitiethoidongSet(Set<Chitiethoidong> chitiethoidongSet) {
-        this.chitiethoidongSet = chitiethoidongSet;
-    }
-
-    @XmlTransient
-    public Set<Khoaluan> getKhoaluanSet() {
-        return khoaluanSet;
-    }
-
-    public void setKhoaluanSet(Set<Khoaluan> khoaluanSet) {
-        this.khoaluanSet = khoaluanSet;
+    public void setHoatDong(Short hoatDong) {
+        this.hoatDong = hoatDong;
     }
 
     @Override

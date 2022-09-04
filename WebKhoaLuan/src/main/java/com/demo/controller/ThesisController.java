@@ -9,8 +9,10 @@ import com.demo.pojo.DangkykhoaluanPK;
 import com.demo.pojo.Detai;
 import com.demo.pojo.Diem;
 import com.demo.pojo.DiemPK;
+import com.demo.pojo.Giangvien;
 import com.demo.pojo.Khoaluan;
 import com.demo.pojo.Nguoidung;
+import com.demo.pojo.NguoidungPK;
 import com.demo.pojo.Sinhvien;
 import com.demo.service.CouncilService;
 import com.demo.service.RoleService;
@@ -20,6 +22,8 @@ import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +47,8 @@ public class ThesisController {
     private CouncilService councilService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private MailSender mailSender;
 
     //ĐỀ TÀI KHÓA LUẬN
     @GetMapping(value = "/DeTaiKhoaLuan", produces = "application/x-www-form-urlencoded;charset=UTF-8")
@@ -104,7 +110,10 @@ public class ThesisController {
         dkklPK.setMaKhoa(sv.getSinhvienPK().getMaKhoa());
         dkklPK.setMaNganh(sv.getSinhvienPK().getMaNganh());
         dk.setDangkykhoaluanPK(dkklPK);
-        this.thesisService.addRegistration(dk);
+        if (this.thesisService.addRegistration(dk) == true) {
+            return "redirect:/";
+        }
+
         return "DangKyKhoaLuan";
     }
 
@@ -140,6 +149,15 @@ public class ThesisController {
         kl.setNam(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
         kl.setDangkykhoaluan(dkkl);
         this.thesisService.addThesis(kl);
+        Giangvien gv1 = this.userService.getGVbyID(kl.getMaGV());
+        String email1 = gv1.getNguoidung().getEmail();
+        sendEmail(email1, "Hội đồng trường đại học", "Bạn đã được phân công để hướng dẫn khóa luận " + kl.getMaKL() + ". Vui lòng vào Website để xem thông tin.");
+
+        if (kl.getMaGV2() != null) {
+            Giangvien gv2 = this.userService.getGVbyID(kl.getMaGV2());
+            String email2 = gv2.getNguoidung().getEmail();
+            sendEmail(email2, "Hội đồng trường đại học", "Bạn đã được phân công để hướng dẫn thứ 2 khóa luận " + kl.getMaKL() + ". Vui lòng vào Website để xem thông tin.");
+        }
         return "redirect:/giaovu/dsDangKyKhoaLuan";
     }
 
@@ -167,10 +185,20 @@ public class ThesisController {
         model.addAttribute("dskhoaluanGV", this.thesisService.getThesisByGV(idGV));
         return "KhoaLuan";
     }
-    
+
     @GetMapping("/giangvien/KhoaLuanHD/{id}")
     public String dsKhoaLuanHD(Model model, @PathVariable(value = "id") int id) {
         model.addAttribute("dskhoaluanhd", this.thesisService.getThesisByIDCouncil(id));
         return "KhoaLuanHD";
+    }
+
+    public void sendEmail(String to, String chuDe, String noiDung) {
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setSubject(chuDe);
+        simpleMailMessage.setText(noiDung);
+
+        mailSender.send(simpleMailMessage);
     }
 }

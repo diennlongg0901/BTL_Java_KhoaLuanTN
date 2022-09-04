@@ -6,9 +6,12 @@ package com.demo.config;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -54,7 +57,31 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/js/**").addResourceLocations("/resources/js");
     }
-    
+
+    @Bean
+    public JavaMailSender mailSender() {
+        JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
+
+        //Tạo gmail
+        javaMailSenderImpl.setHost("smtp.gmail.com");
+        javaMailSenderImpl.setPort(587);
+        javaMailSenderImpl.setUsername(""); //Nhập email của mình
+        javaMailSenderImpl.setPassword(""); //Nhập password của mình
+        javaMailSenderImpl.setDefaultEncoding("UTF-8");
+
+        //SET thuộc tính
+        Properties mailProperties = new Properties();
+        mailProperties.setProperty("mail.smtp.allow8bitmime", "true");
+        mailProperties.setProperty("mail.smtps.allow8bitmime", "true");
+        mailProperties.put("mail.smtp.starttls.enable", "true");
+        mailProperties.put("mail.smtp.auth", "true");
+        mailProperties.put("mail.transport.protocol", "smtp");
+        mailProperties.put("mail.debug", "true");
+
+        javaMailSenderImpl.setJavaMailProperties(mailProperties);
+        return javaMailSenderImpl;
+    }
+
 //    @Bean
 //    public InternalResourceViewResolver viewResolver () {
 //        InternalResourceViewResolver r = new InternalResourceViewResolver ();

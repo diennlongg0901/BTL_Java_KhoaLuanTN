@@ -27,7 +27,8 @@ public interface ScoreRepo {
     double calculation(double scoreHD, double scoreGVHD);
     boolean addResult(Tongketkhoaluan result);
     List<Diem> getAllScore(int id);
-    Tongketkhoaluan getResult(String id);
+    boolean getResult(String id);
+    Tongketkhoaluan getResultScore(String id);
     
     //THỐNG KÊ ĐIỂM VÀ SINH VIÊN
     List<Object> scoreStats(String kw);

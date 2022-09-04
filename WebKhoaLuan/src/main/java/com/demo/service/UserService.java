@@ -34,6 +34,7 @@ public interface UserService extends UserDetailsService {
     List<Nguoidung> getAllSV();
     List<Nguoidung> getAllGVU();
     List<Nguoidung> getAllQT();
+    Giangvien getGVbyID(String id);
     Sinhvien getSVbyID(String id);
     
     //XÓA NGƯỜI DÙNG   

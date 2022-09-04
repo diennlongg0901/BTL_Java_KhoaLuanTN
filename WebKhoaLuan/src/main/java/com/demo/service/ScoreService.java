@@ -31,7 +31,8 @@ public interface ScoreService {
     String resultThesis(double score);
     public boolean addResult(Khoaluan thesis, String result, double score);
     List<Diem> getAllScore(int id);
-    Tongketkhoaluan getResult(String id);
+    boolean getResult(String id);
+    Tongketkhoaluan getResultScore(String id);
     
     //THỐNG KÊ
     List<Object> scoreStats(String kw);

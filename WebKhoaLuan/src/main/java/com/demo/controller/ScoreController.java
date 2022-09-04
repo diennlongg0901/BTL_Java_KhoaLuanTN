@@ -49,11 +49,11 @@ public class ScoreController {
         model.addAttribute("diemkl", diemTong);
         model.addAttribute("ketqua", this.scoreService.resultThesis(diemTong));
         model.addAttribute("nhanxet", this.scoreService.getThesisScores(kl.getMaKL()));
-        if (kl.getNgayNop().compareTo(kl.getDangkykhoaluan().getDetai().getHanNop()) > 0) {
-            diemTong = 0.0;
-            result = "F";
-        }
-        if (this.scoreService.getResult(id).getMaKL() > 0) {
+//        if (kl.getNgayNop().compareTo(kl.getDangkykhoaluan().getDetai().getHanNop()) > 0) {
+//            diemTong = 0.0;
+//            result = "F";
+//        }
+        if (this.scoreService.getResult(id) == false) {
             return "Diem";
         }
         this.scoreService.addResult(kl, result, diemTong);

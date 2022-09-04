@@ -26,7 +26,9 @@ public class CouncilServiceImpl implements CouncilService{
     //THÊM HỘI ĐỒNG
     @Override
     public boolean addCouncil(Hoidong council) {
-        council.setTinhTrangHD("Khóa luận" + String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+        
+        council.setTinhTrangHD("Khóa luận " + String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+        council.setHoatDong(Short.parseShort("1"));
         return this.councilRepo.addCouncil(council);
     }
 

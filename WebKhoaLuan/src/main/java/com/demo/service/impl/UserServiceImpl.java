@@ -116,6 +116,9 @@ public class UserServiceImpl implements UserService {
             NguoidungPK nguoidungPK = new NguoidungPK();
             user.setPassword(this.passwordEncoder.encode(password));
             user.setHoatDong(Short.parseShort("1"));
+            user.setDiaChi(user.getDiaChi());
+            user.setEmail(user.getEmail());
+            user.setSdt(user.getSdt());
             nguoidungPK.setMaND(user.getUsername());
             nguoidungPK.setMaCV(user.getChucvu().getMaCV());
             user.setNguoidungPK(nguoidungPK);
@@ -304,5 +307,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUsersSV(String userID) {
         this.userRepo.deleteUsersSV(userID);
         this.userRepo.deleteUsers(userID);
+    }
+
+    @Override
+    public Giangvien getGVbyID(String id) {
+        return this.userRepo.getGVbyID(id);
     }
 }

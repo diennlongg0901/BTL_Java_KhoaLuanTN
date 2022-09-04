@@ -32,11 +32,6 @@ public class pdfView extends AbstractPdfView {
 
     @Override
     protected void buildPdfDocument(Map<String, Object> map, Document dcmnt, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
-//        OutputStream pdfStream = PDFGenerator.pdfGenerate(data);
-//        byte[] byteArray = ((java.io.ByteArrayOutputStream) pdfStream).toByteArray();
-//
-//// serialize PDF to Base64
-//        byte[] encodedBytes = java.util.Base64.getEncoder().encode(byteArray);
         response.setContentType( "application/pdf" );
         response.setHeader("Content-Disposition", "filename=\"script.pdf\"");
 
@@ -59,7 +54,7 @@ public class pdfView extends AbstractPdfView {
         p.setAlignment(Paragraph.ALIGN_CENTER);
         
         Paragraph p1 = new Paragraph("THESIS SCRIPT", fontParagraph);
-        p.setAlignment(Paragraph.ALIGN_LEFT);
+        p.setAlignment(Paragraph.ALIGN_CENTER);
 
         Paragraph p2 = new Paragraph("Thesis ID: " + scoreScript.getMaKL() + "              " + "Student's ID: " + scoreScript.getMaSV(), fontParagraph);
         p2.setAlignment(Paragraph.ALIGN_LEFT);

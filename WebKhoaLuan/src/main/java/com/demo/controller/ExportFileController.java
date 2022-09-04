@@ -40,7 +40,7 @@ public class ExportFileController {
     
     @RequestMapping("/sinhvien/DiemKL/pdf/{id}")
     public ModelAndView xuatFilePDF(Model model, @PathVariable(value = "id") String id){
-        Tongketkhoaluan result = this.scoreService.getResult(id);        
+        Tongketkhoaluan result = this.scoreService.getResultScore(id);        
         return new ModelAndView(new pdfView(), "scoreScript", result);
     }  
 }

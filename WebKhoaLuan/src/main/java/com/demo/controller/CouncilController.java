@@ -46,7 +46,7 @@ public class CouncilController {
         model.addAttribute("dschitiethoidong", this.councilService.getCouncilDetail(tenHD));
         return "HoiDong";
     }
-    
+
     @GetMapping("/giangvien/HoiDong/{id}")
     public String HoiDong(Model model, @PathVariable(value = "id") String id) {
         model.addAttribute("hoidonggv", this.councilService.getCouncilByGV(id));
@@ -58,21 +58,29 @@ public class CouncilController {
     public String HoiDong(Model model, @ModelAttribute(value = "hoidong") Hoidong council,
             @ModelAttribute(value = "chitiethoidong") Chitiethoidong detailCouncil) {
         model.addAttribute("giangvien", this.userService.getListGV());
+
+        int sl = 0;
         String errMsg = "";
         if (council.getTenHD() != null) {
             if (this.councilService.addCouncil(council) == true) {
                 errMsg = "Thêm hội đồng thành công.";
+
             } else {
                 errMsg = "Đã xảy ra lỗi!";
-            }
-        } else if (this.councilService.countMember((int)this.councilService.getNewCouncil()) <= 5) {
-            if (this.councilService.addDetailCouncil(detailCouncil) == true) {
-                errMsg = "Thêm thành viên hội đồng thành công.";
-            } else {
-                errMsg = "Đã xảy ra lỗi!";
+
             }
         } else {
-            errMsg = "Vượt quá số lượn thành viên!";
+            Hoidong hd = new Hoidong();
+            hd = (Hoidong) this.councilService.getNewCouncil();
+            if (this.councilService.countMember(hd.getMaHD()) < 5) {
+                if (this.councilService.addDetailCouncil(detailCouncil) == true) {
+                    errMsg = "Thêm thành viên hội đồng thành công.";
+                } else {
+                    errMsg = "Đã xảy ra lỗi!";
+                }
+            } else {
+                errMsg = "Vượt quá số lượn thành viên!";
+            }
         }
         model.addAttribute("errMsg", errMsg);
         return "HoiDong";

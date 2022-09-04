@@ -145,7 +145,12 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     @Override
-    public Tongketkhoaluan getResult(String id) {
+    public boolean getResult(String id) {
         return this.scoreRepo.getResult(id);
+    }
+
+    @Override
+    public Tongketkhoaluan getResultScore(String id) {
+        return this.scoreRepo.getResultScore(id);
     }
 }
