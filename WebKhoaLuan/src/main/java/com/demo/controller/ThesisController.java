@@ -178,7 +178,7 @@ public class ThesisController {
         kl.setFile(khoaluan.getFile());
         this.thesisService.updateThesis(kl);
 
-        return "KhoaLuan";
+        return "redirect:/";
     }
 
     @GetMapping("/giangvien/dsKhoaLuan/{idGV}")

@@ -65,7 +65,7 @@ public class WebKhoaLuanConfig implements WebMvcConfigurer {
         javaMailSenderImpl.setHost("smtp.gmail.com");
         javaMailSenderImpl.setPort(587);
         javaMailSenderImpl.setUsername("1951052229tuyen@ou.edu.vn"); //Nhập email của mình
-        javaMailSenderImpl.setPassword("lnt09022001"); //Nhập password của mình
+        javaMailSenderImpl.setPassword("nlt09022001"); //Nhập password của mình
         javaMailSenderImpl.setDefaultEncoding("UTF-8");
 
         //SET thuộc tính

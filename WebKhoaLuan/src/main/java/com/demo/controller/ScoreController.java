@@ -39,7 +39,7 @@ public class ScoreController {
         Khoaluan kl = this.thesisService.getThesisBySV(id);
         double gvhd = this.scoreService.calculateGVHDScore(kl.getMaKL());
         double hd = this.scoreService.calculateCouncilScore(kl.getMaKL());
-        double diemTong = this.scoreService.calculation(hd, gvhd);
+        double diemTong = this.scoreService.calculation(gvhd, hd);
         String result = this.scoreService.resultThesis(diemTong);
         model.addAttribute("khoaluansv", kl);
         model.addAttribute("diemhd", hd);

@@ -48,9 +48,9 @@ public class excelView extends AbstractXlsView {
                     diem.getGiangvien().getNguoidung().getHo() + " " + diem.getGiangvien().getNguoidung().getTen());
             row.createCell(3).setCellValue(String.valueOf(diem.getDiem()));
             if (diem.getTieuchi().getMaTC() == 2) {
-                row.createCell(4).setCellValue("Ban hội đồng");
-            } else {
                 row.createCell(4).setCellValue("Giảng viên hướng dẫn");
+            } else {
+                row.createCell(4).setCellValue("Ban hội đồng");
             }
         }
     }

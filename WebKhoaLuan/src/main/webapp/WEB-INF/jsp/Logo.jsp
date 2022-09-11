@@ -57,7 +57,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><strong>Chức năng sinh viên</strong></a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="<c:url value = "/DeTaiKhoaLuan"/>">Đăng ký đề tài khóa luận</a></li>
-                        <li><a class="dropdown-item" href="<c:url value="/sinhvien/KhoaLuan/"/>">Nộp khóa luận</a></li>
+                        <li><a class="dropdown-item" href="<c:url value = "/sinhvien/KhoaLuan/${pageContext.request.userPrincipal.name}"/>">Nộp khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value="/sinhvien/DiemKL/${pageContext.request.userPrincipal.name}"/>">Xem điểm khóa luận</a></li>
                         <li><a class="dropdown-item" href="<c:url value = "/sinhvien/ThongTinSV/${pageContext.request.userPrincipal.name}"/>">Thông tin người dùng</a></li>
                     </ul>

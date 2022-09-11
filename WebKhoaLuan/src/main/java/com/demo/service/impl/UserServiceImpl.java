@@ -173,7 +173,7 @@ public class UserServiceImpl implements UserService {
                     gvPK.setMaND(user.getUsername());
                     gvPK.setMaCV("ROLE_GV");
                     gv.setHocVi(user.getHocVi());
-                    gv.setHocVi(user.getHocHam());
+                    gv.setHocHam(user.getHocHam());
                     gv.setNguoidung(user);
                     gv.setGiangvienPK(gvPK);
                     addUserGV(gv);

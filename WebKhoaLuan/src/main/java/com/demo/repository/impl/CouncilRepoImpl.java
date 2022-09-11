@@ -127,8 +127,8 @@ public class CouncilRepoImpl implements CouncilRepo {
     //  Khóa hội đồng theo mã hội đồng
     @Override
     public void blockCouncil(int id) {
-         Session session = this.sessionFactory.getObject().getCurrentSession();
-        Query q = session.createQuery("UPDATE Hoidong SET hoatDong = 0 WHERE maHD = (:id)");
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        Query q = session.createQuery("UPDATE Hoidong SET hoatDong = 0, tinhTrangHD = 'Đã đóng' WHERE maHD = (:id)");
         q.setParameter("id", id);
         q.executeUpdate();
     }

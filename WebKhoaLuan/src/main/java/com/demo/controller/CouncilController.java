@@ -82,22 +82,22 @@ public class CouncilController {
             }
         }
         model.addAttribute("errMsg", errMsg);
-        return "Hoidong";
-    }
-    
-    @GetMapping("/giaovu/Hoidong/{id}")
-    public String KhoaHoiDongView(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("nguoidung", this.userService.getAllUsers());
-        model.addAttribute("giangvien", this.userService.getListGV());
-        model.addAttribute("hoidong", new Hoidong());
-        model.addAttribute("chitiethoidong", new Chitiethoidong());
-        model.addAttribute("dschitiethoidong", this.councilService.getListCouncilDetail());
         return "HoiDong";
     }
+    
+//    @GetMapping("/giaovu/Hoidong/{id}")
+//    public String KhoaHoiDongView(Model model, @PathVariable(value = "id") int id) {
+//        model.addAttribute("nguoidung", this.userService.getAllUsers());
+//        model.addAttribute("giangvien", this.userService.getListGV());
+//        model.addAttribute("hoidong", new Hoidong());
+//        model.addAttribute("chitiethoidong", new Chitiethoidong());
+//        model.addAttribute("dschitiethoidong", this.councilService.getListCouncilDetail());
+//        return "HoiDong";
+//    }
     
     @RequestMapping("/giaovu/Hoidong/{id}")
     public String KhoaHoiDong(Model model, @PathVariable(value = "id") int id) {
         this.councilService.blockCouncil(id);
-        return "redirect:/giaovu/HoiDong";
+        return "redirect:/giaovu/Hoidong";
     }
 }
